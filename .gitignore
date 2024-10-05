@@ -25,14 +25,33 @@ coverage
 .next/
 out/
 build
+storybook-static
 dist
+dist-ssr
 
 
-# Debug
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*storybook.log
 
 # Misc
 .DS_Store
 *.pem
+
+# cache
+.eslintcache
+
+# Editor directories and files
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

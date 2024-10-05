@@ -1,7 +1,245 @@
 {
+  // Editor settings
+  "editor.formatOnSave": true,
+  "editor.fontLigatures": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.format": "explicit",
+    "source.organizeImports": "explicit",
+    "source.addMissingImports": "explicit"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "better-comments.multilineComments": true,
+  "explorer.fileNesting.enabled": true,
+
+  // Git settings
+  "git.autoStash": true,
+  "git.autofetch": true,
+
+  // TypeScript settings
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // ESLint settings
+  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.runtime": "node",
   "eslint.workingDirectories": [
+    { "pattern": "apps/*/" },
+    { "pattern": "packages/*/" },
+    { "pattern": "tooling/*/" }
+  ],
+
+  // Prettier settings
+  "prettier.ignorePath": ".gitignore",
+
+  // Tailwind CSS settings
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "tailwindCSS.experimental.configFile": "./tooling/tailwind/web.ts",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  // Comment Extensions settings
+  "better-comments.tags": [
     {
-      "mode": "auto"
+      "tag": "BUG",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "FIX",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "HACK",
+      "color": "#FF6969",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "NOTE",
+      "color": "#3498DB",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "OPTIMIZE",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "TODO",
+      "color": "#FF8C00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "[ ]",
+      "color": "#E8AA42",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "[x]",
+      "color": "#526D82",
+      "strikethrough": true,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "#",
+      "color": "#F97B22",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "->",
+      "color": "#FF6969",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "?",
+      "color": "#3498DB",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "//",
+      "color": "#474747",
+      "strikethrough": true,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "*",
+      "color": "#98C379",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "!",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
     }
-  ]
+  ],
+  "todo-tree.general.tags": [
+    "BUG",
+    "ISSUE",
+    "FIX",
+    "FIXME",
+    "FIXIT",
+    "HACK",
+    "NOTE",
+    "OPTIMIZE",
+    "TODO",
+    "TO DO",
+    "[ ]",
+    "[x]"
+  ],
+  "todo-tree.highlights.defaultHighlight": {
+    "type": "tag",
+    "fontWeight": "bold"
+  },
+  "todo-tree.general.tagGroups": {
+    "BUG": ["ISSUE"],
+    "FIX": ["FIXME", "FIXIT"],
+    "TODO": ["TO DO"]
+  },
+  // check icons list here: https://octicons.github.com/ or https://microsoft.github.io/vscode-codicons/dist/codicon.html
+  "todo-tree.highlights.customHighlight": {
+    "BUG": {
+      "icon": "bug",
+      "iconColour": "#FF2D00",
+      "background": "#FF2D00"
+    },
+    "FIX": {
+      "icon": "tools",
+      "iconColour": "#FF2D00",
+      "background": "#FF2D00"
+    },
+    "HACK": {
+      "icon": "zap",
+      "iconColour": "#FF6969",
+      "background": "#FF6969"
+    },
+    "NOTE": {
+      "icon": "note",
+      "iconColour": "#3498DB",
+      "background": "#3498DB"
+    },
+    "OPTIMIZE": {
+      "icon": "light-bulb",
+      "iconColour": "#FF2D00",
+      "background": "#FF2D00"
+    },
+    "TODO": {
+      "icon": "checklist",
+      "iconColour": "#FF8C00",
+      "background": "#FF8C00"
+    },
+    "[ ]": {
+      "icon": "list-unordered",
+      "iconColour": "#E8AA42",
+      "background": "#E8AA42"
+    },
+    "[x]": {
+      "icon": "check",
+      "iconColour": "#526D82",
+      "background": "#526D82"
+    }
+  }
 }
