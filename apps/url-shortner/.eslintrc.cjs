@@ -1,42 +1,14 @@
-/** @type {import("eslint").Linter.Config} */
-const config = {
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": true
+import baseConfig, { restrictEnvAccess } from "@projects/eslint-config/base";
+import nextjsConfig from "@projects/eslint-config/nextjs";
+import reactConfig from "@projects/eslint-config/react";
+
+/** @type {import('typescript-eslint').Config} */
+export default [
+  {
+    ignores: [".next/**"],
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked"
-  ],
-  "rules": {
-    "@typescript-eslint/array-type": "off",
-    "@typescript-eslint/consistent-type-definitions": "off",
-    "@typescript-eslint/consistent-type-imports": [
-      "warn",
-      {
-        "prefer": "type-imports",
-        "fixStyle": "inline-type-imports"
-      }
-    ],
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        "argsIgnorePattern": "^_"
-      }
-    ],
-    "@typescript-eslint/require-await": "off",
-    "@typescript-eslint/no-misused-promises": [
-      "error",
-      {
-        "checksVoidReturn": {
-          "attributes": false
-        }
-      }
-    ]
-  }
-}
-module.exports = config;
+  ...baseConfig,
+  ...reactConfig,
+  ...nextjsConfig,
+  ...restrictEnvAccess,
+];
