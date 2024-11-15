@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "clean": "git clean -xdf node_modules",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
     "clean:workspaces": "turbo run clean",
     "db:push": "turbo -F @projects/db push",
     "db:studio": "turbo -F @projects/db studio",
@@ -20,10 +20,10 @@
   },
   "devDependencies": {
     "prettier": "catalog:",
-    "turbo": "^2.1.3",
+    "turbo": "catalog:",
     "typescript": "catalog:"
   },
-  "packageManager": "pnpm@9.12.0",
+  "packageManager": "pnpm@9.13.1",
   "engines": {
     "node": ">=20"
   }
