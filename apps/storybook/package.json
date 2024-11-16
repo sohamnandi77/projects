@@ -1,0 +1,29 @@
+{
+  "name": "storybook",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18"
+  },
+  "devDependencies": {
+    "@projects/eslint-config": "workspace:*",
+    "@projects/prettier-config": "workspace:*",
+    "@projects/tailwind-config": "workspace:*",
+    "@projects/tsconfig": "workspace:*",
+    "@types/react": "catalog:react18",
+    "@types/react-dom": "catalog:react18",
+    "@vitejs/plugin-react": "catalog:",
+    "eslint": "catalog:",
+    "globals": "^15.11.0",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}
