@@ -11,7 +11,7 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {},
-  args: { onClick: fn() },
+  args: { onClick: fn(), children: "Button" },
 } satisfies Meta<typeof Button>;
 
 export default meta;
