@@ -1,5 +1,8 @@
 import type { VariantProps } from "class-variance-authority";
-import type { ButtonProps as AriaButtonProps } from "react-aria-components";
+import type {
+  ButtonProps as AriaButtonProps,
+  PressEvent,
+} from "react-aria-components";
 import { cva } from "class-variance-authority";
 import { Button as AriaButton } from "react-aria-components";
 
@@ -44,16 +47,20 @@ const buttonVariants = cva(
 
 interface ButtonProps
   extends AriaButtonProps,
-    VariantProps<typeof buttonVariants> {}
+    VariantProps<typeof buttonVariants> {
+  onClick: (e: PressEvent) => void;
+}
 
-const Button = ({ className, variant, size, ...props }: ButtonProps) => {
+const Button = (props: ButtonProps) => {
+  const { className, onPress, onClick, variant, size, ...rest } = props;
   return (
     <AriaButton
       className={composeTailwindRenderProps(
         buttonVariants({ variant, size }),
         className,
       )}
-      {...props}
+      onPress={onPress ?? onClick}
+      {...rest}
     />
   );
 };
