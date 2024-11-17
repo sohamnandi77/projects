@@ -62,7 +62,7 @@ const Radio = ({ className, children, ...props }: AriaRadioProps) => {
               /* Disabled */
               "group-disabled:cursor-not-allowed group-disabled:opacity-50",
               /* Invalid */
-              "group-data-[invalid]:border-destructive",
+              "group-data-[invalid]:border-error",
             )}
           >
             {renderProps.isSelected && (

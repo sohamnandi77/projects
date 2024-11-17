@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     "./button": "./src/components/ui/button.tsx",
+    "./breadcrumbs": "./src/components/ui/breadcrumbs.tsx",
     "./lib/utils": "./src/lib/utils.ts"
   },
   "license": "MIT",
@@ -13,7 +14,7 @@
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "eslint",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "ui-add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
   },

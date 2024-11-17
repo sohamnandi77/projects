@@ -142,9 +142,9 @@ const CalendarCell = ({ className, ...props }: AriaCalendarCellProps) => {
             !renderProps.isSelected &&
             "bg-accent text-accent-foreground",
           /* Unavailable Date */
-          renderProps.isUnavailable && "cursor-default text-destructive",
+          renderProps.isUnavailable && "text-error cursor-default",
           renderProps.isInvalid &&
-            "bg-destructive text-destructive-foreground hover:bg-destructive hover:text-destructive-foreground focus:bg-destructive focus:text-destructive-foreground",
+            "bg-error text-error-foreground hover:bg-error hover:text-error-foreground focus:bg-error focus:text-error-foreground",
           className,
         ),
       )}
@@ -179,7 +179,7 @@ function Calendar<T extends AriaDateValue>({
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text className="text-sm text-destructive" slot="errorMessage">
+        <Text className="text-error text-sm" slot="errorMessage">
           {errorMessage}
         </Text>
       )}
@@ -214,7 +214,7 @@ function RangeCalendar<T extends AriaDateValue>({
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text slot="errorMessage" className="text-sm text-destructive">
+        <Text slot="errorMessage" className="text-error text-sm">
           {errorMessage}
         </Text>
       )}

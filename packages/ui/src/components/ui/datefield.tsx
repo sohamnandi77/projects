@@ -38,7 +38,7 @@ function DateSegment({ className, ...props }: AriaDateSegmentProps) {
           /* Focused */
           "data-[focused]:bg-accent data-[focused]:text-accent-foreground",
           /* Invalid */
-          "data-[invalid]:data-[focused]:bg-destructive data-[invalid]:data-[focused]:data-[placeholder]:text-destructive-foreground data-[invalid]:data-[focused]:text-destructive-foreground data-[invalid]:data-[placeholder]:text-destructive data-[invalid]:text-destructive",
+          "data-[invalid]:data-[focused]:bg-error data-[invalid]:data-[focused]:data-[placeholder]:text-error-foreground data-[invalid]:data-[focused]:text-error-foreground data-[invalid]:data-[placeholder]:text-error data-[invalid]:text-error",
           className,
         ),
       )}

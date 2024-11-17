@@ -20,7 +20,7 @@ const labelVariants = cva([
   /* Disabled */
   "disabled:cursor-not-allowed disabled:opacity-70",
   /* Invalid */
-  "group-data-[invalid]:text-destructive",
+  "group-data-[invalid]:text-error",
 ]);
 
 const Label = ({ className, ...props }: AriaLabelProps) => (
@@ -40,7 +40,7 @@ function FormDescription({ className, ...props }: AriaTextProps) {
 function FieldError({ className, ...props }: AriaFieldErrorProps) {
   return (
     <AriaFieldError
-      className={cn("text-sm font-medium text-destructive", className)}
+      className={cn("text-error text-sm font-medium", className)}
       {...props}
     />
   );
