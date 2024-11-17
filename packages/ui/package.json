@@ -15,6 +15,7 @@
     "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "ui-add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
   },
@@ -29,7 +30,7 @@
     "cmdk": "1.0.0",
     "embla-carousel-react": "^8.3.1",
     "input-otp": "^1.4.1",
-    "lucide-react": "^0.456.0",
+    "lucide-react": "catalog:",
     "next-themes": "^0.4.3",
     "react-aria-components": "^1.4.1",
     "react-resizable-panels": "^2.1.6",

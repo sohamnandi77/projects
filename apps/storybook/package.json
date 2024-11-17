@@ -6,14 +6,16 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
+    "clean": "git clean -xdf .cache .turbo dist node_modules build-storybook",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "dev:app": "vite",
     "build:app": "tsc -b && vite build"
   },
   "dependencies": {
     "@projects/ui": "workspace:*",
-    "lucide-react": "^0.456.0",
+    "lucide-react": "catalog:",
     "next-themes": "^0.4.3",
     "react": "catalog:react18",
     "react-dom": "catalog:react18"
@@ -35,7 +37,7 @@
     "@types/react-dom": "catalog:react18",
     "@vitejs/plugin-react": "catalog:",
     "eslint": "catalog:",
-    "globals": "^15.11.0",
+    "globals": "^15.12.0",
     "storybook": "^8.4.4",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",

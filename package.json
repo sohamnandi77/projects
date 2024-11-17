@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "clean": "git clean -xdf .cache .turbo dist node_modules",
     "clean:workspaces": "turbo run clean",
+    "clean": "turbo run clean && git clean -xdf .cache .turbo dist node_modules && rm -rf pnpm-lock.yaml",
     "db:push": "turbo -F @projects/db push",
     "db:studio": "turbo -F @projects/db studio",
     "dev": "turbo watch dev --continue",
