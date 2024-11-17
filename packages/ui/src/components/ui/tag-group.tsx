@@ -59,7 +59,7 @@ const badgeVariants = cva(
           "hover:bg-secondary/80",
         ],
         error: [
-          "bg-error text-error-foreground border-transparent",
+          "border-transparent bg-error text-error-foreground",
           /* Hover */
           "hover:bg-error/80",
         ],
@@ -145,7 +145,7 @@ function JollyTagGroup<T extends object>({
         </Text>
       )}
       {errorMessage && (
-        <Text className="text-error text-sm" slot="errorMessage">
+        <Text className="text-sm text-error" slot="errorMessage">
           {errorMessage}
         </Text>
       )}
