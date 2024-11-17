@@ -8,7 +8,28 @@ import { Button as AriaButton } from "react-aria-components";
 
 import { composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
-const buttonVariants = cva(
+const buttonVariants = {
+  variants: {
+    variant: {
+      default: "bg-primary text-primary-foreground hover:bg-primary/90",
+      error: "bg-error text-error-foreground hover:bg-error/90",
+      success: "bg-success text-success-foreground hover:bg-success/90",
+      outline:
+        "border-input border bg-background hover:bg-accent hover:text-accent-foreground",
+      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+      ghost: "hover:bg-accent hover:text-accent-foreground",
+      link: "text-primary underline-offset-4 hover:underline",
+    },
+    size: {
+      default: "h-10 px-4 py-2",
+      sm: "h-9 rounded-md px-3",
+      lg: "h-11 rounded-md px-8",
+      icon: "size-10",
+    },
+  },
+} as const;
+
+const getButtonVariants = cva(
   [
     "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors",
     /* Disabled */
@@ -25,7 +46,7 @@ const buttonVariants = cva(
         error: "bg-error text-error-foreground hover:bg-error/90",
         success: "bg-success text-success-foreground hover:bg-success/90",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border-input border bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
@@ -47,7 +68,7 @@ const buttonVariants = cva(
 
 interface ButtonProps
   extends AriaButtonProps,
-    VariantProps<typeof buttonVariants> {
+    VariantProps<typeof getButtonVariants> {
   onClick?: (e: PressEvent) => void;
 }
 
@@ -56,7 +77,7 @@ const Button = (props: ButtonProps) => {
   return (
     <AriaButton
       className={composeTailwindRenderProps(
-        buttonVariants({ variant, size }),
+        getButtonVariants({ variant, size }),
         className,
       )}
       onPress={onPress ?? onClick}
@@ -65,6 +86,6 @@ const Button = (props: ButtonProps) => {
   );
 };
 
-export { Button, buttonVariants };
+export { Button, buttonVariants, getButtonVariants };
 
 export type { ButtonProps };

@@ -27,7 +27,7 @@ import {
   useLocale,
 } from "react-aria-components";
 
-import { buttonVariants } from "@projects/ui/components/ui/button";
+import { getButtonVariants } from "@projects/ui/components/ui/button";
 import { cn } from "@projects/ui/lib/utils";
 
 const CalendarRoot = AriaCalendar;
@@ -42,7 +42,7 @@ const CalendarHeading = (props: React.HTMLAttributes<HTMLElement>) => {
       <AriaButton
         slot="previous"
         className={cn(
-          buttonVariants({ variant: "outline" }),
+          getButtonVariants({ variant: "outline" }),
           "size-7 bg-transparent p-0 opacity-50",
           /* Hover */
           "hover:opacity-100",
@@ -58,7 +58,7 @@ const CalendarHeading = (props: React.HTMLAttributes<HTMLElement>) => {
       <AriaButton
         slot="next"
         className={cn(
-          buttonVariants({ variant: "outline" }),
+          getButtonVariants({ variant: "outline" }),
           "size-7 bg-transparent p-0 opacity-50",
           /* Hover */
           "hover:opacity-100",
@@ -114,7 +114,7 @@ const CalendarCell = ({ className, ...props }: AriaCalendarCellProps) => {
     <AriaCalendarCell
       className={composeRenderProps(className, (className, renderProps) =>
         cn(
-          buttonVariants({ variant: "ghost" }),
+          getButtonVariants({ variant: "ghost" }),
           "relative flex size-9 items-center justify-center p-0 text-sm font-normal",
           /* Disabled */
           renderProps.isDisabled && "text-muted-foreground opacity-50",
@@ -142,7 +142,7 @@ const CalendarCell = ({ className, ...props }: AriaCalendarCellProps) => {
             !renderProps.isSelected &&
             "bg-accent text-accent-foreground",
           /* Unavailable Date */
-          renderProps.isUnavailable && "text-error cursor-default",
+          renderProps.isUnavailable && "cursor-default text-error",
           renderProps.isInvalid &&
             "bg-error text-error-foreground hover:bg-error hover:text-error-foreground focus:bg-error focus:text-error-foreground",
           className,
@@ -179,7 +179,7 @@ function Calendar<T extends AriaDateValue>({
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text className="text-error text-sm" slot="errorMessage">
+        <Text className="text-sm text-error" slot="errorMessage">
           {errorMessage}
         </Text>
       )}
@@ -214,7 +214,7 @@ function RangeCalendar<T extends AriaDateValue>({
         </CalendarGridBody>
       </CalendarGrid>
       {errorMessage && (
-        <Text slot="errorMessage" className="text-error text-sm">
+        <Text slot="errorMessage" className="text-sm text-error">
           {errorMessage}
         </Text>
       )}

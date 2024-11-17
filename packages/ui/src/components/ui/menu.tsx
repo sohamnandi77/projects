@@ -21,7 +21,7 @@ import {
 
 import { cn } from "@projects/ui/lib/utils";
 
-import type { buttonVariants } from "./button";
+import type { getButtonVariants } from "./button";
 import { Button } from "./button";
 import { ListBoxCollection, ListBoxSection } from "./list-box";
 import { SelectPopover } from "./select";
@@ -112,7 +112,7 @@ const MenuHeader = ({
     className={cn(
       "px-3 py-1.5 text-sm font-semibold",
       inset && "pl-8",
-      separator && "-mx-1 mb-1 border-b border-b-border pb-2.5",
+      separator && "border-b-border -mx-1 mb-1 border-b pb-2.5",
       className,
     )}
     {...props}
@@ -139,7 +139,7 @@ const MenuKeyboard = ({
 };
 interface JollyMenuProps<T>
   extends AriaMenuProps<T>,
-    VariantProps<typeof buttonVariants>,
+    VariantProps<typeof getButtonVariants>,
     Omit<AriaMenuTriggerProps, "children"> {
   label?: string;
 }

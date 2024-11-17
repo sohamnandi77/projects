@@ -2,7 +2,6 @@ import type { Preview } from "@storybook/react";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { ThemeProvider } from "next-themes";
 
-import type { Theme } from "~/constants";
 import { DocsContainer } from "~/components/docs-container";
 import { ThemeSwitcher } from "~/components/theme-switcher";
 import { THEMES } from "~/constants";
@@ -42,7 +41,7 @@ const preview: Preview = {
     (Story, context) => {
       return (
         <ThemeProvider attribute="class" forcedTheme={context?.globals?.theme}>
-          <ThemeSwitcher theme={context?.globals?.theme as Theme}>
+          <ThemeSwitcher theme={context?.globals?.theme}>
             <Story />
           </ThemeSwitcher>
         </ThemeProvider>

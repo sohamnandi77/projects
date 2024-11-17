@@ -14,9 +14,6 @@ import {
 const meta = {
   title: "Components/Breadcrumbs",
   component: Breadcrumbs,
-  parameters: {
-    layout: "centered",
-  },
   tags: ["autodocs"],
   argTypes: {},
 } satisfies Meta<typeof Breadcrumbs>;
@@ -139,3 +136,7 @@ export const DynamicItems: Story = {
     return <BreadcrumbItems />;
   },
 };
+
+// TODO: Add more stories here
+// -> Ellipsis Dropdown
+// -> Responsive Ellipsis Dropdown

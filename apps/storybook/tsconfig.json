@@ -5,17 +5,11 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": ["./src/*"]
     },
     "plugins": [{ "name": "next" }],
     "module": "esnext"
   },
-  "include": [
-    "src/**/*",
-    ".storybook/**/*",
-    "stories/**/*",
-    "components/**/*",
-    "constants/**/*"
-  ],
+  "include": ["src/**/*", ".storybook/**/*"],
   "exclude": ["node_modules"]
 }

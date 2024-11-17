@@ -4,8 +4,17 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
+    "./aspect-ratio": "./src/components/ui/aspect-ratio.tsx",
     "./button": "./src/components/ui/button.tsx",
     "./breadcrumbs": "./src/components/ui/breadcrumbs.tsx",
+    "./calendar": "./src/components/ui/calendar.tsx",
+    "./card": "./src/components/ui/card.tsx",
+    "./carousel": "./src/components/ui/carousel.tsx",
+    "./chart": "./src/components/ui/chart.tsx",
+    "./checkbox": "./src/components/ui/checkbox.tsx",
+    "./combobox": "./src/components/ui/combobox.tsx",
+    "./command": "./src/components/ui/command.tsx",
+    "./date-picker": "./src/components/ui/date-picker.tsx",
     "./lib/utils": "./src/lib/utils.ts"
   },
   "license": "MIT",

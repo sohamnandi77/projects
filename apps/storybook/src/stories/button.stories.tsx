@@ -1,16 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import { Button } from "@projects/ui/button";
+import { Button, buttonVariants } from "@projects/ui/button";
+
+import { getArgTypes } from "~/utils/getArgTypes";
 
 const meta = {
   title: "Components/Button",
   component: Button,
-  parameters: {
-    layout: "centered",
-  },
   tags: ["autodocs"],
-  argTypes: {},
+  argTypes: {
+    ...getArgTypes(buttonVariants),
+  },
   args: { onClick: fn(), children: "Button" },
 } satisfies Meta<typeof Button>;
 

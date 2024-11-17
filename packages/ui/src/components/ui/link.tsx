@@ -4,18 +4,18 @@ import { Link as AriaLink, composeRenderProps } from "react-aria-components";
 
 import { cn } from "@projects/ui/lib/utils";
 
-import { buttonVariants } from "./button";
+import { getButtonVariants } from "./button";
 
 interface LinkProps
   extends AriaLinkProps,
-    VariantProps<typeof buttonVariants> {}
+    VariantProps<typeof getButtonVariants> {}
 
 const Link = ({ className, variant, size, ...props }: LinkProps) => {
   return (
     <AriaLink
       className={composeRenderProps(className, (className) =>
         cn(
-          buttonVariants({
+          getButtonVariants({
             variant,
             size,
             className,
