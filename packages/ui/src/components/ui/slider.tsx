@@ -12,7 +12,8 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import { cn } from "~/lib/utils";
+import { cn } from "@projects/ui/lib/utils";
+
 import { labelVariants } from "./field";
 
 const SliderOutput = ({ className, ...props }: AriaSliderOutputProps) => (

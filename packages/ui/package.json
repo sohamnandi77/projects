@@ -4,17 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "types": "./dist/src/components/ui/*.d.ts",
-      "default": [
-        "./src/components/ui/*.ts",
-        "./src/components/ui/*.tsx"
-      ]
-    }
+    "./button": "./src/components/ui/button.tsx",
+    "./lib/utils": "./src/lib/utils.ts"
   },
   "license": "MIT",
   "scripts": {

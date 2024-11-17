@@ -13,7 +13,7 @@ import {
   Text as AriaText,
 } from "react-aria-components";
 
-import { cn, composeTailwindRenderProps } from "~/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 const labelVariants = cva([
   "text-sm font-medium leading-none",

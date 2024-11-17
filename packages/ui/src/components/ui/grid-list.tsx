@@ -10,8 +10,8 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import { Checkbox } from "~/components/ui//checkbox";
-import { cn, composeTailwindRenderProps } from "~/lib/utils";
+import { Checkbox } from "@projects/ui/components/ui//checkbox";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 export function GridList<T extends object>({
   children,

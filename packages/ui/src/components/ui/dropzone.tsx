@@ -4,7 +4,7 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import { cn } from "~/lib/utils";
+import { cn } from "@projects/ui/lib/utils";
 
 const DropZone = ({ className, ...props }: AriaDropZoneProps) => (
   <AriaDropZone

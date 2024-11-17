@@ -16,7 +16,8 @@ import {
   Text,
 } from "react-aria-components";
 
-import { cn } from "~/lib/utils";
+import { cn } from "@projects/ui/lib/utils";
+
 import { FieldError, Label } from "./field";
 import {
   ListBoxCollection,

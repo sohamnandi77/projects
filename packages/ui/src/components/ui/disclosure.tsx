@@ -16,7 +16,7 @@ import {
   Heading,
 } from "react-aria-components";
 
-import { cn, composeTailwindRenderProps } from "~/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 const disclosureVariants = cva(["group min-w-64"], {
   variants: {

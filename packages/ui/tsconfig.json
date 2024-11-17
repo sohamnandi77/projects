@@ -4,10 +4,11 @@
     "lib": ["ES2022", "dom", "dom.iterable"],
     "jsx": "preserve",
     "rootDir": ".",
+    "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "@projects/ui/*": ["./src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }

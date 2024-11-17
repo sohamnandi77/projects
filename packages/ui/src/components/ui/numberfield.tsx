@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { ChevronDown, ChevronUp } from "lucide-react";
 import {
   ButtonProps as AriaButtonProps,
   Input as AriaInput,
@@ -8,14 +8,14 @@ import {
   ValidationResult as AriaValidationResult,
   composeRenderProps,
   Text,
-} from "react-aria-components"
+} from "react-aria-components";
 
-import { cn } from "~/lib/utils"
+import { cn } from "@projects/ui/lib/utils";
 
-import { Button } from "./button"
-import { FieldError, FieldGroup, Label } from "./field"
+import { Button } from "./button";
+import { FieldError, FieldGroup, Label } from "./field";
 
-const NumberField = AriaNumberField
+const NumberField = AriaNumberField;
 
 function NumberFieldInput({ className, ...props }: AriaInputProps) {
   return (
@@ -23,12 +23,12 @@ function NumberFieldInput({ className, ...props }: AriaInputProps) {
       className={composeRenderProps(className, (className) =>
         cn(
           "w-fit min-w-0 flex-1 border-r border-transparent bg-background pr-2 outline outline-0 placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden",
-          className
-        )
+          className,
+        ),
       )}
       {...props}
     />
-  )
+  );
 }
 
 function NumberFieldSteppers({
@@ -39,7 +39,7 @@ function NumberFieldSteppers({
     <div
       className={cn(
         "absolute right-0 flex h-full flex-col border-l",
-        className
+        className,
       )}
       {...props}
     >
@@ -51,26 +51,26 @@ function NumberFieldSteppers({
         <ChevronDown aria-hidden className="size-4" />
       </NumberFieldStepper>
     </div>
-  )
+  );
 }
 
 function NumberFieldStepper({ className, ...props }: AriaButtonProps) {
   return (
     <Button
       className={composeRenderProps(className, (className) =>
-        cn("w-auto grow rounded-none px-0.5 text-muted-foreground", className)
+        cn("w-auto grow rounded-none px-0.5 text-muted-foreground", className),
       )}
       variant={"ghost"}
       size={"icon"}
       {...props}
     />
-  )
+  );
 }
 
 interface JollyNumberFieldProps extends AriaNumberFieldProps {
-  label?: string
-  description?: string
-  errorMessage?: string | ((validation: AriaValidationResult) => string)
+  label?: string;
+  description?: string;
+  errorMessage?: string | ((validation: AriaValidationResult) => string);
 }
 
 function JollyNumberField({
@@ -83,7 +83,7 @@ function JollyNumberField({
   return (
     <NumberField
       className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className)
+        cn("group flex flex-col gap-2", className),
       )}
       {...props}
     >
@@ -99,14 +99,14 @@ function JollyNumberField({
       )}
       <FieldError>{errorMessage}</FieldError>
     </NumberField>
-  )
+  );
 }
 
 export {
+  JollyNumberField,
   NumberField,
   NumberFieldInput,
-  NumberFieldSteppers,
   NumberFieldStepper,
-  JollyNumberField,
-}
-export type { JollyNumberFieldProps }
+  NumberFieldSteppers,
+};
+export type { JollyNumberFieldProps };

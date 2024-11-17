@@ -21,7 +21,7 @@ import {
   Group,
 } from "react-aria-components";
 
-import { cn, composeTailwindRenderProps } from "~/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 const ResizableTableContainer = AriaResizableTableContainer;
 

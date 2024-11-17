@@ -19,8 +19,9 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
+import { cn } from "@projects/ui/lib/utils";
+
 import type { buttonVariants } from "./button";
-import { cn } from "~/lib/utils";
 import { Button } from "./button";
 import { ListBoxCollection, ListBoxSection } from "./list-box";
 import { SelectPopover } from "./select";

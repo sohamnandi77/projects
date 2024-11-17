@@ -1,11 +1,10 @@
-import React from "react"
 import {
   Toolbar as AriaToolbar,
   composeRenderProps,
   ToolbarProps,
-} from "react-aria-components"
+} from "react-aria-components";
 
-import { cn } from "~/lib/utils"
+import { cn } from "@projects/ui/lib/utils";
 
 export function Toolbar(props: ToolbarProps) {
   return (
@@ -16,9 +15,9 @@ export function Toolbar(props: ToolbarProps) {
           "flex gap-2",
           /* Orientation */
           "data-[orientation=vertical]:flex-col",
-          className
-        )
+          className,
+        ),
       )}
     />
-  )
+  );
 }

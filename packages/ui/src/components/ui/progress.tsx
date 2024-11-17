@@ -1,17 +1,16 @@
-import * as React from "react"
 import {
   ProgressBar as AriaProgressBar,
   ProgressBarProps as AriaProgressBarProps,
   composeRenderProps,
-} from "react-aria-components"
+} from "react-aria-components";
 
-import { cn } from "~/lib/utils"
+import { cn } from "@projects/ui/lib/utils";
 
-import { Label, labelVariants } from "./field"
+import { Label, labelVariants } from "./field";
 
 interface ProgressProps extends AriaProgressBarProps {
-  barClassName?: string
-  fillClassName?: string
+  barClassName?: string;
+  fillClassName?: string;
 }
 
 const Progress = ({
@@ -23,7 +22,7 @@ const Progress = ({
 }: ProgressProps) => (
   <AriaProgressBar
     className={composeRenderProps(className, (className) =>
-      cn("w-full", className)
+      cn("w-full", className),
     )}
     {...props}
   >
@@ -33,13 +32,13 @@ const Progress = ({
         <div
           className={cn(
             "relative h-4 w-full overflow-hidden rounded-full bg-secondary",
-            barClassName
+            barClassName,
           )}
         >
           <div
             className={cn(
               "size-full flex-1 bg-primary transition-all",
-              fillClassName
+              fillClassName,
             )}
             style={{
               transform: `translateX(-${100 - (renderProps.percentage || 0)}%)`,
@@ -49,11 +48,11 @@ const Progress = ({
       </>
     ))}
   </AriaProgressBar>
-)
+);
 
 interface JollyProgressBarProps extends ProgressProps {
-  label?: string
-  showValue?: boolean
+  label?: string;
+  showValue?: boolean;
 }
 
 function JollyProgressBar({
@@ -65,7 +64,7 @@ function JollyProgressBar({
   return (
     <Progress
       className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className)
+        cn("group flex flex-col gap-2", className),
       )}
       {...props}
     >
@@ -76,8 +75,8 @@ function JollyProgressBar({
         </div>
       )}
     </Progress>
-  )
+  );
 }
 
-export { Progress, JollyProgressBar }
-export type { ProgressProps, JollyProgressBarProps }
+export { JollyProgressBar, Progress };
+export type { JollyProgressBarProps, ProgressProps };

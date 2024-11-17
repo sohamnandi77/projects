@@ -3,7 +3,7 @@ import type { ToggleButtonProps as AriaToggleButtonProps } from "react-aria-comp
 import { cva } from "class-variance-authority";
 import { ToggleButton as AriaToggleButton } from "react-aria-components";
 
-import { composeTailwindRenderProps } from "~/lib/utils";
+import { composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 const toggleVariants = cva(
   [

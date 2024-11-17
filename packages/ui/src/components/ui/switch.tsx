@@ -4,7 +4,7 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import { cn } from "~/lib/utils";
+import { cn } from "@projects/ui/lib/utils";
 
 const Switch = ({ children, className, ...props }: AriaSwitchProps) => (
   <AriaSwitch

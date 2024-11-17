@@ -6,7 +6,8 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import { cn, composeTailwindRenderProps } from "~/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
+
 import { labelVariants } from "./field";
 
 const CheckboxGroup = AriaCheckboxGroup;

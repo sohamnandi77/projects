@@ -11,9 +11,10 @@
     "cssVariables": true
   },
   "aliases": {
-    "utils": "~/lib/utils",
-    "components": "~/components/",
-    "ui": "~/components/ui",
-    "lib": "~/lib/"
+    "components": "@projects/ui/components",
+    "hooks": "@projects/ui/hooks",
+    "lib": "@projects/ui/lib",
+    "ui": "@projects/ui/components/ui",
+    "utils": "@projects/ui/lib/utils"
   }
 }
