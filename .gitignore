@@ -29,7 +29,6 @@ storybook-static
 dist
 dist-ssr
 
-
 # Logs
 logs
 *.log
@@ -46,6 +45,7 @@ lerna-debug.log*
 
 # cache
 .eslintcache
+.cache
 
 # Editor directories and files
 .idea
@@ -55,3 +55,22 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# production
+build
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# nitro
+.nitro/
+.output/
+
+# expo
+.expo/
+expo-env.d.ts
+apps/expo/.gitignore
+apps/expo/ios
+apps/expo/android
