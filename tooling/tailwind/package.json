@@ -5,7 +5,9 @@
   "type": "module",
   "exports": {
     "./native": "./native.ts",
-    "./web": "./web.ts"
+    "./web": "./web.ts",
+    "./web-styles": "./web.styles.css",
+    "./postcss": "./postcss.config.cjs"
   },
   "license": "MIT",
   "scripts": {
@@ -15,6 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.20",
     "postcss": "^8.4.41",
     "tailwindcss": "catalog:",
     "tailwindcss-animate": "^1.0.7",

@@ -14,7 +14,6 @@
     "rebornix.project-snippets", // Share useful snippets between collaborators
 
     // ? Optional
-    "GraphQL.vscode-graphql", // GraphQL plugin
     "Tyriar.sort-lines", // Sort lines
     "VisualStudioExptTeam.intellicode-api-usage-examples", // IntelliCode API usage examples
     "VisualStudioExptTeam.vscodeintellicode", // IntelliCode

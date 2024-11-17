@@ -10,6 +10,6 @@
     "plugins": [{ "name": "next" }],
     "module": "esnext"
   },
-  "include": [".", ".next/types/**/*.ts"],
+  "include": ["src/**/*", ".storybook/**/*", "stories"],
   "exclude": ["node_modules"]
 }

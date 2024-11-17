@@ -6,7 +6,7 @@
   "iconLibrary": "lucide",
   "tailwind": {
     "config": "../../tooling/tailwind/web.ts",
-    "css": "unused.css",
+    "css": "../../tooling/tailwind/web.styles.css",
     "baseColor": "zinc",
     "cssVariables": true
   },

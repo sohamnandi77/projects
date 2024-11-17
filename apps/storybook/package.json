@@ -1,15 +1,15 @@
 {
-  "name": "storybook",
+  "name": "@projects/storybook",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "dev:app": "vite",
+    "build:app": "tsc -b && vite build"
   },
   "dependencies": {
     "@projects/ui": "workspace:*",
@@ -35,7 +35,9 @@
     "eslint": "catalog:",
     "globals": "^15.11.0",
     "storybook": "^8.4.4",
+    "tailwindcss": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"
-  }
+  },
+  "prettier": "@projects/prettier-config"
 }
