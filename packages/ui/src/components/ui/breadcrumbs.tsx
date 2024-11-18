@@ -8,10 +8,9 @@ import {
   Breadcrumb as AriaBreadcrumb,
   Breadcrumbs as AriaBreadcrumbs,
   Link as AriaLink,
-  composeRenderProps,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 const Breadcrumbs = <T extends object>({
   className,
@@ -28,14 +27,17 @@ const Breadcrumbs = <T extends object>({
 
 const BreadcrumbItem = ({ className, ...props }: AriaBreadcrumbProps) => (
   <AriaBreadcrumb
-    className={cn("inline-flex items-center gap-1.5 sm:gap-2.5", className)}
+    className={composeTailwindRenderProps(
+      "inline-flex items-center gap-1.5 sm:gap-2.5",
+      className,
+    )}
     {...props}
   />
 );
 
 const BreadcrumbLink = ({ className, ...props }: AriaLinkProps) => (
   <AriaLink
-    className={composeRenderProps(className, (className) =>
+    className={composeTailwindRenderProps(
       cn(
         "transition-colors",
         /* Hover */
@@ -44,8 +46,8 @@ const BreadcrumbLink = ({ className, ...props }: AriaLinkProps) => (
         "disabled:pointer-events-none disabled:opacity-50",
         /* Current */
         "current:pointer-events-auto current:opacity-100",
-        className,
       ),
+      className,
     )}
     {...props}
   />
@@ -62,7 +64,7 @@ const BreadcrumbSeparator = ({
     className={cn("[&>svg]:size-3.5", className)}
     {...props}
   >
-    {children || <ChevronRight />}
+    {children ?? <ChevronRight />}
   </span>
 );
 
@@ -85,8 +87,9 @@ interface BreadcrumbPageProps extends Omit<AriaLinkProps, "href"> {}
 
 const BreadcrumbPage = ({ className, ...props }: BreadcrumbPageProps) => (
   <AriaLink
-    className={composeRenderProps(className, (className) =>
-      cn("font-normal text-foreground", className),
+    className={composeTailwindRenderProps(
+      "font-normal text-foreground",
+      className,
     )}
     {...props}
   />

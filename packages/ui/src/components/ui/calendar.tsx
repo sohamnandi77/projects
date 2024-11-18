@@ -27,7 +27,7 @@ import {
   useLocale,
 } from "react-aria-components";
 
-import { getButtonVariants } from "@projects/ui/components/ui/button";
+import { getButtonVariants } from "@projects/ui/button";
 import { cn } from "@projects/ui/lib/utils";
 
 const CalendarRoot = AriaCalendar;
