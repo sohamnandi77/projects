@@ -1,50 +1,78 @@
-# React + TypeScript + Vite
+# Storybook App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This directory contains the Storybook configuration for the Projects design system. It serves as a development environment for UI components, allowing you to browse a component library, view different states of each component, and interactively test components.
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js
+- pnpm (Package Manager)
+- Turbo (Build System)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Installation
 
-- Configure the top-level `parserOptions` property like this:
+1. From the root directory, install dependencies:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+pnpm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Start Storybook development server:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+pnpm dev
 ```
+
+## Project Structure
+
+```
+apps/storybook/
+├── .storybook/        # Storybook configuration
+├── src/               # Source files
+    ├── components/    # UI components
+    |-- stories/       # Storybook stories
+    ├── styles/        # Global styles
+    ├── utils/         # Utility functions
+    ├── constants/     # Global constants
+├── stories/           # Storybook stories
+├── tsconfig.json      # TypeScript configuration
+└── tailwind.config.ts # Tailwind CSS configuration
+```
+
+## Configuration
+
+### TypeScript
+
+The project uses a custom TypeScript configuration extending from `@projects/tsconfig/base.json` with specific settings for DOM and Next.js support.
+
+### Tailwind CSS
+
+Tailwind is configured to:
+
+- Extend the base configuration from `@projects/tailwind-config/web`
+- Include UI components from `packages/ui`
+- Use custom Geist font families
+
+## Available Scripts
+
+Based on the Turbo configuration:
+
+- `pnpm build` - Build the Storybook static files
+- `pnpm dev` - Start development server
+- `pnpm lint` - Run linting
+- `pnpm typecheck` - Run type checking
+- `pnpm clean` - Clean build artifacts
+
+## Dependencies
+
+The Storybook app is integrated with:
+
+- Tailwind CSS for styling
+- TypeScript for type safety
+- Turbo for build system optimization
+- Custom UI component library from `packages/ui`
+
+## Contributing
+
+When adding new stories, ensure they're placed in the `stories/` directory and follow the existing naming conventions.
