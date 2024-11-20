@@ -43,7 +43,7 @@ const getButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "text-primary-foreground hover:bg-primary/90",
         error: "bg-error text-error-foreground hover:bg-error/90",
         success: "bg-success text-success-foreground hover:bg-success/90",
         outline:

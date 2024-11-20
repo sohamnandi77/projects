@@ -31,8 +31,8 @@ jobs:
         uses: tj-actions/changed-files@v44
         with:
           files: |
-            apps/**
-            .storybook/**
+            apps/storybook/**
+            packages/ui/**
 
   chromatic:
     name: Run visual tests
