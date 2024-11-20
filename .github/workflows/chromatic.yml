@@ -24,7 +24,7 @@ jobs:
         uses: ./tooling/github/setup
 
       - name: Build Storybook
-        run: pnpm run build-storybook
+        run: pnpm run build
 
       - name: ⚡ Run chromatic
         uses: chromaui/action@latest
