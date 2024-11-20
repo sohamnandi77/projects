@@ -15,6 +15,11 @@ permissions:
   actions: write
   contents: read
 
+env:
+  FORCE_COLOR: 3
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
 jobs:
   changed-files:
     runs-on: ubuntu-latest

@@ -10,6 +10,11 @@ permissions:
   actions: write
   contents: read
 
+env:
+  FORCE_COLOR: 3
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
 jobs:
   chromatic:
     name: Publish Storybook on Chromatic
@@ -46,5 +51,5 @@ jobs:
         run: |
           for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
-            echo Did any files change: ${ANY_CHANGED}
+            echo "Did any files change: ${ANY_CHANGED}"
           done
