@@ -30,6 +30,7 @@ jobs:
         uses: chromaui/action@latest
         # Chromatic GitHub Action options
         with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitZeroOnChanges: true
           exitOnceUploaded: true
           onlyChanged: true
