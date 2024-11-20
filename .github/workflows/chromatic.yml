@@ -24,13 +24,14 @@ jobs:
         uses: ./tooling/github/setup
 
       - name: Build Storybook
-        run: pnpm run build
+        run: pnpm run build-storybook
 
       - name: ⚡ Run chromatic
         uses: chromaui/action@latest
         # Chromatic GitHub Action options
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: apps/storybook
           exitZeroOnChanges: true
           exitOnceUploaded: true
           onlyChanged: true
