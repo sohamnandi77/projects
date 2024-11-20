@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   chromatic:
-    name: Chromatic
+    name: Publish Storybook on Chromatic
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repo
@@ -24,7 +24,7 @@ jobs:
         uses: ./tooling/github/setup
 
       - name: Build Storybook
-        run: pnpm run build
+        run: pnpm run build:sb
 
       - name: ⚡ Run chromatic
         uses: chromaui/action@latest
@@ -32,11 +32,13 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/storybook
+          storybookBuildDir: apps/storybook/storybook-static
           exitZeroOnChanges: true
           exitOnceUploaded: true
           onlyChanged: true
           externals: packages/(ui/src)/**
           skip: "@(renovate/**|dependabot/**)"
+          buildScriptName: build
       - name: List all changed files
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}

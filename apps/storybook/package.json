@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "build": "storybook build",
-    "build-storybook": "storybook build",
     "build:app": "tsc -b && vite build",
     "clean": "git clean -xdf .cache .turbo dist node_modules storybook-static",
     "dev": "storybook dev -p 6006",

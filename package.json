@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "clean:workspaces": "turbo run clean",
+    "build:sb": "turbo run build -F @projects/storybook",
     "clean": "turbo run clean && git clean -xdf .cache .turbo dist node_modules && rm -rf pnpm-lock.yaml",
+    "clean:workspaces": "turbo run clean",
     "dev": "turbo watch dev --continue",
     "dev:sb": "turbo watch dev -F @projects/storybook",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
