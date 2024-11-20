@@ -1,25 +1,22 @@
-type variant = {
-  variants: {
-    [key: string]: {
-      [key: string]: string;
-    };
-  };
-};
+interface Variant {
+  variants: Record<string, Record<string, string>>;
+}
 
-type argTypes = {
-  [key: string]: {
+type argTypes = Record<
+  string,
+  {
     options: string[];
     control: {
       type: string;
     };
-  };
-};
+  }
+>;
 
-export const getArgTypes = (variant: variant) => {
+export const getArgTypes = (variant: Variant) => {
   const argTypes: argTypes = {};
   Object.keys(variant.variants).forEach((key) => {
     argTypes[key] = {
-      options: Object.keys(variant.variants[key]!),
+      options: Object.keys(variant.variants[key] ?? {}),
       control: { type: "select" },
     };
   });

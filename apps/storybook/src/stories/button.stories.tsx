@@ -23,3 +23,9 @@ export const Primary: Story = {
     variant: "default",
   },
 };
+
+export const Ghost: Story = {
+  args: {
+    variant: "ghost",
+  },
+};

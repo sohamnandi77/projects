@@ -1,0 +1,46 @@
+name: Chromatic
+
+on: workflow_call
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-chromatic
+  cancel-in-progress: true
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  chromatic:
+    name: Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup
+        uses: ./tooling/github/setup
+
+      - name: Build Storybook
+        run: pnpm run build
+
+      - name: ⚡ Run chromatic
+        uses: chromaui/action@latest
+        # Chromatic GitHub Action options
+        with:
+          exitZeroOnChanges: true
+          exitOnceUploaded: true
+          onlyChanged: true
+          externals: packages/(ui/src)/**
+          skip: "@(renovate/**|dependabot/**)"
+      - name: List all changed files
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+          ANY_CHANGED: ${{ steps.changed-files.outputs.any_changed }}
+        run: |
+          for file in ${ALL_CHANGED_FILES}; do
+            echo "$file was changed"
+            echo Did any files change: ${ANY_CHANGED}
+          done

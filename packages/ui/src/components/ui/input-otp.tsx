@@ -1,10 +1,10 @@
-import * as React from "react";
+import { forwardRef, useContext } from "react";
 import { OTPInput, OTPInputContext } from "input-otp";
 import { Dot } from "lucide-react";
 
 import { cn } from "@projects/ui/lib/utils";
 
-const InputOTP = React.forwardRef<
+const InputOTP = forwardRef<
   React.ElementRef<typeof OTPInput>,
   React.ComponentPropsWithoutRef<typeof OTPInput>
 >(({ className, containerClassName, ...props }, ref) => (
@@ -20,7 +20,7 @@ const InputOTP = React.forwardRef<
 ));
 InputOTP.displayName = "InputOTP";
 
-const InputOTPGroup = React.forwardRef<
+const InputOTPGroup = forwardRef<
   React.ElementRef<"div">,
   React.ComponentPropsWithoutRef<"div">
 >(({ className, ...props }, ref) => (
@@ -28,19 +28,23 @@ const InputOTPGroup = React.forwardRef<
 ));
 InputOTPGroup.displayName = "InputOTPGroup";
 
-const InputOTPSlot = React.forwardRef<
+const InputOTPSlot = forwardRef<
   React.ElementRef<"div">,
   React.ComponentPropsWithoutRef<"div"> & { index: number }
 >(({ index, className, ...props }, ref) => {
-  const inputOTPContext = React.useContext(OTPInputContext);
-  const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index];
+  const inputOTPContext = useContext(OTPInputContext);
+  const slot = inputOTPContext.slots[index];
+  if (!slot) {
+    return null;
+  }
+  const { char, hasFakeCaret, isActive } = slot;
 
   return (
     <div
       ref={ref}
       className={cn(
         "border-input relative flex h-10 w-10 items-center justify-center border-y border-r text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md",
-        isActive && "z-10 ring-2 ring-ring ring-offset-background",
+        isActive ? "z-10 ring-2 ring-ring ring-offset-background" : "",
         className,
       )}
       {...props}
@@ -56,13 +60,13 @@ const InputOTPSlot = React.forwardRef<
 });
 InputOTPSlot.displayName = "InputOTPSlot";
 
-const InputOTPSeparator = React.forwardRef<
-  React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div">
+const InputOTPSeparator = forwardRef<
+  React.ElementRef<"hr">,
+  React.ComponentPropsWithoutRef<"hr">
 >(({ ...props }, ref) => (
-  <div ref={ref} role="separator" {...props}>
+  <hr ref={ref} {...props}>
     <Dot />
-  </div>
+  </hr>
 ));
 InputOTPSeparator.displayName = "InputOTPSeparator";
 

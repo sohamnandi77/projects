@@ -1,11 +1,13 @@
-import {
-  Input as AriaInput,
+import type {
   InputProps as AriaInputProps,
-  TextArea as AriaTextArea,
   TextAreaProps as AriaTextAreaProps,
-  TextField as AriaTextField,
   TextFieldProps as AriaTextFieldProps,
   ValidationResult as AriaValidationResult,
+} from "react-aria-components";
+import {
+  Input as AriaInput,
+  TextArea as AriaTextArea,
+  TextField as AriaTextField,
   composeRenderProps,
   Text,
 } from "react-aria-components";
@@ -63,20 +65,15 @@ interface JollyTextFieldProps extends AriaTextFieldProps {
   textArea?: boolean;
 }
 
-function JollyTextField({
-  label,
-  description,
-  errorMessage,
-  textArea,
-  className,
-  ...props
-}: JollyTextFieldProps) {
+function JollyTextField(props: Readonly<JollyTextFieldProps>) {
+  const { label, description, errorMessage, textArea, className, ...rest } =
+    props;
   return (
     <TextField
       className={composeRenderProps(className, (className) =>
         cn("group flex flex-col gap-2", className),
       )}
-      {...props}
+      {...rest}
     >
       <Label>{label}</Label>
       {textArea ? <TextArea /> : <Input />}

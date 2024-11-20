@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
+    ".": "./src/components/ui/index.ts",
     "./aspect-ratio": "./src/components/ui/aspect-ratio.tsx",
     "./button": "./src/components/ui/button.tsx",
     "./breadcrumbs": "./src/components/ui/breadcrumbs.tsx",

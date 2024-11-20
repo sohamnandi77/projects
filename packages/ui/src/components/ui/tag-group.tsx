@@ -1,13 +1,15 @@
+import type {
+  TagGroupProps as AriaTagGroupProps,
+  TagListProps as AriaTagListProps,
+  TagProps as AriaTagProps,
+} from "react-aria-components";
 import { cva } from "class-variance-authority";
 import { XIcon } from "lucide-react";
 import {
   Button as AriaButton,
   Tag as AriaTag,
   TagGroup as AriaTagGroup,
-  TagGroupProps as AriaTagGroupProps,
   TagList as AriaTagList,
-  TagListProps as AriaTagListProps,
-  TagProps as AriaTagProps,
   composeRenderProps,
   Text,
 } from "react-aria-components";
@@ -18,10 +20,8 @@ import { Label } from "./field";
 
 const TagGroup = AriaTagGroup;
 
-function TagList<T extends object>({
-  className,
-  ...props
-}: AriaTagListProps<T>) {
+function TagList<T extends object>(props: Readonly<AriaTagListProps<T>>) {
+  const { className, ...rest } = props;
   return (
     <AriaTagList
       className={composeRenderProps(className, (className) =>
@@ -32,7 +32,7 @@ function TagList<T extends object>({
           className,
         ),
       )}
-      {...props}
+      {...rest}
     />
   );
 }
@@ -72,8 +72,9 @@ const badgeVariants = cva(
   },
 );
 
-function Tag({ children, className, ...props }: AriaTagProps) {
-  let textValue = typeof children === "string" ? children : undefined;
+function Tag(props: Readonly<AriaTagProps>) {
+  const { children, className, ...rest } = props;
+  const textValue = typeof children === "string" ? children : undefined;
   return (
     <AriaTag
       textValue={textValue}
@@ -89,7 +90,7 @@ function Tag({ children, className, ...props }: AriaTagProps) {
           className,
         ),
       )}
-      {...props}
+      {...rest}
     >
       {composeRenderProps(children, (children, renderProps) => (
         <>
@@ -123,18 +124,21 @@ interface JollyTagGroupProps<T>
   errorMessage?: string;
 }
 
-function JollyTagGroup<T extends object>({
-  label,
-  description,
-  className,
-  errorMessage,
-  items,
-  children,
-  renderEmptyState,
-  ...props
-}: JollyTagGroupProps<T>) {
+function JollyTagGroup<T extends object>(
+  props: Readonly<JollyTagGroupProps<T>>,
+) {
+  const {
+    label,
+    description,
+    className,
+    errorMessage,
+    items,
+    children,
+    renderEmptyState,
+    ...rest
+  } = props;
   return (
-    <TagGroup className={cn("group flex flex-col gap-2", className)} {...props}>
+    <TagGroup className={cn("group flex flex-col gap-2", className)} {...rest}>
       <Label>{label}</Label>
       <TagList items={items} renderEmptyState={renderEmptyState}>
         {children}

@@ -1,6 +1,6 @@
+import type { DropZoneProps as AriaDropZoneProps } from "react-aria-components";
 import {
   DropZone as AriaDropZone,
-  DropZoneProps as AriaDropZoneProps,
   composeRenderProps,
 } from "react-aria-components";
 

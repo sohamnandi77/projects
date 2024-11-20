@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useTheme } from "next-themes";
 
-import { Theme, THEMES } from "~/constants";
+import type { Theme } from "~/constants";
+import { THEMES } from "~/constants";
 
 export const useIsDarkTheme = (theme: Theme) => {
   const { setTheme } = useTheme();

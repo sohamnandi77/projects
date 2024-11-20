@@ -1,9 +1,11 @@
+import type {
+  DialogProps as AriaDialogProps,
+  PopoverProps as AriaPopoverProps,
+} from "react-aria-components";
 import {
   Dialog as AriaDialog,
-  DialogProps as AriaDialogProps,
   DialogTrigger as AriaDialogTrigger,
   Popover as AriaPopover,
-  PopoverProps as AriaPopoverProps,
   composeRenderProps,
 } from "react-aria-components";
 
@@ -30,9 +32,10 @@ const Popover = ({ className, offset = 4, ...props }: AriaPopoverProps) => (
   />
 );
 
-function PopoverDialog({ className, ...props }: AriaDialogProps) {
+function PopoverDialog(props: Readonly<AriaDialogProps>) {
+  const { className, ...rest } = props;
   return (
-    <AriaDialog className={cn("p-4 outline outline-0", className)} {...props} />
+    <AriaDialog className={cn("p-4 outline outline-0", className)} {...rest} />
   );
 }
 

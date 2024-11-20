@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Key, useState } from "react";
+import type { Key } from "react";
+import { useState } from "react";
 import { Slash } from "lucide-react";
 
 import {

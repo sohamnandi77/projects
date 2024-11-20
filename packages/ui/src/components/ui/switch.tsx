@@ -1,6 +1,6 @@
+import type { SwitchProps as AriaSwitchProps } from "react-aria-components";
 import {
   Switch as AriaSwitch,
-  SwitchProps as AriaSwitchProps,
   composeRenderProps,
 } from "react-aria-components";
 

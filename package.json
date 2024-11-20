@@ -5,8 +5,6 @@
     "build": "turbo run build",
     "clean:workspaces": "turbo run clean",
     "clean": "turbo run clean && git clean -xdf .cache .turbo dist node_modules && rm -rf pnpm-lock.yaml",
-    "db:push": "turbo -F @projects/db push",
-    "db:studio": "turbo -F @projects/db studio",
     "dev": "turbo watch dev --continue",
     "dev:sb": "turbo watch dev -F @projects/storybook",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
@@ -20,6 +18,7 @@
   },
   "devDependencies": {
     "@projects/prettier-config": "workspace:*",
+    "@turbo/gen": "^2.3.0",
     "prettier": "catalog:",
     "turbo": "^2.3.0",
     "typescript": "catalog:"

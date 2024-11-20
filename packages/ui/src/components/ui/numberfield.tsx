@@ -1,11 +1,13 @@
-import { ChevronDown, ChevronUp } from "lucide-react";
-import {
+import type {
   ButtonProps as AriaButtonProps,
-  Input as AriaInput,
   InputProps as AriaInputProps,
-  NumberField as AriaNumberField,
   NumberFieldProps as AriaNumberFieldProps,
   ValidationResult as AriaValidationResult,
+} from "react-aria-components";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import {
+  Input as AriaInput,
+  NumberField as AriaNumberField,
   composeRenderProps,
   Text,
 } from "react-aria-components";
@@ -17,7 +19,8 @@ import { FieldError, FieldGroup, Label } from "./field";
 
 const NumberField = AriaNumberField;
 
-function NumberFieldInput({ className, ...props }: AriaInputProps) {
+function NumberFieldInput(props: Readonly<AriaInputProps>) {
+  const { className, ...rest } = props;
   return (
     <AriaInput
       className={composeRenderProps(className, (className) =>
@@ -26,7 +29,7 @@ function NumberFieldInput({ className, ...props }: AriaInputProps) {
           className,
         ),
       )}
-      {...props}
+      {...rest}
     />
   );
 }
@@ -54,7 +57,8 @@ function NumberFieldSteppers({
   );
 }
 
-function NumberFieldStepper({ className, ...props }: AriaButtonProps) {
+function NumberFieldStepper(props: Readonly<AriaButtonProps>) {
+  const { className, ...rest } = props;
   return (
     <Button
       className={composeRenderProps(className, (className) =>
@@ -62,7 +66,7 @@ function NumberFieldStepper({ className, ...props }: AriaButtonProps) {
       )}
       variant={"ghost"}
       size={"icon"}
-      {...props}
+      {...rest}
     />
   );
 }
@@ -73,19 +77,14 @@ interface JollyNumberFieldProps extends AriaNumberFieldProps {
   errorMessage?: string | ((validation: AriaValidationResult) => string);
 }
 
-function JollyNumberField({
-  label,
-  description,
-  errorMessage,
-  className,
-  ...props
-}: JollyNumberFieldProps) {
+function JollyNumberField(props: Readonly<JollyNumberFieldProps>) {
+  const { label, description, errorMessage, className, ...rest } = props;
   return (
     <NumberField
       className={composeRenderProps(className, (className) =>
         cn("group flex flex-col gap-2", className),
       )}
-      {...props}
+      {...rest}
     >
       <Label>{label}</Label>
       <FieldGroup>

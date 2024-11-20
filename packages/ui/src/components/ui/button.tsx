@@ -3,6 +3,7 @@ import type {
   ButtonProps as AriaButtonProps,
   PressEvent,
 } from "react-aria-components";
+import { forwardRef } from "react";
 import { cva } from "class-variance-authority";
 import { Button as AriaButton } from "react-aria-components";
 
@@ -72,10 +73,11 @@ interface ButtonProps
   onClick?: (e: PressEvent) => void;
 }
 
-const Button = (props: ButtonProps) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { className, onPress, onClick, variant, size, ...rest } = props;
   return (
     <AriaButton
+      ref={ref}
       className={composeTailwindRenderProps(
         getButtonVariants({ variant, size }),
         className,
@@ -84,7 +86,7 @@ const Button = (props: ButtonProps) => {
       {...rest}
     />
   );
-};
+});
 
 export { Button, buttonVariants, getButtonVariants };
 

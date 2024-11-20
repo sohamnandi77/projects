@@ -1,12 +1,12 @@
+import type { ToolbarProps } from "react-aria-components";
 import {
   Toolbar as AriaToolbar,
   composeRenderProps,
-  ToolbarProps,
 } from "react-aria-components";
 
 import { cn } from "@projects/ui/lib/utils";
 
-export function Toolbar(props: ToolbarProps) {
+export function Toolbar(props: Readonly<ToolbarProps>) {
   return (
     <AriaToolbar
       {...props}

@@ -1,8 +1,5 @@
-import {
-  Meter as AriaMeter,
-  MeterProps as AriaMeterProps,
-  composeRenderProps,
-} from "react-aria-components";
+import type { MeterProps as AriaMeterProps } from "react-aria-components";
+import { Meter as AriaMeter, composeRenderProps } from "react-aria-components";
 
 import { cn } from "@projects/ui/lib/utils";
 
@@ -55,18 +52,14 @@ interface JollyMeterProps extends MeterProps {
   showValue?: boolean;
 }
 
-function JollyMeter({
-  label,
-  className,
-  showValue = true,
-  ...props
-}: JollyMeterProps) {
+function JollyMeter(props: Readonly<JollyMeterProps>) {
+  const { label, className, showValue = true, ...rest } = props;
   return (
     <Meter
       className={composeRenderProps(className, (className) =>
         cn("group flex flex-col gap-2", className),
       )}
-      {...props}
+      {...rest}
     >
       {({ valueText }) => (
         <div className="flex w-full justify-between">

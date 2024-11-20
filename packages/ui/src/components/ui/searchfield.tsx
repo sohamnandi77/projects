@@ -1,14 +1,16 @@
+import type {
+  ButtonProps as AriaButtonProps,
+  GroupProps as AriaGroupProps,
+  InputProps as AriaInputProps,
+  SearchFieldProps as AriaSearchFieldProps,
+  ValidationResult as AriaValidationResult,
+} from "react-aria-components";
 import { SearchIcon, XIcon } from "lucide-react";
 import {
   Button as AriaButton,
-  ButtonProps as AriaButtonProps,
   Group as AriaGroup,
-  GroupProps as AriaGroupProps,
   Input as AriaInput,
-  InputProps as AriaInputProps,
   SearchField as AriaSearchField,
-  SearchFieldProps as AriaSearchFieldProps,
-  ValidationResult as AriaValidationResult,
   composeRenderProps,
   Text,
 } from "react-aria-components";
@@ -17,18 +19,20 @@ import { cn } from "@projects/ui/lib/utils";
 
 import { FieldError, FieldGroup, Label } from "./field";
 
-function SearchField({ className, ...props }: AriaSearchFieldProps) {
+function SearchField(props: Readonly<AriaSearchFieldProps>) {
+  const { className, ...rest } = props;
   return (
     <AriaSearchField
       className={composeRenderProps(className, (className) =>
         cn("group", className),
       )}
-      {...props}
+      {...rest}
     />
   );
 }
 
-function SearchFieldInput({ className, ...props }: AriaInputProps) {
+function SearchFieldInput(props: Readonly<AriaInputProps>) {
+  const { className, ...rest } = props;
   return (
     <AriaInput
       className={composeRenderProps(className, (className) =>
@@ -37,12 +41,13 @@ function SearchFieldInput({ className, ...props }: AriaInputProps) {
           className,
         ),
       )}
-      {...props}
+      {...rest}
     />
   );
 }
 
-function SearchFieldGroup({ className, ...props }: AriaGroupProps) {
+function SearchFieldGroup(props: Readonly<AriaGroupProps>) {
+  const { className, ...rest } = props;
   return (
     <AriaGroup
       className={composeRenderProps(className, (className) =>
@@ -55,12 +60,13 @@ function SearchFieldGroup({ className, ...props }: AriaGroupProps) {
           className,
         ),
       )}
-      {...props}
+      {...rest}
     />
   );
 }
 
-function SearchFieldClear({ className, ...props }: AriaButtonProps) {
+function SearchFieldClear(props: Readonly<AriaButtonProps>) {
+  const { className, ...rest } = props;
   return (
     <AriaButton
       className={composeRenderProps(className, (className) =>
@@ -75,7 +81,7 @@ function SearchFieldClear({ className, ...props }: AriaButtonProps) {
           className,
         ),
       )}
-      {...props}
+      {...rest}
     />
   );
 }
@@ -92,7 +98,7 @@ function JollySearchField({
   className,
   errorMessage,
   ...props
-}: JollySearchFieldProps) {
+}: Readonly<JollySearchFieldProps>) {
   return (
     <SearchField
       className={composeRenderProps(className, (className) =>

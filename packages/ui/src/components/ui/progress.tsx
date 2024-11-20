@@ -1,6 +1,6 @@
+import type { ProgressBarProps as AriaProgressBarProps } from "react-aria-components";
 import {
   ProgressBar as AriaProgressBar,
-  ProgressBarProps as AriaProgressBarProps,
   composeRenderProps,
 } from "react-aria-components";
 
@@ -41,7 +41,7 @@ const Progress = ({
               fillClassName,
             )}
             style={{
-              transform: `translateX(-${100 - (renderProps.percentage || 0)}%)`,
+              transform: `translateX(-${100 - (renderProps.percentage ?? 0)}%)`,
             }}
           />
         </div>
@@ -55,18 +55,14 @@ interface JollyProgressBarProps extends ProgressProps {
   showValue?: boolean;
 }
 
-function JollyProgressBar({
-  label,
-  className,
-  showValue = true,
-  ...props
-}: JollyProgressBarProps) {
+function JollyProgressBar(props: Readonly<JollyProgressBarProps>) {
+  const { label, className, showValue = true, ...rest } = props;
   return (
     <Progress
       className={composeRenderProps(className, (className) =>
         cn("group flex flex-col gap-2", className),
       )}
-      {...props}
+      {...rest}
     >
       {({ valueText }) => (
         <div className="flex w-full justify-between">

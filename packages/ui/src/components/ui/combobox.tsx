@@ -1,13 +1,15 @@
-import { ChevronsUpDown } from "lucide-react";
-import {
-  ComboBox as AriaComboBox,
+import type {
   ComboBoxProps as AriaComboBoxProps,
-  Input as AriaInput,
   InputProps as AriaInputProps,
-  ListBox as AriaListBox,
   ListBoxProps as AriaListBoxProps,
   PopoverProps as AriaPopoverProps,
   ValidationResult as AriaValidationResult,
+} from "react-aria-components";
+import { ChevronsUpDown } from "lucide-react";
+import {
+  ComboBox as AriaComboBox,
+  Input as AriaInput,
+  ListBox as AriaListBox,
   composeRenderProps,
   Text,
 } from "react-aria-components";

@@ -1,14 +1,16 @@
+import type {
+  SliderOutputProps as AriaSliderOutputProps,
+  SliderProps as AriaSliderProps,
+  SliderThumbProps as AriaSliderThumbProps,
+  SliderTrackProps as AriaSliderTrackProps,
+} from "react-aria-components";
 import * as React from "react";
 import {
   Slider as AriaSlider,
   SliderOutput as AriaSliderOutput,
-  SliderOutputProps as AriaSliderOutputProps,
-  SliderProps as AriaSliderProps,
   SliderStateContext as AriaSliderStateContext,
   SliderThumb as AriaSliderThumb,
-  SliderThumbProps as AriaSliderThumbProps,
   SliderTrack as AriaSliderTrack,
-  SliderTrackProps as AriaSliderTrackProps,
   composeRenderProps,
 } from "react-aria-components";
 
@@ -63,7 +65,7 @@ const SliderFillTrack = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
-  let state = React.useContext(AriaSliderStateContext)!;
+  const state = React.useContext(AriaSliderStateContext);
   const orientation = state.orientation === "vertical" ? "height" : "width";
   return (
     <div

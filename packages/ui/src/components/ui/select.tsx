@@ -1,17 +1,19 @@
 "use client";
 
+import type {
+  ButtonProps as AriaButtonProps,
+  ListBoxProps as AriaListBoxProps,
+  PopoverProps as AriaPopoverProps,
+  SelectProps as AriaSelectProps,
+  SelectValueProps as AriaSelectValueProps,
+  ValidationResult as AriaValidationResult,
+} from "react-aria-components";
 import { ChevronDown } from "lucide-react";
 import {
   Button as AriaButton,
-  ButtonProps as AriaButtonProps,
   ListBox as AriaListBox,
-  ListBoxProps as AriaListBoxProps,
-  PopoverProps as AriaPopoverProps,
   Select as AriaSelect,
-  SelectProps as AriaSelectProps,
   SelectValue as AriaSelectValue,
-  SelectValueProps as AriaSelectValueProps,
-  ValidationResult as AriaValidationResult,
   composeRenderProps,
   Text,
 } from "react-aria-components";
@@ -112,21 +114,22 @@ interface JollySelectProps<T extends object>
   children: React.ReactNode | ((item: T) => React.ReactNode);
 }
 
-function JollySelect<T extends object>({
-  label,
-  description,
-  errorMessage,
-  children,
-  className,
-  items,
-  ...props
-}: JollySelectProps<T>) {
+function JollySelect<T extends object>(props: Readonly<JollySelectProps<T>>) {
+  const {
+    label,
+    description,
+    errorMessage,
+    children,
+    className,
+    items,
+    ...rest
+  } = props;
   return (
     <Select
       className={composeRenderProps(className, (className) =>
         cn("group flex flex-col gap-2", className),
       )}
-      {...props}
+      {...rest}
     >
       <Label>{label}</Label>
       <SelectTrigger>

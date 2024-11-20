@@ -83,7 +83,7 @@ const BreadcrumbEllipsis = ({
   </span>
 );
 
-interface BreadcrumbPageProps extends Omit<AriaLinkProps, "href"> {}
+type BreadcrumbPageProps = Omit<AriaLinkProps, "href">;
 
 const BreadcrumbPage = ({ className, ...props }: BreadcrumbPageProps) => (
   <AriaLink
@@ -102,4 +102,10 @@ export {
   BreadcrumbPage,
   Breadcrumbs,
   BreadcrumbSeparator,
+};
+
+export type {
+  BreadcrumbPageProps,
+  AriaBreadcrumbProps as BreadcrumbProps,
+  AriaBreadcrumbsProps as BreadcrumbsProps,
 };

@@ -2,7 +2,7 @@ import type React from "react";
 import { useEffect } from "react";
 import { useTheme } from "next-themes";
 
-import { Theme } from "~/constants";
+import type { Theme } from "~/constants";
 
 interface ThemeSwitcherProps {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ export const ThemeSwitcher = (props: ThemeSwitcherProps) => {
     } catch (error) {
       console.error("Failed to set theme:", error);
     }
-  }, []);
+  }, [setTheme, theme]);
 
   return <>{children}</>;
 };
