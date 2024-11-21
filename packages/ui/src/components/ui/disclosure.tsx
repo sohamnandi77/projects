@@ -9,9 +9,12 @@ import React from "react";
 import { cva } from "class-variance-authority";
 import { ChevronDownIcon } from "lucide-react";
 import {
-  UNSTABLE_Disclosure as AriaDisclosure,
-  UNSTABLE_DisclosureGroup as AriaDisclosureGroup,
-  UNSTABLE_DisclosurePanel as AriaDisclosurePanel,
+  // UNSTABLE_Disclosure as AriaDisclosure,
+  // UNSTABLE_DisclosureGroup as AriaDisclosureGroup,
+  // UNSTABLE_DisclosurePanel as AriaDisclosurePanel,
+  Disclosure as AriaDisclosure,
+  DisclosureGroup as AriaDisclosureGroup,
+  DisclosurePanel as AriaDisclosurePanel,
   Button,
   Heading,
 } from "react-aria-components";
