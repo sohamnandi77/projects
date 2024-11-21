@@ -6,8 +6,8 @@
   "exports": {
     ".": "./src/components/ui/index.ts",
     "./aspect-ratio": "./src/components/ui/aspect-ratio.tsx",
-    "./button": "./src/components/ui/button.tsx",
     "./breadcrumbs": "./src/components/ui/breadcrumbs.tsx",
+    "./button": "./src/components/ui/button.tsx",
     "./calendar": "./src/components/ui/calendar.tsx",
     "./card": "./src/components/ui/card.tsx",
     "./carousel": "./src/components/ui/carousel.tsx",
