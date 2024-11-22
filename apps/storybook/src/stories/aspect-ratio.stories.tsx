@@ -29,7 +29,7 @@ export const Primary: Story = {
       <AspectRatio {...args}>
         <img
           src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd"
-          alt="Photo by Drew Beamer"
+          alt="Drew Beamer's work"
           className="h-full w-full rounded-md object-cover"
         />
       </AspectRatio>

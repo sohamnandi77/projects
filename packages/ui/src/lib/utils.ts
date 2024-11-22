@@ -6,7 +6,7 @@ import { twMerge } from "tailwind-merge";
 export const cn = (...inputs: ClassValue[]): string => twMerge(cx(...inputs));
 
 export function composeTailwindRenderProps<T>(
-  tw: string,
+  tw: string | (string | undefined)[],
   className: string | ((v: T) => string) | undefined,
 ): string | ((v: T) => string) {
   return composeRenderProps(className, (className) => twMerge(tw, className));

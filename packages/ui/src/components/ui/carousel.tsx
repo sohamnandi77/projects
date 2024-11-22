@@ -1,7 +1,17 @@
 import type { UseEmblaCarouselType } from "embla-carousel-react";
-import React, { createContext, forwardRef, useContext } from "react";
+import type { ListBoxSectionProps } from "react-aria-components";
+import {
+  createContext,
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ListBox, ListBoxItem, ListBoxSection } from "react-aria-components";
 
 import { Button } from "@projects/ui/button";
 import { cn } from "@projects/ui/lib/utils";
@@ -42,155 +52,155 @@ function useCarousel() {
 const Carousel = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & CarouselProps
->(
-  (
+>((props, ref) => {
+  const {
+    orientation = "horizontal",
+    opts,
+    setApi,
+    plugins,
+    className,
+    children,
+    ...rest
+  } = props;
+  const [carouselRef, api] = useEmblaCarousel(
     {
-      orientation = "horizontal",
-      opts,
-      setApi,
-      plugins,
-      className,
-      children,
-      ...props
+      ...opts,
+      axis: orientation === "horizontal" ? "x" : "y",
     },
-    ref,
-  ) => {
-    const [carouselRef, api] = useEmblaCarousel(
-      {
-        ...opts,
-        axis: orientation === "horizontal" ? "x" : "y",
-      },
-      plugins,
-    );
-    const [canScrollPrev, setCanScrollPrev] = React.useState(false);
-    const [canScrollNext, setCanScrollNext] = React.useState(false);
+    plugins,
+  );
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
-    const onSelect = React.useCallback((api: CarouselApi) => {
-      if (!api) {
-        return;
+  const onSelect = useCallback((api: CarouselApi) => {
+    if (!api) {
+      return;
+    }
+
+    setCanScrollPrev(api.canScrollPrev());
+    setCanScrollNext(api.canScrollNext());
+  }, []);
+
+  const scrollPrev = useCallback(() => {
+    api?.scrollPrev();
+  }, [api]);
+
+  const scrollNext = useCallback(() => {
+    api?.scrollNext();
+  }, [api]);
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        scrollPrev();
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        scrollNext();
       }
+    },
+    [scrollPrev, scrollNext],
+  );
 
-      setCanScrollPrev(api.canScrollPrev());
-      setCanScrollNext(api.canScrollNext());
-    }, []);
+  useEffect(() => {
+    if (!api || !setApi) {
+      return;
+    }
 
-    const scrollPrev = React.useCallback(() => {
-      api?.scrollPrev();
-    }, [api]);
+    setApi(api);
+  }, [api, setApi]);
 
-    const scrollNext = React.useCallback(() => {
-      api?.scrollNext();
-    }, [api]);
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
 
-    const handleKeyDown = React.useCallback(
-      (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (event.key === "ArrowLeft") {
-          event.preventDefault();
-          scrollPrev();
-        } else if (event.key === "ArrowRight") {
-          event.preventDefault();
-          scrollNext();
-        }
-      },
-      [scrollPrev, scrollNext],
-    );
+    onSelect(api);
+    api.on("reInit", onSelect);
+    api.on("select", onSelect);
 
-    React.useEffect(() => {
-      if (!api || !setApi) {
-        return;
-      }
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api, onSelect]);
 
-      setApi(api);
-    }, [api, setApi]);
+  const computedOrientation =
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    orientation ?? (opts?.axis === "y" ? "vertical" : "horizontal");
 
-    React.useEffect(() => {
-      if (!api) {
-        return;
-      }
+  const value = useMemo(
+    () => ({
+      carouselRef,
+      api: api,
+      opts,
+      orientation: computedOrientation,
+      scrollPrev,
+      scrollNext,
+      canScrollPrev,
+      canScrollNext,
+    }),
+    [
+      api,
+      canScrollNext,
+      canScrollPrev,
+      carouselRef,
+      opts,
+      computedOrientation,
+      scrollNext,
+      scrollPrev,
+    ],
+  );
 
-      onSelect(api);
-      api.on("reInit", onSelect);
-      api.on("select", onSelect);
-
-      return () => {
-        api.off("select", onSelect);
-      };
-    }, [api, onSelect]);
-
-    const computedOrientation =
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      orientation ?? (opts?.axis === "y" ? "vertical" : "horizontal");
-
-    const value = React.useMemo(
-      () => ({
-        carouselRef,
-        api: api,
-        opts,
-        orientation: computedOrientation,
-        scrollPrev,
-        scrollNext,
-        canScrollPrev,
-        canScrollNext,
-      }),
-      [
-        api,
-        canScrollNext,
-        canScrollPrev,
-        carouselRef,
-        opts,
-        computedOrientation,
-        scrollNext,
-        scrollPrev,
-      ],
-    );
-
-    return (
-      <CarouselContext.Provider value={value}>
-        <section
-          ref={ref}
-          onKeyDownCapture={handleKeyDown}
-          className={cn("relative", className)}
-          aria-label="carousel"
-          {...props}
-        >
-          {children}
-        </section>
-      </CarouselContext.Provider>
-    );
-  },
-);
+  return (
+    <CarouselContext.Provider value={value}>
+      <section
+        ref={ref}
+        onKeyDownCapture={handleKeyDown}
+        className={cn("relative", className)}
+        aria-label="carousel"
+        {...rest}
+      >
+        {children}
+      </section>
+    </CarouselContext.Provider>
+  );
+});
 Carousel.displayName = "Carousel";
 
-const CarouselContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+const CarouselContent = <T extends object>(props: ListBoxSectionProps<T>) => {
+  const { className, ...rest } = props;
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef} className="overflow-hidden">
-      <div
-        ref={ref}
+    <ListBox
+      layout={orientation === "vertical" ? "stack" : "grid"}
+      orientation={orientation}
+      aria-label="Slides"
+      ref={carouselRef}
+      className="overflow-hidden"
+    >
+      <ListBoxSection
         className={cn(
           "flex",
           orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
           className,
         )}
-        {...props}
+        {...rest}
       />
-    </div>
+    </ListBox>
   );
-});
+};
+
 CarouselContent.displayName = "CarouselContent";
 
-const CarouselItem = React.forwardRef<
-  HTMLDetailsElement,
-  React.HTMLAttributes<HTMLDetailsElement>
+const CarouselItem = forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const { orientation } = useCarousel();
 
   return (
-    <details
+    <ListBoxItem
       ref={ref}
       aria-roledescription="slide"
       className={cn(
@@ -204,7 +214,7 @@ const CarouselItem = React.forwardRef<
 });
 CarouselItem.displayName = "CarouselItem";
 
-const CarouselPrevious = React.forwardRef<
+const CarouselPrevious = forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
@@ -226,14 +236,14 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
+      <ArrowLeft className="size-4" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
 });
 CarouselPrevious.displayName = "CarouselPrevious";
 
-const CarouselNext = React.forwardRef<
+const CarouselNext = forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
@@ -255,7 +265,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-4 w-4" />
+      <ArrowRight className="size-4" />
       <span className="sr-only">Next slide</span>
     </Button>
   );

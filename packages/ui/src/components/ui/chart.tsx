@@ -12,6 +12,8 @@ import { cn } from "@projects/ui/lib/utils";
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const;
 
+type ChartTheme = keyof typeof THEMES;
+
 export type ChartConfig = Record<
   string,
   {
@@ -19,7 +21,7 @@ export type ChartConfig = Record<
     icon?: React.ComponentType;
   } & (
     | { color?: string; theme?: never }
-    | { color?: never; theme: Record<keyof typeof THEMES, string> }
+    | { color?: never; theme: Record<ChartTheme, string> }
   )
 >;
 
@@ -39,38 +41,44 @@ function useChart() {
   return context;
 }
 
-const ChartContainer = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<"div"> & {
-    config: ChartConfig;
-    children: React.ComponentProps<typeof ResponsiveContainer>["children"];
-  }
->(({ id, className, children, config, ...props }, ref) => {
-  const uniqueId = React.useId();
-  const chartId = `chart-${id ?? uniqueId.replace(/:/g, "")}`;
+type ChartProps = React.ComponentProps<"div"> & {
+  config: ChartConfig;
+  children: React.ReactElement;
+};
 
-  const value = React.useMemo(() => ({ config }), [config]);
+const ChartContainer = React.forwardRef<HTMLDivElement, ChartProps>(
+  ({ id, className, children, config, ...props }, ref) => {
+    const uniqueId = React.useId();
+    const chartId = `chart-${id ?? uniqueId.replace(/:/g, "")}`;
 
-  return (
-    <ChartContext.Provider value={value}>
-      <div
-        data-chart={chartId}
-        ref={ref}
-        className={cn(
-          "[&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
-          className,
-        )}
-        {...props}
-      >
-        <ChartStyle id={chartId} config={config} />
-        <ResponsiveContainer>{children}</ResponsiveContainer>
-      </div>
-    </ChartContext.Provider>
-  );
-});
+    const value = React.useMemo(() => ({ config }), [config]);
+
+    return (
+      <ChartContext.Provider value={value}>
+        <div
+          data-chart={chartId}
+          ref={ref}
+          className={cn(
+            "[&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
+            className,
+          )}
+          {...props}
+        >
+          <ChartStyle id={chartId} config={config} />
+          <ResponsiveContainer>{children}</ResponsiveContainer>
+        </div>
+      </ChartContext.Provider>
+    );
+  },
+);
 ChartContainer.displayName = "Chart";
 
-const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
+interface StyleProps {
+  id: string;
+  config: ChartConfig;
+}
+
+const ChartStyle = ({ id, config }: StyleProps) => {
   const colorConfig = Object.entries(config).filter(
     ([_, config]) => config.theme ?? config.color,
   );
@@ -263,18 +271,18 @@ const ChartTooltipContent = React.forwardRef<
     );
   },
 );
-ChartTooltipContent.displayName = "ChartTooltip";
+ChartTooltipContent.displayName = "ChartTooltipContent";
 
 const ChartLegend = Legend;
 
-const ChartLegendContent = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<"div"> &
-    Pick<LegendProps, "payload" | "verticalAlign"> & {
-      hideIcon?: boolean;
-      nameKey?: string;
-    }
->(
+interface LegendContentProps
+  extends React.ComponentProps<"div">,
+    Pick<LegendProps, "payload" | "verticalAlign"> {
+  hideIcon?: boolean;
+  nameKey?: string;
+}
+
+const ChartLegendContent = React.forwardRef<HTMLDivElement, LegendContentProps>(
   (
     { className, hideIcon = false, payload, verticalAlign = "bottom", nameKey },
     ref,
@@ -324,7 +332,7 @@ const ChartLegendContent = React.forwardRef<
     );
   },
 );
-ChartLegendContent.displayName = "ChartLegend";
+ChartLegendContent.displayName = "ChartLegendContent";
 
 // Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(
