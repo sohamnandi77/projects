@@ -1,9 +1,11 @@
 {
-  "name": "@projects/{{name}}",
+  "name": "@projects/hooks",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "exports": { ".": "./src/index.ts" },
+  "exports": {
+    "./use-media-query": "./src/use-media-query.ts"
+  },
   "license": "MIT",
   "scripts": {
     "build": "tsc",
@@ -18,9 +20,17 @@
     "@projects/eslint-config": "workspace:*",
     "@projects/prettier-config": "workspace:*",
     "@projects/tsconfig": "workspace:*",
+    "@types/react": "catalog:react18",
     "eslint": "catalog:",
     "prettier": "catalog:",
+    "react": "catalog:react18",
     "typescript": "catalog:"
   },
-  "prettier": "@projects/prettier-config"
+  "peerDependencies": {
+    "react": "catalog:react18"
+  },
+  "prettier": "@projects/prettier-config",
+  "dependencies": {
+    "superjson": "^2.2.1"
+  }
 }
