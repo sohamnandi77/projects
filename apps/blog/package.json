@@ -5,19 +5,17 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "check": "next lint && tsc --noEmit",
+    "clean": "git clean -xdf .cache .turbo .next dist node_modules",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "dev": "next dev --turbo",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "next build && next start",
     "start": "next start",
-    "typecheck": "tsc --noEmit",
-    "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@projects/auth": "workspace:^",
@@ -45,7 +43,7 @@
     "@projects/prettier-config": "workspace:*",
     "@projects/tailwind-config": "workspace:*",
     "@projects/tsconfig": "workspace:*",
-    "@types/node": "^20.14.10",
+    "@types/node": "^20.16.11",
     "@types/react": "catalog:react18",
     "@types/react-dom": "catalog:react18",
     "drizzle-kit": "^0.28.1",

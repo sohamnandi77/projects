@@ -5,7 +5,7 @@
   "type": "module",
   "exports": {
     "./base": "./base.js",
-    "./nextjs": "./nextjs.js",
+    "./next": "./next.js",
     "./react": "./react.js",
     "./drizzle": "./drizzle.js"
   },
@@ -22,7 +22,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "5.0.0",
-    "eslint-plugin-turbo": "^2.3.0",
+    "eslint-plugin-turbo": "^2.3.1",
     "typescript-eslint": "^8.15.0"
   },
   "devDependencies": {

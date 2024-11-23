@@ -52,13 +52,13 @@ importers:
         specifier: workspace:*
         version: link:tooling/prettier
       '@turbo/gen':
-        specifier: ^2.3.0
+        specifier: ^2.3.1
         version: 2.3.1(@types/node@20.17.7)(typescript@5.7.2)
       prettier:
         specifier: 'catalog:'
         version: 3.3.3
       turbo:
-        specifier: ^2.3.0
+        specifier: ^2.3.1
         version: 2.3.1
       typescript:
         specifier: 'catalog:'
@@ -137,7 +137,7 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/tsconfig
       '@types/node':
-        specifier: ^20.14.10
+        specifier: ^20.16.11
         version: 20.17.7
       '@types/react':
         specifier: catalog:react18
@@ -408,7 +408,7 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(eslint@9.15.0(jiti@2.4.0))
       eslint-plugin-turbo:
-        specifier: ^2.3.0
+        specifier: ^2.3.1
         version: 2.3.1(eslint@9.15.0(jiti@2.4.0))
       typescript-eslint:
         specifier: ^8.15.0

@@ -7,24 +7,36 @@ import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import SuperJSON from "superjson";
 
+import type { AppRouter } from "~/server/api/root";
 import { env } from "~/env";
-import { AppRouter } from "~/server/api/root";
 import { createQueryClient } from "./query-client";
 
+// Declare the singleton variable
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
+
+// Separate function to initialize the singleton
+function initializeQueryClientSingleton(): QueryClient {
+  if (!clientQueryClientSingleton) {
+    clientQueryClientSingleton = createQueryClient();
+  }
+  return clientQueryClientSingleton;
+}
+
+// Modified getQueryClient function
 const getQueryClient = () => {
   if (typeof window === "undefined") {
     // Server: always make a new query client
     return createQueryClient();
-  } else {
-    // Browser: use singleton pattern to keep the same query client
-    return (clientQueryClientSingleton ??= createQueryClient());
   }
+  // Browser: use the initialized singleton
+  return initializeQueryClientSingleton();
 };
 
 export const api = createTRPCReact<AppRouter>();
 
-export function TRPCReactProvider(props: { children: React.ReactNode }) {
+export function TRPCReactProvider(
+  props: Readonly<{ children: React.ReactNode }>,
+) {
   const queryClient = getQueryClient();
 
   const [trpcClient] = useState(() =>
@@ -60,6 +72,5 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
 const getBaseUrl = () => {
   if (typeof window !== "undefined") return window.location.origin;
   if (env.VERCEL_URL) return `https://${env.VERCEL_URL}`;
-  // eslint-disable-next-line no-restricted-properties
-  return `http://localhost:${process.env.PORT ?? 3000}`;
+  return `http://localhost:3000`;
 };

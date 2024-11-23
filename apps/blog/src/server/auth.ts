@@ -1,4 +1,5 @@
-import { betterAuth, BetterAuthOptions } from "better-auth";
+import type { BetterAuthOptions } from "better-auth";
+import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 
 import { env } from "~/env";
@@ -11,9 +12,6 @@ export const config = {
   secret: env.BETTER_AUTH_SECRET,
   emailAndPassword: {
     enabled: true,
-    async sendResetPassword(_, url) {
-      console.log("Reset password URL:", url);
-    },
   },
   socialProviders: {
     google: {
