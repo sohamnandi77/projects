@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 90%;
+    --foreground: 0 0% 9%;
+
+    --primary: 263 69% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 270 100% 98%;
+    --secondary-foreground: 263 69% 42%;
+
+    --error: 353 59% 94%;
+    --error-foreground: 0 75% 35%;
+
+    --success: 131 47% 93%;
+    --success-foreground: 134 100% 19%;
+
+    --muted: 0 0% 69%;
+    --muted-foreground: 0 0% 22%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+
+    --stoke-primary: 269 100% 92%;
+    --stoke-secondary: 0 0% 90%;
+    --stoke-input: 269 100% 95%;
+    --stoke-error: 356, 61% 86%;
+    --stoke-success: 127 42% 84%;
+    --stoke-muted: 0 0% 56%;
+
+    --placeholder: 0 0% 56%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5% 64.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 94%;
+
+    --primary: 263 70% 50%;
+    --primary-foreground: 269 100% 92%;
+
+    --secondary: 269 97% 85%;
+    --secondary-foreground: 264 67% 35%;
+
+    --error: 3 56% 51%;
+    --error-foreground: 356 61% 86%;
+
+    --success: 134 100% 19%;
+    --success-foreground: 127 42% 84%;
+
+    --muted: 0 0% 33%;
+    --muted-foreground: 0 0% 69%;
+
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 94%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 94%;
+
+    --stoke-primary: 263 69% 42%;
+    --stoke-secondary: 0 0% 41%;
+    --stoke-input: 258 90% 66%;
+    --stoke-error: 2 46% 57%;
+    --stoke-success: 136 74% 33%;
+    --stoke-muted: 0 0% 41%;
+
+    --placeholder: 0 0% 56%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}

@@ -8,7 +8,7 @@ export default {
   content: [
     ...baseConfig.content,
     "../../packages/ui/src/components/ui/**/*.{ts,tsx}",
-    "./stories/**/*.{ts,tsx}",
+    "./src/**/*.tsx",
   ],
   presets: [baseConfig],
 } satisfies Config;
