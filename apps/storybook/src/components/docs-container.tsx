@@ -1,10 +1,10 @@
 import type { DocsContainerProps } from "@storybook/blocks";
-import { DocsContainer as BaseContainer } from "@storybook/blocks";
 import type { FC, PropsWithChildren } from "react";
+import { DocsContainer as BaseContainer } from "@storybook/blocks";
 import { themes } from "storybook/internal/theming";
 
 import type { Theme } from "~/constants";
-import { useIsDarkTheme } from "./useGetTheme";
+import { useIsDarkTheme } from "./use-is-dark-theme";
 
 export const DocsContainer: FC<PropsWithChildren<DocsContainerProps>> = ({
   children,

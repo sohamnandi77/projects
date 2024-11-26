@@ -32,6 +32,7 @@
     "drizzle-zod": "^0.5.1",
     "lucide-react": "catalog:",
     "next": "^15.0.3",
+    "next-axiom": "^1.6.0",
     "postgres": "^3.4.5",
     "react": "catalog:react18",
     "react-dom": "catalog:react18",

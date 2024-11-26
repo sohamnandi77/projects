@@ -1,8 +1,8 @@
 import type { Preview } from "@storybook/react";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
-import { ThemeProvider } from "next-themes";
 
 import { I18nProvider } from "@projects/ui";
+import { ThemeProvider } from "@projects/ui/theme";
 
 import type { Theme } from "~/constants";
 import { DocsContainer } from "~/components/docs-container";

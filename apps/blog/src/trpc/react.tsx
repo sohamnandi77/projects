@@ -2,7 +2,7 @@
 
 import type { QueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { isServer, QueryClientProvider } from "@tanstack/react-query";
 import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import SuperJSON from "superjson";
@@ -24,7 +24,7 @@ function initializeQueryClientSingleton(): QueryClient {
 
 // Modified getQueryClient function
 const getQueryClient = () => {
-  if (typeof window === "undefined") {
+  if (isServer) {
     // Server: always make a new query client
     return createQueryClient();
   }

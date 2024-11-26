@@ -1,6 +1,7 @@
 import type React from "react";
 import { useEffect } from "react";
-import { useTheme } from "next-themes";
+
+import { useTheme } from "@projects/ui/theme";
 
 import type { Theme } from "~/constants";
 

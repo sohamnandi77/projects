@@ -16,7 +16,9 @@
     "./combobox": "./src/components/ui/combobox.tsx",
     "./command": "./src/components/ui/command.tsx",
     "./date-picker": "./src/components/ui/date-picker.tsx",
-    "./lib/utils": "./src/lib/utils.ts"
+    "./theme": "./src/components/vendors/theme.tsx",
+    "./lib/utils": "./src/lib/utils.ts",
+    "./types": "./src/types/index.ts"
   },
   "license": "MIT",
   "scripts": {
