@@ -21,7 +21,7 @@
     "postcss": "^8.4.49",
     "tailwindcss": "catalog:",
     "tailwindcss-animate": "^1.0.7",
-    "tailwindcss-react-aria-components": "^1.1.6"
+    "tailwindcss-react-aria-components": "^1.2.0"
   },
   "devDependencies": {
     "@projects/eslint-config": "workspace:*",
