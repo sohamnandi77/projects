@@ -2,6 +2,7 @@
   // Editor settings
   "editor.formatOnSave": true,
   "editor.fontLigatures": true,
+  "editor.rulers": [100],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[typescript,typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -34,6 +35,13 @@
   "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
   "eslint.codeActionsOnSave.mode": "all",
   "eslint.runtime": "node",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "astro",
+    "typescript",
+    "typescriptreact"
+  ],
   "eslint.workingDirectories": [
     { "pattern": "apps/*/" },
     { "pattern": "packages/*/" },

@@ -44,6 +44,9 @@ jobs:
           externals: packages/(ui/src)/**
           skip: "@(renovate/**|dependabot/**)"
           buildScriptName: build
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
       - name: List all changed files
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}

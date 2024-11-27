@@ -28,6 +28,9 @@
     "clean": {
       "cache": false
     },
+    "//#clean": {
+      "cache": false
+    },
     "push": {
       "cache": false,
       "interactive": true
