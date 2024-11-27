@@ -5,7 +5,7 @@ import { ThemeProvider } from "@projects/ui/theme";
 
 import { TRPCReactProvider } from "~/trpc/react";
 
-export default function Providers({ children }: ReactChildrenProps) {
+export default function RootProviders({ children }: ReactChildrenProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <TRPCReactProvider>{children}</TRPCReactProvider>

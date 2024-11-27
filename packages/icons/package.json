@@ -1,11 +1,11 @@
 {
-  "name": "@projects/auth",
+  "name": "@projects/icons",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./env": "./env.ts"
+    ".": "./src/type.ts",
+    "./google": "./src/google.tsx"
   },
   "license": "MIT",
   "scripts": {
@@ -17,17 +17,18 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
-  "dependencies": {
-    "@t3-oss/env-nextjs": "^0.11.1",
-    "zod": "catalog:"
-  },
   "devDependencies": {
     "@projects/eslint-config": "workspace:*",
     "@projects/prettier-config": "workspace:*",
     "@projects/tsconfig": "workspace:*",
+    "@types/react": "catalog:react18",
     "eslint": "catalog:",
     "prettier": "catalog:",
+    "react": "catalog:react18",
     "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:react18"
   },
   "prettier": "@projects/prettier-config"
 }

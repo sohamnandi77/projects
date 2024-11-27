@@ -15,10 +15,11 @@
     "lint:fix": "eslint . --fix",
     "preview": "next build && next start",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@projects/auth": "workspace:^",
+    "@projects/auth": "workspace:*",
+    "@projects/icons": "workspace:*",
     "@projects/ui": "workspace:*",
     "@t3-oss/env-nextjs": "^0.11.1",
     "@tanstack/react-query": "^5.61.0",

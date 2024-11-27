@@ -8,6 +8,7 @@
     "clean:workspaces": "turbo run clean",
     "dev": "turbo watch dev --continue",
     "dev:sb": "turbo watch dev -F storybook",
+    "dev:blog": "turbo watch dev -F blog",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
@@ -19,9 +20,9 @@
   },
   "devDependencies": {
     "@projects/prettier-config": "workspace:*",
-    "@turbo/gen": "^2.3.2",
+    "@turbo/gen": "^2.3.3",
     "prettier": "catalog:",
-    "turbo": "^2.3.2",
+    "turbo": "^2.3.3",
     "typescript": "catalog:"
   },
   "packageManager": "pnpm@9.12.1",
