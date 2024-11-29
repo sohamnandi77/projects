@@ -16,7 +16,7 @@ import {
 
 import { cn } from "@projects/ui/lib/utils";
 
-import { labelVariants } from "./field";
+import { labelVariants } from "./label";
 
 const SliderOutput = (props: AriaSliderOutputProps) => {
   const { className, ...rest } = props;

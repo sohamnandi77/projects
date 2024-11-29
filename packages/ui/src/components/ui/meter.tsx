@@ -3,7 +3,7 @@ import { Meter as AriaMeter, composeRenderProps } from "react-aria-components";
 
 import { cn } from "@projects/ui/lib/utils";
 
-import { Label, labelVariants } from "./field";
+import { Label, labelVariants } from "./label";
 
 interface MeterProps extends AriaMeterProps {
   barClassName?: string;

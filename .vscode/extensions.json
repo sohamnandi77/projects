@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    // ! Must Have
     "EditorConfig.EditorConfig", // EditorConfig
     "SonarSource.sonarlint-vscode", // SonarLint
     "aaron-bond.better-comments", // Better comments
@@ -8,22 +7,7 @@
     "dbaeumer.vscode-eslint", // eslint plugin
     "eamodio.gitlens", // GitLens
     "esbenp.prettier-vscode", // prettier plugin
-
-    // # Snippets
     "dsznajder.es7-react-js-snippets", // React snippets
-    "rebornix.project-snippets", // Share useful snippets between collaborators
-
-    // ? Optional
-    "Tyriar.sort-lines", // Sort lines
-    "VisualStudioExptTeam.intellicode-api-usage-examples", // IntelliCode API usage examples
-    "VisualStudioExptTeam.vscodeintellicode", // IntelliCode
-    "WallabyJs.console-ninja", // Better console logs
-    "YoavBls.pretty-ts-errors", // Better TypeScript errors
-    "atlassian.atlascode", // Atlassian and Jira integration
-    "ban.spellright", // Spell check for docs
-    "jock.svg", // SVG preview
-    "redhat.vscode-yaml", // YAML support
-    "unifiedjs.vscode-mdx", // MDX support
-    "wix.vscode-import-cost" // Show import cost
+    "gruntfuggly.todo-tree" // Todo Tree
   ]
 }

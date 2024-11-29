@@ -17,7 +17,8 @@ import {
 
 import { cn } from "@projects/ui/lib/utils";
 
-import { FieldError, FieldGroup, Label } from "./field";
+import { FieldError, FieldGroup } from "./field";
+import { Label } from "./label";
 
 function SearchField(props: Readonly<AriaSearchFieldProps>) {
   const { className, ...rest } = props;

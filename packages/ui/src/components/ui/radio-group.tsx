@@ -13,7 +13,8 @@ import {
 
 import { cn } from "@projects/ui/lib/utils";
 
-import { FieldError, Label, labelVariants } from "./field";
+import { FieldError } from "./field";
+import { Label, labelVariants } from "./label";
 
 const RadioGroup = ({
   className,

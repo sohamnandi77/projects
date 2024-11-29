@@ -20,7 +20,8 @@ import {
 
 import { cn } from "@projects/ui/lib/utils";
 
-import { FieldError, Label } from "./field";
+import { FieldError } from "./field";
+import { Label } from "./label";
 import {
   ListBoxCollection,
   ListBoxHeader,

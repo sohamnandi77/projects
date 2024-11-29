@@ -19,7 +19,8 @@ import {
 
 import { cn } from "@projects/ui/lib/utils";
 
-import { FieldError, fieldGroupVariants, Label } from "./field";
+import { FieldError, fieldGroupVariants } from "./field";
+import { Label } from "./label";
 
 const DateField = AriaDateField;
 

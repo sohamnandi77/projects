@@ -6,7 +6,7 @@ import {
 
 import { cn } from "@projects/ui/lib/utils";
 
-import { Label, labelVariants } from "./field";
+import { Label, labelVariants } from "./label";
 
 interface ProgressProps extends AriaProgressBarProps {
   barClassName?: string;

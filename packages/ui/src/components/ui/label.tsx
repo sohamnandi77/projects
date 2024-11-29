@@ -17,4 +17,4 @@ const Label = (props: AriaLabelProps) => {
   return <AriaLabel className={cn(labelVariants(), className)} {...rest} />;
 };
 
-export { Label };
+export { Label, labelVariants };

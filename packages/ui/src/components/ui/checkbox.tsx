@@ -11,7 +11,7 @@ import {
 
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
-import { labelVariants } from "./field";
+import { labelVariants } from "./label";
 
 const CheckboxGroup = AriaCheckboxGroup;
 
