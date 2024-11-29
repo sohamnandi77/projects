@@ -44,7 +44,7 @@ const BreadcrumbLink = (props: AriaLinkProps) => {
     <AriaLink
       className={composeTailwindRenderProps(
         cn(
-          "transition-colors",
+          "cursor-pointer transition-colors",
           /* Hover */
           "hover:text-foreground",
           /* Disabled */

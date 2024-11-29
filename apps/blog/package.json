@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@projects/auth": "workspace:*",
+    "@projects/hooks": "workspace:*",
     "@projects/icons": "workspace:*",
     "@projects/ui": "workspace:*",
     "@t3-oss/env-nextjs": "^0.11.1",

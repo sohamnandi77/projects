@@ -16,8 +16,12 @@
     "./combobox": "./src/components/ui/combobox.tsx",
     "./command": "./src/components/ui/command.tsx",
     "./date-picker": "./src/components/ui/date-picker.tsx",
-    "./theme": "./src/components/vendors/theme.tsx",
+    "./field": "./src/components/ui/field.tsx",
+    "./label": "./src/components/ui/label.tsx",
+    "./input": "./src/components/ui/input.tsx",
+    "./textarea": "./src/components/ui/textarea.tsx",
     "./lib/utils": "./src/lib/utils.ts",
+    "./theme": "./src/components/vendors/theme.tsx",
     "./types": "./src/types/index.ts"
   },
   "license": "MIT",

@@ -2,46 +2,34 @@ import type { VariantProps } from "class-variance-authority";
 import type {
   FieldErrorProps as AriaFieldErrorProps,
   GroupProps as AriaGroupProps,
-  LabelProps as AriaLabelProps,
   TextProps as AriaTextProps,
 } from "react-aria-components";
 import { cva } from "class-variance-authority";
 import {
   FieldError as AriaFieldError,
   Group as AriaGroup,
-  Label as AriaLabel,
   Text as AriaText,
 } from "react-aria-components";
 
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
-const labelVariants = cva([
-  "text-sm font-medium leading-none",
-  /* Disabled */
-  "disabled:cursor-not-allowed disabled:opacity-70",
-  /* Invalid */
-  "group-data-[invalid]:text-error",
-]);
-
-const Label = ({ className, ...props }: AriaLabelProps) => (
-  <AriaLabel className={cn(labelVariants(), className)} {...props} />
-);
-
-function FormDescription({ className, ...props }: AriaTextProps) {
+function FormDescription(props: Readonly<AriaTextProps>) {
+  const { className, ...rest } = props;
   return (
     <AriaText
       className={cn("text-sm text-muted-foreground", className)}
-      {...props}
+      {...rest}
       slot="description"
     />
   );
 }
 
-function FieldError({ className, ...props }: AriaFieldErrorProps) {
+function FieldError(props: Readonly<AriaFieldErrorProps>) {
+  const { className, ...rest } = props;
   return (
     <AriaFieldError
       className={cn("text-sm font-medium text-error", className)}
-      {...props}
+      {...rest}
     />
   );
 }
@@ -80,11 +68,4 @@ function FieldGroup({ className, variant, ...props }: GroupProps) {
   );
 }
 
-export {
-  FieldError,
-  FieldGroup,
-  fieldGroupVariants,
-  FormDescription,
-  Label,
-  labelVariants,
-};
+export { FieldError, FieldGroup, fieldGroupVariants, FormDescription };

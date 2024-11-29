@@ -4,7 +4,11 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    "./use-media-query": "./src/use-media-query.ts"
+    "./use-media-query": "./src/use-media-query.ts",
+    "./use-local-storage": "./src/use-local-storage.ts",
+    "./use-session-storage": "./src/use-session-storage.ts",
+    "./use-online-status": "./src/use-online-status.ts",
+    "./use-toggle": "./src/use-toggle.ts"
   },
   "license": "MIT",
   "scripts": {

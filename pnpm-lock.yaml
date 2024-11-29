@@ -69,6 +69,9 @@ importers:
       '@projects/auth':
         specifier: workspace:*
         version: link:../../packages/auth
+      '@projects/hooks':
+        specifier: workspace:*
+        version: link:../../packages/hooks
       '@projects/icons':
         specifier: workspace:*
         version: link:../../packages/icons

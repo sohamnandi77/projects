@@ -11,6 +11,12 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     ...getArgTypes(buttonVariants),
+    isPending: {
+      control: "boolean",
+    },
+    isDisabled: {
+      control: "boolean",
+    },
   },
   args: { onClick: fn(), children: "Button" },
 } satisfies Meta<typeof Button>;
