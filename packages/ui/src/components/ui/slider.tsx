@@ -14,7 +14,7 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 import { labelVariants } from "./label";
 
@@ -29,15 +29,12 @@ const Slider = (props: AriaSliderProps) => {
   const { className, orientation = "horizontal", ...rest } = props;
   return (
     <AriaSlider
-      className={composeRenderProps(className, (className) =>
-        cn(
-          "relative flex touch-none select-none items-center",
-          {
-            "h-full": orientation === "vertical",
-            "w-full": orientation === "horizontal",
-          },
-          className,
-        ),
+      className={composeTailwindRenderProps(
+        cn("relative flex touch-none select-none items-center", {
+          "h-full": orientation === "vertical",
+          "w-full": orientation === "horizontal",
+        }),
+        className,
       )}
       orientation={orientation}
       {...rest}
@@ -98,15 +95,15 @@ const SliderThumb = (props: AriaSliderThumbProps) => {
   const { className, ...rest } = props;
   return (
     <AriaSliderThumb
-      className={composeRenderProps(className, (className) =>
+      className={composeTailwindRenderProps(
         cn(
           "left-1/2 top-1/2 block size-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors",
           /* Disabled */
           "disabled:pointer-events-none",
           /* Focus Visible */
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          className,
         ),
+        className,
       )}
       {...rest}
     />

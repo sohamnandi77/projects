@@ -97,7 +97,7 @@ jobs:
           fi
 
   chromatic:
-    name: Deploy to Chromatic
+    name: Deploy Storybook to Chromatic
     needs: [lint, format, typecheck, changed-files]
     if: ${{ needs.changed-files.outputs.any_changed == 'true' }}
     runs-on: ubuntu-latest
@@ -128,7 +128,7 @@ jobs:
           buildScriptName: build
 
   deploy-sb-production:
-    name: Deploy Storybook Production
+    name: Deploy Storybook to Vercel - Production
     needs: [lint, format, typecheck, changed-files]
     if: ${{ needs.changed-files.outputs.any_changed == 'true' }}
     runs-on: ubuntu-latest

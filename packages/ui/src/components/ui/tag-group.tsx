@@ -14,7 +14,7 @@ import {
   Text,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 import { Label } from "./label";
 
@@ -24,13 +24,13 @@ function TagList<T extends object>(props: Readonly<AriaTagListProps<T>>) {
   const { className, ...rest } = props;
   return (
     <AriaTagList
-      className={composeRenderProps(className, (className) =>
+      className={composeTailwindRenderProps(
         cn(
           "flex flex-wrap gap-2",
           /* Empty */
           "empty:text-sm empty:text-muted-foreground",
-          className,
         ),
+        className,
       )}
       {...rest}
     />

@@ -11,7 +11,7 @@ import {
   Text,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 import { FieldError } from "./form";
 import { Label, labelVariants } from "./label";
@@ -23,14 +23,12 @@ const RadioGroup = ({
 }: AriaRadioGroupProps) => {
   return (
     <AriaRadioGroup
-      className={composeRenderProps(className, (className) =>
-        cn(
-          {
-            "grid gap-2": orientation === "vertical",
-            "flex items-center gap-2": orientation === "horizontal",
-          },
-          className,
-        ),
+      className={composeTailwindRenderProps(
+        cn({
+          "grid gap-2": orientation === "vertical",
+          "flex items-center gap-2": orientation === "horizontal",
+        }),
+        className,
       )}
       {...props}
     />
@@ -40,14 +38,14 @@ const RadioGroup = ({
 const Radio = ({ className, children, ...props }: AriaRadioProps) => {
   return (
     <AriaRadio
-      className={composeRenderProps(className, (className) =>
+      className={composeTailwindRenderProps(
         cn(
           "group flex items-center gap-x-2",
           /* Disabled */
           "disabled:cursor-not-allowed disabled:opacity-70",
           labelVariants,
-          className,
         ),
+        className,
       )}
       {...props}
     >
@@ -83,20 +81,16 @@ interface JollyRadioGroupProps extends AriaRadioGroupProps {
   errorMessage?: string | ((validation: AriaValidationResult) => string);
 }
 
-function JollyRadioGroup({
-  label,
-  description,
-  className,
-  errorMessage,
-  children,
-  ...props
-}: JollyRadioGroupProps) {
+function JollyRadioGroup(props: Readonly<JollyRadioGroupProps>) {
+  const { label, description, className, errorMessage, children, ...rest } =
+    props;
   return (
     <RadioGroup
-      className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className),
+      className={composeTailwindRenderProps(
+        "group flex flex-col gap-2",
+        className,
       )}
-      {...props}
+      {...rest}
     >
       {composeRenderProps(children, (children) => (
         <>

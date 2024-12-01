@@ -4,15 +4,15 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 const Switch = ({ children, className, ...props }: AriaSwitchProps) => (
   <AriaSwitch
-    className={composeRenderProps(className, (className) =>
+    className={composeTailwindRenderProps(
       cn(
         "group inline-flex items-center gap-2 text-sm font-medium leading-none disabled:cursor-not-allowed disabled:opacity-70",
-        className,
       ),
+      className,
     )}
     {...props}
   >

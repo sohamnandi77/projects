@@ -4,7 +4,7 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 import { Label, labelVariants } from "./label";
 
@@ -21,9 +21,7 @@ const Progress = ({
   ...props
 }: ProgressProps) => (
   <AriaProgressBar
-    className={composeRenderProps(className, (className) =>
-      cn("w-full", className),
-    )}
+    className={composeTailwindRenderProps("w-full", className)}
     {...props}
   >
     {composeRenderProps(children, (children, renderProps) => (
@@ -59,8 +57,9 @@ function JollyProgressBar(props: Readonly<JollyProgressBarProps>) {
   const { label, className, showValue = true, ...rest } = props;
   return (
     <Progress
-      className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className),
+      className={composeTailwindRenderProps(
+        "group flex flex-col gap-2",
+        className,
       )}
       {...rest}
     >

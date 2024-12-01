@@ -3,6 +3,7 @@ import type {
   DeepValue,
   FieldApi,
   FormOptions,
+  ReactFormExtendedApi,
   Validator,
 } from "@tanstack/react-form";
 import type { VariantProps } from "class-variance-authority";
@@ -107,6 +108,16 @@ type FieldComponent<
   "form"
 >) => ReactNode;
 
+type FormExtended<TFormData> = ReactFormExtendedApi<
+  TFormData,
+  Validator<TFormData>
+> & {
+  Root: FC<ComponentProps<typeof Form>>;
+  Field: FieldComponent<TFormData, Validator<TFormData>>;
+  Submit: FC<ComponentProps<typeof Button>>;
+  Reset: FC<ComponentProps<typeof Button>>;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyFieldApi = FieldApi<any, any, any, any, any>;
 
@@ -192,12 +203,7 @@ function useForm<
   TFormData = z.infer<TFormSchema>,
 >(
   options: FormOptions<TFormData, Validator<TFormData>>,
-): {
-  Root: (props: ComponentProps<typeof Form>) => JSX.Element;
-  Field: FieldComponent<TFormData, Validator<TFormData>>;
-  Submit: (props: ComponentProps<typeof Button>) => JSX.Element;
-  Reset: (props: ComponentProps<typeof Button>) => JSX.Element;
-} & ReturnType<typeof useTanStackForm<TFormData, Validator<TFormData>>> {
+): FormExtended<TFormData> {
   const form = useTanStackForm(options);
 
   const FormRoot = (props: ComponentProps<typeof Form>) => {
@@ -218,11 +224,12 @@ function useForm<
   const FormField: FieldComponent<TFormData, Validator<TFormData>> = (
     props,
   ) => {
+    const { render, ...rest } = props;
     return (
-      <form.Field
-        children={(field) => (
+      <form.Field {...rest}>
+        {(field) => (
           <FieldContextProvider value={field}>
-            {props.render(
+            {render(
               Object.assign(field, {
                 Label: FormLabel,
                 Description: FormDesription,
@@ -231,8 +238,7 @@ function useForm<
             )}
           </FieldContextProvider>
         )}
-        {...props}
-      />
+      </form.Field>
     );
   };
 
@@ -271,7 +277,7 @@ function useForm<
   return {
     ...form,
     Root: FormRoot,
-    // @ts-expect-error - TODO: Need to fix this
+    // @ts-expect-error - // FIX: This is a hack to get around the type error
     Field: FormField,
     Submit: FormSubmit,
     Reset: FormReset,

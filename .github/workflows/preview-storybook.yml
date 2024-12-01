@@ -58,7 +58,7 @@ jobs:
         run: pnpm typecheck
 
   deploy-sb-preview:
-    name: Deploy Storybook Preview
+    name: Deploy Storybook to Vercel - Preview
     needs: [lint, format, typecheck]
     runs-on: ubuntu-latest
     steps:

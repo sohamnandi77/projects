@@ -8,11 +8,10 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import {
   Input as AriaInput,
   NumberField as AriaNumberField,
-  composeRenderProps,
   Text,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 import { Button } from "./button";
 import { FieldError, FieldGroup } from "./form";
@@ -24,11 +23,9 @@ function NumberFieldInput(props: Readonly<AriaInputProps>) {
   const { className, ...rest } = props;
   return (
     <AriaInput
-      className={composeRenderProps(className, (className) =>
-        cn(
-          "w-fit min-w-0 flex-1 border-r border-transparent bg-background pr-2 outline outline-0 placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden",
-          className,
-        ),
+      className={composeTailwindRenderProps(
+        "w-fit min-w-0 flex-1 border-r border-transparent bg-background pr-2 outline outline-0 placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden",
+        className,
       )}
       {...rest}
     />
@@ -62,8 +59,9 @@ function NumberFieldStepper(props: Readonly<AriaButtonProps>) {
   const { className, ...rest } = props;
   return (
     <Button
-      className={composeRenderProps(className, (className) =>
-        cn("w-auto grow rounded-none px-0.5 text-muted-foreground", className),
+      className={composeTailwindRenderProps(
+        "w-auto grow rounded-none px-0.5 text-muted-foreground",
+        className,
       )}
       variant={"ghost"}
       size={"icon"}
@@ -82,8 +80,9 @@ function JollyNumberField(props: Readonly<JollyNumberFieldProps>) {
   const { label, description, errorMessage, className, ...rest } = props;
   return (
     <NumberField
-      className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className),
+      className={composeTailwindRenderProps(
+        "group flex flex-col gap-2",
+        className,
       )}
       {...rest}
     >

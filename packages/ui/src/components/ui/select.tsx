@@ -18,7 +18,7 @@ import {
   Text,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 import { FieldError } from "./form";
 import { Label } from "./label";
@@ -45,13 +45,13 @@ const SelectValue = <T extends object>({
   ...props
 }: AriaSelectValueProps<T>) => (
   <AriaSelectValue
-    className={composeRenderProps(className, (className) =>
+    className={composeTailwindRenderProps(
       cn(
         "line-clamp-1 data-[placeholder]:text-muted-foreground",
         /* Description */
         "[&>[slot=description]]:hidden",
-        className,
       ),
+      className,
     )}
     {...props}
   />
@@ -59,7 +59,7 @@ const SelectValue = <T extends object>({
 
 const SelectTrigger = ({ className, children, ...props }: AriaButtonProps) => (
   <AriaButton
-    className={composeRenderProps(className, (className) =>
+    className={composeTailwindRenderProps(
       cn(
         "flex h-10 w-full items-center justify-between rounded-md border border-stoke-input bg-background px-3 py-2 text-sm ring-offset-background",
         /* Disabled */
@@ -68,8 +68,8 @@ const SelectTrigger = ({ className, children, ...props }: AriaButtonProps) => (
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         /* Resets */
         "focus-visible:outline-none",
-        className,
       ),
+      className,
     )}
     {...props}
   >
@@ -84,9 +84,7 @@ const SelectTrigger = ({ className, children, ...props }: AriaButtonProps) => (
 
 const SelectPopover = ({ className, ...props }: AriaPopoverProps) => (
   <Popover
-    className={composeRenderProps(className, (className) =>
-      cn("w-[--trigger-width]", className),
-    )}
+    className={composeTailwindRenderProps("w-[--trigger-width]", className)}
     {...props}
   />
 );
@@ -96,11 +94,9 @@ const SelectListBox = <T extends object>({
   ...props
 }: AriaListBoxProps<T>) => (
   <AriaListBox
-    className={composeRenderProps(className, (className) =>
-      cn(
-        "max-h-[inherit] overflow-auto p-1 outline-none [clip-path:inset(0_0_0_0_round_calc(var(--radius)-2px))]",
-        className,
-      ),
+    className={composeTailwindRenderProps(
+      "max-h-[inherit] overflow-auto p-1 outline-none [clip-path:inset(0_0_0_0_round_calc(var(--radius)-2px))]",
+      className,
     )}
     {...props}
   />
@@ -127,8 +123,9 @@ function JollySelect<T extends object>(props: Readonly<JollySelectProps<T>>) {
   } = props;
   return (
     <Select
-      className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className),
+      className={composeTailwindRenderProps(
+        "group flex flex-col gap-2",
+        className,
       )}
       {...rest}
     >

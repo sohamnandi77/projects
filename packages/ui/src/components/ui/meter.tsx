@@ -1,7 +1,7 @@
 import type { MeterProps as AriaMeterProps } from "react-aria-components";
 import { Meter as AriaMeter, composeRenderProps } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 import { Label, labelVariants } from "./label";
 
@@ -18,9 +18,7 @@ const Meter = ({
   ...props
 }: MeterProps) => (
   <AriaMeter
-    className={composeRenderProps(className, (className) =>
-      cn("w-full", className),
-    )}
+    className={composeTailwindRenderProps("w-full", className)}
     {...props}
   >
     {composeRenderProps(children, (children, renderProps) => (
@@ -56,8 +54,9 @@ function JollyMeter(props: Readonly<JollyMeterProps>) {
   const { label, className, showValue = true, ...rest } = props;
   return (
     <Meter
-      className={composeRenderProps(className, (className) =>
-        cn("group flex flex-col gap-2", className),
+      className={composeTailwindRenderProps(
+        "group flex flex-col gap-2",
+        className,
       )}
       {...rest}
     >

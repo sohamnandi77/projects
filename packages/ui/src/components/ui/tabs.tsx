@@ -9,22 +9,21 @@ import {
   TabList as AriaTabList,
   TabPanel as AriaTabPanel,
   Tabs as AriaTabs,
-  composeRenderProps,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 function Tabs(props: Readonly<AriaTabsProps>) {
   const { className, ...rest } = props;
   return (
     <AriaTabs
-      className={composeRenderProps(className, (className) =>
+      className={composeTailwindRenderProps(
         cn(
           "group flex flex-col gap-2",
           /* Orientation */
           "orientation-vertical:flex-row",
-          className,
         ),
+        className,
       )}
       {...rest}
     />
@@ -35,13 +34,13 @@ const TabList = <T extends object>(props: AriaTabListProps<T>) => {
   const { className, ...rest } = props;
   return (
     <AriaTabList
-      className={composeRenderProps(className, (className) =>
+      className={composeTailwindRenderProps(
         cn(
           "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
           /* Orientation */
           "orientation-vertical:h-auto orientation-vertical:flex-col",
-          className,
         ),
+        className,
       )}
       {...rest}
     />
@@ -52,7 +51,7 @@ const Tab = (props: AriaTabProps) => {
   const { className, ...rest } = props;
   return (
     <AriaTab
-      className={composeRenderProps(className, (className) =>
+      className={composeTailwindRenderProps(
         cn(
           "inline-flex cursor-pointer justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium outline-none ring-offset-background transition-all",
           /* Focus Visible */
@@ -63,8 +62,8 @@ const Tab = (props: AriaTabProps) => {
           "selected:bg-background selected:text-foreground selected:shadow-sm",
           /* Orientation */
           "group-orientation-vertical:w-full",
-          className,
         ),
+        className,
       )}
       {...rest}
     />
@@ -76,13 +75,13 @@ const TabPanel = (props: AriaTabPanelProps) => {
 
   return (
     <AriaTabPanel
-      className={composeRenderProps(className, (className) =>
+      className={composeTailwindRenderProps(
         cn(
           "mt-2 ring-offset-background",
           /* Focus Visible */
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          className,
         ),
+        className,
       )}
       {...rest}
     />

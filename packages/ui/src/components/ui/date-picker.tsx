@@ -70,7 +70,7 @@ function JollyDatePicker<T extends AriaDateValue>({
   errorMessage,
   className,
   ...props
-}: JollyDatePickerProps<T>) {
+}: Readonly<JollyDatePickerProps<T>>) {
   return (
     <DatePicker
       className={composeRenderProps(className, (className) =>
@@ -125,7 +125,7 @@ function JollyDateRangePicker<T extends AriaDateValue>({
   errorMessage,
   className,
   ...props
-}: JollyDateRangePickerProps<T>) {
+}: Readonly<JollyDateRangePickerProps<T>>) {
   return (
     <DateRangePicker
       className={composeRenderProps(className, (className) =>

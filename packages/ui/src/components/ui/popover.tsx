@@ -6,17 +6,16 @@ import {
   Dialog as AriaDialog,
   DialogTrigger as AriaDialogTrigger,
   Popover as AriaPopover,
-  composeRenderProps,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 const PopoverTrigger = AriaDialogTrigger;
 
 const Popover = ({ className, offset = 4, ...props }: AriaPopoverProps) => (
   <AriaPopover
     offset={offset}
-    className={composeRenderProps(className, (className) =>
+    className={composeTailwindRenderProps(
       cn(
         "z-50 rounded-md border bg-popover text-popover-foreground shadow-md outline-none",
         /* Entering */
@@ -25,8 +24,8 @@ const Popover = ({ className, offset = 4, ...props }: AriaPopoverProps) => (
         "data-[exiting]:animate-out data-[exiting]:fade-out-0 data-[exiting]:zoom-out-95",
         /* Placement */
         "placement-left:slide-in-from-right-2 placement-right:slide-in-from-left-2 placement-top:slide-in-from-bottom-2 placement-bottom:slide-in-from-top-2",
-        className,
       ),
+      className,
     )}
     {...props}
   />
