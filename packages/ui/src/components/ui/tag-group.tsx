@@ -28,7 +28,7 @@ function TagList<T extends object>(props: Readonly<AriaTagListProps<T>>) {
         cn(
           "flex flex-wrap gap-2",
           /* Empty */
-          "data-[empty]:text-sm data-[empty]:text-muted-foreground",
+          "empty:text-sm empty:text-muted-foreground",
           className,
         ),
       )}
@@ -41,7 +41,7 @@ const badgeVariants = cva(
   [
     "inline-flex items-center gap-2 rounded-full border px-2.5 py-0.5 text-xs font-semibold ring-offset-background transition-colors",
     /* Focus */
-    "data-[focused]:outline-none data-[focused]:ring-2 data-[focused]:ring-ring data-[focused]:ring-offset-2",
+    "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
     /* Disabled */
     "disabled:cursor-not-allowed disabled:opacity-50",
   ],

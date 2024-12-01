@@ -14,7 +14,7 @@ export function Toolbar(props: Readonly<ToolbarProps>) {
         cn(
           "flex gap-2",
           /* Orientation */
-          "data-[orientation=vertical]:flex-col",
+          "orientation-vertical:flex-col",
           className,
         ),
       )}
