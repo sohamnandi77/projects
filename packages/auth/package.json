@@ -12,7 +12,8 @@
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc --watch",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format": "prettier --check . --ignore-path ../../.prettierignore",
+    "format:fix": "prettier --write . --ignore-path ../../.prettierignore",
     "lint": "eslint",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"

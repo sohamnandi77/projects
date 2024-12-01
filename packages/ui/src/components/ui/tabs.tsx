@@ -22,7 +22,7 @@ function Tabs(props: Readonly<AriaTabsProps>) {
         cn(
           "group flex flex-col gap-2",
           /* Orientation */
-          "data-[orientation=vertical]:flex-row",
+          "orientation-vertical:flex-row",
           className,
         ),
       )}
@@ -39,7 +39,7 @@ const TabList = <T extends object>(props: AriaTabListProps<T>) => {
         cn(
           "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
           /* Orientation */
-          "data-[orientation=vertical]:h-auto data-[orientation=vertical]:flex-col",
+          "orientation-vertical:h-auto orientation-vertical:flex-col",
           className,
         ),
       )}
@@ -60,9 +60,9 @@ const Tab = (props: AriaTabProps) => {
           /* Disabled */
           "disabled:pointer-events-none disabled:opacity-50",
           /* Selected */
-          "data-[selected]:bg-background data-[selected]:text-foreground data-[selected]:shadow-sm",
+          "selected:bg-background selected:text-foreground selected:shadow-sm",
           /* Orientation */
-          "group-data-[orientation=vertical]:w-full",
+          "group-orientation-vertical:w-full",
           className,
         ),
       )}

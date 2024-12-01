@@ -1,4 +1,4 @@
-import type { LabelProps as AriaLabelProps } from "react-aria-components";
+import { forwardRef } from "react";
 import { cva } from "class-variance-authority";
 import { Label as AriaLabel } from "react-aria-components";
 
@@ -9,12 +9,18 @@ const labelVariants = cva([
   /* Disabled */
   "disabled:cursor-not-allowed disabled:opacity-70",
   /* Invalid */
-  "group-data-[invalid]:text-error",
+  "group-invalid:text-error",
 ]);
 
-const Label = (props: AriaLabelProps) => {
+const Label = forwardRef<
+  React.ElementRef<typeof AriaLabel>,
+  React.ComponentPropsWithoutRef<typeof AriaLabel>
+>((props, ref) => {
   const { className, ...rest } = props;
-  return <AriaLabel className={cn(labelVariants(), className)} {...rest} />;
-};
+  return (
+    <AriaLabel ref={ref} className={cn(labelVariants(), className)} {...rest} />
+  );
+});
+Label.displayName = "Label";
 
 export { Label, labelVariants };

@@ -13,7 +13,7 @@ import {
 
 import { cn } from "@projects/ui/lib/utils";
 
-import { FieldError } from "./field";
+import { FieldError } from "./form";
 import { Label, labelVariants } from "./label";
 
 const RadioGroup = ({
@@ -57,13 +57,13 @@ const Radio = ({ className, children, ...props }: AriaRadioProps) => {
             className={cn(
               "jolly-Radio flex aspect-square size-4 items-center justify-center rounded-full border border-primary text-primary ring-offset-background",
               /* Focus */
-              "group-data-[focused]:outline-none",
+              "group-focus:outline-none",
               /* Focus Visible */
               "group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2",
               /* Disabled */
               "group-disabled:cursor-not-allowed group-disabled:opacity-50",
               /* Invalid */
-              "group-data-[invalid]:border-error",
+              "group-invalid:border-error",
             )}
           >
             {renderProps.isSelected && (

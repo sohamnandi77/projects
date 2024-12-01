@@ -17,7 +17,7 @@ import {
 
 import { cn } from "@projects/ui/lib/utils";
 
-import { FieldError, FieldGroup } from "./field";
+import { FieldError, FieldGroup } from "./form";
 import { Label } from "./label";
 
 function SearchField(props: Readonly<AriaSearchFieldProps>) {
@@ -53,7 +53,7 @@ function SearchFieldGroup(props: Readonly<AriaGroupProps>) {
     <AriaGroup
       className={composeRenderProps(className, (className) =>
         cn(
-          "border-input flex h-10 w-full items-center overflow-hidden rounded-md border bg-background px-3 py-2 text-sm ring-offset-background",
+          "flex h-10 w-full items-center overflow-hidden rounded-md border border-stoke-input bg-background px-3 py-2 text-sm ring-offset-background",
           /* Focus Within */
           "data-[focus-within]:outline-none data-[focus-within]:ring-2 data-[focus-within]:ring-ring data-[focus-within]:ring-offset-2",
           /* Disabled */
@@ -78,7 +78,7 @@ function SearchFieldClear(props: Readonly<AriaButtonProps>) {
           /* Disabled */
           "disabled:pointer-events-none",
           /* Empty */
-          "group-data-[empty]:invisible",
+          "group-empty:invisible",
           className,
         ),
       )}

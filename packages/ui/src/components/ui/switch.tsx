@@ -26,9 +26,9 @@ const Switch = ({ children, className, ...props }: AriaSwitchProps) => (
             /* Disabled */
             "group-disabled:cursor-not-allowed group-disabled:opacity-50",
             /* Selected */
-            "bg-input group-data-[selected]:bg-primary",
+            "bg-input group-selected:bg-primary",
             /* Readonly */
-            "group-data-[readonly]:cursor-default",
+            "group-readonly:cursor-default",
             /* Resets */
             "focus-visible:outline-none",
           )}
@@ -37,7 +37,7 @@ const Switch = ({ children, className, ...props }: AriaSwitchProps) => (
             className={cn(
               "pointer-events-none block size-5 rounded-full bg-background shadow-lg ring-0 transition-transform",
               /* Selected */
-              "translate-x-0 group-data-[selected]:translate-x-5",
+              "translate-x-0 group-selected:translate-x-5",
             )}
           />
         </div>

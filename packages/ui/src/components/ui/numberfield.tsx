@@ -15,7 +15,7 @@ import {
 import { cn } from "@projects/ui/lib/utils";
 
 import { Button } from "./button";
-import { FieldError, FieldGroup } from "./field";
+import { FieldError, FieldGroup } from "./form";
 import { Label } from "./label";
 
 const NumberField = AriaNumberField;

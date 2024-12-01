@@ -9,6 +9,8 @@
     "clean": "git clean -xdf .cache .turbo dist node_modules storybook-static",
     "dev": "storybook dev -p 6006",
     "dev:app": "vite",
+    "format": "prettier --check . --ignore-path ../../.prettierignore",
+    "format:fix": "prettier --write . --ignore-path ../../.prettierignore",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",

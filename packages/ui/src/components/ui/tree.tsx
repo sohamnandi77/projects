@@ -38,7 +38,7 @@ function TreeItemExpandButton(props: Readonly<ButtonProps>) {
     >
       {(renderProps) => (
         <>
-          <ChevronRightIcon className="size-4 shrink-0 transition-transform duration-200 group-data-[expanded]:rotate-90" />
+          <ChevronRightIcon className="size-4 shrink-0 transition-transform duration-200 group-expanded:rotate-90" />
           {typeof children === "function" ? children(renderProps) : children}
         </>
       )}

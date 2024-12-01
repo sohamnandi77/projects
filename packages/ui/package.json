@@ -16,7 +16,7 @@
     "./combobox": "./src/components/ui/combobox.tsx",
     "./command": "./src/components/ui/command.tsx",
     "./date-picker": "./src/components/ui/date-picker.tsx",
-    "./field": "./src/components/ui/field.tsx",
+    "./form": "./src/components/ui/form.tsx",
     "./label": "./src/components/ui/label.tsx",
     "./input": "./src/components/ui/input.tsx",
     "./textarea": "./src/components/ui/textarea.tsx",
@@ -29,7 +29,8 @@
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc --watch",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format": "prettier --check . --ignore-path ../../.prettierignore",
+    "format:fix": "prettier --write . --ignore-path ../../.prettierignore",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
@@ -42,6 +43,7 @@
     "@radix-ui/react-hover-card": "^1.1.2",
     "@radix-ui/react-scroll-area": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
+    "@tanstack/react-form": "^0.39.0",
     "class-variance-authority": "^0.7.0",
     "cmdk": "1.0.4",
     "embla-carousel-react": "^8.5.1",
@@ -53,7 +55,8 @@
     "recharts": "^2.13.3",
     "sonner": "^1.7.0",
     "tailwind-merge": "^2.5.4",
-    "vaul": "^1.1.1"
+    "vaul": "^1.1.1",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@projects/eslint-config": "workspace:*",
@@ -63,6 +66,7 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "react": "catalog:react18",
+    "type-fest": "^4.29.0",
     "typescript": "catalog:"
   },
   "peerDependencies": {

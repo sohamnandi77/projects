@@ -84,3 +84,6 @@ db.sqlite
 # Million Lint
 .million
 
+# ! not included in the original .gitignore
+# database migrations
+**/*/migrations/

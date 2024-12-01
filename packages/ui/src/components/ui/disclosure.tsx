@@ -84,7 +84,7 @@ function DisclosureHeader({ children, className }: DisclosureHeaderProps) {
           aria-hidden
           className={cn(
             "size-4 shrink-0 transition-transform duration-200",
-            "group-data-[expanded]:rotate-180",
+            "group-expanded:rotate-180",
             "group-disabled:opacity-50",
           )}
         />

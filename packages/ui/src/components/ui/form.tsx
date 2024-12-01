@@ -1,3 +1,5 @@
+"use client";
+
 import type { VariantProps } from "class-variance-authority";
 import type {
   FieldErrorProps as AriaFieldErrorProps,
@@ -28,7 +30,10 @@ function FieldError(props: Readonly<AriaFieldErrorProps>) {
   const { className, ...rest } = props;
   return (
     <AriaFieldError
-      className={cn("text-sm font-medium text-error", className)}
+      className={composeTailwindRenderProps(
+        "text-destructive text-sm font-medium",
+        className,
+      )}
       {...rest}
     />
   );
@@ -38,7 +43,7 @@ const fieldGroupVariants = cva("", {
   variants: {
     variant: {
       default: [
-        "border-input relative flex h-10 w-full items-center overflow-hidden rounded-md border bg-background px-3 py-2 text-sm ring-offset-background",
+        "relative flex h-10 w-full items-center overflow-hidden rounded-md border border-stoke-input bg-background px-3 py-2 text-sm ring-offset-background",
         /* Focus Within */
         "focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
         /* Disabled */
@@ -68,4 +73,5 @@ function FieldGroup({ className, variant, ...props }: GroupProps) {
   );
 }
 
+export { Form } from "react-aria-components";
 export { FieldError, FieldGroup, fieldGroupVariants, FormDescription };
