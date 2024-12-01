@@ -40,7 +40,8 @@ const TextFieldInput = forwardRef<HTMLInputElement, AriaInputProps>(
 );
 TextFieldInput.displayName = "TextFieldInput";
 
-const TextAreaInput = ({ className, ...props }: AriaTextAreaProps) => {
+const TextAreaInput = (props: AriaTextAreaProps) => {
+  const { className, ...rest } = props;
   return (
     <AriaTextArea
       className={composeRenderProps(className, (className) =>
@@ -57,7 +58,7 @@ const TextAreaInput = ({ className, ...props }: AriaTextAreaProps) => {
           className,
         ),
       )}
-      {...props}
+      {...rest}
     />
   );
 };

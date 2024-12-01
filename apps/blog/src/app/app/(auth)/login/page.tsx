@@ -2,9 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
+// Dependencies: pnpm install lucide-react
+
+// Dependencies: pnpm install lucide-react
+
 import { useForm } from "@tanstack/react-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { AtSign, EyeIcon, EyeOffIcon } from "lucide-react";
 import { z } from "zod";
 
 import { useToggle } from "@projects/hooks/use-toggle";
@@ -14,6 +18,8 @@ import { Checkbox } from "@projects/ui/checkbox";
 import { Form } from "@projects/ui/form";
 import { TextField, TextFieldInput } from "@projects/ui/input";
 import { Label } from "@projects/ui/label";
+
+import { signIn } from "~/server/auth-client";
 
 const LoginSchema = z.object({
   email: z.string().email(),
@@ -33,8 +39,8 @@ const LoginPage = () => {
     validators: {
       onSubmit: LoginSchema,
     },
-    onSubmit: ({ value }) => {
-      console.log(value);
+    onSubmit: async ({ value }) => {
+      await signIn.email(value);
     },
     validatorAdapter: zodValidator(),
   });
@@ -73,7 +79,16 @@ const LoginPage = () => {
                       isRequired
                     >
                       <Label htmlFor="email">Email</Label>
-                      <TextFieldInput placeholder="m@example.com" required />
+                      <div className="relative">
+                        <TextFieldInput className="peer ps-9" required />
+                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                          <AtSign
+                            size={16}
+                            strokeWidth={2}
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </div>
                       {field.state.meta.errors.length > 0 && (
                         <ul>
                           {field.state.meta.errors.map((error, i) => (

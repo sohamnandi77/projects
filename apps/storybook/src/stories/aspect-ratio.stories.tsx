@@ -6,15 +6,6 @@ const meta = {
   title: "Components/AspectRatio",
   component: AspectRatio,
   tags: ["autodocs"],
-  argTypes: {
-    ratio: {
-      control: {
-        type: "number",
-        min: 0,
-        step: 0.1,
-      },
-    },
-  },
 } satisfies Meta<typeof AspectRatio>;
 
 export default meta;

@@ -43,7 +43,7 @@ const Checkbox = (props: AriaCheckboxProps) => {
           <>
             <div
               className={cn(
-                "flex size-4 shrink-0 items-center justify-center rounded-sm border border-primary text-current ring-offset-background",
+                "flex size-4 shrink-0 items-center justify-center rounded-sm border border-stoke-secondary text-current ring-offset-background",
                 /* Focus Visible */
                 "group-focus-visible/checkbox:outline-none group-focus-visible/checkbox:ring-2 group-focus-visible/checkbox:ring-ring group-focus-visible/checkbox:ring-offset-2",
                 /* Selected */
