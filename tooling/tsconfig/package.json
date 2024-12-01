@@ -1,7 +1,9 @@
 {
   "name": "@projects/tsconfig",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
   "private": true,
-  "version": "0.1.0",
   "files": [
     "*.json"
   ],

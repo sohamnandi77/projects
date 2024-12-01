@@ -11,5 +11,5 @@
     "plugins": [{ "name": "next" }],
     "module": "esnext"
   },
-  "include": [".", ".next/types/**/*.ts"]
+  "include": ["src", "next.config.js", ".next/types/**/*.ts", "next-env.d.ts"]
 }

@@ -1,15 +1,15 @@
 {
   "name": "@projects/tailwind-config",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
   "type": "module",
+  "license": "MIT",
+  "private": true,
   "exports": {
     "./native": "./native.ts",
     "./web": "./web.ts",
     "./web-styles": "./web.styles.css",
     "./postcss": "./postcss.config.cjs"
   },
-  "license": "MIT",
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.prettierignore",

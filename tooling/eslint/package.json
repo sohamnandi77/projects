@@ -1,8 +1,9 @@
 {
   "name": "@projects/eslint-config",
-  "private": true,
-  "version": "0.3.0",
+  "version": "1.0.0",
   "type": "module",
+  "license": "MIT",
+  "private": true,
   "exports": {
     "./base": "./base.js",
     "./next": "./next.js",

@@ -1,8 +1,9 @@
 {
   "name": "@projects/hooks",
-  "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
+  "license": "MIT",
+  "private": true,
   "exports": {
     "./use-media-query": "./src/use-media-query.ts",
     "./use-local-storage": "./src/use-local-storage.ts",
@@ -10,7 +11,6 @@
     "./use-online-status": "./src/use-online-status.ts",
     "./use-toggle": "./src/use-toggle.ts"
   },
-  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",

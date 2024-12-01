@@ -2,10 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-// Dependencies: pnpm install lucide-react
-
-// Dependencies: pnpm install lucide-react
-
 import { useForm } from "@tanstack/react-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
 import { AtSign, EyeIcon, EyeOffIcon } from "lucide-react";

@@ -1,8 +1,9 @@
 {
   "name": "storybook",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "storybook build",
     "build:app": "tsc -b && vite build",

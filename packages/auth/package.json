@@ -1,13 +1,13 @@
 {
   "name": "@projects/auth",
-  "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
+  "license": "MIT",
+  "private": true,
   "exports": {
     ".": "./src/index.ts",
     "./env": "./env.ts"
   },
-  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",

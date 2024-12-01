@@ -1,8 +1,10 @@
 {
   "name": "@projects/ui",
-  "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "private": true,
   "exports": {
     ".": "./src/components/ui/index.ts",
     "./aspect-ratio": "./src/components/ui/aspect-ratio.tsx",
@@ -24,7 +26,6 @@
     "./theme": "./src/components/vendors/theme.tsx",
     "./types": "./src/types/index.ts"
   },
-  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",

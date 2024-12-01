@@ -1,8 +1,9 @@
 {
   "name": "blog",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "next build",
     "clean": "git clean -xdf .cache .turbo .next dist node_modules",
