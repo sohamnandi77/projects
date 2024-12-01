@@ -1,4 +1,4 @@
-import type { IconProps } from "@projects/icons/type";
+import type { IconProps } from "./type";
 
 export function Google(props: IconProps) {
   const { className, ...rest } = props;
