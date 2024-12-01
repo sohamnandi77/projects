@@ -2,9 +2,8 @@ name: CI
 
 on:
   pull_request:
-    branches: ["*"]
+    branches-ignore: ["main"]
   push:
-    branches: ["*"]
     branches-ignore: ["main"]
   merge_group:
 
