@@ -45,7 +45,7 @@
     "@radix-ui/react-scroll-area": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-form": "^0.39.0",
-    "class-variance-authority": "^0.7.0",
+    "class-variance-authority": "^0.7.1",
     "cmdk": "1.0.4",
     "embla-carousel-react": "^8.5.1",
     "input-otp": "^1.4.1",
@@ -55,7 +55,7 @@
     "react-resizable-panels": "^2.1.7",
     "recharts": "^2.13.3",
     "sonner": "^1.7.0",
-    "tailwind-merge": "^2.5.4",
+    "tailwind-merge": "^2.5.5",
     "vaul": "^1.1.1",
     "zod": "catalog:"
   },
@@ -67,7 +67,7 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "react": "catalog:react18",
-    "type-fest": "^4.29.0",
+    "type-fest": "^4.29.1",
     "typescript": "catalog:"
   },
   "peerDependencies": {
