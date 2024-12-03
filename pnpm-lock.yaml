@@ -178,6 +178,9 @@ importers:
 
   apps/storybook:
     dependencies:
+      '@projects/hooks':
+        specifier: workspace:*
+        version: link:../../packages/hooks
       '@projects/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -209,6 +212,9 @@ importers:
       '@projects/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/tsconfig
+      '@storybook/addon-a11y':
+        specifier: ^8.4.6
+        version: 8.4.6(storybook@8.4.6(prettier@3.4.1))
       '@storybook/addon-essentials':
         specifier: ^8.4.6
         version: 8.4.6(@types/react@18.3.12)(storybook@8.4.6(prettier@3.4.1))
@@ -2747,6 +2753,11 @@ packages:
 
   '@simplewebauthn/types@10.0.0':
     resolution: {integrity: sha512-SFXke7xkgPRowY2E+8djKbdEznTVnD5R6GO7GPTthpHrokLvNKw8C3lFZypTxLI7KkCfGPfhtqB3d7OVGGa9jQ==}
+
+  '@storybook/addon-a11y@8.4.6':
+    resolution: {integrity: sha512-Z6x/yfStplSROgmBTtiJ8LJgTqPgzW3Q7KXi+l+KoZ0pht6Nz9cYfcyygLCaftBk1ZaL7SDDIrjCP0H1NwfYiQ==}
+    peerDependencies:
+      storybook: ^8.4.6
 
   '@storybook/addon-actions@8.4.6':
     resolution: {integrity: sha512-vbplwjMj7UXbdzoFhQkqFHLQAPJX8OVGTM9Q+yjuWDHViaKKUlgRWp0jclT7aIDNJQU2a6wJbTimHgJeF16Vhg==}
@@ -8369,6 +8380,12 @@ snapshots:
       - encoding
 
   '@simplewebauthn/types@10.0.0': {}
+
+  '@storybook/addon-a11y@8.4.6(storybook@8.4.6(prettier@3.4.1))':
+    dependencies:
+      '@storybook/addon-highlight': 8.4.6(storybook@8.4.6(prettier@3.4.1))
+      axe-core: 4.10.2
+      storybook: 8.4.6(prettier@3.4.1)
 
   '@storybook/addon-actions@8.4.6(storybook@8.4.6(prettier@3.4.1))':
     dependencies:

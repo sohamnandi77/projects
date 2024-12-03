@@ -21,11 +21,11 @@ const TextFieldInput = forwardRef<HTMLInputElement, AriaInputProps>(
         ref={ref}
         className={composeTailwindRenderProps(
           cn(
-            "flex h-10 w-full rounded-md border border-stoke-secondary bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground",
+            "border-stroke-secondary flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground",
             /* Disabled */
             "disabled:cursor-not-allowed disabled:opacity-50",
             /* Focused */
-            "focus:border-stoke-input focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+            "focus:border-stroke-input focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
             /* Resets */
             "focus-visible:outline-none",
             /* Invalid / Error */
@@ -46,7 +46,7 @@ const TextAreaInput = (props: AriaTextAreaProps) => {
     <AriaTextArea
       className={composeRenderProps(className, (className) =>
         cn(
-          "flex min-h-[80px] w-full rounded-md border border-stoke-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground",
+          "border-stroke-input flex min-h-[80px] w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground",
           /* Focused */
           "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
           /* Disabled */

@@ -16,7 +16,7 @@ const buttonVariants = {
       error: "bg-error text-error-foreground hover:bg-error/90",
       success: "bg-success text-success-foreground hover:bg-success/90",
       outline:
-        "border-stoke-input border bg-background hover:bg-accent hover:text-accent-foreground",
+        "border-stroke-input border bg-background hover:bg-accent hover:text-accent-foreground",
       secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
       ghost: "hover:bg-accent hover:text-accent-foreground",
       link: "text-primary underline-offset-4 hover:underline",
@@ -45,7 +45,7 @@ const getButtonVariants = cva(
         error: "bg-error text-error-foreground hover:bg-error/90",
         success: "bg-success text-success-foreground hover:bg-success/90",
         outline:
-          "border border-stoke-secondary bg-background hover:bg-accent hover:text-accent-foreground focus:border-stoke-input",
+          "border-stroke-secondary focus:border-stroke-input border bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",

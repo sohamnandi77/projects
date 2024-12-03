@@ -122,7 +122,7 @@ export const Ellipsis: Story = {
 
 export const DynamicItems: Story = {
   render: () => {
-    // Not a recommend practice to define components inside a component, just did it for storybook to show the complete code in stories's show code
+    // ! Not a recommend practice to define components inside a component, just did it for storybook to show the complete code in stories's show code
     const BreadcrumbItems = () => {
       const [breadcrumbs, setBreadcrumbs] = useState([
         { id: 1, label: "Home" },

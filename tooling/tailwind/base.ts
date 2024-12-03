@@ -37,12 +37,12 @@ export default {
           foreground: "hsl(var(--popover-foreground))",
         },
         stoke: {
-          DEFAULT: "hsl(var(--stoke-primary))",
-          secondary: "hsl(var(--stoke-secondary))",
-          input: "hsl(var(--stoke-input))",
-          error: "hsl(var(--stoke-error))",
-          success: "hsl(var(--stoke-success))",
-          muted: "hsl(var(--stoke-muted))",
+          DEFAULT: "hsl(var(--stroke-primary))",
+          secondary: "hsl(var(--stroke-secondary))",
+          input: "hsl(var(--stroke-input))",
+          error: "hsl(var(--stroke-error))",
+          success: "hsl(var(--stroke-success))",
+          muted: "hsl(var(--stroke-muted))",
         },
         placeholder: "hsl(var(--placeholder))",
         accent: {

@@ -26,7 +26,7 @@ const preview: Preview = {
     docs: {
       toc: {
         contentsSelector: ".sbdocs-content",
-        headingSelector: "h1, h2, h3",
+        headingSelector: "h3",
         title: "Table of Contents",
         disable: false,
         unsafeTocbotOptions: {

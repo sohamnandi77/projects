@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "@tanstack/react-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
-import { AtSign, EyeIcon, EyeOffIcon } from "lucide-react";
+import { AtSign, EyeIcon, EyeOffIcon, RectangleEllipsis } from "lucide-react";
 import { z } from "zod";
 
 import { useToggle } from "@projects/hooks/use-toggle";
@@ -125,7 +125,14 @@ const LoginPage = () => {
                         </Link>
                       </div>
                       <div className="relative">
-                        <TextFieldInput required />
+                        <TextFieldInput className="peer ps-9" required />
+                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                          <RectangleEllipsis
+                            size={16}
+                            strokeWidth={2}
+                            aria-hidden="true"
+                          />
+                        </div>
                         <Button
                           type="button"
                           variant="ghost"
@@ -186,8 +193,8 @@ const LoginPage = () => {
           </Form>
           <div className="mt-4 space-x-1 text-center text-sm">
             <span>Don&apos;t have an account?</span>
-            <Link href="#" className="underline">
-              Sign up
+            <Link href="/register" className="underline">
+              Register
             </Link>
           </div>
         </div>

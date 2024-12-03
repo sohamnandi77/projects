@@ -17,10 +17,9 @@ import {
   Text,
 } from "react-aria-components";
 
+import { FieldErrorMessage, fieldGroupVariants } from "@projects/ui/form";
+import { Label } from "@projects/ui/label";
 import { cn } from "@projects/ui/lib/utils";
-
-import { FieldError, fieldGroupVariants } from "./form";
-import { Label } from "./label";
 
 const DateField = AriaDateField;
 
@@ -97,7 +96,7 @@ function JollyDateField<T extends AriaDateValue>({
           {description}
         </Text>
       )}
-      <FieldError>{errorMessage}</FieldError>
+      <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
     </DateField>
   );
 }
@@ -126,7 +125,7 @@ function JollyTimeField<T extends AriaTimeValue>({
       <Label>{label}</Label>
       <DateInput />
       {description && <Text slot="description">{description}</Text>}
-      <FieldError>{errorMessage}</FieldError>
+      <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
     </TimeField>
   );
 }

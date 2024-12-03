@@ -6,11 +6,9 @@ import type {
   ReactFormExtendedApi,
   Validator,
 } from "@tanstack/react-form";
-import type { VariantProps } from "class-variance-authority";
 import type { ComponentProps, FC, ReactNode } from "react";
 import type {
   FieldErrorProps as AriaFieldErrorProps,
-  GroupProps as AriaGroupProps,
   TextProps as AriaTextProps,
 } from "react-aria-components";
 import type { Except } from "type-fest";
@@ -19,15 +17,11 @@ import {
   useField as useFieldApi,
   useForm as useTanStackForm,
 } from "@tanstack/react-form";
-import { cva } from "class-variance-authority";
-import {
-  FieldError as AriaFieldError,
-  Group as AriaGroup,
-  Text as AriaText,
-  Form,
-} from "react-aria-components";
+import { Form } from "react-aria-components";
 
+import type { TextProps } from "@projects/ui/form";
 import { Button } from "@projects/ui/button";
+import { Description, FieldErrorMessage } from "@projects/ui/form";
 import { Label } from "@projects/ui/label";
 import {
   cn,
@@ -42,28 +36,20 @@ type FieldLabelProps = ComponentProps<typeof Label>;
 interface FieldApiExtended<
   TParentData,
   TName extends DeepKeys<TParentData>,
-  TFieldValidator extends
-    | Validator<DeepValue<TParentData, TName>, unknown>
-    | undefined = undefined,
-  TFormValidator extends
-    | Validator<TParentData, unknown>
-    | undefined = undefined,
+  TFieldValidator extends Validator<DeepValue<TParentData, TName>, unknown>,
+  TFormValidator extends Validator<TParentData, unknown>,
   TData extends DeepValue<TParentData, TName> = DeepValue<TParentData, TName>,
 > extends FieldApi<TParentData, TName, TFieldValidator, TFormValidator, TData> {
   Label: FC<FieldLabelProps>;
   Description: FC<AriaTextProps>;
-  Message: FC<AriaFieldErrorProps>;
+  Error: FC<AriaFieldErrorProps>;
 }
 
 interface FieldComponentProps<
   TParentData,
   TName extends DeepKeys<TParentData>,
-  TFieldValidator extends
-    | Validator<DeepValue<TParentData, TName>, unknown>
-    | undefined = undefined,
-  TFormValidator extends
-    | Validator<TParentData, unknown>
-    | undefined = undefined,
+  TFieldValidator extends Validator<DeepValue<TParentData, TName>, unknown>,
+  TFormValidator extends Validator<TParentData, unknown>,
   TData extends DeepValue<TParentData, TName> = DeepValue<TParentData, TName>,
 > extends UseFieldOptions<
     TParentData,
@@ -85,14 +71,10 @@ interface FieldComponentProps<
 
 type FieldComponent<
   TParentData,
-  TFormValidator extends
-    | Validator<TParentData, unknown>
-    | undefined = undefined,
+  TFormValidator extends Validator<TParentData, unknown>,
 > = <
   TName extends DeepKeys<TParentData>,
-  TFieldValidator extends
-    | Validator<DeepValue<TParentData, TName>, unknown>
-    | undefined = undefined,
+  TFieldValidator extends Validator<DeepValue<TParentData, TName>, unknown>,
   TData extends DeepValue<TParentData, TName> = DeepValue<TParentData, TName>,
 >({
   render,
@@ -108,6 +90,9 @@ type FieldComponent<
   "form"
 >) => ReactNode;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyFieldApi = FieldApi<any, any, any, any, any>;
+
 type FormExtended<TFormData> = ReactFormExtendedApi<
   TFormData,
   Validator<TFormData>
@@ -117,9 +102,6 @@ type FormExtended<TFormData> = ReactFormExtendedApi<
   Submit: FC<ComponentProps<typeof Button>>;
   Reset: FC<ComponentProps<typeof Button>>;
 };
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AnyFieldApi = FieldApi<any, any, any, any, any>;
 
 const [FieldContextProvider, useFieldContext] =
   createContextFactory<AnyFieldApi>();
@@ -140,7 +122,7 @@ function useField() {
   });
 }
 
-function FormLabel(props: FieldLabelProps) {
+function FieldLabel(props: FieldLabelProps) {
   const { className, children, ...rest } = props;
   const field = useField();
 
@@ -162,39 +144,30 @@ function FormLabel(props: FieldLabelProps) {
   );
 }
 
-function FormDesription(props: Readonly<AriaTextProps>) {
-  const { className, children, ...rest } = props;
+function FieldDesription(props: Readonly<TextProps>) {
+  const { children } = props;
   const field = useField();
 
   if (children === undefined) return null;
 
-  return (
-    <AriaText
-      id={field.formDescriptionId}
-      className={cn("text-sm text-muted-foreground", className)}
-      {...rest}
-      slot="description"
-    />
-  );
+  return <Description id={field.formDescriptionId} {...props} />;
 }
 
 function FieldError(props: Readonly<AriaFieldErrorProps>) {
-  const { className, ...rest } = props;
   const field = useField();
   const message =
     field.isTouched && field.hasErrors ? field.state.meta.errors : [];
 
+  if (message.length === 0) return null;
+
   return (
-    <AriaFieldError
-      className={cn("text-sm font-medium text-error", className)}
-      {...rest}
-    >
+    <FieldErrorMessage {...props}>
       <ul>
         {message.map((error, i) => (
           <li key={`${field.formMessageId}-${i}`}>{error}</li>
         ))}
       </ul>
-    </AriaFieldError>
+    </FieldErrorMessage>
   );
 }
 
@@ -202,7 +175,7 @@ function useForm<
   TFormSchema extends z.ZodType,
   TFormData = z.infer<TFormSchema>,
 >(
-  options: FormOptions<TFormData, Validator<TFormData>>,
+  options?: FormOptions<TFormData, Validator<TFormData>>,
 ): FormExtended<TFormData> {
   const form = useTanStackForm(options);
 
@@ -223,34 +196,33 @@ function useForm<
 
   const FormField: FieldComponent<TFormData, Validator<TFormData>> = (
     props,
-  ) => {
-    const { render, ...rest } = props;
-    return (
-      <form.Field {...rest}>
-        {(field) => (
-          <FieldContextProvider value={field}>
-            {render(
-              Object.assign(field, {
-                Label: FormLabel,
-                Description: FormDesription,
-                Message: FieldError,
-              }),
-            )}
-          </FieldContextProvider>
-        )}
-      </form.Field>
-    );
-  };
+  ) => (
+    <form.Field
+      children={(field) => (
+        <FieldContextProvider value={field}>
+          {props.render(
+            Object.assign(field, {
+              Label: FieldLabel,
+              Description: FieldDesription,
+              Error: FieldError,
+            }),
+          )}
+        </FieldContextProvider>
+      )}
+      {...props}
+    />
+  );
 
   const FormSubmit = (props: ComponentProps<typeof Button>) => {
     const { className, ...rest } = props;
     return (
       <form.Subscribe
-        children={(state) => (
+        selector={(state) => [state.canSubmit, state.isSubmitting]}
+        children={([canSubmit, isSubmitting]) => (
           <Button
             type="submit"
-            isDisabled={state.isSubmitting || !state.canSubmit}
-            className={cn("w-full", className)}
+            isDisabled={isSubmitting ?? !canSubmit}
+            className={composeTailwindRenderProps("w-full", className)}
             {...rest}
           />
         )}
@@ -262,11 +234,12 @@ function useForm<
     const { className, ...rest } = props;
     return (
       <form.Subscribe
-        children={(state) => (
+        selector={(state) => [state.canSubmit, state.isSubmitting]}
+        children={([canSubmit, isSubmitting]) => (
           <Button
             type="reset"
-            isDisabled={state.isSubmitting || !state.canSubmit}
-            className={cn("w-full", className)}
+            isDisabled={isSubmitting ?? !canSubmit}
+            className={composeTailwindRenderProps("w-full", className)}
             {...rest}
           />
         )}
@@ -277,45 +250,10 @@ function useForm<
   return {
     ...form,
     Root: FormRoot,
-    // @ts-expect-error - // FIX: This is a hack to get around the type error
     Field: FormField,
     Submit: FormSubmit,
     Reset: FormReset,
-  };
+  } as FormExtended<TFormData>;
 }
 
-const fieldGroupVariants = cva("", {
-  variants: {
-    variant: {
-      default: [
-        "relative flex h-10 w-full items-center overflow-hidden rounded-md border border-stoke-input bg-background px-3 py-2 text-sm ring-offset-background",
-        /* Focus Within */
-        "focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
-        /* Disabled */
-        "disabled:opacity-50",
-      ],
-      ghost: "",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-});
-
-interface GroupProps
-  extends AriaGroupProps,
-    VariantProps<typeof fieldGroupVariants> {}
-
-function FieldGroup({ className, variant, ...props }: GroupProps) {
-  return (
-    <AriaGroup
-      className={composeTailwindRenderProps(
-        fieldGroupVariants({ variant }),
-        className,
-      )}
-      {...props}
-    />
-  );
-}
-
-export { FieldGroup, useForm };
+export { useForm };

@@ -15,9 +15,6 @@ import {
   Text,
 } from "react-aria-components";
 
-import { cn } from "@projects/ui/lib/utils";
-
-import { Button } from "./button";
 import {
   Calendar,
   CalendarCell,
@@ -27,11 +24,14 @@ import {
   CalendarHeaderCell,
   CalendarHeading,
   RangeCalendar,
-} from "./calendar";
-import { DateInput } from "./datefield";
-import { FieldError, FieldGroup } from "./form";
-import { Label } from "./label";
-import { Popover } from "./popover";
+} from "@projects/ui/calendar";
+import { DateInput } from "@projects/ui/datefield";
+import { FieldErrorMessage, FieldGroup } from "@projects/ui/form";
+import { Label } from "@projects/ui/label";
+import { cn } from "@projects/ui/lib/utils";
+import { Popover } from "@projects/ui/popover";
+
+import { Button } from "./button";
 
 const DatePicker = AriaDatePicker;
 
@@ -94,7 +94,7 @@ function JollyDatePicker<T extends AriaDateValue>({
           {description}
         </Text>
       )}
-      <FieldError>{errorMessage}</FieldError>
+      <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       <DatePickerContent>
         <Calendar>
           <CalendarHeading />
@@ -154,7 +154,7 @@ function JollyDateRangePicker<T extends AriaDateValue>({
           {description}
         </Text>
       )}
-      <FieldError>{errorMessage}</FieldError>
+      <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       <DatePickerContent>
         <RangeCalendar>
           <CalendarHeading />

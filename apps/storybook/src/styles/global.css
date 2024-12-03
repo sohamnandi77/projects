@@ -28,12 +28,12 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 9%;
 
-    --stoke-primary: 269 100% 92%;
-    --stoke-secondary: 0 0% 90%;
-    --stoke-input: 269 100% 95%;
-    --stoke-error: 356, 61% 86%;
-    --stoke-success: 127 42% 84%;
-    --stoke-muted: 0 0% 56%;
+    --stroke-primary: 269 100% 92%;
+    --stroke-secondary: 0 0% 90%;
+    --stroke-input: 269 100% 95%;
+    --stroke-error: 356, 61% 86%;
+    --stroke-success: 127 42% 84%;
+    --stroke-muted: 0 0% 56%;
 
     --placeholder: 0 0% 56%;
 
@@ -72,12 +72,12 @@
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 94%;
 
-    --stoke-primary: 263 69% 42%;
-    --stoke-secondary: 0 0% 41%;
-    --stoke-input: 258 90% 66%;
-    --stoke-error: 2 46% 57%;
-    --stoke-success: 136 74% 33%;
-    --stoke-muted: 0 0% 41%;
+    --stroke-primary: 263 69% 42%;
+    --stroke-secondary: 0 0% 41%;
+    --stroke-input: 258 90% 66%;
+    --stroke-error: 2 46% 57%;
+    --stroke-success: 136 74% 33%;
+    --stroke-muted: 0 0% 41%;
 
     --placeholder: 0 0% 56%;
 
