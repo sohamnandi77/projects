@@ -12,9 +12,8 @@ import {
 } from "react-aria-components";
 
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
-
-import { ListBoxCollection, ListBoxHeader } from "./list-box";
-import { Popover } from "./popover";
+import { ListBoxCollection, ListBoxHeader } from "@projects/ui/list-box";
+import { Popover } from "@projects/ui/popover";
 
 const Combobox = AriaComboBox;
 

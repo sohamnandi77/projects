@@ -11,10 +11,9 @@ import {
   Text,
 } from "react-aria-components";
 
+import { FieldErrorMessage } from "@projects/ui/form";
+import { Label, labelVariants } from "@projects/ui/label";
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
-
-import { FieldError } from "./form";
-import { Label, labelVariants } from "./label";
 
 const RadioGroup = ({
   className,
@@ -101,7 +100,7 @@ function JollyRadioGroup(props: Readonly<JollyRadioGroupProps>) {
               {description}
             </Text>
           )}
-          <FieldError>{errorMessage}</FieldError>
+          <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
         </>
       ))}
     </RadioGroup>

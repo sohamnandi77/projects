@@ -14,10 +14,9 @@ import {
   Text,
 } from "react-aria-components";
 
+import { FieldErrorMessage, FieldGroup } from "@projects/ui/form";
+import { Label } from "@projects/ui/label";
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
-
-import { FieldError, FieldGroup } from "./form";
-import { Label } from "./label";
 
 function SearchField(props: Readonly<AriaSearchFieldProps>) {
   const { className, ...rest } = props;
@@ -116,7 +115,7 @@ function JollySearchField({
           {description}
         </Text>
       )}
-      <FieldError>{errorMessage}</FieldError>
+      <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
     </SearchField>
   );
 }

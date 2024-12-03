@@ -20,10 +20,10 @@ import {
 } from "react-aria-components";
 
 import { cn } from "@projects/ui/lib/utils";
+import { ListBoxCollection, ListBoxSection } from "@projects/ui/list-box";
 
 import type { getButtonVariants } from "./button";
 import { Button } from "./button";
-import { ListBoxCollection, ListBoxSection } from "./list-box";
 import { SelectPopover } from "./select";
 
 const MenuTrigger = AriaMenuTrigger;

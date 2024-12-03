@@ -14,9 +14,8 @@ import {
   Text,
 } from "react-aria-components";
 
+import { Label } from "@projects/ui/label";
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
-
-import { Label } from "./label";
 
 const TagGroup = AriaTagGroup;
 

@@ -14,9 +14,8 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
+import { labelVariants } from "@projects/ui/label";
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
-
-import { labelVariants } from "./label";
 
 const SliderOutput = (props: AriaSliderOutputProps) => {
   const { className, ...rest } = props;

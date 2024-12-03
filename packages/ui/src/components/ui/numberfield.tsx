@@ -11,11 +11,11 @@ import {
   Text,
 } from "react-aria-components";
 
+import { FieldErrorMessage, FieldGroup } from "@projects/ui/form";
+import { Label } from "@projects/ui/label";
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
 import { Button } from "./button";
-import { FieldError, FieldGroup } from "./form";
-import { Label } from "./label";
 
 const NumberField = AriaNumberField;
 
@@ -96,7 +96,7 @@ function JollyNumberField(props: Readonly<JollyNumberFieldProps>) {
           {description}
         </Text>
       )}
-      <FieldError>{errorMessage}</FieldError>
+      <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
     </NumberField>
   );
 }

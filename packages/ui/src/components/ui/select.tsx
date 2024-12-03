@@ -18,17 +18,16 @@ import {
   Text,
 } from "react-aria-components";
 
+import { FieldErrorMessage } from "@projects/ui/form";
+import { Label } from "@projects/ui/label";
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
-
-import { FieldError } from "./form";
-import { Label } from "./label";
 import {
   ListBoxCollection,
   ListBoxHeader,
   ListBoxItem,
   ListBoxSection,
-} from "./list-box";
-import { Popover } from "./popover";
+} from "@projects/ui/list-box";
+import { Popover } from "@projects/ui/popover";
 
 const Select = AriaSelect;
 
@@ -138,7 +137,7 @@ function JollySelect<T extends object>(props: Readonly<JollySelectProps<T>>) {
           {description}
         </Text>
       )}
-      <FieldError>{errorMessage}</FieldError>
+      <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       <SelectPopover>
         <SelectListBox items={items}>{children}</SelectListBox>
       </SelectPopover>

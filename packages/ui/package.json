@@ -23,6 +23,7 @@
     "./input": "./src/components/ui/input.tsx",
     "./label": "./src/components/ui/label.tsx",
     "./lib/utils": "./src/lib/utils.ts",
+    "./list-box": "./src/components/ui/list-box.tsx",
     "./popover": "./src/components/ui/popover.tsx",
     "./textarea": "./src/components/ui/textarea.tsx",
     "./theme": "./src/components/vendors/theme.tsx",
