@@ -19,8 +19,8 @@ import { getSession } from "../utils";
  * - Expo requests will have a session token in the Authorization header
  * - Next.js requests will have a session token in cookies
  */
-const isomorphicGetSession = async () => {
-  return await getSession();
+const isomorphicGetSession = () => {
+  return getSession();
 };
 
 /**

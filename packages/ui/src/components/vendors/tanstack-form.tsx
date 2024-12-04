@@ -7,21 +7,16 @@ import type {
   Validator,
 } from "@tanstack/react-form";
 import type { ComponentProps, FC, ReactNode } from "react";
-import type {
-  FieldErrorProps as AriaFieldErrorProps,
-  TextProps as AriaTextProps,
-} from "react-aria-components";
 import type { Except } from "type-fest";
 import type { z } from "zod";
 import {
   useField as useFieldApi,
   useForm as useTanStackForm,
 } from "@tanstack/react-form";
-import { Form } from "react-aria-components";
 
-import type { TextProps } from "@projects/ui/form";
+import type { FieldErrorProps, TextProps } from "@projects/ui/form";
 import { Button } from "@projects/ui/button";
-import { Description, FieldErrorMessage } from "@projects/ui/form";
+import { Description, FieldErrorMessage, Form } from "@projects/ui/form";
 import { Label } from "@projects/ui/label";
 import {
   cn,
@@ -41,8 +36,8 @@ interface FieldApiExtended<
   TData extends DeepValue<TParentData, TName> = DeepValue<TParentData, TName>,
 > extends FieldApi<TParentData, TName, TFieldValidator, TFormValidator, TData> {
   Label: FC<FieldLabelProps>;
-  Description: FC<AriaTextProps>;
-  Error: FC<AriaFieldErrorProps>;
+  Description: FC<TextProps>;
+  Error: FC<FieldErrorProps>;
 }
 
 interface FieldComponentProps<
@@ -153,7 +148,7 @@ function FieldDesription(props: Readonly<TextProps>) {
   return <Description id={field.formDescriptionId} {...props} />;
 }
 
-function FieldError(props: Readonly<AriaFieldErrorProps>) {
+function FieldError(props: Readonly<FieldErrorProps>) {
   const field = useField();
   const message =
     field.isTouched && field.hasErrors ? field.state.meta.errors : [];

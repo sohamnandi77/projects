@@ -26,6 +26,7 @@
     "./list-box": "./src/components/ui/list-box.tsx",
     "./popover": "./src/components/ui/popover.tsx",
     "./textarea": "./src/components/ui/textarea.tsx",
+    "./tanstack-form": "./src/components/vendors/tanstack-form.tsx",
     "./theme": "./src/components/vendors/theme.tsx",
     "./types": "./src/types/index.ts"
   },

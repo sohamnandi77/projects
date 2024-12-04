@@ -6,8 +6,12 @@ CREATE TABLE IF NOT EXISTS "blog_account" (
 	"accessToken" text,
 	"refreshToken" text,
 	"idToken" text,
-	"expiresAt" timestamp,
-	"password" text
+	"accessTokenExpiresAt" timestamp,
+	"refreshTokenExpiresAt" timestamp,
+	"scope" text,
+	"password" text,
+	"createdAt" timestamp NOT NULL,
+	"updatedAt" timestamp NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blog_post" (
@@ -21,9 +25,15 @@ CREATE TABLE IF NOT EXISTS "blog_post" (
 CREATE TABLE IF NOT EXISTS "blog_session" (
 	"id" text PRIMARY KEY NOT NULL,
 	"expiresAt" timestamp NOT NULL,
+	"token" text NOT NULL,
+	"createdAt" timestamp NOT NULL,
+	"updatedAt" timestamp NOT NULL,
 	"ipAddress" text,
 	"userAgent" text,
-	"userId" text NOT NULL
+	"userId" text NOT NULL,
+	"activeOrganizationId" text,
+	"impersonatedBy" text,
+	CONSTRAINT "blog_session_token_unique" UNIQUE("token")
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blog_user" (
@@ -34,6 +44,11 @@ CREATE TABLE IF NOT EXISTS "blog_user" (
 	"image" text,
 	"createdAt" timestamp NOT NULL,
 	"updatedAt" timestamp NOT NULL,
+	"isAnonymous" boolean,
+	"role" text,
+	"banned" boolean,
+	"banReason" text,
+	"banExpires" timestamp,
 	CONSTRAINT "blog_user_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
@@ -41,7 +56,9 @@ CREATE TABLE IF NOT EXISTS "blog_verification" (
 	"id" text PRIMARY KEY NOT NULL,
 	"identifier" text NOT NULL,
 	"value" text NOT NULL,
-	"expiresAt" timestamp NOT NULL
+	"expiresAt" timestamp NOT NULL,
+	"createdAt" timestamp,
+	"updatedAt" timestamp
 );
 --> statement-breakpoint
 DO $$ BEGIN

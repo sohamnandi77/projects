@@ -53,10 +53,10 @@ const LoginPage = () => {
           </div>
           <Form
             validationBehavior="aria"
-            onSubmit={async (e) => {
+            onSubmit={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              await form.handleSubmit();
+              void form.handleSubmit();
             }}
           >
             <div className="grid gap-4">
@@ -181,7 +181,6 @@ const LoginPage = () => {
                   )}
                 </form.Field>
               </div>
-              <div className="flex"></div>
               <Button type="submit" className="w-full">
                 Login
               </Button>
