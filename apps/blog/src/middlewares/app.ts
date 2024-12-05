@@ -1,10 +1,8 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { createAuthClient } from "better-auth/client";
 
 import { parse } from "~/middlewares/utils/parse";
-
-const client = createAuthClient();
+import { client } from "~/server/auth-client";
 
 export default async function AppMiddleware(req: NextRequest) {
   const { path, fullPath } = parse(req);
@@ -30,14 +28,32 @@ export default async function AppMiddleware(req: NextRequest) {
     return NextResponse.redirect(
       new URL(`/login${path === "/" ? "" : searchParam}`, req.url),
     );
-
-    // if there's a user
   }
+  // if there's a user
 
   if (user) {
     // For New Blog
     // if (path === "/new") {
     //   return NewLinkMiddleware(req, user);
+    // }
+
+    // onboarding middleware
+    /* Onboarding redirects
+        - User was created less than a day ago
+        - User is not invited to a workspace (redirect straight to the workspace)
+        - The path does not start with /onboarding
+        - The user has not completed the onboarding step
+      */
+
+    // const defaultWorkspace = await client.
+
+    // if (
+    //   new Date(user.createdAt).getTime() > Date.now() - 60 * 60 * 24 * 1000 &&
+    //   // !isWorkspaceInvite &&
+    //   !path.startsWith("/onboarding") &&
+    //   !(await getDefaultWorkspace(user)) &&
+    //   (await getOnboardingStep(user)) !== "completed"
+    // ) {
     // }
 
     if (

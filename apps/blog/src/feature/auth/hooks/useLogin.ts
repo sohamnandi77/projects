@@ -2,7 +2,7 @@ import { useForm } from "@tanstack/react-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
 import { z } from "zod";
 
-import { signIn } from "~/server/auth-client";
+import { client } from "~/server/auth-client";
 
 const LoginSchema = z.object({
   email: z.string().email(),
@@ -21,7 +21,7 @@ const useLogin = () => {
       onSubmit: LoginSchema,
     },
     onSubmit: async ({ value }) => {
-      await signIn.email(value);
+      await client.signIn.email({ ...value, callbackURL: "/" });
     },
     validatorAdapter: zodValidator(),
   });

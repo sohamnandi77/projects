@@ -2,10 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useForm } from "@tanstack/react-form";
-import { zodValidator } from "@tanstack/zod-form-adapter";
 import { AtSign, EyeIcon, EyeOffIcon, RectangleEllipsis } from "lucide-react";
-import { z } from "zod";
 
 import { useToggle } from "@projects/hooks/use-toggle";
 import { Google } from "@projects/icons/google";
@@ -15,31 +12,12 @@ import { Form } from "@projects/ui/form";
 import { TextField, TextFieldInput } from "@projects/ui/input";
 import { Label } from "@projects/ui/label";
 
-import { signIn } from "~/server/auth-client";
-
-const LoginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
-  rememberMe: z.boolean(),
-});
+import useLogin from "~/feature/auth/hooks/useLogin";
 
 const LoginPage = () => {
   const [showPassword, togglePassword] = useToggle(false);
 
-  const form = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-      rememberMe: false,
-    },
-    validators: {
-      onSubmit: LoginSchema,
-    },
-    onSubmit: async ({ value }) => {
-      await signIn.email(value);
-    },
-    validatorAdapter: zodValidator(),
-  });
+  const { form } = useLogin();
 
   return (
     <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2">
@@ -181,15 +159,17 @@ const LoginPage = () => {
                   )}
                 </form.Field>
               </div>
-              <Button type="submit" className="w-full">
-                Login
-              </Button>
-              <Button variant="outline" className="w-full space-x-3">
-                <Google />
-                <span>Login with Google</span>
-              </Button>
+              <form.Subscribe>
+                <Button type="submit" className="w-full">
+                  Login
+                </Button>
+              </form.Subscribe>
             </div>
           </Form>
+          <Button variant="outline" className="w-full space-x-3">
+            <Google />
+            <span>Login with Google</span>
+          </Button>
           <div className="mt-4 space-x-1 text-center text-sm">
             <span>Don&apos;t have an account?</span>
             <Link href="/register" className="underline">

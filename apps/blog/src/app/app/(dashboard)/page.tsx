@@ -1,5 +1,5 @@
 const DashboardPage = () => {
-  return <div>DashboardPage</div>;
+  return <div>DashboardPage List Sites, Sidebar with Sites, AI, Settings</div>;
 };
 
 export default DashboardPage;

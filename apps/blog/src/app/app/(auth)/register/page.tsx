@@ -20,7 +20,7 @@ import { Form } from "@projects/ui/form";
 import { TextField, TextFieldInput } from "@projects/ui/input";
 import { Label } from "@projects/ui/label";
 
-import { signUp } from "~/server/auth-client";
+import { client } from "~/server/auth-client";
 
 const RegisterSchema = z.object({
   name: z.string().min(2),
@@ -46,7 +46,7 @@ const RegisterPage = () => {
     },
     onSubmit: async ({ value }) => {
       console.log({ value });
-      await signUp.email({
+      await client.signUp.email({
         email: value.email,
         password: value.password,
         name: value.name,

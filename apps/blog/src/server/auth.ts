@@ -1,7 +1,6 @@
 import type { BetterAuthOptions } from "better-auth";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { nextCookies } from "better-auth/next-js";
 import {
   admin,
   anonymous,
@@ -18,6 +17,7 @@ import { env } from "~/env";
 import { db } from "~/server/db";
 
 export const config = {
+  trustedOrigins: ["http://app.localhost:3000"],
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
@@ -56,7 +56,6 @@ export const config = {
     oneTap(),
     oAuthProxy(),
     openAPI(),
-    nextCookies(),
   ],
 } satisfies BetterAuthOptions;
 
