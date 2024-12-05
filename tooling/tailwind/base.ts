@@ -36,7 +36,7 @@ export default {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
-        stoke: {
+        stroke: {
           DEFAULT: "hsl(var(--stroke-primary))",
           secondary: "hsl(var(--stroke-secondary))",
           input: "hsl(var(--stroke-input))",
@@ -50,6 +50,16 @@ export default {
           foreground: "hsl(var(--accent-foreground))",
         },
         ring: "hsl(var(--ring))",
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
       },
       borderColor: {
         DEFAULT: "hsl(var(--border))",

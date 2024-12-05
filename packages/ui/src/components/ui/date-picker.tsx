@@ -15,6 +15,7 @@ import {
   Text,
 } from "react-aria-components";
 
+import { Button } from "@projects/ui/button";
 import {
   Calendar,
   CalendarCell,
@@ -30,8 +31,6 @@ import { FieldErrorMessage, FieldGroup } from "@projects/ui/form";
 import { Label } from "@projects/ui/label";
 import { cn } from "@projects/ui/lib/utils";
 import { Popover } from "@projects/ui/popover";
-
-import { Button } from "./button";
 
 const DatePicker = AriaDatePicker;
 

@@ -143,8 +143,8 @@ export const MessagesButton: Story = {
   },
   render: (args) => (
     <Button {...args}>
-      Messages
-      <span className="border-stroke-secondary -me-1 ms-3 inline-flex h-5 max-h-full items-center rounded border px-1 font-[inherit] text-[0.625rem] font-medium text-muted-foreground">
+      <span>Messages</span>
+      <span className="-me-1 ms-3 inline-flex h-5 max-h-full items-center rounded border border-stroke-secondary px-1 font-[inherit] text-[0.625rem] font-medium text-muted-foreground">
         18
       </span>
     </Button>
@@ -164,7 +164,7 @@ export const PrintButton: Story = {
         aria-hidden="true"
       />
       Print
-      <kbd className="border-stroke-secondary -me-1 ms-3 inline-flex h-5 max-h-full items-center rounded border bg-background px-1 font-[inherit] text-[0.625rem] font-medium text-muted-foreground/70">
+      <kbd className="-me-1 ms-3 inline-flex h-5 max-h-full items-center rounded border border-stroke-secondary bg-background px-1 font-[inherit] text-[0.625rem] font-medium text-muted-foreground/70">
         ⌘P
       </kbd>
     </Button>

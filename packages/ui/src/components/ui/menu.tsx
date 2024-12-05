@@ -19,11 +19,11 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
+import type { getButtonVariants } from "@projects/ui/button";
+import { Button } from "@projects/ui/button";
 import { cn } from "@projects/ui/lib/utils";
 import { ListBoxCollection, ListBoxSection } from "@projects/ui/list-box";
 
-import type { getButtonVariants } from "./button";
-import { Button } from "./button";
 import { SelectPopover } from "./select";
 
 const MenuTrigger = AriaMenuTrigger;
@@ -34,7 +34,7 @@ const MenuSection = ListBoxSection;
 
 const MenuCollection = ListBoxCollection;
 
-function MenuPopover({ className, ...props }: PopoverProps) {
+function MenuPopover({ className, ...props }: Readonly<PopoverProps>) {
   return (
     <SelectPopover
       className={composeRenderProps(className, (className) =>

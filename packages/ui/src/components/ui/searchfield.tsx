@@ -47,7 +47,7 @@ function SearchFieldGroup(props: Readonly<AriaGroupProps>) {
     <AriaGroup
       className={composeTailwindRenderProps(
         cn(
-          "border-stroke-input flex h-10 w-full items-center overflow-hidden rounded-md border bg-background px-3 py-2 text-sm ring-offset-background",
+          "flex h-10 w-full items-center overflow-hidden rounded-md border border-stroke-input bg-background px-3 py-2 text-sm ring-offset-background",
           /* Focus Within */
           "data-[focus-within]:outline-none data-[focus-within]:ring-2 data-[focus-within]:ring-ring data-[focus-within]:ring-offset-2",
           /* Disabled */

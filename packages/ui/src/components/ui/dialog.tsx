@@ -4,40 +4,40 @@ import type {
   HeadingProps as AriaHeadingProps,
   ModalOverlayProps as AriaModalOverlayProps,
 } from "react-aria-components";
-import * as React from "react";
+import { forwardRef } from "react";
 import { cva } from "class-variance-authority";
 import { X } from "lucide-react";
 import {
   Button as AriaButton,
-  Dialog as AriaDialog,
   DialogTrigger as AriaDialogTrigger,
   Heading as AriaHeading,
   Modal as AriaModal,
   ModalOverlay as AriaModalOverlay,
   composeRenderProps,
+  Dialog,
 } from "react-aria-components";
 
+import type { ButtonProps } from "@projects/ui/button";
+import { Button } from "@projects/ui/button";
 import { cn } from "@projects/ui/lib/utils";
-
-const Dialog = AriaDialog;
 
 const sheetVariants = cva(
   [
     "fixed z-50 gap-4 bg-background shadow-lg transition ease-in-out",
     /* Entering */
-    "data-[entering]:duration-500 data-[entering]:animate-in",
+    "entering:duration-500 entering:animate-in",
     /* Exiting */
-    "data-[exiting]:duration-300 data-[exiting]:animate-out",
+    "exiting:duration-300 exiting:animate-out",
   ],
   {
     variants: {
       side: {
-        top: "inset-x-0 top-0 border-b data-[entering]:slide-in-from-top data-[exiting]:slide-out-to-top",
+        top: "inset-x-0 top-0 border-b entering:slide-in-from-top exiting:slide-out-to-top",
         bottom:
-          "inset-x-0 bottom-0 border-t data-[entering]:slide-in-from-bottom data-[exiting]:slide-out-to-bottom",
-        left: "inset-y-0 left-0 h-full w-3/4 border-r data-[entering]:slide-in-from-left data-[exiting]:slide-out-to-left sm:max-w-sm",
+          "inset-x-0 bottom-0 border-t entering:slide-in-from-bottom exiting:slide-out-to-bottom",
+        left: "inset-y-0 left-0 h-full w-3/4 border-r entering:slide-in-from-left exiting:slide-out-to-left sm:max-w-sm",
         right:
-          "inset-y-0 right-0 h-full w-3/4 border-l data-[entering]:slide-in-from-right data-[exiting]:slide-out-to-right sm:max-w-sm",
+          "inset-y-0 right-0 h-full w-3/4 border-l entering:slide-in-from-right exiting:slide-out-to-right sm:max-w-sm",
       },
     },
   },
@@ -56,9 +56,9 @@ const DialogOverlay = ({
       cn(
         "fixed inset-0 z-50 bg-black/80",
         /* Exiting */
-        "data-[exiting]:duration-300 data-[exiting]:animate-out data-[exiting]:fade-out-0",
+        "exiting:duration-300 exiting:animate-out exiting:fade-out-0",
         /* Entering */
-        "data-[entering]:animate-in data-[entering]:fade-in-0",
+        "entering:animate-in entering:fade-in-0",
         className,
       ),
     )}
@@ -87,13 +87,13 @@ const DialogContent = ({
       cn(
         side
           ? sheetVariants({ side, className: "h-full p-6" })
-          : "fixed left-[50vw] top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 border bg-background p-6 shadow-lg duration-200 data-[exiting]:duration-300 data-[entering]:animate-in data-[exiting]:animate-out data-[entering]:fade-in-0 data-[exiting]:fade-out-0 data-[entering]:zoom-in-95 data-[exiting]:zoom-out-95 data-[entering]:slide-in-from-left-1/2 data-[entering]:slide-in-from-top-[48%] data-[exiting]:slide-out-to-left-1/2 data-[exiting]:slide-out-to-top-[48%] sm:rounded-lg md:w-full",
+          : "fixed left-[50vw] top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 border bg-background p-6 shadow-lg duration-200 entering:animate-in entering:fade-in-0 entering:zoom-in-95 entering:slide-in-from-left-1/2 entering:slide-in-from-top-[48%] exiting:duration-300 exiting:animate-out exiting:fade-out-0 exiting:zoom-out-95 exiting:slide-out-to-left-1/2 exiting:slide-out-to-top-[48%] sm:rounded-lg md:w-full",
         className,
       ),
     )}
     {...props}
   >
-    <AriaDialog
+    <Dialog
       role={role}
       className={cn(!side && "grid h-full gap-4", "h-full outline-none")}
     >
@@ -103,7 +103,7 @@ const DialogContent = ({
           {closeButton && (
             <AriaButton
               onPress={renderProps.close}
-              className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity data-[entering]:bg-accent data-[entering]:text-muted-foreground hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
+              className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity entering:bg-accent entering:text-muted-foreground hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
             >
               <X className="size-4" />
               <span className="sr-only">Close</span>
@@ -111,7 +111,7 @@ const DialogContent = ({
           )}
         </>
       ))}
-    </AriaDialog>
+    </Dialog>
   </AriaModal>
 );
 
@@ -165,8 +165,17 @@ const DialogDescription = ({
   />
 );
 
+type DialogCloseProps = Omit<ButtonProps, "slot">;
+
+const DialogClose = forwardRef<HTMLButtonElement, DialogCloseProps>(
+  (props, ref) => {
+    return <Button slot="close" ref={ref} {...props} />;
+  },
+);
+
 export {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -175,4 +184,5 @@ export {
   DialogTitle,
   DialogTrigger,
 };
-export type { DialogContentProps };
+
+export type { DialogContentProps, AriaDialogProps as DialogProps };

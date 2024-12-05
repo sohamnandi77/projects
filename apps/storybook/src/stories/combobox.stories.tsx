@@ -13,6 +13,12 @@ import {
 const meta = {
   title: "Components/Combobox",
   component: Combobox,
+  subcomponents: {
+    ComboboxInput: ComboboxInput as unknown as React.ComponentType<unknown>,
+    ComboboxItem: ComboboxItem as unknown as React.ComponentType<unknown>,
+    ComboboxListBox: ComboboxListBox as unknown as React.ComponentType<unknown>,
+    ComboboxPopover: ComboboxPopover as unknown as React.ComponentType<unknown>,
+  },
   tags: ["autodocs"],
 } satisfies Meta<typeof Combobox>;
 

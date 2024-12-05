@@ -11,11 +11,10 @@ import {
   Text,
 } from "react-aria-components";
 
+import { Button } from "@projects/ui/button";
 import { FieldErrorMessage, FieldGroup } from "@projects/ui/form";
 import { Label } from "@projects/ui/label";
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
-
-import { Button } from "./button";
 
 const NumberField = AriaNumberField;
 
