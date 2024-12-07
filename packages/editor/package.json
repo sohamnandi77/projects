@@ -1,10 +1,13 @@
 {
-  "name": "@projects/{{name}}",
+  "name": "@projects/editor",
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
   "private": true,
-  "exports": { ".": "./src/index.ts" },
+  "exports": {
+    ".": "./src/index",
+    "./editor": "./src/editor/plate-editor.tsx"
+  },
   "scripts": {
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
@@ -15,13 +18,29 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
+  "dependencies": {
+    "@projects/ui": "workspace:*",
+    "@udecode/plate-common": "^40.2.8",
+    "prismjs": "^1.29.0",
+    "slate": "^0.110.2",
+    "slate-dom": "^0.111.0",
+    "slate-history": "^0.110.3",
+    "slate-hyperscript": "^0.100.0",
+    "slate-react": "^0.111.0"
+  },
   "devDependencies": {
     "@projects/eslint-config": "workspace:*",
     "@projects/prettier-config": "workspace:*",
     "@projects/tsconfig": "workspace:*",
+    "@types/prismjs": "^1.26.5",
+    "@types/react": "catalog:react18",
     "eslint": "catalog:",
     "prettier": "catalog:",
+    "react": "catalog:react18",
     "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:react18"
   },
   "prettier": "@projects/prettier-config"
 }

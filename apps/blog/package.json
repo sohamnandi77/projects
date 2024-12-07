@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@projects/auth": "workspace:*",
+    "@projects/editor": "workspace:*",
     "@projects/hooks": "workspace:*",
     "@projects/icons": "workspace:*",
     "@projects/ui": "workspace:*",
