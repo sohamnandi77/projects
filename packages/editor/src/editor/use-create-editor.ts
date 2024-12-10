@@ -1,50 +1,44 @@
 import {
   ParagraphPlugin,
-  PlateElement,
   PlateLeaf,
   usePlateEditor,
 } from "@udecode/plate-common/react";
 
-import { withProps } from "@projects/editor/lib/withProps";
 import { BasicElementsPlugin } from "@projects/editor/plugins/basic-elements-plugin";
 import { BasicMarksPlugin } from "@projects/editor/plugins/basic-marks";
-import { ItalicPlugin } from "@projects/editor/plugins/italic";
-import { StrikethroughPlugin } from "@projects/editor/plugins/strike-through";
-import { UnderlinePlugin } from "@projects/editor/plugins/underline";
-import { cn } from "@projects/ui/lib/utils";
 
-import { BoldPlugin } from "../plugins/base-bold";
-import { BlockquotePlugin } from "../plugins/blockquote";
+import { PLUGIN_KEYS } from "../constant";
+import { withProps } from "../lib/withProps";
+import { BlockquoteElement } from "../ui/blockquote-element";
+import { CodeBlockElement } from "../ui/code-block-element";
+import { CodeLeaf } from "../ui/code-leaf";
+import { CodeLineElement } from "../ui/code-line-element";
+import { CodeSyntaxLeaf } from "../ui/code-syntax-leaf";
+import { HeadingElement } from "../ui/heading-element";
+import { ParagraphElement } from "../ui/paragraph-element";
 
 export const useCreateEditor = () => {
   return usePlateEditor({
     override: {
       components: {
-        [BoldPlugin.key]: withProps(PlateLeaf, { as: "strong" }),
-        [ItalicPlugin.key]: withProps(PlateLeaf, { as: "em" }),
-        [ParagraphPlugin.key]: withProps(PlateElement, {
-          as: "p",
-          className: "mb-4",
-        }),
-        [StrikethroughPlugin.key]: withProps(PlateLeaf, { as: "s" }),
-        [UnderlinePlugin.key]: withProps(PlateLeaf, { as: "u" }),
-        [BlockquotePlugin.key]: withProps(PlateElement, {
-          as: "blockquote",
-          className: cn("border-l-3 mb-4 border-[#d0d7de] pl-4 text-[#636c76]"),
-        }),
-        h1: withProps(PlateElement, {
-          as: "h1",
-          className:
-            "mb-4 mt-6 text-3xl font-semibold tracking-tight lg:text-4xl",
-        }),
-        h2: withProps(PlateElement, {
-          as: "h2",
-          className: "mb-4 mt-6 text-2xl font-semibold tracking-tight",
-        }),
-        h3: withProps(PlateElement, {
-          as: "h3",
-          className: "mb-4 mt-6 text-xl font-semibold tracking-tight",
-        }),
+        [PLUGIN_KEYS.BLOCKQUOTE]: BlockquoteElement,
+        [PLUGIN_KEYS.BOLD]: withProps(PlateLeaf, { as: "strong" }),
+        [PLUGIN_KEYS.CODE_BLOCK]: CodeBlockElement,
+        [PLUGIN_KEYS.CODE_LEAF]: CodeLeaf,
+        [PLUGIN_KEYS.CODE_LINE]: CodeLineElement,
+        [PLUGIN_KEYS.CODE_SYNTAX]: CodeSyntaxLeaf,
+        [PLUGIN_KEYS.H1]: withProps(HeadingElement, { variant: "h1" }),
+        [PLUGIN_KEYS.H2]: withProps(HeadingElement, { variant: "h2" }),
+        [PLUGIN_KEYS.H3]: withProps(HeadingElement, { variant: "h3" }),
+        [PLUGIN_KEYS.H4]: withProps(HeadingElement, { variant: "h4" }),
+        [PLUGIN_KEYS.H5]: withProps(HeadingElement, { variant: "h5" }),
+        [PLUGIN_KEYS.H6]: withProps(HeadingElement, { variant: "h6" }),
+        [PLUGIN_KEYS.ITALIC]: withProps(PlateLeaf, { as: "em" }),
+        [PLUGIN_KEYS.PARAGRAPH]: ParagraphElement,
+        [PLUGIN_KEYS.STRIKETHROUGH]: withProps(PlateLeaf, { as: "s" }),
+        [PLUGIN_KEYS.SUBSCRIPT]: withProps(PlateLeaf, { as: "sub" }),
+        [PLUGIN_KEYS.SUPERSCRIPT]: withProps(PlateLeaf, { as: "sup" }),
+        [PLUGIN_KEYS.UNDERLINE]: withProps(PlateLeaf, { as: "u" }),
       },
     },
     plugins: [BasicElementsPlugin, BasicMarksPlugin],

@@ -8,7 +8,8 @@
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.format": "explicit",
-    "source.removeUnusedImports": "explicit"
+    "source.removeUnusedImports": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
   "editor.quickSuggestions": {
     "strings": true

@@ -6,14 +6,15 @@ import {
   wrapNodes,
 } from "@udecode/plate-common";
 
-import { CODE_PLUGIN_KEYS } from "../constants";
+import { PLUGIN_KEYS } from "@projects/editor/constant";
+
 import { unwrapCodeBlock } from "./unwrap-code-block";
 
 export const toggleCodeBlock = (editor: SlateEditor) => {
   if (!editor.selection) return;
 
-  const codeBlockType = CODE_PLUGIN_KEYS.CODE_BLOCK;
-  const codeLineType = CODE_PLUGIN_KEYS.CODE_LINE;
+  const codeBlockType = PLUGIN_KEYS.CODE_BLOCK;
+  const codeLineType = PLUGIN_KEYS.CODE_LINE;
 
   const isActive = someNode(editor, {
     match: { type: codeBlockType },

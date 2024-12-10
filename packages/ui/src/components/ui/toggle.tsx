@@ -1,7 +1,14 @@
 import type { VariantProps } from "class-variance-authority";
-import type { ToggleButtonProps as AriaToggleButtonProps } from "react-aria-components";
+import type {
+  ToggleButtonProps as AriaToggleButtonProps,
+  ToggleButtonGroupProps,
+} from "react-aria-components";
 import { cva } from "class-variance-authority";
-import { ToggleButton as AriaToggleButton } from "react-aria-components";
+import {
+  ToggleButton as AriaToggleButton,
+  composeRenderProps,
+  ToggleButtonGroup,
+} from "react-aria-components";
 
 import { composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
@@ -43,15 +50,45 @@ interface ToggleProps
   extends AriaToggleButtonProps,
     VariantProps<typeof toggleVariants> {}
 
-const Toggle = ({ className, variant, size, ...props }: ToggleProps) => (
-  <AriaToggleButton
-    className={composeTailwindRenderProps(
-      toggleVariants({ variant, size }),
-      className,
-    )}
-    {...props}
-  />
-);
+const Toggle = (props: ToggleProps) => {
+  const { className, variant, size, ...rest } = props;
+  return (
+    <AriaToggleButton
+      className={composeTailwindRenderProps(
+        toggleVariants({ variant, size }),
+        className,
+      )}
+      {...rest}
+    />
+  );
+};
 
-export { Toggle, toggleVariants };
-export type { ToggleProps };
+const toggleGroupVariants = cva("flex gap-1", {
+  variants: {
+    orientation: {
+      horizontal:
+        "flex-row [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+      vertical: "flex-col items-start",
+    },
+  },
+});
+
+const ToggleGroup = (props: ToggleButtonGroupProps) => {
+  const { orientation, className } = props;
+  return (
+    <ToggleButtonGroup
+      orientation={orientation}
+      className={composeRenderProps(className, (className, renderProps) => {
+        return toggleGroupVariants({
+          ...renderProps,
+          orientation,
+          className,
+        });
+      })}
+      {...props}
+    />
+  );
+};
+
+export { Toggle, ToggleGroup, toggleVariants };
+export type { ToggleProps, ToggleButtonGroupProps };

@@ -50,6 +50,7 @@ const RegisterPage = () => {
         email: value.email,
         password: value.password,
         name: value.name,
+        callbackURL: "/",
       });
     },
     validatorAdapter: zodValidator(),

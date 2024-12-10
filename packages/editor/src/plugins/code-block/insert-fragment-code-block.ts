@@ -1,7 +1,7 @@
 import type { SlateEditor, TDescendant, TElement } from "@udecode/plate-common";
 import { getBlockAbove, getNodeString } from "@udecode/plate-common";
 
-import { CODE_PLUGIN_KEYS } from "./constants";
+import { PLUGIN_KEYS } from "@projects/editor/constant";
 
 function extractCodeLinesFromCodeBlock(node: TElement) {
   return node.children as TElement[];
@@ -9,8 +9,8 @@ function extractCodeLinesFromCodeBlock(node: TElement) {
 
 export const insertFragmentCodeBlock = (editor: SlateEditor) => {
   const { insertFragment } = editor;
-  const codeBlockType = CODE_PLUGIN_KEYS.CODE_BLOCK;
-  const codeLineType = CODE_PLUGIN_KEYS.CODE_LINE;
+  const codeBlockType = PLUGIN_KEYS.CODE_BLOCK;
+  const codeLineType = PLUGIN_KEYS.CODE_LINE;
 
   function convertNodeToCodeLine(node: TElement): TElement {
     return {
@@ -26,8 +26,8 @@ export const insertFragmentCodeBlock = (editor: SlateEditor) => {
       blockAbove &&
       [codeBlockType, codeLineType].includes(
         blockAbove.type as
-          | typeof CODE_PLUGIN_KEYS.CODE_BLOCK
-          | typeof CODE_PLUGIN_KEYS.CODE_LINE,
+          | typeof PLUGIN_KEYS.CODE_BLOCK
+          | typeof PLUGIN_KEYS.CODE_LINE,
       )
     ) {
       return insertFragment(

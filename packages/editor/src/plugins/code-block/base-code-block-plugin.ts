@@ -6,14 +6,15 @@ import {
   someNode,
 } from "@udecode/plate-common";
 
+import { PLUGIN_KEYS } from "@projects/editor/constant";
+
 import type { Prism } from "./types";
-import { CODE_PLUGIN_KEYS } from "./constants";
 import { decorateCodeLine } from "./decorate-code-line";
 import { htmlDeserializerCodeBlock } from "./html-deserializer-code-block";
 import { withCodeBlock } from "./with-code-block";
 
 export type CodeBlockConfig = PluginConfig<
-  typeof CODE_PLUGIN_KEYS.CODE_BLOCK,
+  typeof PLUGIN_KEYS.CODE_BLOCK,
   {
     deserializers?: string[];
     prism?: Prism;
@@ -23,18 +24,18 @@ export type CodeBlockConfig = PluginConfig<
 >;
 
 export const BaseCodeLinePlugin = createSlatePlugin({
-  key: CODE_PLUGIN_KEYS.CODE_LINE,
+  key: PLUGIN_KEYS.CODE_LINE,
   decorate: decorateCodeLine,
   node: { isElement: true },
 });
 
 export const BaseCodeSyntaxPlugin = createSlatePlugin({
-  key: CODE_PLUGIN_KEYS.CODE_SYNTAX,
+  key: PLUGIN_KEYS.CODE_SYNTAX,
   node: { isLeaf: true },
 });
 
 export const BaseCodeBlockPlugin = createTSlatePlugin<CodeBlockConfig>({
-  key: CODE_PLUGIN_KEYS.CODE_BLOCK,
+  key: PLUGIN_KEYS.CODE_BLOCK,
   extendEditor: withCodeBlock,
   inject: {
     plugins: {

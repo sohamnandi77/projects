@@ -2,8 +2,8 @@ import { forwardRef } from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
 
-import type { DialogProps } from "@projects/ui/components/ui/dialog";
-import { Dialog, DialogContent } from "@projects/ui/components/ui/dialog";
+import type { DialogProps } from "@projects/ui/dialog";
+import { Dialog, DialogContent } from "@projects/ui/dialog";
 import { cn } from "@projects/ui/lib/utils";
 
 const Command = forwardRef<

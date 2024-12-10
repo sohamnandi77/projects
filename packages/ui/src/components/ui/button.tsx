@@ -24,6 +24,10 @@ const buttonVariants = {
     size: {
       default: "h-10 px-4 py-2",
       icon: "size-10",
+      xs: "h-8 rounded-md px-3 text-xs",
+      sm: "h-9 rounded-md px-3",
+      md: "h-8 px-3 text-sm",
+      lg: "h-11 rounded-md px-8",
     },
   },
 } as const;
@@ -53,9 +57,11 @@ const getButtonVariants = cva(
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
         icon: "size-10",
+        xs: "h-8 rounded-md px-3 text-xs",
+        sm: "h-9 rounded-md px-3",
+        md: "h-8 px-3 text-sm",
+        lg: "h-11 rounded-md px-8",
       },
     },
     defaultVariants: {

@@ -1,8 +1,10 @@
-export * from "./delete-start-space";
-export * from "./indent-code-line";
-export * from "./insert-code-block";
-export * from "./insert-code-line";
-export * from "./insert-empty-code-block";
-export * from "./outdent-code-line";
-export * from "./toggle-code-block";
-export * from "./unwrap-code-block";
+export type { IndentCodeLineOptions } from "./indent-code-line";
+export type { OutdentCodeLineOptions } from "./outdent-code-line";
+export { deleteStartSpace } from "./delete-start-space";
+export { indentCodeLine } from "./indent-code-line";
+export { insertCodeBlock } from "./insert-code-block";
+export { insertCodeLine } from "./insert-code-line";
+export { insertEmptyCodeBlock } from "./insert-empty-code-block";
+export { outdentCodeLine } from "./outdent-code-line";
+export { toggleCodeBlock } from "./toggle-code-block";
+export { unwrapCodeBlock } from "./unwrap-code-block";

@@ -21,6 +21,7 @@
   "dependencies": {
     "@projects/ui": "workspace:*",
     "@udecode/plate-common": "^40.2.8",
+    "js-video-url-parser": "^0.5.1",
     "prismjs": "^1.29.0",
     "slate": "^0.110.2",
     "slate-dom": "^0.111.0",

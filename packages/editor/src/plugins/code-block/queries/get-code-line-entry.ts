@@ -12,7 +12,7 @@ import {
   someNode,
 } from "@udecode/plate-common";
 
-import { CODE_PLUGIN_KEYS } from "../constants";
+import { PLUGIN_KEYS } from "@projects/editor/constant";
 
 /** If at (default = selection) is in ul>li>p, return li and ul node entries. */
 export const getCodeLineEntry = <N extends ElementOf<E>, E extends SlateEditor>(
@@ -23,7 +23,7 @@ export const getCodeLineEntry = <N extends ElementOf<E>, E extends SlateEditor>(
     at &&
     someNode(editor, {
       at,
-      match: { type: CODE_PLUGIN_KEYS.CODE_BLOCK },
+      match: { type: PLUGIN_KEYS.CODE_BLOCK },
     })
   ) {
     const selectionParent = getParentNode(editor, at);
@@ -35,17 +35,14 @@ export const getCodeLineEntry = <N extends ElementOf<E>, E extends SlateEditor>(
     const codeLine =
       getAboveNode<TElement>(editor, {
         at,
-        match: { type: CODE_PLUGIN_KEYS.CODE_BLOCK },
+        match: { type: PLUGIN_KEYS.CODE_BLOCK },
       }) ?? getParentNode<N>(editor, parentPath);
 
     if (!codeLine) return;
 
     const [codeLineNode, codeLinePath] = codeLine;
 
-    if (
-      isElement(codeLineNode) &&
-      codeLineNode.type !== CODE_PLUGIN_KEYS.CODE_BLOCK
-    )
+    if (isElement(codeLineNode) && codeLineNode.type !== PLUGIN_KEYS.CODE_BLOCK)
       return;
 
     const codeBlock = getParentNode<N>(editor, codeLinePath);

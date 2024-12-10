@@ -11,7 +11,7 @@ import {
   wrapNodes,
 } from "@udecode/plate-common";
 
-import { CODE_PLUGIN_KEYS } from "../constants";
+import { PLUGIN_KEYS } from "@projects/editor/constant";
 
 /**
  * Insert a code block: set the node to code line and wrap it with a code block.
@@ -24,8 +24,7 @@ export const insertCodeBlock = <E extends SlateEditor>(
   if (!editor.selection || isExpanded(editor.selection)) return;
 
   const matchCodeElements = (node: TElement) =>
-    node.type === CODE_PLUGIN_KEYS.CODE_BLOCK ||
-    node.type === CODE_PLUGIN_KEYS.CODE_LINE;
+    node.type === PLUGIN_KEYS.CODE_BLOCK || node.type === PLUGIN_KEYS.CODE_LINE;
 
   if (
     someNode(editor, {
@@ -42,7 +41,7 @@ export const insertCodeBlock = <E extends SlateEditor>(
     editor,
     {
       children: [{ text: "" }],
-      type: CODE_PLUGIN_KEYS.CODE_LINE,
+      type: PLUGIN_KEYS.CODE_LINE,
     },
     insertNodesOptions,
   );
@@ -51,7 +50,7 @@ export const insertCodeBlock = <E extends SlateEditor>(
     editor,
     {
       children: [],
-      type: CODE_PLUGIN_KEYS.CODE_BLOCK,
+      type: PLUGIN_KEYS.CODE_BLOCK,
     },
     insertNodesOptions,
   );

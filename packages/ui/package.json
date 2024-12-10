@@ -20,6 +20,7 @@
     "./date-picker": "./src/components/ui/date-picker.tsx",
     "./datefield": "./src/components/ui/datefield.tsx",
     "./dialog": "./src/components/ui/dialog.tsx",
+    "./dropdown": "./src/components/ui/dropdown.tsx",
     "./form": "./src/components/ui/form.tsx",
     "./input": "./src/components/ui/input.tsx",
     "./label": "./src/components/ui/label.tsx",
@@ -33,6 +34,7 @@
     "./tanstack-form": "./src/components/vendors/tanstack-form.tsx",
     "./textarea": "./src/components/ui/textarea.tsx",
     "./theme": "./src/components/vendors/theme.tsx",
+    "./toolbar": "./src/components/ui/toolbar.tsx",
     "./tooltip": "./src/components/ui/tooltip.tsx",
     "./types": "./src/types/index.ts"
   },

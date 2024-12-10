@@ -1,12 +1,12 @@
 import type { SlateEditor, TElement, TNodeEntry } from "@udecode/plate-common";
 import { getChildren, isElement, setNodes } from "@udecode/plate-common";
 
-import { CODE_PLUGIN_KEYS } from "./constants";
+import { PLUGIN_KEYS } from "@projects/editor/constant";
 
 /** Normalize code block node to force the pre>code>div.codeline structure. */
 export const normalizeCodeBlock = (editor: SlateEditor) => {
-  const codeBlockType = CODE_PLUGIN_KEYS.CODE_BLOCK;
-  const codeLineType = CODE_PLUGIN_KEYS.CODE_LINE;
+  const codeBlockType = PLUGIN_KEYS.CODE_BLOCK;
+  const codeLineType = PLUGIN_KEYS.CODE_LINE;
 
   const { normalizeNode } = editor;
 
