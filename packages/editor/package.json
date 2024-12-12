@@ -20,28 +20,29 @@
   },
   "dependencies": {
     "@projects/ui": "workspace:*",
-    "@udecode/plate-common": "^40.2.8",
+    "@udecode/plate-common": "^40.3.1",
     "js-video-url-parser": "^0.5.1",
     "prismjs": "^1.29.0",
-    "slate": "^0.110.2",
+    "slate": "^0.112.0",
     "slate-dom": "^0.111.0",
     "slate-history": "^0.110.3",
     "slate-hyperscript": "^0.100.0",
-    "slate-react": "^0.111.0"
+    "slate-react": "^0.112.0"
   },
   "devDependencies": {
     "@projects/eslint-config": "workspace:*",
     "@projects/prettier-config": "workspace:*",
     "@projects/tsconfig": "workspace:*",
     "@types/prismjs": "^1.26.5",
-    "@types/react": "catalog:react18",
+    "@types/react": "catalog:react19",
     "eslint": "catalog:",
+    "eslint-plugin-tailwindcss": "^3.17.5",
     "prettier": "catalog:",
-    "react": "catalog:react18",
+    "react": "catalog:react19",
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "react": "catalog:react18"
+    "react": "catalog:react19"
   },
   "prettier": "@projects/prettier-config"
 }

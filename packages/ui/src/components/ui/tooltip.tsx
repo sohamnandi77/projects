@@ -1,21 +1,30 @@
-import type { TooltipProps as AriaTooltipProps } from "react-aria-components";
-import {
-  Tooltip as AriaTooltip,
-  TooltipTrigger as AriaTooltipTrigger,
+import type { ReactNode } from "react";
+import type {
+  TooltipProps as AriaTooltipProps,
+  TooltipRenderProps as AriaTooltipRenderProps,
 } from "react-aria-components";
+import { Tooltip as AriaTooltip, OverlayArrow } from "react-aria-components";
 
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
-const TooltipTrigger = AriaTooltipTrigger;
+type TooltipRenderProps = AriaTooltipRenderProps & {
+  defaultChildren?: ReactNode;
+};
 
-const Tooltip = (props: AriaTooltipProps) => {
-  const { className, offset = 4, ...rest } = props;
+interface TooltipContentProps extends Omit<AriaTooltipProps, "children"> {
+  children?: ReactNode;
+  showArrow?: boolean;
+}
+
+const TooltipContent = (props: TooltipContentProps) => {
+  const { className, children, showArrow = true, offset = 8, ...rest } = props;
+
   return (
     <AriaTooltip
       offset={offset}
       className={composeTailwindRenderProps(
         cn(
-          "z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0",
+          "group z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0",
           /* Entering */
           "entering:zoom-in-95",
           /* Exiting */
@@ -26,8 +35,27 @@ const Tooltip = (props: AriaTooltipProps) => {
         className,
       )}
       {...rest}
-    />
+    >
+      {showArrow && (
+        <OverlayArrow>
+          jdlks
+          <svg
+            width={12}
+            height={12}
+            viewBox="0 0 12 12"
+            className="group-placement-left:-rotate-90 group-placement-right:rotate-90 group-placement-bottom:rotate-180 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
+          >
+            <path d="M0 0 L6 6 L12 0" />
+          </svg>
+        </OverlayArrow>
+      )}
+      {children}
+    </AriaTooltip>
   );
 };
 
-export { Tooltip, TooltipTrigger };
+export { TooltipContent };
+
+export { TooltipTrigger as Tooltip } from "react-aria-components";
+
+export type { TooltipContentProps, TooltipRenderProps };

@@ -184,7 +184,7 @@ const LoginPage = () => {
           alt="Image"
           width="1920"
           height="1080"
-          className="h-full w-full rounded-xl object-cover dark:brightness-[0.2] dark:grayscale"
+          className="size-full rounded-xl object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>
     </div>

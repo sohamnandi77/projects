@@ -52,7 +52,8 @@
   // Tailwind CSS settings
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["variants:\\s*{([\\s\\S]*)}", "\\s?[\\w].*:\\s*?[\"']([^\"']*).*?,?\\s?"]
   ],
   "tailwindCSS.experimental.configFile": "./tooling/tailwind/web.ts",
   "files.associations": {

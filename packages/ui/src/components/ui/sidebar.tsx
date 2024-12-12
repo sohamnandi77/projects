@@ -18,7 +18,7 @@ import { cn } from "@projects/ui/lib/utils";
 import { Separator } from "@projects/ui/separator";
 import { Skeleton } from "@projects/ui/skeleton";
 import { Slot } from "@projects/ui/slot";
-import { Tooltip, TooltipTrigger } from "@projects/ui/tooltip";
+import { Tooltip, TooltipContent } from "@projects/ui/tooltip";
 
 import { DialogContent, DialogOverlay, DialogTrigger } from "./dialog";
 
@@ -227,7 +227,7 @@ const Sidebar = forwardRef<
                 } as React.CSSProperties
               }
             >
-              <div className="flex h-full w-full flex-col">{children}</div>
+              <div className="flex size-full flex-col">{children}</div>
             </DialogContent>
           </DialogOverlay>
         </DialogTrigger>
@@ -270,7 +270,7 @@ const Sidebar = forwardRef<
         >
           <div
             data-sidebar="sidebar"
-            className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
+            className="flex size-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
           >
             {children}
           </div>
@@ -293,7 +293,7 @@ const SidebarTrigger = forwardRef<
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
-      className={cn("h-7 w-7", className)}
+      className={cn("size-7", className)}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
@@ -555,7 +555,7 @@ const SidebarMenuButton = forwardRef<
   React.ComponentProps<"button"> & {
     asChild?: boolean;
     isActive?: boolean;
-    tooltip?: string | React.ComponentProps<typeof Tooltip>;
+    tooltip?: string | React.ComponentProps<typeof TooltipContent>;
   } & VariantProps<typeof sidebarMenuButtonVariants>
 >(
   (
@@ -595,15 +595,15 @@ const SidebarMenuButton = forwardRef<
     }
 
     return (
-      <TooltipTrigger delay={0}>
+      <Tooltip delay={0}>
         {button}
-        <Tooltip
+        <TooltipContent
           placement="right"
           isOpen={state === "collapsed" && !isMobile}
           // hidden={state !== "collapsed" || isMobile}
           {...tooltip}
         />
-      </TooltipTrigger>
+      </Tooltip>
     );
   },
 );

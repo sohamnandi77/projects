@@ -34,6 +34,9 @@ const preview: Preview = {
         },
       },
       container: DocsContainer,
+      argTypes: {
+        sort: "requiredFirst",
+      },
     },
   },
   globalTypes: {
@@ -76,6 +79,14 @@ const preview: Preview = {
       );
     },
   ],
+  argTypes: {
+    className: {
+      type: "string",
+    },
+    name: {
+      type: "string",
+    },
+  },
 };
 
 export default preview;

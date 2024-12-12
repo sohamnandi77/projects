@@ -22,14 +22,14 @@
     "@projects/eslint-config": "workspace:*",
     "@projects/prettier-config": "workspace:*",
     "@projects/tsconfig": "workspace:*",
-    "@types/react": "catalog:react18",
+    "@types/react": "catalog:react19",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "react": "catalog:react18",
+    "react": "catalog:react19",
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "react": "catalog:react18"
+    "react": "catalog:react19"
   },
   "prettier": "@projects/prettier-config"
 }

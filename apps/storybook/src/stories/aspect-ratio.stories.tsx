@@ -21,7 +21,7 @@ export const Primary: Story = {
         <img
           src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd"
           alt="Drew Beamer's work"
-          className="h-full w-full rounded-md object-cover"
+          className="size-full rounded-md object-cover"
         />
       </AspectRatio>
     </div>
@@ -42,7 +42,7 @@ export const Horizontal: Story = {
                 <img
                   src={`https://placehold.co/${width * 100}x${height * 100}/png?text=${height}x${width}`}
                   alt="Sample"
-                  className="h-full w-full rounded-md object-cover"
+                  className="size-full rounded-md object-cover"
                 />
               </AspectRatio>
             </div>
@@ -65,7 +65,7 @@ export const Vertical: Story = {
                 <img
                   src={`https://placehold.co/${width * 100}x${height * 100}/png?text=${height}x${width}`}
                   alt="Sample"
-                  className="h-full w-full rounded-md object-cover"
+                  className="size-full rounded-md object-cover"
                 />
               </AspectRatio>
             </div>

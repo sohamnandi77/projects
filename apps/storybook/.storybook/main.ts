@@ -12,6 +12,9 @@ const excludedProps = new Set([
   "onSelect",
   "onBeforeInput",
   "onInput",
+  "ref",
+  "key",
+  "style",
 ]);
 
 const config: StorybookConfig = {

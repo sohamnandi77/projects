@@ -1,5 +1,4 @@
 import reactPlugin from "eslint-plugin-react";
-// @ts-ignore
 import reactCompiler from "eslint-plugin-react-compiler";
 import hooksPlugin from "eslint-plugin-react-hooks";
 

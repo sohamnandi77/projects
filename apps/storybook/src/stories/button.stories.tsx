@@ -5,6 +5,7 @@ import { Archive, ArrowLeft, LoaderCircle, Plus, Printer } from "lucide-react";
 
 import { useToggle } from "@projects/hooks/use-toggle";
 import { Button, buttonVariants } from "@projects/ui/button";
+import { Tooltip, TooltipContent } from "@projects/ui/tooltip";
 
 import { getArgTypes } from "~/utils/getArgTypes";
 
@@ -15,10 +16,10 @@ const meta = {
   argTypes: {
     ...getArgTypes(buttonVariants),
     isPending: {
-      control: "boolean",
+      type: "boolean",
     },
     isDisabled: {
-      control: "boolean",
+      type: "boolean",
     },
   },
   args: { onClick: fn(), children: "Button" },
@@ -58,6 +59,23 @@ export const withIcon: Story = {
         aria-hidden="true"
       />
       Button
+    </Button>
+  ),
+};
+
+export const OnlyIcon: Story = {
+  args: {
+    variant: "outline",
+    size: "icon",
+  },
+  render: (args) => (
+    <Button {...args}>
+      <Archive
+        className="opacity-60"
+        size={16}
+        strokeWidth={2}
+        aria-hidden="true"
+      />
     </Button>
   ),
 };
@@ -196,6 +214,25 @@ export const IconButton: Story = {
           aria-hidden="true"
         />
       </Button>
+    );
+  },
+};
+
+export const WithTooltip: Story = {
+  args: {
+    variant: "outline",
+    size: "icon",
+  },
+  render: (args) => {
+    return (
+      <Tooltip delay={0} closeDelay={0}>
+        <Button aria-label="Add new item" {...args}>
+          <Plus size={16} strokeWidth={2} aria-hidden="true" />
+        </Button>
+        <TooltipContent className="px-2 py-1 text-xs">
+          Add new item
+        </TooltipContent>
+      </Tooltip>
     );
   },
 };

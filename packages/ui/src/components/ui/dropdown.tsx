@@ -64,8 +64,6 @@ const dropdownSectionVariants = cva("", {
   },
 });
 
-// const { section, header } = dropdownSectionVariants();
-
 interface DropdownSectionProps<T> extends SectionProps<T> {
   title?: string;
 }

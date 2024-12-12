@@ -30,6 +30,10 @@ const buttonVariants = {
       lg: "h-11 rounded-md px-8",
     },
   },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
 } as const;
 
 const getButtonVariants = cva(
@@ -42,33 +46,7 @@ const getButtonVariants = cva(
     /* Resets */
     "focus-visible:outline-none",
   ],
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        error: "bg-error text-error-foreground hover:bg-error/90",
-        success: "bg-success text-success-foreground hover:bg-success/90",
-        outline:
-          "border border-stroke-secondary bg-background hover:bg-accent hover:text-accent-foreground focus:border-stroke-input",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        icon: "size-10",
-        xs: "h-8 rounded-md px-3 text-xs",
-        sm: "h-9 rounded-md px-3",
-        md: "h-8 px-3 text-sm",
-        lg: "h-11 rounded-md px-8",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  },
+  buttonVariants,
 );
 
 interface ButtonProps
