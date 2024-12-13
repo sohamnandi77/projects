@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "@tanstack/react-form";
-import { zodValidator } from "@tanstack/zod-form-adapter";
 import {
   AtSign,
   CircleUserRound,
@@ -53,7 +52,6 @@ const RegisterPage = () => {
         callbackURL: "/",
       });
     },
-    validatorAdapter: zodValidator(),
   });
   return (
     <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2">

@@ -1,5 +1,4 @@
 import { useForm } from "@tanstack/react-form";
-import { zodValidator } from "@tanstack/zod-form-adapter";
 import { z } from "zod";
 
 import { client } from "~/server/auth-client";
@@ -23,7 +22,6 @@ const useLogin = () => {
     onSubmit: async ({ value }) => {
       await client.signIn.email({ ...value, callbackURL: "/" });
     },
-    validatorAdapter: zodValidator(),
   });
 
   return { form };

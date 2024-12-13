@@ -21,6 +21,9 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
+  "dependencies": {
+    "superjson": "^2.2.2"
+  },
   "devDependencies": {
     "@projects/eslint-config": "workspace:*",
     "@projects/prettier-config": "workspace:*",
@@ -34,8 +37,5 @@
   "peerDependencies": {
     "react": "catalog:react19"
   },
-  "prettier": "@projects/prettier-config",
-  "dependencies": {
-    "superjson": "^2.2.2"
-  }
+  "prettier": "@projects/prettier-config"
 }

@@ -8,4 +8,12 @@ export default [
   ...baseConfig,
   ...reactConfig,
   ...tailwind.configs["flat/recommended"],
+  {
+    settings: {
+      tailwindcss: {
+        callees: ["cn", "cva"],
+        config: "tailwind.config.ts",
+      },
+    },
+  },
 ];

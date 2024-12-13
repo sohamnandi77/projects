@@ -4,6 +4,7 @@ import { withRef } from "@projects/editor/lib/withRef";
 import { withVariants } from "@projects/editor/lib/withVariants";
 import { PlateElement } from "@projects/editor/ui/plate-element";
 
+// eslint-disable-next-line tailwindcss/no-custom-classname
 const headingVariants = cva("relative mb-1", {
   variants: {
     variant: {

@@ -5,8 +5,6 @@ import drizzleConfig from "@projects/eslint-config/drizzle";
 import nextjsConfig from "@projects/eslint-config/next";
 import reactConfig from "@projects/eslint-config/react";
 
-// import tailwindConfig from "@projects/eslint-config/tailwind";
-
 /** @type {import('typescript-eslint').Config} */
 export default [
   {
@@ -16,7 +14,14 @@ export default [
   ...reactConfig,
   ...nextjsConfig,
   ...drizzleConfig,
-  // ...tailwindConfig,
   ...tailwind.configs["flat/recommended"],
   ...restrictEnvAccess,
+  {
+    settings: {
+      tailwindcss: {
+        callees: ["cn", "cva"],
+        config: "tailwind.config.ts",
+      },
+    },
+  },
 ];

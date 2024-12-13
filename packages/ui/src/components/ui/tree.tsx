@@ -56,10 +56,10 @@ function TreeItemInfoButton(props: Readonly<ButtonProps>) {
           "ml-auto flex items-center justify-center rounded-md ring-offset-background",
           /* Disabled */
           "disabled:pointer-events-none disabled:opacity-50",
-          /* Focus Visible */
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           /* Resets */
           "focus-visible:outline-none",
+          /* Focus Visible */
+          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         ),
         className,
       )}
@@ -79,10 +79,10 @@ function TreeItem<T extends object>(props: Readonly<AriaTreeItemProps<T>>) {
           "group relative flex items-center gap-2 rounded-md p-1 pl-[calc((var(--tree-item-level)_-_1)_*_2.25rem)] font-medium outline-none ring-offset-background data-[has-child-rows]:pl-[calc((var(--tree-item-level)_-_1)_*_1.5rem)]",
           /* Disabled */
           "disabled:pointer-events-none disabled:opacity-50",
-          /* Focus Visible */
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           /* Resets */
           "focus-visible:outline-none",
+          /* Focus Visible */
+          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         ),
         className,
       )}

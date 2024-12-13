@@ -11,7 +11,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@projects/ui/lib/utils";
 
 const editorContainerVariants = cva(
-  "selection:bg-brand/25 [&_.slate-selection-area]:border-brand/25 [&_.slate-selection-area]:bg-brand/15 relative w-full cursor-text overflow-y-auto caret-primary focus-visible:outline-none [&_.slate-selection-area]:border",
+  "relative w-full cursor-text overflow-y-auto caret-primary selection:bg-primary/25 focus-visible:outline-none [&_.slate-selection-area]:border [&_.slate-selection-area]:border-primary/25 [&_.slate-selection-area]:bg-primary/15",
   {
     defaultVariants: {
       variant: "default",
@@ -21,7 +21,7 @@ const editorContainerVariants = cva(
         default: "h-full",
         demo: "h-[650px]",
         select: cn(
-          "border-input group rounded-md border ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
+          "group rounded-md border border-stroke-input ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
           "has-[[data-readonly]]:w-fit has-[[data-readonly]]:cursor-default has-[[data-readonly]]:border-transparent has-[[data-readonly]]:focus-within:[box-shadow:none]",
         ),
       },
@@ -42,6 +42,7 @@ export const EditorContainer = ({
     <div
       id={editor.uid}
       ref={containerRef}
+      // eslint-disable-next-line tailwindcss/no-custom-classname
       className={cn(
         "ignore-click-outside/toolbar",
         editorContainerVariants({ variant }),

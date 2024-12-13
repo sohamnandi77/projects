@@ -57,7 +57,7 @@
     "@radix-ui/react-hover-card": "^1.1.2",
     "@radix-ui/react-scroll-area": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
-    "@tanstack/react-form": "^0.40.0",
+    "@tanstack/react-form": "^0.40.1",
     "class-variance-authority": "^0.7.1",
     "cmdk": "1.0.4",
     "embla-carousel-react": "^8.5.1",
@@ -66,7 +66,7 @@
     "next-themes": "^0.4.4",
     "react-aria-components": "^1.5.0",
     "react-resizable-panels": "^2.1.7",
-    "recharts": "^2.14.1",
+    "recharts": "^2.15.0",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
     "vaul": "^1.1.1",
@@ -78,7 +78,7 @@
     "@projects/tsconfig": "workspace:*",
     "@types/react": "catalog:react19",
     "eslint": "catalog:",
-    "eslint-plugin-tailwindcss": "^3.17.5",
+    "eslint-plugin-tailwindcss": "catalog:",
     "prettier": "catalog:",
     "react": "catalog:react19",
     "type-fest": "^4.30.0",
@@ -86,6 +86,9 @@
   },
   "peerDependencies": {
     "react": "catalog:react19"
+  },
+  "overrides": {
+    "react-is": "^19.0.0"
   },
   "prettier": "@projects/prettier-config"
 }

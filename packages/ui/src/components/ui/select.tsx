@@ -61,12 +61,12 @@ const SelectTrigger = ({ className, children, ...props }: AriaButtonProps) => (
     className={composeTailwindRenderProps(
       cn(
         "flex h-10 w-full items-center justify-between rounded-md border border-stroke-input bg-background px-3 py-2 text-sm ring-offset-background",
+        /* Resets */
+        "focus-visible:outline-none",
         /* Disabled */
         "disabled:cursor-not-allowed disabled:opacity-50",
         /* Focused */
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        /* Resets */
-        "focus-visible:outline-none",
+        "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       ),
       className,
     )}

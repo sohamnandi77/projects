@@ -4,7 +4,9 @@ packages:
   - tooling/*
 
 catalog:
+  "@types/eslint-plugin-tailwindcss": ^3.17.0
   "@vitejs/plugin-react": ^4.3.3
+  eslint-plugin-tailwindcss: ^3.17.5
   eslint: ^9.16.0
   lucide-react: ^0.468.0
   prettier: ^3.4.2

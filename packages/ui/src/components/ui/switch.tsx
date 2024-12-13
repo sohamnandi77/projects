@@ -26,7 +26,7 @@ const Switch = ({ children, className, ...props }: AriaSwitchProps) => (
             /* Disabled */
             "group-disabled:cursor-not-allowed group-disabled:opacity-50",
             /* Selected */
-            "bg-input group-selected:bg-primary",
+            "bg-stroke-input group-selected:bg-primary",
             /* Readonly */
             "group-readonly:cursor-default",
             /* Resets */
