@@ -17,7 +17,7 @@ const Breadcrumbs = <T extends object>(props: AriaBreadcrumbsProps<T>) => {
   return (
     <AriaBreadcrumbs
       className={cn(
-        "flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5",
+        "flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-fg sm:gap-2.5",
         className,
       )}
       {...rest}
@@ -46,7 +46,7 @@ const BreadcrumbLink = (props: AriaLinkProps) => {
         cn(
           "cursor-pointer transition-colors",
           /* Hover */
-          "hover:text-foreground",
+          "hover:text-fg",
           /* Disabled */
           "disabled:pointer-events-none disabled:opacity-50",
           /* Current */
@@ -94,10 +94,7 @@ const BreadcrumbPage = (props: BreadcrumbPageProps) => {
   const { className, ...rest } = props;
   return (
     <AriaLink
-      className={composeTailwindRenderProps(
-        "font-normal text-foreground",
-        className,
-      )}
+      className={composeTailwindRenderProps("font-normal text-fg", className)}
       {...rest}
     />
   );

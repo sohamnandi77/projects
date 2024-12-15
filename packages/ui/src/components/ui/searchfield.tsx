@@ -33,7 +33,7 @@ function SearchFieldInput(props: Readonly<AriaInputProps>) {
   return (
     <AriaInput
       className={composeTailwindRenderProps(
-        "min-w-0 flex-1 bg-background px-2 py-1.5 outline outline-0 placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden",
+        "min-w-0 flex-1 bg-bg px-2 py-1.5 outline outline-0 placeholder:text-muted-fg [&::-webkit-search-cancel-button]:hidden",
         className,
       )}
       {...rest}
@@ -47,7 +47,7 @@ function SearchFieldGroup(props: Readonly<AriaGroupProps>) {
     <AriaGroup
       className={composeTailwindRenderProps(
         cn(
-          "flex h-10 w-full items-center overflow-hidden rounded-md border border-stroke-input bg-background px-3 py-2 text-sm ring-offset-background",
+          "flex h-10 w-full items-center overflow-hidden rounded-md border border-input bg-bg px-3 py-2 text-sm ring-offset-bg",
           /* Focus Within */
           "data-[focus-within]:outline-none data-[focus-within]:ring-2 data-[focus-within]:ring-ring data-[focus-within]:ring-offset-2",
           /* Disabled */
@@ -66,7 +66,7 @@ function SearchFieldClear(props: Readonly<AriaButtonProps>) {
     <AriaButton
       className={composeTailwindRenderProps(
         cn(
-          "mr-1 rounded-sm opacity-70 ring-offset-background transition-opacity",
+          "mr-1 rounded-sm opacity-70 ring-offset-bg transition-opacity",
           /* Hover */
           "hover:opacity-100",
           /* Disabled */
@@ -104,14 +104,14 @@ function JollySearchField({
     >
       <Label>{label}</Label>
       <FieldGroup>
-        <SearchIcon aria-hidden className="size-4 text-muted-foreground" />
+        <SearchIcon aria-hidden className="size-4 text-muted-fg" />
         <SearchFieldInput placeholder="Search..." />
         <SearchFieldClear>
           <XIcon aria-hidden className="size-4" />
         </SearchFieldClear>
       </FieldGroup>
       {description && (
-        <Text className="text-sm text-muted-foreground" slot="description">
+        <Text className="text-sm text-muted-fg" slot="description">
           {description}
         </Text>
       )}

@@ -24,7 +24,7 @@ const TooltipContent = (props: TooltipContentProps) => {
       offset={offset}
       className={composeTailwindRenderProps(
         cn(
-          "group z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground shadow-md animate-in fade-in-0",
+          "group z-50 overflow-hidden rounded-md border bg-overlay px-3 py-1.5 text-sm text-overlay-fg shadow-md animate-in fade-in-0",
           /* Entering */
           "entering:zoom-in-95",
           /* Exiting */

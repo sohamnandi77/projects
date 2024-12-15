@@ -59,7 +59,7 @@ const RegisterPage = () => {
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Register</h1>
-            <p className="text-balance text-muted-foreground">
+            <p className="text-balance text-muted-fg">
               Enter your information to create an account
             </p>
           </div>
@@ -89,7 +89,7 @@ const RegisterPage = () => {
                       <Label htmlFor="name">Name</Label>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
-                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-fg/80 peer-disabled:opacity-50">
                           <CircleUserRound
                             size={16}
                             strokeWidth={2}
@@ -130,7 +130,7 @@ const RegisterPage = () => {
                       <Label htmlFor="email">Email</Label>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
-                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-fg/80 peer-disabled:opacity-50">
                           <AtSign
                             size={16}
                             strokeWidth={2}
@@ -171,7 +171,7 @@ const RegisterPage = () => {
                       <Label htmlFor="password">Password</Label>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
-                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-fg/80 peer-disabled:opacity-50">
                           <RectangleEllipsis
                             size={16}
                             strokeWidth={2}
@@ -228,7 +228,7 @@ const RegisterPage = () => {
                       <Label htmlFor="password">Confirm Password</Label>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
-                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-fg/80 peer-disabled:opacity-50">
                           <RectangleEllipsis
                             size={16}
                             strokeWidth={2}

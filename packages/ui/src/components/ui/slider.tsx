@@ -96,7 +96,7 @@ const SliderThumb = (props: AriaSliderThumbProps) => {
     <AriaSliderThumb
       className={composeTailwindRenderProps(
         cn(
-          "left-1/2 top-1/2 block size-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors",
+          "left-1/2 top-1/2 block size-5 rounded-full border-2 border-primary bg-bg ring-offset-bg transition-colors",
           /* Disabled */
           "disabled:pointer-events-none",
           /* Focus Visible */

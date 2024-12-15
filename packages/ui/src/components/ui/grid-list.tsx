@@ -23,7 +23,7 @@ export function GridList<T extends object>({
       {...props}
       className={composeTailwindRenderProps(
         cn(
-          "group flex flex-col gap-2 overflow-auto rounded-md border bg-popover p-1 text-popover-foreground shadow-md outline-none",
+          "group flex flex-col gap-2 overflow-auto rounded-md border bg-overlay p-1 text-overlay-fg shadow-md outline-none",
           /* Empty */
           "empty:p-6 empty:text-center empty:text-sm",
         ),
@@ -50,11 +50,11 @@ export function GridListItem({
           /* Disabled */
           "disabled:pointer-events-none disabled:opacity-50",
           /* Focus Visible */
-          "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
           /* Hovered */
-          "hover:bg-accent hover:text-accent-foreground",
+          "hover:bg-accent hover:text-accent-fg",
           /* Selected */
-          "selected:bg-accent selected:text-accent-foreground",
+          "selected:bg-accent selected:text-accent-fg",
           /* Dragging */
           "dragging:opacity-60",
         ),

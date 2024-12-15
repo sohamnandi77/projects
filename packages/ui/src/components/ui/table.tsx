@@ -52,7 +52,7 @@ export interface ColumnProps extends AriaColumnProps {
 const TableHead = ({ className, children, ...props }: ColumnProps) => (
   <AriaColumn
     className={composeTailwindRenderProps(
-      "h-12 text-left align-middle font-medium text-muted-foreground -outline-offset-2 focus-visible:outline-ring",
+      "h-12 text-left align-middle font-medium text-muted-fg -outline-offset-2 focus-visible:outline-ring",
       className,
     )}
     {...props}
@@ -64,7 +64,7 @@ const TableHead = ({ className, children, ...props }: ColumnProps) => (
           tabIndex={-1}
           className={cn(
             "flex h-10 flex-1 items-center gap-1 overflow-hidden rounded-md px-4",
-            allowsSorting && "p-2 hover:bg-accent hover:text-accent-foreground",
+            allowsSorting && "p-2 hover:bg-accent hover:text-accent-fg",
             "focus-visible:outline-none focus-visible:-outline-offset-2 focus-visible:outline-ring [&:has([slot=selection])]:pr-0",
           )}
         >
@@ -72,7 +72,7 @@ const TableHead = ({ className, children, ...props }: ColumnProps) => (
           {allowsSorting && <ArrowUpDown className="ml-2 size-4" />}
         </Group>
         {props.isResizable && (
-          <ColumnResizer className="box-content h-5 w-px translate-x-[8px] cursor-col-resize rounded bg-muted-foreground bg-clip-content px-[8px] py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring resizing:w-[2px] resizing:bg-primary resizing:pl-[7px]" />
+          <ColumnResizer className="box-content h-5 w-px translate-x-[8px] cursor-col-resize rounded bg-muted-fg bg-clip-content px-[8px] py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring resizing:w-[2px] resizing:bg-primary resizing:pl-[7px]" />
         )}
       </div>
     ))}
@@ -131,7 +131,7 @@ const TableCaption = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
-    className={cn("mt-4 text-sm text-muted-foreground", className)}
+    className={cn("mt-4 text-sm text-muted-fg", className)}
     {...props}
   />
 ));

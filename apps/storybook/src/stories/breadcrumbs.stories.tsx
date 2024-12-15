@@ -138,7 +138,7 @@ export const DynamicItems: Story = {
       return (
         <Breadcrumbs items={breadcrumbs} onAction={navigate}>
           {(item) => (
-            <BreadcrumbItem className="last:font-normal last:text-foreground last:[&>span]:last:hidden">
+            <BreadcrumbItem className="last:font-normal last:text-fg last:[&>span]:last:hidden">
               <BreadcrumbLink>{item.label}</BreadcrumbLink>
               <BreadcrumbSeparator />
             </BreadcrumbItem>

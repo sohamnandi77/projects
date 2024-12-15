@@ -12,13 +12,13 @@ import { composeTailwindRenderProps } from "@projects/ui/lib/utils";
 const buttonVariants = {
   variants: {
     variant: {
-      default: "bg-primary text-primary-foreground hover:bg-primary/90",
-      error: "bg-error text-error-foreground hover:bg-error/90",
-      success: "bg-success text-success-foreground hover:bg-success/90",
+      default: "bg-primary text-primary-fg hover:bg-primary/90",
+      error: "bg-danger text-danger-fg hover:bg-danger/90",
+      success: "bg-success text-success-fg hover:bg-success/90",
       outline:
-        "border-stroke-input border bg-background hover:bg-accent hover:text-accent-foreground",
-      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-      ghost: "hover:bg-accent hover:text-accent-foreground",
+        "border-stroke-input border bg-bg hover:bg-accent hover:text-accent-fg",
+      secondary: "bg-secondary text-secondary-fg hover:bg-secondary/80",
+      ghost: "hover:bg-accent hover:text-accent-fg",
       link: "text-primary underline-offset-4 hover:underline",
     },
     size: {
@@ -38,7 +38,7 @@ const buttonVariants = {
 
 const getButtonVariants = cva(
   [
-    "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors",
+    "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-bg transition-colors",
     /* Disabled */
     "disabled:pointer-events-none disabled:opacity-50",
     /* Focus Visible */

@@ -52,7 +52,7 @@ const Radio = ({ className, children, ...props }: AriaRadioProps) => {
         <>
           <span
             className={cn(
-              "flex aspect-square size-4 items-center justify-center rounded-full border border-primary text-primary ring-offset-background",
+              "flex aspect-square size-4 items-center justify-center rounded-full border border-primary text-primary ring-offset-bg",
               /* Focus */
               "group-focus:outline-none",
               /* Focus Visible */
@@ -60,7 +60,7 @@ const Radio = ({ className, children, ...props }: AriaRadioProps) => {
               /* Disabled */
               "group-disabled:cursor-not-allowed group-disabled:opacity-50",
               /* Invalid */
-              "group-invalid:border-error",
+              "group-invalid:border-danger",
             )}
           >
             {renderProps.isSelected && (
@@ -96,7 +96,7 @@ function JollyRadioGroup(props: Readonly<JollyRadioGroupProps>) {
           <Label>{label}</Label>
           {children}
           {description && (
-            <Text slot="description" className="text-sm text-muted-foreground">
+            <Text slot="description" className="text-sm text-muted-fg">
               {description}
             </Text>
           )}

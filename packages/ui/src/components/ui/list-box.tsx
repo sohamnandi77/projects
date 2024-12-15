@@ -27,7 +27,7 @@ const ListBox = forwardRef<HTMLDivElement, AriaListBoxProps<object>>(
         ref={ref}
         className={composeTailwindRenderProps(
           cn(
-            "group overflow-auto rounded-md border bg-popover p-1 text-popover-foreground shadow-md outline-none",
+            "group overflow-auto rounded-md border bg-overlay p-1 text-overlay-fg shadow-md outline-none",
             /* Empty */
             "empty:p-6 empty:text-center empty:text-sm",
           ),
@@ -55,9 +55,9 @@ const ListBoxItem = forwardRef<HTMLDivElement, AriaListBoxItemProps<object>>(
             /* Disabled */
             "disabled:pointer-events-none disabled:opacity-50",
             /* Focused */
-            "focus:bg-accent focus:text-accent-foreground",
+            "focus:bg-accent focus:text-accent-fg",
             /* Hovered */
-            "hover:bg-accent hover:text-accent-foreground",
+            "hover:bg-accent hover:text-accent-fg",
             /* Selection */
             "data-[selection-mode]:pl-8",
           ),

@@ -17,7 +17,7 @@ const Popover = ({ className, offset = 4, ...props }: AriaPopoverProps) => (
     offset={offset}
     className={composeTailwindRenderProps(
       cn(
-        "z-50 rounded-md border bg-popover text-popover-foreground shadow-md outline-none",
+        "z-50 rounded-md border bg-overlay text-overlay-fg shadow-md outline-none",
         /* Entering */
         "entering:animate-in entering:fade-in-0 entering:zoom-in-95",
         /* Exiting */

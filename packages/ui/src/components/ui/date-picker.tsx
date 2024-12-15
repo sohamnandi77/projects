@@ -89,7 +89,7 @@ function JollyDatePicker<T extends AriaDateValue>({
         </Button>
       </FieldGroup>
       {description && (
-        <Text className="text-sm text-muted-foreground" slot="description">
+        <Text className="text-sm text-muted-fg" slot="description">
           {description}
         </Text>
       )}
@@ -135,7 +135,7 @@ function JollyDateRangePicker<T extends AriaDateValue>({
       <Label>{label}</Label>
       <FieldGroup>
         <DateInput variant="ghost" slot={"start"} />
-        <span aria-hidden className="px-2 text-sm text-muted-foreground">
+        <span aria-hidden className="px-2 text-sm text-muted-fg">
           -
         </span>
         <DateInput className="flex-1" variant="ghost" slot={"end"} />
@@ -149,7 +149,7 @@ function JollyDateRangePicker<T extends AriaDateValue>({
         </Button>
       </FieldGroup>
       {description && (
-        <Text className="text-sm text-muted-foreground" slot="description">
+        <Text className="text-sm text-muted-fg" slot="description">
           {description}
         </Text>
       )}

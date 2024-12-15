@@ -32,13 +32,13 @@ function DateSegment({ className, ...props }: AriaDateSegmentProps) {
         cn(
           "inline rounded p-0.5 caret-transparent outline outline-0 type-literal:px-0",
           /* Placeholder */
-          "data-[placeholder]:text-muted-foreground",
+          "data-[placeholder]:text-muted-fg",
           /* Disabled */
           "disabled:cursor-not-allowed disabled:opacity-50",
           /* Focused */
-          "focus:bg-accent focus:text-accent-foreground",
+          "focus:bg-accent focus:text-accent-fg",
           /* Invalid */
-          "data-[invalid]:data-[placeholder]:text-error data-[invalid]:text-error data-[invalid]:focus:bg-error data-[invalid]:focus:data-[placeholder]:text-error-foreground data-[invalid]:focus:text-error-foreground",
+          "data-[invalid]:data-[placeholder]:text-danger data-[invalid]:text-danger data-[invalid]:focus:bg-danger data-[invalid]:focus:data-[placeholder]:text-danger-fg data-[invalid]:focus:text-danger-fg",
           className,
         ),
       )}
@@ -92,7 +92,7 @@ function JollyDateField<T extends AriaDateValue>({
       <Label>{label}</Label>
       <DateInput />
       {description && (
-        <Text className="text-sm text-muted-foreground" slot="description">
+        <Text className="text-sm text-muted-fg" slot="description">
           {description}
         </Text>
       )}

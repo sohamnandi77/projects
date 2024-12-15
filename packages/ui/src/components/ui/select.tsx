@@ -46,7 +46,7 @@ const SelectValue = <T extends object>({
   <AriaSelectValue
     className={composeTailwindRenderProps(
       cn(
-        "line-clamp-1 data-[placeholder]:text-muted-foreground",
+        "line-clamp-1 data-[placeholder]:text-muted-fg",
         /* Description */
         "[&>[slot=description]]:hidden",
       ),
@@ -60,7 +60,7 @@ const SelectTrigger = ({ className, children, ...props }: AriaButtonProps) => (
   <AriaButton
     className={composeTailwindRenderProps(
       cn(
-        "flex h-10 w-full items-center justify-between rounded-md border border-stroke-input bg-background px-3 py-2 text-sm ring-offset-background",
+        "flex h-10 w-full items-center justify-between rounded-md border border-input bg-bg px-3 py-2 text-sm ring-offset-bg",
         /* Resets */
         "focus-visible:outline-none",
         /* Disabled */
@@ -133,7 +133,7 @@ function JollySelect<T extends object>(props: Readonly<JollySelectProps<T>>) {
         <SelectValue />
       </SelectTrigger>
       {description && (
-        <Text className="text-sm text-muted-foreground" slot="description">
+        <Text className="text-sm text-muted-fg" slot="description">
           {description}
         </Text>
       )}

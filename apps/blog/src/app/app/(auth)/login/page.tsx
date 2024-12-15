@@ -25,7 +25,7 @@ const LoginPage = () => {
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-balance text-muted-foreground">
+            <p className="text-balance text-muted-fg">
               Enter your email below to login to your account
             </p>
           </div>
@@ -55,7 +55,7 @@ const LoginPage = () => {
                       <Label htmlFor="email">Email</Label>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
-                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-fg/80 peer-disabled:opacity-50">
                           <AtSign
                             size={16}
                             strokeWidth={2}
@@ -104,7 +104,7 @@ const LoginPage = () => {
                       </div>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
-                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+                        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-fg/80 peer-disabled:opacity-50">
                           <RectangleEllipsis
                             size={16}
                             strokeWidth={2}

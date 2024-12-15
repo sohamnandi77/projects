@@ -93,7 +93,7 @@ export const Primary: Story = {
         <div className="flex gap-2 font-medium leading-none">
           Trending up by 5.2% this month <TrendingUp className="size-4" />
         </div>
-        <div className="leading-none text-muted-foreground">
+        <div className="leading-none text-muted-fg">
           Showing total visitors for the last 6 months
         </div>
       </CardFooter>

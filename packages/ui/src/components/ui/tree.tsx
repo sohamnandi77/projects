@@ -53,7 +53,7 @@ function TreeItemInfoButton(props: Readonly<ButtonProps>) {
       aria-label="Info"
       className={composeTailwindRenderProps(
         cn(
-          "ml-auto flex items-center justify-center rounded-md ring-offset-background",
+          "ml-auto flex items-center justify-center rounded-md ring-offset-bg",
           /* Disabled */
           "disabled:pointer-events-none disabled:opacity-50",
           /* Resets */
@@ -76,7 +76,7 @@ function TreeItem<T extends object>(props: Readonly<AriaTreeItemProps<T>>) {
     <AriaTreeItem
       className={composeTailwindRenderProps(
         cn(
-          "group relative flex items-center gap-2 rounded-md p-1 pl-[calc((var(--tree-item-level)_-_1)_*_2.25rem)] font-medium outline-none ring-offset-background data-[has-child-rows]:pl-[calc((var(--tree-item-level)_-_1)_*_1.5rem)]",
+          "group relative flex items-center gap-2 rounded-md p-1 pl-[calc((var(--tree-item-level)_-_1)_*_2.25rem)] font-medium outline-none ring-offset-bg data-[has-child-rows]:pl-[calc((var(--tree-item-level)_-_1)_*_1.5rem)]",
           /* Disabled */
           "disabled:pointer-events-none disabled:opacity-50",
           /* Resets */

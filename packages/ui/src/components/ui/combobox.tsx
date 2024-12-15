@@ -31,7 +31,7 @@ const ComboboxInput = (props: AriaInputProps) => {
     <AriaInput
       className={composeTailwindRenderProps(
         cn(
-          "flex h-10 w-full bg-background px-3 py-2 outline-none file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground",
+          "flex h-10 w-full bg-bg px-3 py-2 outline-none file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-fg",
           /* Disabled */
           "disabled:cursor-not-allowed disabled:opacity-50",
         ),

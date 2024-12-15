@@ -71,7 +71,7 @@ function DisclosureHeader({ children, className }: DisclosureHeaderProps) {
         slot="trigger"
         className={composeTailwindRenderProps(
           cn(
-            "group flex flex-1 items-center justify-between rounded-md py-4 font-medium ring-offset-background transition-all hover:underline",
+            "group flex flex-1 items-center justify-between rounded-md py-4 font-medium ring-offset-bg transition-all hover:underline",
             "disabled:pointer-events-none disabled:opacity-50",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
             "outline-none",

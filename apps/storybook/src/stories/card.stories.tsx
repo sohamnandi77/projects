@@ -53,7 +53,7 @@ export const Primary: Story = {
               <p className="text-sm font-medium leading-none">
                 Push Notifications
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-fg">
                 Send notifications to device.
               </p>
             </div>
@@ -69,7 +69,7 @@ export const Primary: Story = {
                   <p className="text-sm font-medium leading-none">
                     {notification.title}
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-fg">
                     {notification.description}
                   </p>
                 </div>

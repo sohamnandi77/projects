@@ -22,11 +22,11 @@ const Switch = ({ children, className, ...props }: AriaSwitchProps) => (
           className={cn(
             "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors",
             /* Focus Visible */
-            "group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background",
+            "group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-bg",
             /* Disabled */
             "group-disabled:cursor-not-allowed group-disabled:opacity-50",
             /* Selected */
-            "bg-stroke-input group-selected:bg-primary",
+            "bg-input group-selected:bg-primary",
             /* Readonly */
             "group-readonly:cursor-default",
             /* Resets */
@@ -35,7 +35,7 @@ const Switch = ({ children, className, ...props }: AriaSwitchProps) => (
         >
           <div
             className={cn(
-              "pointer-events-none block size-5 rounded-full bg-background shadow-lg ring-0 transition-transform",
+              "pointer-events-none block size-5 rounded-full bg-bg shadow-lg ring-0 transition-transform",
               /* Selected */
               "translate-x-0 group-selected:translate-x-5",
             )}

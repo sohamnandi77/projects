@@ -36,7 +36,7 @@ const TabList = <T extends object>(props: AriaTabListProps<T>) => {
     <AriaTabList
       className={composeTailwindRenderProps(
         cn(
-          "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
+          "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-fg",
           /* Orientation */
           "orientation-vertical:h-auto orientation-vertical:flex-col",
         ),
@@ -53,13 +53,13 @@ const Tab = (props: AriaTabProps) => {
     <AriaTab
       className={composeTailwindRenderProps(
         cn(
-          "inline-flex cursor-pointer justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium outline-none ring-offset-background transition-all",
+          "inline-flex cursor-pointer justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium outline-none ring-offset-bg transition-all",
           /* Focus Visible */
           "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           /* Disabled */
           "disabled:pointer-events-none disabled:opacity-50",
           /* Selected */
-          "selected:bg-background selected:text-foreground selected:shadow-sm",
+          "selected:bg-bg selected:text-fg selected:shadow-sm",
           /* Orientation */
           "group-orientation-vertical:w-full",
         ),
@@ -77,7 +77,7 @@ const TabPanel = (props: AriaTabPanelProps) => {
     <AriaTabPanel
       className={composeTailwindRenderProps(
         cn(
-          "mt-2 ring-offset-background",
+          "mt-2 ring-offset-bg",
           /* Focus Visible */
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         ),

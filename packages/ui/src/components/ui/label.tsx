@@ -9,7 +9,7 @@ const labelVariants = cva([
   /* Disabled */
   "disabled:cursor-not-allowed disabled:opacity-70",
   /* Invalid */
-  "group-invalid:text-error",
+  "group-invalid:text-danger",
 ]);
 
 const Label = forwardRef<

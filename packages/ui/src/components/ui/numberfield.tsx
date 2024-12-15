@@ -23,7 +23,7 @@ function NumberFieldInput(props: Readonly<AriaInputProps>) {
   return (
     <AriaInput
       className={composeTailwindRenderProps(
-        "w-fit min-w-0 flex-1 border-r border-transparent bg-background pr-2 outline outline-0 placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden",
+        "w-fit min-w-0 flex-1 border-r border-transparent bg-bg pr-2 outline outline-0 placeholder:text-muted-fg [&::-webkit-search-cancel-button]:hidden",
         className,
       )}
       {...rest}
@@ -59,7 +59,7 @@ function NumberFieldStepper(props: Readonly<AriaButtonProps>) {
   return (
     <Button
       className={composeTailwindRenderProps(
-        "w-auto grow rounded-none px-0.5 text-muted-foreground",
+        "w-auto grow rounded-none px-0.5 text-muted-fg",
         className,
       )}
       variant={"ghost"}
@@ -91,7 +91,7 @@ function JollyNumberField(props: Readonly<JollyNumberFieldProps>) {
         <NumberFieldSteppers />
       </FieldGroup>
       {description && (
-        <Text className="text-sm text-muted-foreground" slot="description">
+        <Text className="text-sm text-muted-fg" slot="description">
           {description}
         </Text>
       )}

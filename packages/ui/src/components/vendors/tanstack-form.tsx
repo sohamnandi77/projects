@@ -129,7 +129,7 @@ function FieldLabel(props: FieldLabelProps) {
       htmlFor={field.name.toString()}
       className={cn(
         "font-semibold",
-        field.isTouched && field.hasErrors && "text-error",
+        field.isTouched && field.hasErrors && "text-danger",
         className,
       )}
       {...rest}

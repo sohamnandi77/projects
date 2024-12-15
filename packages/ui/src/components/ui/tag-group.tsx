@@ -27,7 +27,7 @@ function TagList<T extends object>(props: Readonly<AriaTagListProps<T>>) {
         cn(
           "flex flex-wrap gap-2",
           /* Empty */
-          "empty:text-sm empty:text-muted-foreground",
+          "empty:text-sm empty:text-muted-fg",
         ),
         className,
       )}
@@ -38,7 +38,7 @@ function TagList<T extends object>(props: Readonly<AriaTagListProps<T>>) {
 
 const badgeVariants = cva(
   [
-    "inline-flex items-center gap-2 rounded-full border px-2.5 py-0.5 text-xs font-semibold ring-offset-background transition-colors",
+    "inline-flex items-center gap-2 rounded-full border px-2.5 py-0.5 text-xs font-semibold ring-offset-bg transition-colors",
     /* Focus */
     "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
     /* Disabled */
@@ -48,21 +48,21 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: [
-          "border-transparent bg-primary text-primary-foreground",
+          "border-transparent bg-primary text-primary-fg",
           /* Hover */
           "hover:bg-primary/80",
         ],
         secondary: [
-          "border-transparent bg-secondary text-secondary-foreground",
+          "border-transparent bg-secondary text-secondary-fg",
           /* Hover */
           "hover:bg-secondary/80",
         ],
         error: [
-          "border-transparent bg-error text-error-foreground",
+          "border-transparent bg-danger text-danger-fg",
           /* Hover */
-          "hover:bg-error/80",
+          "hover:bg-danger/80",
         ],
-        outline: "text-foreground",
+        outline: "text-fg",
       },
     },
     defaultVariants: {
@@ -98,7 +98,7 @@ function Tag(props: Readonly<AriaTagProps>) {
             <AriaButton
               slot="remove"
               className={cn(
-                "rounded-sm opacity-70 ring-offset-background transition-opacity",
+                "rounded-sm opacity-70 ring-offset-bg transition-opacity",
                 /* Hover */
                 "hover:opacity-100",
                 /* Resets */
@@ -143,12 +143,12 @@ function JollyTagGroup<T extends object>(
         {children}
       </TagList>
       {description && (
-        <Text className="text-sm text-muted-foreground" slot="description">
+        <Text className="text-sm text-muted-fg" slot="description">
           {description}
         </Text>
       )}
       {errorMessage && (
-        <Text className="text-sm text-error" slot="errorMessage">
+        <Text className="text-sm text-danger" slot="errorMessage">
           {errorMessage}
         </Text>
       )}

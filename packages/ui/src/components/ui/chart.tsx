@@ -59,7 +59,7 @@ const ChartContainer = React.forwardRef<HTMLDivElement, ChartProps>(
           data-chart={chartId}
           ref={ref}
           className={cn(
-            "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-stroke/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-stroke [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-stroke [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-stroke [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
+            "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-fg [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-stroke/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-stroke [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-stroke [&_.recharts-radial-bar-bg-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-stroke [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
             className,
           )}
           {...props}
@@ -189,7 +189,7 @@ const ChartTooltipContent = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "grid min-w-32 items-start gap-1.5 rounded-lg border border-stroke/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
+          "grid min-w-32 items-start gap-1.5 rounded-lg border border-stroke/50 bg-bg px-2.5 py-1.5 text-xs shadow-xl",
           className,
         )}
       >
@@ -205,7 +205,7 @@ const ChartTooltipContent = React.forwardRef<
               <div
                 key={item.dataKey}
                 className={cn(
-                  "flex w-full flex-wrap items-stretch gap-2 [&>svg]:size-2.5 [&>svg]:text-muted-foreground",
+                  "flex w-full flex-wrap items-stretch gap-2 [&>svg]:size-2.5 [&>svg]:text-muted-fg",
                   indicator === "dot" && "items-center",
                 )}
               >
@@ -251,12 +251,12 @@ const ChartTooltipContent = React.forwardRef<
                     >
                       <div className="grid gap-1.5">
                         {nestLabel ? tooltipLabel : null}
-                        <span className="text-muted-foreground">
+                        <span className="text-muted-fg">
                           {itemConfig?.label ?? item.name}
                         </span>
                       </div>
                       {item.value && (
-                        <span className="font-mono font-medium tabular-nums text-foreground">
+                        <span className="font-mono font-medium tabular-nums text-fg">
                           {item.value.toLocaleString()}
                         </span>
                       )}
@@ -311,7 +311,7 @@ const ChartLegendContent = React.forwardRef<HTMLDivElement, LegendContentProps>(
             <div
               key={item.value as string}
               className={cn(
-                "flex items-center gap-1.5 [&>svg]:size-3 [&>svg]:text-muted-foreground",
+                "flex items-center gap-1.5 [&>svg]:size-3 [&>svg]:text-muted-fg",
               )}
             >
               {itemConfig?.icon && !hideIcon ? (

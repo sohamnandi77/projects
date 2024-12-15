@@ -112,7 +112,7 @@ const CalendarHeaderCell = ({
 }: AriaCalendarHeaderCellProps) => (
   <AriaCalendarHeaderCell
     className={cn(
-      "w-9 rounded-md text-[0.8rem] font-normal text-muted-foreground",
+      "w-9 rounded-md text-[0.8rem] font-normal text-muted-fg",
       className,
     )}
     {...props}
@@ -135,34 +135,34 @@ const CalendarCell = ({ className, ...props }: AriaCalendarCellProps) => {
           getButtonVariants({ variant: "ghost" }),
           "relative flex size-9 items-center justify-center p-0 text-sm font-normal",
           /* Disabled */
-          renderProps.isDisabled && "text-muted-foreground opacity-50",
+          renderProps.isDisabled && "text-muted-fg opacity-50",
           /* Selected */
           renderProps.isSelected &&
-            "bg-primary text-primary-foreground focus:bg-primary focus:text-primary-foreground",
+            "bg-primary text-primary-fg focus:bg-primary focus:text-primary-fg",
           /* Hover */
           renderProps.isHovered &&
             renderProps.isSelected &&
             (renderProps.isSelectionStart ||
               renderProps.isSelectionEnd ||
               !isRange) &&
-            "hover:bg-primary hover:text-primary-foreground",
+            "hover:bg-primary hover:text-primary-fg",
           /* Selection Start/End */
           renderProps.isSelected &&
             isRange &&
             !renderProps.isSelectionStart &&
             !renderProps.isSelectionEnd &&
-            "rounded-none bg-accent text-accent-foreground",
+            "rounded-none bg-accent text-accent-fg",
           /* Outside Month */
           renderProps.isOutsideMonth &&
-            "text-muted-foreground opacity-50 selected:bg-accent/50 selected:text-muted-foreground selected:opacity-30",
+            "text-muted-fg opacity-50 selected:bg-accent/50 selected:text-muted-fg selected:opacity-30",
           /* Current Date */
           renderProps.date.compare(today(getLocalTimeZone())) === 0 &&
             !renderProps.isSelected &&
-            "bg-accent text-accent-foreground",
+            "bg-accent text-accent-fg",
           /* Unavailable Date */
-          renderProps.isUnavailable && "cursor-default text-error",
+          renderProps.isUnavailable && "cursor-default text-danger",
           renderProps.isInvalid &&
-            "bg-error text-error-foreground hover:bg-error hover:text-error-foreground focus:bg-error focus:text-error-foreground",
+            "bg-danger text-danger-fg hover:bg-danger hover:text-danger-fg focus:bg-danger focus:text-danger-fg",
           className,
         ),
       )}

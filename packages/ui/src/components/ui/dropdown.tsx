@@ -18,11 +18,11 @@ import { cn } from "@projects/ui/lib/utils";
 
 const dropdownItemStyles = cva(
   cn([
-    "group relative flex cursor-default select-none items-center gap-x-1.5 rounded-[calc(var(--radius)-1px)] px-2.5 py-2 text-base text-foreground outline outline-0 forced-color-adjust-none lg:text-sm forced-colors:text-[LinkText]",
-    "has-submenu:open:data-[danger=true]:bg-error/20 has-submenu:open:data-[danger=true]:text-error",
-    "has-submenu:open:bg-accent has-submenu:open:text-accent-foreground [&[data-has-submenu][data-open]_.text-muted-foreground]:text-accent-foreground [&[data-has-submenu][data-open]_[data-slot=icon]]:text-accent-foreground",
+    "group relative flex cursor-default select-none items-center gap-x-1.5 rounded-[calc(var(--radius)-1px)] px-2.5 py-2 text-base text-fg outline outline-0 forced-color-adjust-none lg:text-sm forced-colors:text-[LinkText]",
+    "has-submenu:open:data-[danger=true]:bg-danger/20 has-submenu:open:data-[danger=true]:text-danger",
+    "has-submenu:open:bg-accent has-submenu:open:text-accent-fg [&[data-has-submenu][data-open]_.text-muted-fg]:text-accent-fg [&[data-has-submenu][data-open]_[data-slot=icon]]:text-accent-fg",
     "[&_[data-slot=avatar]]:-mr-0.5 [&_[data-slot=avatar]]:size-6 sm:[&_[data-slot=avatar]]:size-5",
-    "[&[data-error]_[data-slot=icon]]:text-error/60 [&[data-focused][data-error]_[data-slot=icon]]:text-error-foreground [&[data-focused]_[data-slot=icon]]:text-accent-foreground [&[data-hovered]_[data-slot=icon]]:text-accent-foreground [&_[data-slot=icon]]:size-4 [&_[data-slot=icon]]:shrink-0 [&_[data-slot=icon]]:text-muted-foreground",
+    "[&[data-danger]_[data-slot=icon]]:text-danger/60 [&[data-focused][data-danger]_[data-slot=icon]]:text-danger-fg [&[data-focused]_[data-slot=icon]]:text-accent-fg [&[data-hovered]_[data-slot=icon]]:text-accent-fg [&_[data-slot=icon]]:size-4 [&_[data-slot=icon]]:shrink-0 [&_[data-slot=icon]]:text-muted-fg",
     "[&_[data-slot=menu-radio]>[data-slot=icon]]:size-3",
     "forced-colors:[&_[data-slot=icon]]:text-[CanvasText] forced-colors:[&_[data-slot=icon]]:group-data-[focus]:text-[Canvas]",
   ]),
@@ -32,14 +32,14 @@ const dropdownItemStyles = cva(
         true: "bg-secondary",
       },
       isDisabled: {
-        true: "text-muted-foreground forced-colors:text-[GrayText]",
+        true: "text-muted-fg forced-colors:text-[GrayText]",
       },
       isFocused: {
-        false: "data-[danger=true]:text-error",
+        false: "data-[danger=true]:text-danger",
         true: [
-          "bg-accent text-accent-foreground forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
-          "data-[danger=true]:bg-error data-[danger=true]:text-error-foreground",
-          "[&[data-slot=description]]:text-accent-foreground [&[data-slot=label]]:text-accent-foreground [&_.text-muted-foreground]:text-accent-foreground/80",
+          "bg-accent text-accent-fg forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
+          "data-[danger=true]:bg-danger data-[danger=true]:text-danger-fg",
+          "[&[data-slot=description]]:text-accent-fg [&[data-slot=label]]:text-accent-fg [&_.text-muted-fg]:text-accent-fg/80",
         ],
       },
     },
@@ -53,14 +53,13 @@ const dropdownItemStyles = cva(
   },
 );
 
-// eslint-disable-next-line tailwindcss/no-custom-classname
 const dropdownSectionVariants = cva("", {
   variants: {
     slots: {
       section:
         "flex flex-col gap-y-0.5 after:block after:h-[5px] after:content-[''] first:mt-[-5px]",
       header:
-        "bg-tertiary supports-[-moz-appearance:none]:bg-tertiary sticky top-[-5px] z-10 -mx-1 -mb-0.5 min-w-[--trigger-width] truncate border-y px-4 py-2 text-sm font-medium text-muted-foreground [&+*]:mt-1",
+        "sticky top-[-5px] z-10 -mx-1 -mb-0.5 min-w-[--trigger-width] truncate border-y bg-tertiary px-4 py-2 text-sm font-medium text-muted-fg supports-[-moz-appearance:none]:bg-tertiary [&+*]:mt-1",
     },
   },
 });
@@ -147,10 +146,7 @@ const DropdownItemDetails = ({
       {description && (
         <Text
           slot={slot ?? "description"}
-          className={cn(
-            "text-xs text-muted-foreground",
-            classNames?.description,
-          )}
+          className={cn("text-xs text-muted-fg", classNames?.description)}
           {...restProps}
         >
           {description}
