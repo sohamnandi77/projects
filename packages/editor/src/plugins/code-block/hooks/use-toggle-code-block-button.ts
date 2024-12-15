@@ -1,7 +1,6 @@
 import type React from "react";
 import { useEditorRef } from "@udecode/plate-common/react";
-
-import { toggleCodeBlock } from "@projects/editor/plugins/code-block/transforms";
+import { toggleCodeBlock } from "#editor/plugins/code-block/transforms/toggle-code-block";
 
 export const useToggleCodeBlockButton = () => {
   const editor = useEditorRef();

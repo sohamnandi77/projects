@@ -5,8 +5,7 @@ import {
   HtmlPlugin,
   someNode,
 } from "@udecode/plate-common";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 import type { Prism } from "./types";
 import { decorateCodeLine } from "./decorate-code-line";

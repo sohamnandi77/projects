@@ -6,7 +6,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "@projects/editor/*": ["./src/*"]
+      "#editor/*": ["./src/*"]
     }
   },
   "include": ["*.ts", "src"],

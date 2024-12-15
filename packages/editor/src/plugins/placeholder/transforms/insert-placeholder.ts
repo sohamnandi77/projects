@@ -1,7 +1,6 @@
 import type { InsertNodesOptions, SlateEditor } from "@udecode/plate-common";
 import { insertNodes, withoutNormalizing } from "@udecode/plate-common";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 import type { TPlaceholderElement } from "../base-placeholder-plugin";
 import { BasePlaceholderPlugin } from "../base-placeholder-plugin";

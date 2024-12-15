@@ -1,4 +1,4 @@
-import type { PLUGIN_KEYS } from "@projects/editor/constant";
+import type { PLUGIN_KEYS } from "#editor/constant";
 
 import type { AllowedFileType } from "./internal/mimes";
 

@@ -6,8 +6,7 @@ import {
   removeNodes,
 } from "@udecode/plate-common";
 import { findEventRange, toTPlatePlugin } from "@udecode/plate-common/react";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 import type { PlaceholderConfig } from "./base-placeholder-plugin";
 import type { AllowedFileType } from "./internal/mimes";

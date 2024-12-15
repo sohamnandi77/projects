@@ -1,3 +1,4 @@
+import type { TCodeBlockElement } from "#editor/plugins/code-block/types";
 import React from "react";
 import { setNodes } from "@udecode/plate-common";
 import {
@@ -5,10 +6,8 @@ import {
   useEditorRef,
   useElement,
 } from "@udecode/plate-common/react";
+import { BaseCodeBlockPlugin } from "#editor/plugins/code-block/base-code-block-plugin";
 import { useReadOnly } from "slate-react";
-
-import type { TCodeBlockElement } from "@projects/editor/plugins/code-block/types";
-import { BaseCodeBlockPlugin } from "@projects/editor/plugins/code-block/base-code-block-plugin";
 
 export const useCodeBlockComboboxState = () => {
   const editor = useEditorRef();

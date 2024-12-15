@@ -1,7 +1,6 @@
 import type { SlateEditor } from "@udecode/plate-common";
 import { insertElements } from "@udecode/plate-common";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 /** Insert a code line starting with indentation. */
 export const insertCodeLine = (editor: SlateEditor, indentDepth = 0) => {

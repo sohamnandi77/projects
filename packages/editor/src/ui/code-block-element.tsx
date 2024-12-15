@@ -1,7 +1,8 @@
-import { withRef } from "@projects/editor/lib/withRef";
-import { useCodeBlockElementState } from "@projects/editor/plugins/code-block/hooks";
-import { CodeBlockCombobox } from "@projects/editor/ui/code-block-combobox";
-import { PlateElement } from "@projects/editor/ui/plate-element";
+import { withRef } from "#editor/lib/with-ref";
+import { useCodeBlockElementState } from "#editor/plugins/code-block/hooks/use-code-block-element";
+import { CodeBlockCombobox } from "#editor/ui/code-block-combobox";
+import { PlateElement } from "#editor/ui/plate-element";
+
 import { cn } from "@projects/ui/lib/utils";
 
 import "./code-block-element.css";

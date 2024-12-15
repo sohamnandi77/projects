@@ -1,8 +1,7 @@
+import type { TCodeBlockElement } from "#editor/plugins/code-block/types";
 import { useEffect, useState } from "react";
 import { useEditorRef } from "@udecode/plate-common/react";
-
-import type { TCodeBlockElement } from "@projects/editor/plugins/code-block/types";
-import { BaseCodeBlockPlugin } from "@projects/editor/plugins/code-block/base-code-block-plugin";
+import { BaseCodeBlockPlugin } from "#editor/plugins/code-block/base-code-block-plugin";
 
 export const useCodeBlockElementState = ({
   element,

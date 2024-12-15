@@ -3,19 +3,17 @@ import {
   PlateLeaf,
   usePlateEditor,
 } from "@udecode/plate-common/react";
-
-import { BasicElementsPlugin } from "@projects/editor/plugins/basic-elements-plugin";
-import { BasicMarksPlugin } from "@projects/editor/plugins/basic-marks";
-
-import { PLUGIN_KEYS } from "../constant";
-import { withProps } from "../lib/withProps";
-import { BlockquoteElement } from "../ui/blockquote-element";
-import { CodeBlockElement } from "../ui/code-block-element";
-import { CodeLeaf } from "../ui/code-leaf";
-import { CodeLineElement } from "../ui/code-line-element";
-import { CodeSyntaxLeaf } from "../ui/code-syntax-leaf";
-import { HeadingElement } from "../ui/heading-element";
-import { ParagraphElement } from "../ui/paragraph-element";
+import { PLUGIN_KEYS } from "#editor/constant";
+import { withProps } from "#editor/lib/with-props";
+import { BasicElementsPlugin } from "#editor/plugins/basic-elements-plugin";
+import { BasicMarksPlugin } from "#editor/plugins/basic-marks/index";
+import { BlockquoteElement } from "#editor/ui/blockquote-element";
+import { CodeBlockElement } from "#editor/ui/code-block-element";
+import { CodeLeaf } from "#editor/ui/code-leaf";
+import { CodeLineElement } from "#editor/ui/code-line-element";
+import { CodeSyntaxLeaf } from "#editor/ui/code-syntax-leaf";
+import { HeadingElement } from "#editor/ui/heading-element";
+import { ParagraphElement } from "#editor/ui/paragraph-element";
 
 export const useCreateEditor = () => {
   return usePlateEditor({

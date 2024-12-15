@@ -6,7 +6,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "@projects/ui/*": ["./src/*"]
+      "~hooks/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"],

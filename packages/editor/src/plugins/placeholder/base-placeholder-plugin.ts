@@ -1,7 +1,6 @@
 import type { PluginConfig, TElement } from "@udecode/plate-common";
 import { bindFirst, createTSlatePlugin } from "@udecode/plate-common";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 import {
   insertAudioPlaceholder,

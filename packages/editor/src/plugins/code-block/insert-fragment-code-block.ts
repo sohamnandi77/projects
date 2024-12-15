@@ -1,7 +1,6 @@
 import type { SlateEditor, TDescendant, TElement } from "@udecode/plate-common";
 import { getBlockAbove, getNodeString } from "@udecode/plate-common";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 function extractCodeLinesFromCodeBlock(node: TElement) {
   return node.children as TElement[];

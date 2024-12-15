@@ -1,6 +1,6 @@
 import { PlateLeaf } from "@udecode/plate-common/react";
+import { withRef } from "#editor/lib/with-ref";
 
-import { withRef } from "@projects/editor/lib/withRef";
 import { cn } from "@projects/ui/lib/utils";
 
 export const CodeLeaf = withRef<typeof PlateLeaf>(

@@ -1,6 +1,6 @@
 import { withRef } from "@udecode/plate-common/react";
+import { PlateElement } from "#editor/ui/plate-element";
 
-import { PlateElement } from "@projects/editor/ui/plate-element";
 import { cn } from "@projects/ui/lib/utils";
 
 export const ParagraphElement = withRef<typeof PlateElement>(

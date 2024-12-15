@@ -10,8 +10,7 @@ import {
   someNode,
   wrapNodes,
 } from "@udecode/plate-common";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 /**
  * Insert a code block: set the node to code line and wrap it with a code block.

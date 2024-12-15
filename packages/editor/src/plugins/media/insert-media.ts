@@ -3,8 +3,7 @@ import type {
   SlateEditor,
   TEditor,
 } from "@udecode/plate-common";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 import { BaseImagePlugin } from "../image/base-image-plugin";
 import { insertImage } from "../image/transforms";

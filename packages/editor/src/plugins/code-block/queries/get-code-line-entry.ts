@@ -11,8 +11,7 @@ import {
   isElement,
   someNode,
 } from "@udecode/plate-common";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 /** If at (default = selection) is in ul>li>p, return li and ul node entries. */
 export const getCodeLineEntry = <N extends ElementOf<E>, E extends SlateEditor>(

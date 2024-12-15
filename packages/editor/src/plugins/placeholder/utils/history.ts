@@ -5,8 +5,7 @@
 import type { TElement } from "@udecode/plate-common";
 import type { PlateEditor } from "@udecode/plate-common/react";
 import type { BaseOperation } from "slate";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 const historyMarks = new WeakMap<PlateEditor, boolean>();
 

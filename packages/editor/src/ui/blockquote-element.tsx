@@ -1,4 +1,5 @@
-import { withRef } from "@projects/editor/lib/withRef";
+import { withRef } from "#editor/lib/with-ref";
+
 import { cn } from "@projects/ui/lib/utils";
 
 import { PlateElement } from "./plate-element";

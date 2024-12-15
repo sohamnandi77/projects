@@ -1,6 +1,5 @@
 import { PlateLeaf } from "@udecode/plate-common/react";
-
-import { withRef } from "@projects/editor/lib/withRef";
+import { withRef } from "#editor/lib/with-ref";
 
 import { useCodeSyntaxLeaf } from "../plugins/code-block/hooks";
 

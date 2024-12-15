@@ -4,6 +4,12 @@
   "type": "module",
   "license": "MIT",
   "private": true,
+  "imports": {
+    "#editor*": [
+      "./src/*.ts",
+      "./src/*.tsx"
+    ]
+  },
   "exports": {
     ".": "./src/index",
     "./editor": "./src/editor/plate-editor.tsx"

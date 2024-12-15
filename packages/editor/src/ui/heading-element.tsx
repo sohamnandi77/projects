@@ -1,9 +1,8 @@
 /* eslint-disable tailwindcss/no-custom-classname */
+import { withRef } from "#editor/lib/with-ref";
+import { withVariants } from "#editor/lib/with-variants";
+import { PlateElement } from "#editor/ui/plate-element";
 import { cva } from "class-variance-authority";
-
-import { withRef } from "@projects/editor/lib/withRef";
-import { withVariants } from "@projects/editor/lib/withVariants";
-import { PlateElement } from "@projects/editor/ui/plate-element";
 
 const headingVariants = cva("relative mb-1", {
   variants: {

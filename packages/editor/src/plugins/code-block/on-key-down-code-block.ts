@@ -10,8 +10,7 @@ import {
   withoutNormalizing,
 } from "@udecode/plate-common";
 import { Hotkeys } from "@udecode/plate-common/react";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 import { getCodeLineEntry } from "./queries";
 import { indentCodeLine, outdentCodeLine } from "./transforms";

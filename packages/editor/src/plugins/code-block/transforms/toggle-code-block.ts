@@ -5,8 +5,7 @@ import {
   withoutNormalizing,
   wrapNodes,
 } from "@udecode/plate-common";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 import { unwrapCodeBlock } from "./unwrap-code-block";
 

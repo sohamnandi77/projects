@@ -1,7 +1,6 @@
 import type { PluginConfig } from "@udecode/plate-common";
 import { bindFirst, createTSlatePlugin } from "@udecode/plate-common";
-
-import { PLUGIN_KEYS } from "@projects/editor/constant";
+import { PLUGIN_KEYS } from "#editor/constant";
 
 import type { MediaPluginOptions, TMediaElement } from "../media";
 import { insertImageFromFiles } from "./transforms/insert-image-from-files";
