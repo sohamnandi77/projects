@@ -2,7 +2,7 @@ import type { TCodeBlockElement } from "#editor/plugins/code-block/types";
 import React from "react";
 import { setNodes } from "@udecode/plate-common";
 import {
-  findNodePath,
+  findPath,
   useEditorRef,
   useElement,
 } from "@udecode/plate-common/react";
@@ -39,7 +39,7 @@ export const useCodeBlockCombobox = ({
   return {
     commandItemProps: {
       onSelect: (_value: string) => {
-        const path = findNodePath(editor, element);
+        const path = findPath(editor, element);
         if (path)
           setNodes<TCodeBlockElement>(editor, { lang: _value }, { at: path });
         setValue(_value);

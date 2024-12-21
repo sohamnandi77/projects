@@ -1,73 +1,75 @@
-import type { MeterProps as AriaMeterProps } from "react-aria-components";
-import { Meter as AriaMeter, composeRenderProps } from "react-aria-components";
+import type { MeterProps as MeterPrimitiveProps } from "react-aria-components";
+import { composeTailwindRenderProps } from "#ui/lib/utils";
+import { motion } from "framer-motion";
+import { TriangleAlert } from "lucide-react";
+import { Meter as MeterPrimitive } from "react-aria-components";
 
-import { Label, labelVariants } from "@projects/ui/label";
-import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
+import { Label } from "./form";
 
-interface MeterProps extends AriaMeterProps {
-  barClassName?: string;
-  fillClassName?: string;
-}
-
-const Meter = ({
-  className,
-  barClassName,
-  fillClassName,
-  children,
-  ...props
-}: MeterProps) => (
-  <AriaMeter
-    className={composeTailwindRenderProps("w-full", className)}
-    {...props}
-  >
-    {composeRenderProps(children, (children, renderProps) => (
-      <>
-        {children}
-        <div
-          className={cn(
-            "relative h-4 w-full overflow-hidden rounded-full bg-secondary",
-            barClassName,
-          )}
-        >
-          <div
-            className={cn(
-              "size-full flex-1 bg-primary transition-all",
-              fillClassName,
-            )}
-            style={{
-              transform: `translateX(-${100 - (renderProps.percentage || 0)}%)`,
-            }}
-          />
-        </div>
-      </>
-    ))}
-  </AriaMeter>
-);
-
-interface JollyMeterProps extends MeterProps {
+export interface MeterProps extends MeterPrimitiveProps {
   label?: string;
-  showValue?: boolean;
 }
 
-function JollyMeter(props: Readonly<JollyMeterProps>) {
-  const { label, className, showValue = true, ...rest } = props;
+const Meter = ({ label, ...props }: MeterProps) => {
   return (
-    <Meter
+    <MeterPrimitive
+      {...props}
       className={composeTailwindRenderProps(
-        "group flex flex-col gap-2",
-        className,
+        "flex flex-col gap-1",
+        props.className,
       )}
-      {...rest}
     >
-      {({ valueText }) => (
-        <div className="flex w-full justify-between">
-          <Label>{label}</Label>
-          {showValue && <span className={labelVariants()}>{valueText}</span>}
-        </div>
+      {({ percentage, valueText }) => (
+        <>
+          <div className="flex w-full justify-between gap-2">
+            <Label>{label}</Label>
+            <span
+              className={`text-sm tabular-nums ${percentage >= 80 ? "text-danger" : "text-muted-fg"}`}
+            >
+              {percentage >= 80 && (
+                <TriangleAlert
+                  aria-label="Alert"
+                  className="inline-block size-4 fill-danger/20 align-text-bottom text-danger"
+                />
+              )}
+              {" " + valueText}
+            </span>
+          </div>
+          <div className="relative h-2 min-w-64 rounded-full bg-muted outline outline-1 -outline-offset-1 outline-transparent">
+            <motion.div
+              className="absolute left-0 top-0 h-full rounded-full forced-colors:bg-[Highlight]"
+              initial={{ width: "0%", backgroundColor: getColor(0) }}
+              animate={{
+                width: `${percentage}%`,
+                backgroundColor: getColor(percentage),
+              }}
+              transition={{ duration: 0.5 }}
+            />
+          </div>
+        </>
       )}
-    </Meter>
+    </MeterPrimitive>
   );
-}
+};
 
-export { JollyMeter, Meter };
-export type { JollyMeterProps, MeterProps };
+const getColor = (percentage: number) => {
+  if (percentage < 30) {
+    return "hsl(var(--primary))"; // Blue
+  }
+
+  if (percentage < 50) {
+    return "hsl(var(--success))"; // Green
+  }
+
+  if (percentage < 70) {
+    return "#eab308"; // Yellow
+  }
+
+  if (percentage < 80) {
+    return "hsl(var(--warning))"; // Orange
+  }
+
+  return "hsl(var(--danger))"; // Red
+};
+
+export { Meter };

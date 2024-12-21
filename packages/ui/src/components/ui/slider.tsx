@@ -1,112 +1,193 @@
 import type {
-  SliderOutputProps as AriaSliderOutputProps,
-  SliderProps as AriaSliderProps,
-  SliderThumbProps as AriaSliderThumbProps,
-  SliderTrackProps as AriaSliderTrackProps,
+  LabelProps,
+  SliderOutputProps,
+  SliderProps as SliderPrimitiveProps,
+  SliderThumbProps,
+  SliderTrackProps,
+  TextProps,
 } from "react-aria-components";
-import * as React from "react";
+import type { VariantProps } from "tailwind-variants";
+import { useContext, useMemo } from "react";
+import { useSlotId } from "@react-aria/utils";
 import {
-  Slider as AriaSlider,
   SliderOutput as AriaSliderOutput,
   SliderStateContext as AriaSliderStateContext,
   SliderThumb as AriaSliderThumb,
   SliderTrack as AriaSliderTrack,
+  TextContext as AriaTextContext,
   composeRenderProps,
+  Slider as SliderPrimitive,
 } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
-import { labelVariants } from "@projects/ui/label";
-import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
+import { Description, Label } from "@projects/ui/form";
 
-const SliderOutput = (props: AriaSliderOutputProps) => {
-  const { className, ...rest } = props;
+const sliderStyles = tv({
+  slots: {
+    root: "flex flex-col gap-2 orientation-horizontal:w-full orientation-vertical:h-56 orientation-vertical:items-center disabled:opacity-50",
+    track: [
+      "group/track relative cursor-pointer rounded-full bg-zinc-200 disabled:cursor-default disabled:bg-muted dark:bg-zinc-800",
+      "grow orientation-horizontal:h-1.5 orientation-horizontal:w-full orientation-vertical:w-1.5 orientation-vertical:flex-1",
+    ],
+    filler: [
+      "rounded-full bg-primary group-disabled/track:bg-muted",
+      "pointer-events-none absolute group-orientation-horizontal:top-0 group-orientation-horizontal/track:h-full group-orientation-vertical/track:bottom-0 group-orientation-vertical/track:w-full",
+    ],
+    thumb: [
+      "border border-zinc-200 outline-none focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/20 dragging:cursor-grabbing forced-colors:outline-[Highlight]",
+      "rounded-full bg-white transition-[width,height]",
+      "absolute left-1/2 top-1/2 block !-translate-x-1/2 !-translate-y-1/2",
+      "disabled:border disabled:border-bg disabled:bg-muted",
+      "orientation-horizontal:h-2 orientation-vertical:w-2",
+      "size-[1.15rem] dragging:size-[1.30rem] dragging:border-primary",
+    ],
+    valueLabel: "text-sm tabular-nums text-muted-fg",
+  },
+});
+
+const { track, filler, thumb, root, valueLabel } = sliderStyles();
+
+type SliderRootProps = SliderPrimitiveProps;
+
+const SliderRoot = (props: SliderPrimitiveProps) => {
+  const descriptionId = useSlotId();
+
+  const value = useMemo(
+    () => ({ slots: { description: { id: descriptionId } } }),
+    [descriptionId],
+  );
+
   return (
-    <AriaSliderOutput className={cn(labelVariants(), className)} {...rest} />
+    <AriaTextContext.Provider value={value}>
+      <SliderPrimitive
+        data-slot="root"
+        aria-describedby={descriptionId}
+        {...props}
+        className={composeRenderProps(props.className, (className) =>
+          root({ className }),
+        )}
+      />
+    </AriaTextContext.Provider>
   );
 };
 
-const Slider = (props: AriaSliderProps) => {
-  const { className, orientation = "horizontal", ...rest } = props;
-  return (
-    <AriaSlider
-      className={composeTailwindRenderProps(
-        cn("relative flex touch-none select-none items-center", {
-          "h-full": orientation === "vertical",
-          "w-full": orientation === "horizontal",
-        }),
-        className,
+interface SliderProps
+  extends SliderRootProps,
+    VariantProps<typeof sliderStyles> {
+  label?: LabelProps["children"];
+  description?: TextProps["children"];
+  showValue?: boolean | ((value: number[]) => string);
+}
+
+const Slider = ({
+  label,
+  description,
+  showValue = true,
+  ...props
+}: SliderProps) => (
+  <SliderRoot {...props}>
+    <div className="flex items-center justify-between gap-2">
+      {label && <Label>{label}</Label>}
+      {(showValue || typeof showValue === "function") && (
+        <SliderOutput>
+          {({ state }) =>
+            typeof showValue === "function"
+              ? showValue(state.values)
+              : undefined
+          }
+        </SliderOutput>
       )}
-      orientation={orientation}
-      {...rest}
-    />
+    </div>
+    <SliderControls />
+    {description && <Description>{description}</Description>}
+  </SliderRoot>
+);
+
+const SliderControls = (props: SliderTrackProps) => {
+  const state = useContext(AriaSliderStateContext);
+  return (
+    <SliderTrack {...props}>
+      <SliderFiller />
+      {state?.values.map((idx, i) => <SliderThumb key={idx} index={i} />)}
+    </SliderTrack>
   );
 };
 
-const SliderTrack = (props: AriaSliderTrackProps) => {
-  const { className, ...rest } = props;
+const SliderTrack = (props: SliderTrackProps) => {
   return (
     <AriaSliderTrack
-      className={composeRenderProps(className, (className, renderProps) =>
-        cn(
-          {
-            "h-2 w-full": renderProps.orientation === "horizontal",
-            "h-full w-2": renderProps.orientation === "vertical",
-          },
-          "relative grow rounded-full bg-secondary",
-          /* Disabled */
-          "disabled:opacity-50",
-          className,
-        ),
+      {...props}
+      className={composeRenderProps(props.className, (className) =>
+        track({ className }),
       )}
-      {...rest}
     />
   );
 };
 
-const useSliderState = () => {
-  const state = React.useContext(AriaSliderStateContext);
-  if (state === null) {
-    throw new Error("Slider components must be used within a Slider");
-  }
-  return state;
-};
+const SliderFiller = (props: React.HTMLAttributes<HTMLDivElement>) => {
+  const state = useContext(AriaSliderStateContext);
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const { orientation, getThumbPercent, values } = state ?? {};
 
-const SliderFillTrack = (props: React.HTMLAttributes<HTMLDivElement>) => {
-  const { className, ...rest } = props;
-  const state = useSliderState();
-  const orientation = state.orientation === "vertical" ? "height" : "width";
+  const getStyle = () => {
+    const percent0 = getThumbPercent ? getThumbPercent(0) * 100 : 0;
+    const percent1 = getThumbPercent ? getThumbPercent(1) * 100 : 0;
+
+    if (values?.length === 1) {
+      return orientation === "horizontal"
+        ? { width: `${percent0}%` }
+        : { height: `${percent0}%` };
+    }
+
+    return orientation === "horizontal"
+      ? { left: `${percent0}%`, width: `${Math.abs(percent0 - percent1)}%` }
+      : { bottom: `${percent0}%`, height: `${Math.abs(percent0 - percent1)}%` };
+  };
+
   return (
     <div
-      style={{ [orientation]: state.getThumbPercent(0) * 100 + "%" }}
-      className={cn(
-        "absolute rounded-full bg-primary",
-        {
-          "h-full": state.orientation === "horizontal",
-          "bottom-0 w-full": state.orientation === "vertical",
-        },
-        className,
-      )}
-      {...rest}
+      {...props}
+      style={getStyle()}
+      className={filler({ className: props.className })}
     />
   );
 };
 
-const SliderThumb = (props: AriaSliderThumbProps) => {
-  const { className, ...rest } = props;
+const SliderThumb = ({ className, ...props }: SliderThumbProps) => {
   return (
     <AriaSliderThumb
-      className={composeTailwindRenderProps(
-        cn(
-          "left-1/2 top-1/2 block size-5 rounded-full border-2 border-primary bg-bg ring-offset-bg transition-colors",
-          /* Disabled */
-          "disabled:pointer-events-none",
-          /* Focus Visible */
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        ),
-        className,
+      {...props}
+      className={composeRenderProps(className, (className) =>
+        thumb({ className }),
       )}
-      {...rest}
     />
   );
 };
 
-export { Slider, SliderFillTrack, SliderOutput, SliderThumb, SliderTrack };
+const SliderOutput = ({ className, ...props }: SliderOutputProps) => {
+  return (
+    <AriaSliderOutput
+      {...props}
+      className={composeRenderProps(className, (className) =>
+        valueLabel({ className }),
+      )}
+    >
+      {composeRenderProps(
+        props.children,
+        (children, { state }) =>
+          children ??
+          state.values.map((_, i) => state.getThumbValueLabel(i)).join(" - "),
+      )}
+    </AriaSliderOutput>
+  );
+};
+
+export {
+  Slider,
+  SliderControls,
+  SliderFiller,
+  SliderRoot,
+  SliderThumb,
+  SliderTrack,
+  SliderOutput,
+};

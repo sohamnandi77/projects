@@ -11,6 +11,7 @@ import {
 } from "react-aria-components";
 
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
+import { VisuallyHidden } from "@projects/ui/visually-hidden";
 
 const Breadcrumbs = <T extends object>(props: AriaBreadcrumbsProps<T>) => {
   const { className, ...rest } = props;
@@ -63,7 +64,6 @@ const BreadcrumbSeparator = (props: React.ComponentProps<"span">) => {
   const { children, className, ...rest } = props;
   return (
     <span
-      role="presentation"
       aria-hidden="true"
       className={cn("[&>svg]:size-3.5", className)}
       {...rest}
@@ -73,17 +73,20 @@ const BreadcrumbSeparator = (props: React.ComponentProps<"span">) => {
   );
 };
 
-const BreadcrumbEllipsis = (props: React.ComponentProps<"span">) => {
-  const { className, ...rest } = props;
+type BreadcrumbEllipsisProps = React.ComponentProps<"span"> & {
+  visuallyHiddenText?: string;
+};
+
+const BreadcrumbEllipsis = (props: BreadcrumbEllipsisProps) => {
+  const { className, visuallyHiddenText = "more", ...rest } = props;
   return (
     <span
-      role="presentation"
       aria-hidden="true"
       className={cn("flex size-9 items-center justify-center", className)}
       {...rest}
     >
       <MoreHorizontal className="size-4" />
-      <span className="sr-only">More</span>
+      <VisuallyHidden>{visuallyHiddenText}</VisuallyHidden>
     </span>
   );
 };

@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "exports": {
-    "./use-media-query": "./src/use-media-query.ts",
+    "./use-viewport": "./src/use-viewport.ts",
     "./use-local-storage": "./src/use-local-storage.ts",
     "./use-session-storage": "./src/use-session-storage.ts",
     "./use-online-status": "./src/use-online-status.ts",

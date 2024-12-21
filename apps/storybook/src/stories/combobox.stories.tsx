@@ -31,7 +31,7 @@ export const Primary: Story = {
       <Combobox>
         <div>Favorite Animal</div>
         <ComboboxInput />
-        <Button variant="ghost" size="icon" className="mr-1 size-6 p-1">
+        <Button appearance="plain" size="icon" className="mr-1 size-6 p-1">
           <ChevronsUpDown aria-hidden="true" className="size-4 opacity-50" />
         </Button>
         <ComboboxPopover>

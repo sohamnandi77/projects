@@ -1,68 +1,128 @@
-import type { VariantProps } from "class-variance-authority";
 import type {
   ButtonProps as AriaButtonProps,
   PressEvent,
 } from "react-aria-components";
+import type { VariantProps } from "tailwind-variants";
 import { forwardRef } from "react";
-import { cva } from "class-variance-authority";
-import { Button as AriaButton } from "react-aria-components";
+import {
+  Button as AriaButton,
+  composeRenderProps,
+} from "react-aria-components";
+import { tv } from "tailwind-variants";
 
-import { composeTailwindRenderProps } from "@projects/ui/lib/utils";
+import { focusButtonStyles } from "@projects/ui/lib/style";
 
-const buttonVariants = {
+const getButtonVariants = tv({
+  extend: focusButtonStyles,
+  base: [
+    "relative isolate box-border inline-flex items-center justify-center gap-x-2 border font-medium no-underline before:absolute after:absolute",
+    "forced-colors:[--button-icon:ButtonText] forced-colors:hover:[--button-icon:ButtonText]",
+    "[&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-1 [&>[data-slot=icon]]:size-4 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:text-[--button-icon]",
+  ],
   variants: {
     variant: {
-      default: "bg-primary text-primary-fg hover:bg-primary/90",
-      error: "bg-danger text-danger-fg hover:bg-danger/90",
-      success: "bg-success text-success-fg hover:bg-success/90",
-      outline:
-        "border-stroke-input border bg-bg hover:bg-accent hover:text-accent-fg",
-      secondary: "bg-secondary text-secondary-fg hover:bg-secondary/80",
-      ghost: "hover:bg-accent hover:text-accent-fg",
-      link: "text-primary underline-offset-4 hover:underline",
+      default: [
+        "text-primary-fg [--button-bg:theme(colors.primary.DEFAULT)] [--button-border:theme(colors.primary.DEFAULT)] [--button-hover-overlay:theme(colors.white/10%)]",
+        "[--button-icon:theme(colors.primary.fg/60%)] active:[--button-icon:theme(colors.primary.fg/80%)] hover:[--button-icon:theme(colors.primary.fg/80%)]",
+      ],
+      secondary: [
+        "text-secondary-fg [--button-bg:theme(colors.secondary.DEFAULT)] [--button-border:theme(colors.secondary.fg/10%)] [--button-hover-overlay:theme(colors.secondary.fg/2.5%)] data-[active]:[--button-border:theme(colors.secondary.fg/15%)] hover:[--button-border:theme(colors.secondary.fg/15%)] dark:[--button-bg:theme(colors.secondary.DEFAULT)]",
+        "[--button-icon:theme(colors.muted.fg)] active:[--button-icon:theme(colors.fg)] hover:[--button-icon:theme(colors.fg)]",
+      ],
+      warning: [
+        "text-warning-fg [--button-bg:theme(colors.warning.DEFAULT)] [--button-border:theme(colors.warning.DEFAULT)] [--button-hover-overlay:theme(colors.white/10%)]",
+        "[--button-icon:theme(colors.warning.fg/60%)] active:[--button-icon:theme(colors.warning.fg/80%)] hover:[--button-icon:theme(colors.warning.fg/80%)]",
+      ],
+      danger: [
+        "text-white [--button-bg:theme(colors.danger.DEFAULT)] [--button-border:theme(colors.danger.DEFAULT)] [--button-hover-overlay:theme(colors.white/10%)]",
+        "[--button-icon:theme(colors.white/60%)] active:[--button-icon:theme(colors.white/80%)] hover:[--button-icon:theme(colors.white/80%)]",
+      ],
+      success: [
+        "text-success-fg [--button-bg:theme(colors.success.DEFAULT)] [--button-border:theme(colors.success.DEFAULT)] [--button-hover-overlay:theme(colors.white/10%)]",
+        "[--button-icon:theme(colors.success.fg/60%)] active:[--button-icon:theme(colors.success.fg/80%)] hover:[--button-icon:theme(colors.success.fg/80%)]",
+      ],
+      info: [
+        "text-info-fg [--button-bg:theme(colors.info.DEFAULT)] [--button-border:theme(colors.info.DEFAULT)] [--button-hover-overlay:theme(colors.white/10%)]",
+        "[--button-icon:theme(colors.info.fg/60%)] active:[--button-icon:theme(colors.info.fg/80%)] hover:[--button-icon:theme(colors.info.fg/80%)]",
+      ],
+    },
+    appearance: {
+      solid: [
+        "border-transparent bg-[--button-border]",
+        "before:inset-0 before:-z-10 before:bg-[--button-bg] before:shadow before:disabled:shadow-none",
+        "after:inset-0 after:-z-10 after:shadow-[shadow:inset_0_1px_theme(colors.white/15%)] after:active:bg-[--button-hover-overlay] after:hover:bg-[--button-hover-overlay] after:disabled:shadow-none",
+        "dark:border-white/5 dark:bg-[--button-bg] dark:before:hidden dark:after:-inset-px",
+      ],
+      outline: [
+        "border-border text-fg [--button-icon:theme(colors.muted.fg)]",
+        "hover:bg-secondary/90 hover:[--button-icon:theme(colors.fg)]",
+        "active:bg-secondary/90 active:[--button-icon:theme(colors.fg)]",
+      ],
+      plain: [
+        "border-transparent text-fg [--button-icon:theme(colors.muted.fg)]",
+        "pressed:bg-secondary/90",
+        "active:bg-secondary/90 active:[--button-icon:theme(colors.fg)]",
+        "hover:bg-secondary/90 hover:[--button-icon:theme(colors.fg)]",
+      ],
     },
     size: {
-      default: "h-10 px-4 py-2",
-      icon: "size-10",
-      xs: "h-8 rounded-md px-3 text-xs",
-      sm: "h-9 rounded-md px-3",
-      md: "h-8 px-3 text-sm",
-      lg: "h-11 rounded-md px-8",
+      xs: "h-8 px-[calc(theme(spacing.3)-1px)] py-[calc(theme(spacing.1)-1px)] text-xs/4 lg:text-[0.800rem]/4",
+      sm: "h-9 px-[calc(theme(spacing.4)-1px)] py-[calc(theme(spacing[1.5])-1px)] text-sm/5 lg:text-sm/5",
+      md: "h-10 px-[calc(theme(spacing.4)-1px)] py-[calc(theme(spacing.2)-1px)] text-base lg:text-sm/6",
+      lg: "h-10 px-[calc(theme(spacing.4)-1px)] py-[calc(theme(spacing[2.5])-1px)] text-base sm:h-11 sm:px-[calc(theme(spacing.5)-1px)] lg:text-base/7 [&>[data-slot=icon]]:mx-[-3px] sm:[&>[data-slot=icon]]:size-5",
+      icon: "size-9 shrink-0 [&_[data-slot=icon]]:text-current",
+    },
+    shape: {
+      square:
+        "rounded-lg before:rounded-[calc(theme(borderRadius.lg)-1px)] after:rounded-[calc(theme(borderRadius.lg)-1px)] dark:after:rounded-lg",
+      circle:
+        "rounded-full before:rounded-[9998px] after:rounded-[9998px] dark:after:rounded-full",
+    },
+    isDisabled: {
+      true: "pointer-events-none cursor-not-allowed opacity-60 forced-colors:disabled:text-[GrayText]",
+      false: "forced-colors:disabled:text-[GrayText]",
+    },
+    isPending: {
+      true: "cursor-not-allowed",
     },
   },
   defaultVariants: {
     variant: "default",
-    size: "default",
+    appearance: "solid",
+    size: "md",
+    shape: "square",
   },
-} as const;
-
-const getButtonVariants = cva(
-  [
-    "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-bg transition-colors",
-    /* Disabled */
-    "disabled:pointer-events-none disabled:opacity-50",
-    /* Focus Visible */
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-    /* Resets */
-    "focus-visible:outline-none",
-  ],
-  buttonVariants,
-);
+});
 
 interface ButtonProps
-  extends AriaButtonProps,
-    VariantProps<typeof getButtonVariants> {
+  extends VariantProps<typeof getButtonVariants>,
+    AriaButtonProps {
   onClick?: (e: PressEvent) => void;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { className, onPress, onClick, variant, size, ...rest } = props;
+  const {
+    className,
+    onPress,
+    onClick,
+    variant,
+    shape,
+    appearance,
+    size,
+    ...rest
+  } = props;
   return (
     <AriaButton
       ref={ref}
-      className={composeTailwindRenderProps(
-        getButtonVariants({ variant, size }),
-        className,
+      className={composeRenderProps(className, (className, renderProps) =>
+        getButtonVariants({
+          ...renderProps,
+          variant,
+          appearance,
+          size,
+          shape,
+          className,
+        }),
       )}
       onPress={onPress ?? onClick}
       {...rest}
@@ -70,6 +130,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   );
 });
 
-export { Button, buttonVariants, getButtonVariants };
+export { Button, getButtonVariants };
 
 export type { ButtonProps };

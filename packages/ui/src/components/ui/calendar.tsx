@@ -1,3 +1,4 @@
+import type { ReactChildrenProps } from "#ui/types/index";
 import type {
   CalendarCellProps as AriaCalendarCellProps,
   CalendarGridBodyProps as AriaCalendarGridBodyProps,
@@ -11,30 +12,22 @@ import { useContext } from "react";
 import { getLocalTimeZone, today } from "@internationalized/date";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
-  Calendar as AriaCalendar,
   CalendarCell as AriaCalendarCell,
   CalendarGrid as AriaCalendarGrid,
   CalendarGridBody as AriaCalendarGridBody,
-  CalendarGridHeader as AriaCalendarGridHeader,
   CalendarHeaderCell as AriaCalendarHeaderCell,
-  Heading as AriaHeading,
-  RangeCalendar as AriaRangeCalendar,
   RangeCalendarStateContext as AriaRangeCalendarStateContext,
+  CalendarGridHeader,
+  Heading as CalendarHeading,
+  Calendar as CalendarRoot,
   composeRenderProps,
+  RangeCalendar as RangeCalendarRoot,
   useLocale,
 } from "react-aria-components";
 
 import type { ButtonProps } from "@projects/ui/button";
 import { Button, getButtonVariants } from "@projects/ui/button";
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
-
-const CalendarRoot = AriaCalendar;
-
-const RangeCalendarRoot = AriaRangeCalendar;
-
-const CalendarHeading = AriaHeading;
-
-const CalendarGridHeader = AriaCalendarGridHeader;
 
 interface CalendarNavigationIconProps {
   direction: "rtl" | "ltr";
@@ -71,7 +64,7 @@ const CalendarHeaderButton = (props: CalendarHeaderButtonProps) => {
       slot={slot}
       className={composeTailwindRenderProps(
         cn(
-          getButtonVariants({ variant: "outline" }),
+          getButtonVariants({ appearance: "outline" }),
           "size-7 bg-transparent p-0 opacity-50",
           "hover:opacity-100",
         ),
@@ -84,7 +77,8 @@ const CalendarHeaderButton = (props: CalendarHeaderButtonProps) => {
   );
 };
 
-const CalendarHeader = ({ children }: { children?: React.ReactNode }) => {
+const CalendarHeader = (props: ReactChildrenProps) => {
+  const { children } = props;
   return (
     <header className="flex w-full items-center gap-1 px-1 pb-4">
       <CalendarHeaderButton slot="previous" />
@@ -132,7 +126,7 @@ const CalendarCell = ({ className, ...props }: AriaCalendarCellProps) => {
     <AriaCalendarCell
       className={composeRenderProps(className, (className, renderProps) =>
         cn(
-          getButtonVariants({ variant: "ghost" }),
+          getButtonVariants({ appearance: "plain" }),
           "relative flex size-9 items-center justify-center p-0 text-sm font-normal",
           /* Disabled */
           renderProps.isDisabled && "text-muted-fg opacity-50",

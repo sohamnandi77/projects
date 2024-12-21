@@ -6,7 +6,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "~ui/*": ["./src/*"]
+      "#ui/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"],

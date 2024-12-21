@@ -1,21 +1,30 @@
-import type { SeparatorProps as AriaSeparatorProps } from "react-aria-components";
-import { forwardRef } from "react";
-import { Separator as AriaSeparator } from "react-aria-components";
+import type { SeparatorProps } from "react-aria-components";
+import { Separator as SeparatorPrimitive } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
-import { cn } from "@projects/ui/lib/utils";
-
-const Separator = forwardRef<
-  React.ElementRef<typeof AriaSeparator>,
-  AriaSeparatorProps
->((props, ref) => {
-  const { className, ...rest } = props;
-  return (
-    <AriaSeparator
-      ref={ref}
-      className={cn("-mx-1 my-1 h-px bg-muted", className)}
-      {...rest}
-    />
-  );
+const separatorStyles = tv({
+  base: "shrink-0 bg-border forced-colors:bg-[ButtonBorder]",
+  variants: {
+    orientation: {
+      horizontal: "h-px w-full",
+      vertical: "w-px",
+    },
+  },
+  defaultVariants: {
+    orientation: "horizontal",
+  },
 });
 
-export { Separator };
+export function Separator({ className, ...props }: SeparatorProps) {
+  return (
+    <SeparatorPrimitive
+      {...props}
+      className={separatorStyles({
+        orientation: props.orientation,
+        className: className,
+      })}
+    />
+  );
+}
+
+export type { SeparatorProps };

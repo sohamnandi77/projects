@@ -8,9 +8,8 @@ import { useToggle } from "@projects/hooks/use-toggle";
 import { Google } from "@projects/icons/google";
 import { Button } from "@projects/ui/button";
 import { Checkbox } from "@projects/ui/checkbox";
-import { Form } from "@projects/ui/form";
+import { Form, Label } from "@projects/ui/form";
 import { TextField, TextFieldInput } from "@projects/ui/input";
-import { Label } from "@projects/ui/label";
 
 import useLogin from "~/feature/auth/hooks/useLogin";
 
@@ -113,7 +112,7 @@ const LoginPage = () => {
                         </div>
                         <Button
                           type="button"
-                          variant="ghost"
+                          appearance="plain"
                           size="sm"
                           className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                           onClick={togglePassword}
@@ -166,7 +165,7 @@ const LoginPage = () => {
               </form.Subscribe>
             </div>
           </Form>
-          <Button variant="outline" className="w-full space-x-3">
+          <Button appearance="outline" className="w-full space-x-3">
             <Google />
             <span>Login with Google</span>
           </Button>

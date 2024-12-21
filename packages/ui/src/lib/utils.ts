@@ -1,8 +1,8 @@
-import type { ClassValue } from "class-variance-authority/types";
+import type { ClassValue } from "tailwind-variants";
 import { createContext, useContext } from "react";
-import { cx } from "class-variance-authority";
 import { composeRenderProps } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
+import { cnBase as cx } from "tailwind-variants";
 
 export const cn = (...inputs: ClassValue[]): string => twMerge(cx(...inputs));
 
@@ -39,5 +39,5 @@ export function createContextFactory<ContextData>(options?: {
     return contextValue;
   }
 
-  return [context.Provider, useContextFactory] as const;
+  return [context, useContextFactory] as const;
 }

@@ -14,6 +14,13 @@ import {
 const meta = {
   title: "Components/Card",
   component: Card,
+  subcomponents: {
+    CardHeader: CardHeader as unknown as React.ComponentType<unknown>,
+    CardTitle: CardTitle as unknown as React.ComponentType<unknown>,
+    CardContent: CardContent as unknown as React.ComponentType<unknown>,
+    CardDescription: CardDescription as unknown as React.ComponentType<unknown>,
+    CardFooter: CardFooter as unknown as React.ComponentType<unknown>,
+  },
   tags: ["autodocs"],
 } satisfies Meta<typeof Card>;
 

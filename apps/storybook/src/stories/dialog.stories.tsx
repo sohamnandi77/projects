@@ -11,8 +11,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@projects/ui/dialog";
+import { Label } from "@projects/ui/form";
 import { TextField, TextFieldInput } from "@projects/ui/input";
-import { Label } from "@projects/ui/label";
 
 const meta = {
   title: "Components/Dialog",
@@ -41,7 +41,7 @@ export const Primary: Story = {
   render: () => {
     return (
       <DialogTrigger>
-        <Button variant="outline">Sign up</Button>
+        <Button appearance="outline">Sign up</Button>
         <DialogOverlay>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -75,7 +75,7 @@ export const AlertDialog: Story = {
     // This also has an example of Custom Close Button
     return (
       <DialogTrigger>
-        <Button variant="outline">Delete</Button>
+        <Button appearance="outline">Delete</Button>
         <DialogOverlay isDismissable={false}>
           <DialogContent role="alertdialog" className="sm:max-w-[425px]">
             {({ close }) => (
@@ -88,7 +88,7 @@ export const AlertDialog: Story = {
                 </DialogDescription>
                 <DialogFooter>
                   <Button onPress={close}>Cancel</Button>
-                  <Button variant="error" onPress={close}>
+                  <Button variant="danger" onPress={close}>
                     Delete
                   </Button>
                 </DialogFooter>
@@ -108,7 +108,7 @@ export const ModalSheet: Story = {
   render: () => {
     return (
       <DialogTrigger>
-        <Button variant="outline">Edit Profile</Button>
+        <Button appearance="outline">Edit Profile</Button>
         <DialogOverlay>
           <DialogContent side="right" className="sm:max-w-[425px]">
             {({ close }) => (

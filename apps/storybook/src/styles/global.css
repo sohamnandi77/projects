@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    --light: 223.81 0% 98%;
+    --dark: 223.81 0% 4%;
+
     --bg: 0 0% 100%;
     --fg: 223.81 0% 4%;
 
@@ -51,17 +54,17 @@
     --stroke-danger: 356, 61% 86%;
     --stroke-warning: 356, 61% 86%;
 
-    --border: 220 10% 88%;
+    --border: 240 5.9% 90%;
     --input: 219.99 15% 88%;
     --ring: var(--primary);
     --toggle: 220 8% 79%;
     --placeholder: 0 0% 56%;
 
-    --chart-primary: 261.17 93% 62%;
-    --chart-secondary: 252.49 94% 85%;
-    --chart-tertiary: 255.6 71% 70%;
-    --chart-highlight: 250.55 64% 88%;
-    --chart-accent: 251.42 89% 95%;
+    --chart-1: 261.17 93% 62%;
+    --chart-2: 252.49 94% 85%;
+    --chart-3: 255.6 71% 70%;
+    --chart-4: 250.55 64% 88%;
+    --chart-5: 251.42 89% 95%;
 
     --sidebar-bg: 0 0% 98%;
     --sidebar-fg: 240 5.3% 26.1%;
@@ -120,17 +123,17 @@
     --stroke-danger: 356, 61% 86%;
     --stroke-warning: 356, 61% 86%;
 
-    --border: 222.93 9% 13%;
+    --border: 240 3.7% 15.9%;
     --input: 222.92 9% 14.02%;
     --ring: var(--primary);
     --toggle: 223.7 9% 24%;
     --placeholder: 0 0% 56%;
 
-    --chart-primary: 263.88 74% 52%;
-    --chart-secondary: 252.49 94% 85%;
-    --chart-tertiary: 255.6 71% 70%;
-    --chart-highlight: 269.18 97% 85%;
-    --chart-accent: 268.56 99% 92%;
+    --chart-1: 263.88 74% 52%;
+    --chart-2: 252.49 94% 85%;
+    --chart-3: 255.6 71% 70%;
+    --chart-4: 269.18 97% 85%;
+    --chart-5: 268.56 99% 92%;
 
     --sidebar-bg: 240 5.9% 10%;
     --sidebar-fg: 240 4.8% 95.9%;

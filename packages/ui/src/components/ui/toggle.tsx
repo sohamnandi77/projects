@@ -1,69 +1,28 @@
-import type { VariantProps } from "class-variance-authority";
 import type {
-  ToggleButtonProps as AriaToggleButtonProps,
   ToggleButtonGroupProps,
+  ToggleButtonProps,
 } from "react-aria-components";
-import { cva } from "class-variance-authority";
+import type { VariantProps } from "tailwind-variants";
+import { createContext, useContext, useMemo } from "react";
 import {
-  ToggleButton as AriaToggleButton,
   composeRenderProps,
+  ToggleButton,
   ToggleButtonGroup,
 } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
-import { composeTailwindRenderProps } from "@projects/ui/lib/utils";
+import { focusButtonStyles } from "@projects/ui/lib/style";
 
-const toggleVariants = cva(
-  [
-    "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-bg transition-colors",
-    /* Disabled */
-    "disabled:pointer-events-none disabled:opacity-50",
-    /* Hover */
-    "hover:bg-muted hover:text-muted-fg",
-    /* Selected */
-    "selected:bg-accent selected:text-accent-fg",
-    /* Focus Visible */
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-    /* Resets */
-    "focus-visible:outline-none",
-  ],
-  {
-    variants: {
-      variant: {
-        default: "bg-transparent",
-        outline:
-          "border border-input bg-transparent hover:bg-accent hover:text-accent-fg",
-      },
-      size: {
-        default: "h-10 px-3",
-        sm: "h-9 px-2.5",
-        lg: "h-11 px-5",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  },
-);
+interface ToggleGroupContextProps {
+  appearance?: "outline" | "plain" | "solid";
+}
 
-interface ToggleProps
-  extends AriaToggleButtonProps,
-    VariantProps<typeof toggleVariants> {}
+const ToggleGroupContext = createContext<ToggleGroupContextProps>({
+  appearance: "plain",
+});
 
-const Toggle = (props: ToggleProps) => {
-  const { className, variant, size, ...rest } = props;
-  return (
-    <AriaToggleButton
-      className={composeTailwindRenderProps(
-        toggleVariants({ variant, size }),
-        className,
-      )}
-      {...rest}
-    />
-  );
-};
-
-const toggleGroupVariants = cva("flex gap-1", {
+const getToggleGroupVariants = tv({
+  base: ["flex gap-1"],
   variants: {
     orientation: {
       horizontal:
@@ -73,22 +32,93 @@ const toggleGroupVariants = cva("flex gap-1", {
   },
 });
 
-const ToggleGroup = (props: ToggleButtonGroupProps) => {
-  const { orientation, className } = props;
+const ToggleGroup = ({
+  className,
+  orientation = "horizontal",
+  appearance = "plain",
+  ...props
+}: ToggleButtonGroupProps & ToggleGroupContextProps) => {
+  const value = useMemo(() => ({ appearance }), [appearance]);
   return (
-    <ToggleButtonGroup
-      orientation={orientation}
-      className={composeRenderProps(className, (className, renderProps) => {
-        return toggleGroupVariants({
-          ...renderProps,
-          orientation,
-          className,
-        });
-      })}
+    <ToggleGroupContext value={value}>
+      <ToggleButtonGroup
+        orientation={orientation}
+        className={composeRenderProps(className, (className, renderProps) =>
+          getToggleGroupVariants({
+            ...renderProps,
+            orientation,
+            className,
+          }),
+        )}
+        {...props}
+      />
+    </ToggleGroupContext>
+  );
+};
+
+const getToggleVariants = tv({
+  extend: focusButtonStyles,
+  base: [
+    "relative inline-flex items-center justify-center gap-x-2 rounded-lg border border-transparent bg-transparent text-sm font-medium ring-offset-bg transition-colors",
+    "enabled:hover:bg-secondary enabled:hover:text-secondary-fg",
+    "forced-colors:[--button-icon:ButtonText] forced-colors:hover:[--button-icon:ButtonText]",
+    "[&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-1 [&>[data-slot=icon]]:size-4 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:text-[--button-icon]",
+  ],
+  variants: {
+    isDisabled: {
+      true: "cursor-default opacity-50 forced-colors:border-[GrayText]",
+    },
+    appearance: {
+      plain: [
+        "selected:bg-secondary selected:text-secondary-fg",
+        "[--button-icon:theme(colors.secondary.fg/60%)] enabled:hover:[--button-icon:theme(colors.secondary.fg/80%)] selected:[--button-icon:theme(colors.secondary.fg)]",
+      ],
+      solid: [
+        "border-border bg-white text-black enabled:hover:bg-white/95 enabled:hover:text-black selected:border-primary selected:bg-primary selected:text-primary-fg",
+        "[--button-icon:theme(colors.black/60%)] enabled:hover:[--button-icon:theme(colors.black/80%)] selected:[--button-icon:theme(colors.white)]",
+      ],
+      outline: [
+        "border-border enabled:hover:bg-secondary/50 enabled:hover:text-secondary-fg selected:bg-secondary selected:text-secondary-fg selected:backdrop-blur-sm",
+        "[--button-icon:theme(colors.secondary.fg/60%)] enabled:hover:[--button-icon:theme(colors.secondary.fg/80%)] selected:[--button-icon:theme(colors.secondary.fg)]",
+      ],
+    },
+    size: {
+      sm: "h-9 px-3.5",
+      md: "h-10 px-4",
+      lg: "h-11 px-5",
+      "square-petite": "size-9 shrink-0",
+    },
+    shape: {
+      square: "rounded-lg",
+      circle: "rounded-full",
+    },
+  },
+  defaultVariants: {
+    appearance: "plain",
+    size: "sm",
+    shape: "square",
+  },
+});
+
+type ToggleProps = ToggleButtonProps & VariantProps<typeof getToggleVariants>;
+
+const Toggle = ({ className, appearance, ...props }: ToggleProps) => {
+  const { appearance: groupAppearance } = useContext(ToggleGroupContext);
+  return (
+    <ToggleButton
       {...props}
+      className={composeRenderProps(className, (className, renderProps) =>
+        getToggleVariants({
+          ...renderProps,
+          appearance: appearance ?? groupAppearance,
+          size: props.size,
+          shape: props.shape,
+          className,
+        }),
+      )}
     />
   );
 };
 
-export { Toggle, ToggleGroup, toggleVariants };
-export type { ToggleProps, ToggleButtonGroupProps };
+export { ToggleGroup, Toggle };
+export type { ToggleProps };

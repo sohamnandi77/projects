@@ -1,30 +1,54 @@
-import type { VariantProps } from "class-variance-authority";
-import type { LinkProps as AriaLinkProps } from "react-aria-components";
-import { Link as AriaLink, composeRenderProps } from "react-aria-components";
+import type { LinkProps as LinkPrimitiveProps } from "react-aria-components";
+import {
+  composeRenderProps,
+  Link as LinkPrimitive,
+} from "react-aria-components";
+import { tv } from "tailwind-variants";
 
-import { getButtonVariants } from "@projects/ui/button";
-import { cn } from "@projects/ui/lib/utils";
+const linkStyles = tv({
+  base: [
+    "relative outline-0 outline-offset-2 outline-primary transition-colors focus:outline-none focus-visible:outline-2",
+    "disabled:focus-visible:outline-0 forced-colors:outline-[Highlight] forced-colors:disabled:text-[GrayText]",
+    "disabled:cursor-default disabled:opacity-60",
+  ],
+  variants: {
+    intent: {
+      unstyled: "text-current",
+      primary:
+        "text-primary hover:text-primary/80 forced-colors:disabled:text-[GrayText]",
+      danger:
+        "text-danger hover:text-danger/80 forced-colors:disabled:text-[GrayText]",
+      "lad/primary":
+        "text-fg hover:text-primary dark:hover:text-primary/80 forced-colors:disabled:text-[GrayText]",
+      secondary: "text-secondary-fg hover:text-secondary-fg/80",
+    },
+  },
+  defaultVariants: {
+    intent: "unstyled",
+  },
+});
 
-interface LinkProps
-  extends AriaLinkProps,
-    VariantProps<typeof getButtonVariants> {}
+interface LinkProps extends LinkPrimitiveProps {
+  intent?: "primary" | "secondary" | "danger" | "lad/primary" | "unstyled";
+}
 
-const Link = ({ className, variant, size, ...props }: LinkProps) => {
+const Link = ({ className, ...props }: LinkProps) => {
   return (
-    <AriaLink
-      className={composeRenderProps(className, (className) =>
-        cn(
-          getButtonVariants({
-            variant,
-            size,
-            className,
-          }),
-        ),
-      )}
+    <LinkPrimitive
       {...props}
-    />
+      className={composeRenderProps(className, (className, ...renderProps) =>
+        linkStyles({ ...renderProps, intent: props.intent, className }),
+      )}
+    >
+      {(values) => (
+        <>
+          {typeof props.children === "function"
+            ? props.children(values)
+            : props.children}
+        </>
+      )}
+    </LinkPrimitive>
   );
 };
 
-export { Link };
-export type { LinkProps };
+export { Link, LinkPrimitive, type LinkPrimitiveProps, type LinkProps };

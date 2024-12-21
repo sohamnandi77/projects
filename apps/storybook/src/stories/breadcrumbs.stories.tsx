@@ -11,6 +11,7 @@ import {
   Breadcrumbs,
   BreadcrumbSeparator,
 } from "@projects/ui/breadcrumbs";
+import { Menu, MenuContent, MenuItem, MenuTrigger } from "@projects/ui/menu";
 
 const meta = {
   title: "Components/Breadcrumbs",
@@ -59,13 +60,13 @@ export const CustomSeperator: Story = {
   render: (args) => (
     <Breadcrumbs {...args}>
       <BreadcrumbItem>
-        <BreadcrumbLink href="/home">Home</BreadcrumbLink>
+        <BreadcrumbLink href="#">Home</BreadcrumbLink>
         <BreadcrumbSeparator>
           <Slash />
         </BreadcrumbSeparator>
       </BreadcrumbItem>
       <BreadcrumbItem>
-        <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+        <BreadcrumbLink href="#">Docs</BreadcrumbLink>
         <BreadcrumbSeparator>
           <Slash />
         </BreadcrumbSeparator>
@@ -106,7 +107,19 @@ export const Ellipsis: Story = {
         <BreadcrumbSeparator />
       </BreadcrumbItem>
       <BreadcrumbItem>
-        <BreadcrumbEllipsis />
+        <Menu>
+          <MenuTrigger appearance="plain">
+            <BreadcrumbEllipsis
+              className="size-4"
+              visuallyHiddenText="Toggle Menu"
+            />
+          </MenuTrigger>
+          <MenuContent placement="bottom">
+            <MenuItem>Documentation</MenuItem>
+            <MenuItem>Themes</MenuItem>
+            <MenuItem>GitHub</MenuItem>
+          </MenuContent>
+        </Menu>
         <BreadcrumbSeparator />
       </BreadcrumbItem>
       <BreadcrumbItem>
@@ -150,7 +163,3 @@ export const DynamicItems: Story = {
     return <BreadcrumbItems />;
   },
 };
-
-// TODO: Add more stories here
-// -> Ellipsis Dropdown
-// -> Responsive Ellipsis Dropdown

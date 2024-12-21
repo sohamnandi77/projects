@@ -11,7 +11,7 @@ export default [
   {
     settings: {
       tailwindcss: {
-        callees: ["cn", "cva"],
+        callees: ["cn", "cva", "tv"],
         config: "tailwind.config.ts",
       },
     },

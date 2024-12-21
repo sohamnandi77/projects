@@ -5,3 +5,4 @@ export {
   useLocale,
   useSlottedContext,
 } from "react-aria-components";
+export type { Key } from "react-aria-components";

@@ -1,82 +1,90 @@
-import type {
-  GridListItemProps as AriaGridListItemProps,
-  GridListProps as AriaGridListProps,
-} from "react-aria-components";
-import { GripHorizontal } from "lucide-react";
+import type { GridListItemProps, GridListProps } from "react-aria-components";
+import { composeTailwindRenderProps } from "#ui/lib/utils";
+import { Menu } from "lucide-react";
 import {
-  Button as AriaButton,
-  GridList as AriaGridList,
   GridListItem as AriaGridListItem,
+  Button,
   composeRenderProps,
+  GridList as GridListPrimitive,
 } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
 import { Checkbox } from "@projects/ui/checkbox";
-import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
-export function GridList<T extends object>({
+const gridListStyles = tv({
+  base: "relative max-h-96 overflow-auto rounded-lg border [scrollbar-width:thin] [&::-webkit-scrollbar]:size-0.5 [&>[data-drop-target]]:border [&>[data-drop-target]]:border-primary",
+});
+
+const GridList = <T extends object>({
   children,
   className,
   ...props
-}: AriaGridListProps<T>) {
-  return (
-    <AriaGridList
-      {...props}
-      className={composeTailwindRenderProps(
-        cn(
-          "group flex flex-col gap-2 overflow-auto rounded-md border bg-overlay p-1 text-overlay-fg shadow-md outline-none",
-          /* Empty */
-          "empty:p-6 empty:text-center empty:text-sm",
-        ),
-        className,
-      )}
-    >
-      {children}
-    </AriaGridList>
-  );
-}
+}: GridListProps<T>) => (
+  <GridListPrimitive
+    className={composeTailwindRenderProps(gridListStyles(), className)}
+    {...props}
+  >
+    {children}
+  </GridListPrimitive>
+);
 
-export function GridListItem({
-  children,
-  className,
-  ...props
-}: AriaGridListItemProps) {
-  const textValue = typeof children === "string" ? children : undefined;
+const itemStyles = tv({
+  base: "group relative -mb-px flex cursor-default select-none gap-3 border-y px-3 py-2 text-fg outline-none -outline-offset-2 transition first:rounded-t-md first:border-t-0 last:mb-0 last:rounded-b-md last:border-b-0 lg:text-sm",
+  variants: {
+    isHovered: { true: "bg-accent-subtle" },
+    isSelected: {
+      true: "z-20 border-border/50 bg-accent-subtle hover:bg-accent-subtle/50 dark:hover:bg-accent-subtle/60",
+    },
+    isFocused: {
+      true: "outline-none",
+    },
+    isFocusVisible: {
+      true: "bg-accent-subtle outline-none ring-1 ring-primary hover:bg-accent-subtle/70 selected:bg-accent-subtle/80",
+    },
+    isDisabled: {
+      true: "text-muted-fg forced-colors:text-[GrayText]",
+    },
+  },
+});
+
+const GridListItem = ({ className, ...props }: GridListItemProps) => {
+  const textValue =
+    typeof props.children === "string" ? props.children : undefined;
   return (
     <AriaGridListItem
       textValue={textValue}
-      className={composeTailwindRenderProps(
-        cn(
-          "relative flex w-full cursor-default select-none items-center gap-3 rounded-sm px-2 py-1.5 text-sm outline-none",
-          /* Disabled */
-          "disabled:pointer-events-none disabled:opacity-50",
-          /* Focus Visible */
-          "focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
-          /* Hovered */
-          "hover:bg-accent hover:text-accent-fg",
-          /* Selected */
-          "selected:bg-accent selected:text-accent-fg",
-          /* Dragging */
-          "dragging:opacity-60",
-        ),
-        className,
-      )}
       {...props}
+      className={composeRenderProps(className, (className, renderProps) =>
+        itemStyles({ ...renderProps, className }),
+      )}
     >
-      {composeRenderProps(children, (children, renderProps) => (
+      {({ selectionMode, selectionBehavior, allowsDragging }) => (
         <>
-          {/* Add elements for drag and drop and selection. */}
-          {renderProps.allowsDragging && (
-            <AriaButton slot="drag">
-              <GripHorizontal className="size-4" />
-            </AriaButton>
+          {allowsDragging && (
+            <Button
+              slot="drag"
+              className="cursor-grab dragging:cursor-grabbing [&>[data-slot=icon]]:text-muted-fg"
+            >
+              <Menu />
+            </Button>
           )}
-          {renderProps.selectionMode === "multiple" &&
-            renderProps.selectionBehavior === "toggle" && (
-              <Checkbox slot="selection" />
-            )}
-          {children}
+
+          <span
+            aria-hidden
+            className="absolute inset-y-0 left-0 hidden h-full w-0.5 bg-primary group-selected:block"
+          />
+          {selectionMode === "multiple" && selectionBehavior === "toggle" && (
+            <Checkbox className="-mr-2" slot="selection" />
+          )}
+          {props.children as React.ReactNode}
         </>
-      ))}
+      )}
     </AriaGridListItem>
   );
-}
+};
+
+const GridListEmptyState = (props: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className="p-6" {...props} />
+);
+
+export { GridList, GridListItem, GridListEmptyState };

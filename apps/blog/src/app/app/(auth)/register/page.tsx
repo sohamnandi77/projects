@@ -15,9 +15,8 @@ import { z } from "zod";
 import { useToggle } from "@projects/hooks/use-toggle";
 import { Google } from "@projects/icons/google";
 import { Button } from "@projects/ui/button";
-import { Form } from "@projects/ui/form";
+import { Form, Label } from "@projects/ui/form";
 import { TextField, TextFieldInput } from "@projects/ui/input";
-import { Label } from "@projects/ui/label";
 
 import { client } from "~/server/auth-client";
 
@@ -180,7 +179,7 @@ const RegisterPage = () => {
                         </div>
                         <Button
                           type="button"
-                          variant="ghost"
+                          appearance="plain"
                           size="sm"
                           className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                           onClick={togglePassword}
@@ -237,7 +236,7 @@ const RegisterPage = () => {
                         </div>
                         <Button
                           type="button"
-                          variant="ghost"
+                          appearance="plain"
                           size="sm"
                           className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                           onClick={toggleConfirmPassword}
@@ -275,7 +274,7 @@ const RegisterPage = () => {
               </Button>
             </div>
           </Form>
-          <Button variant="outline" className="w-full space-x-3">
+          <Button appearance="outline" className="w-full space-x-3">
             <Google />
             <span>Register with Google</span>
           </Button>

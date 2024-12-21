@@ -88,13 +88,12 @@ export const CustomHeader: Story = {
 };
 
 export const InternationalCalendars: Story = {
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+  render: function Render(args) {
     const [date, setDate] = useState<DateValue | null>(null);
 
     return (
       <>
-        <Calendar aria-label="Date" value={date} onChange={setDate} />
+        <Calendar aria-label="Date" value={date} onChange={setDate} {...args} />
         <p className="mt-3">Selected date: {date?.toString()}</p>
       </>
     );

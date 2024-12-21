@@ -1,32 +1,25 @@
 import type { UseEmblaCarouselType } from "embla-carousel-react";
-import type { ListBoxSectionProps } from "react-aria-components";
+import type { ListBoxItemProps, SectionProps } from "react-aria-components";
 import {
   createContext,
-  forwardRef,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from "react";
+import { cn, composeTailwindRenderProps } from "#ui/lib/utils";
 import useEmblaCarousel from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ListBox, ListBoxItem, ListBoxSection } from "react-aria-components";
 
+import type { ButtonProps } from "@projects/ui/button";
 import { Button } from "@projects/ui/button";
-import { cn } from "@projects/ui/lib/utils";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 type CarouselOptions = UseCarouselParameters[0];
 type CarouselPlugin = UseCarouselParameters[1];
-
-interface CarouselProps {
-  opts?: CarouselOptions;
-  plugins?: CarouselPlugin;
-  orientation?: "horizontal" | "vertical";
-  setApi?: (api: CarouselApi) => void;
-}
 
 type CarouselContextProps = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0];
@@ -39,7 +32,7 @@ type CarouselContextProps = {
 
 const CarouselContext = createContext<CarouselContextProps | null>(null);
 
-function useCarousel() {
+const useCarousel = () => {
   const context = useContext(CarouselContext);
 
   if (!context) {
@@ -47,12 +40,25 @@ function useCarousel() {
   }
 
   return context;
+};
+
+interface CarouselRootProps {
+  CarouselContent?: typeof CarouselContent;
+  CarouselHandler?: typeof CarouselHandler;
+  CarouselItem?: typeof CarouselItem;
+  CarouselButton?: typeof CarouselButton;
 }
 
-const Carousel = forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & CarouselProps
->((props, ref) => {
+interface CarouselProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    CarouselRootProps {
+  opts?: CarouselOptions;
+  plugins?: CarouselPlugin;
+  orientation?: "horizontal" | "vertical";
+  setApi?: (api: CarouselApi) => void;
+}
+
+const Carousel = (props: CarouselProps) => {
   const {
     orientation = "horizontal",
     opts,
@@ -124,16 +130,12 @@ const Carousel = forwardRef<
     };
   }, [api, onSelect]);
 
-  const computedOrientation =
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    orientation ?? (opts?.axis === "y" ? "vertical" : "horizontal");
-
   const value = useMemo(
     () => ({
       carouselRef,
       api: api,
       opts,
-      orientation: computedOrientation,
+      orientation,
       scrollPrev,
       scrollNext,
       canScrollPrev,
@@ -145,16 +147,15 @@ const Carousel = forwardRef<
       canScrollPrev,
       carouselRef,
       opts,
-      computedOrientation,
+      orientation,
       scrollNext,
       scrollPrev,
     ],
   );
 
   return (
-    <CarouselContext.Provider value={value}>
+    <CarouselContext value={value}>
       <section
-        ref={ref}
         onKeyDownCapture={handleKeyDown}
         className={cn("relative", className)}
         aria-label="carousel"
@@ -162,20 +163,19 @@ const Carousel = forwardRef<
       >
         {children}
       </section>
-    </CarouselContext.Provider>
+    </CarouselContext>
   );
-});
-Carousel.displayName = "Carousel";
+};
 
-const CarouselContent = <T extends object>(props: ListBoxSectionProps<T>) => {
+const CarouselContent = <T extends object>(props: SectionProps<T>) => {
   const { className, ...rest } = props;
   const { carouselRef, orientation } = useCarousel();
 
   return (
     <ListBox
       layout={orientation === "vertical" ? "stack" : "grid"}
-      orientation={orientation}
       aria-label="Slides"
+      orientation={orientation}
       ref={carouselRef}
       className="overflow-hidden"
     >
@@ -191,92 +191,88 @@ const CarouselContent = <T extends object>(props: ListBoxSectionProps<T>) => {
   );
 };
 
-CarouselContent.displayName = "CarouselContent";
-
-const CarouselItem = forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+const CarouselItem = (props: ListBoxItemProps) => {
+  const { className, ...rest } = props;
   const { orientation } = useCarousel();
 
   return (
     <ListBoxItem
-      ref={ref}
+      aria-label={`Slide ${props.id}`}
       aria-roledescription="slide"
-      className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full",
-        orientation === "horizontal" ? "pl-4" : "pt-4",
+      className={composeTailwindRenderProps(
+        cn([
+          "min-w-0 shrink-0 grow-0 basis-full focus:outline-none focus-visible:outline-none",
+          orientation === "horizontal" ? "pl-4" : "pt-4",
+        ]),
         className,
       )}
-      {...props}
+      {...rest}
     />
   );
-});
-CarouselItem.displayName = "CarouselItem";
+};
 
-const CarouselPrevious = forwardRef<
-  HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
+const CarouselHandler = (props: React.HTMLAttributes<HTMLDivElement>) => {
+  const { className, ...rest } = props;
+  const { orientation } = useCarousel();
+  return (
+    <div
+      className={cn(
+        "relative z-10 mt-6 flex items-center gap-x-2",
+        orientation === "horizontal" ? "justify-end" : "justify-center",
+        className,
+      )}
+      {...rest}
+    />
+  );
+};
+CarouselHandler.displayName = "CarouselHandler";
+
+type CarouselButtonProps = ButtonProps & { slot: "previous" | "next" };
+
+const CarouselButton = (props: CarouselButtonProps) => {
+  const {
+    slot,
+    className,
+    variant = "secondary",
+    appearance = "outline",
+    shape = "circle",
+    size = "icon",
+    ...rest
+  } = props;
+  const { orientation, scrollPrev, canScrollPrev, scrollNext, canScrollNext } =
+    useCarousel();
+  const isNext = slot === "next";
+  const canScroll = isNext ? canScrollNext : canScrollPrev;
+  const scroll = isNext ? scrollNext : scrollPrev;
+  const Icon = isNext ? ChevronRight : ChevronLeft;
 
   return (
     <Button
-      ref={ref}
+      aria-label={isNext ? "Next slide" : "Previous slide"}
+      slot={slot}
       variant={variant}
+      appearance={appearance}
       size={size}
-      className={cn(
-        "absolute size-8 rounded-full",
-        orientation === "horizontal"
-          ? "-left-12 top-1/2 -translate-y-1/2"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+      shape={shape}
+      className={composeTailwindRenderProps(
+        orientation === "vertical" ? "rotate-90" : "",
         className,
       )}
-      isDisabled={!canScrollPrev}
-      onClick={scrollPrev}
-      {...props}
+      isDisabled={!canScroll}
+      onPress={scroll}
+      {...rest}
     >
-      <ArrowLeft className="size-4" />
-      <span className="sr-only">Previous slide</span>
+      <Icon className="size-4" />
     </Button>
   );
-});
-CarouselPrevious.displayName = "CarouselPrevious";
-
-const CarouselNext = forwardRef<
-  HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollNext, canScrollNext } = useCarousel();
-
-  return (
-    <Button
-      ref={ref}
-      variant={variant}
-      size={size}
-      className={cn(
-        "absolute size-8 rounded-full",
-        orientation === "horizontal"
-          ? "-right-12 top-1/2 -translate-y-1/2"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
-        className,
-      )}
-      isDisabled={!canScrollNext}
-      onClick={scrollNext}
-      {...props}
-    >
-      <ArrowRight className="size-4" />
-      <span className="sr-only">Next slide</span>
-    </Button>
-  );
-});
-CarouselNext.displayName = "CarouselNext";
+};
 
 export {
   Carousel,
   CarouselContent,
+  CarouselHandler,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
+  CarouselButton,
 };
+
+export type { CarouselApi };

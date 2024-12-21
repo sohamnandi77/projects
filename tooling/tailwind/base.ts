@@ -6,6 +6,8 @@ export default {
   theme: {
     extend: {
       colors: {
+        light: "hsl(var(--light))",
+        dark: "hsl(var(--dark))",
         bg: "hsl(var(--bg))",
         fg: "hsl(var(--fg))",
         primary: {

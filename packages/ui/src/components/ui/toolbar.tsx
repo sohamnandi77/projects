@@ -4,19 +4,19 @@ import type {
   ToolbarProps,
 } from "react-aria-components";
 import { createContext, useContext, useMemo } from "react";
-import { cva } from "class-variance-authority";
+import { cn } from "#ui/lib/utils";
 import {
-  Toolbar as AriaToolbar,
   composeRenderProps,
   Group,
+  Toolbar as ToolbarPrimitive,
 } from "react-aria-components";
-
-import { cn } from "@projects/ui/lib/utils";
+import { tv } from "tailwind-variants";
 
 import { Separator } from "./separator";
 import { Toggle } from "./toggle";
 
-const toolbarVariants = cva("group flex gap-2", {
+const toolbarStyles = tv({
+  base: "group flex gap-2",
   variants: {
     orientation: {
       horizontal:
@@ -25,28 +25,6 @@ const toolbarVariants = cva("group flex gap-2", {
     },
   },
 });
-
-const ToolbarContext = createContext<{
-  orientation?: ToolbarProps["orientation"];
-}>({
-  orientation: "horizontal",
-});
-
-function Toolbar(props: Readonly<ToolbarProps>) {
-  const { className, orientation, ...rest } = props;
-  const value = useMemo(() => ({ orientation }), [orientation]);
-  return (
-    <ToolbarContext.Provider value={value}>
-      <AriaToolbar
-        orientation={orientation}
-        className={composeRenderProps(className, (className, renderProps) =>
-          toolbarVariants({ ...renderProps, className }),
-        )}
-        {...rest}
-      />
-    </ToolbarContext.Provider>
-  );
-}
 
 const ToolbarSeparator = ({ className, ...props }: SeparatorProps) => {
   const { orientation } = useContext(ToolbarContext);
@@ -64,22 +42,46 @@ const ToolbarSeparator = ({ className, ...props }: SeparatorProps) => {
   );
 };
 
+const ToolbarContext = createContext<{
+  orientation?: ToolbarProps["orientation"];
+}>({
+  orientation: "horizontal",
+});
+
+const Toolbar = ({ orientation = "horizontal", ...props }: ToolbarProps) => {
+  const value = useMemo(() => ({ orientation }), [orientation]);
+  return (
+    <ToolbarContext value={value}>
+      <ToolbarPrimitive
+        orientation={orientation}
+        {...props}
+        className={composeRenderProps(
+          props.className,
+          (className, renderProps) =>
+            toolbarStyles({ ...renderProps, className }),
+        )}
+      />
+    </ToolbarContext>
+  );
+};
+
+const toolbarGroupStyles = tv({
+  base: [
+    "flex gap-2",
+    "group-orientation-vertical:flex-col group-orientation-vertical:items-start",
+  ],
+});
+
 const ToolbarGroupContext = createContext<{ isDisabled?: boolean }>({});
 
-const ToolbarGroup = (props: GroupProps) => {
-  const { isDisabled, children, ...rest } = props;
+const ToolbarGroup = ({ isDisabled, ...props }: GroupProps) => {
   const value = useMemo(() => ({ isDisabled }), [isDisabled]);
   return (
-    <ToolbarGroupContext.Provider value={value}>
-      <Group
-        className={
-          "flex gap-2 group-orientation-vertical:flex-col group-orientation-vertical:items-start"
-        }
-        {...rest}
-      >
-        {children}
+    <ToolbarGroupContext value={value}>
+      <Group className={toolbarGroupStyles()} {...props}>
+        {props.children}
       </Group>
-    </ToolbarGroupContext.Provider>
+    </ToolbarGroupContext>
   );
 };
 
@@ -91,5 +93,4 @@ const ToolbarItem = (props: React.ComponentProps<typeof Toggle>) => {
   return <Toggle isDisabled={effectiveIsDisabled} {...rest} />;
 };
 
-export { Toolbar, ToolbarSeparator, ToolbarGroup, ToolbarItem };
-export type { ToolbarProps };
+export { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarItem };

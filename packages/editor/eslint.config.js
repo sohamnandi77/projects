@@ -12,7 +12,7 @@ export default [
   {
     settings: {
       tailwindcss: {
-        callees: ["cn", "cva"],
+        callees: ["cn", "cva", "tv"],
         config: "../../apps/storybook/tailwind.config.ts",
       },
     },

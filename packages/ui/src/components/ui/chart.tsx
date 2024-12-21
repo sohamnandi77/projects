@@ -54,7 +54,7 @@ const ChartContainer = React.forwardRef<HTMLDivElement, ChartProps>(
     const value = React.useMemo(() => ({ config }), [config]);
 
     return (
-      <ChartContext.Provider value={value}>
+      <ChartContext value={value}>
         <div
           data-chart={chartId}
           ref={ref}
@@ -67,7 +67,7 @@ const ChartContainer = React.forwardRef<HTMLDivElement, ChartProps>(
           <ChartStyle id={chartId} config={config} />
           <ResponsiveContainer>{children}</ResponsiveContainer>
         </div>
-      </ChartContext.Provider>
+      </ChartContext>
     );
   },
 );
@@ -226,13 +226,11 @@ const ChartTooltipContent = React.forwardRef<
                         <div
                           className={cn(
                             "shrink-0 rounded-[2px] border-[--color-border] bg-[--color-bg]",
-                            {
-                              "h-2.5 w-2.5": indicator === "dot",
-                              "w-1": indicator === "line",
-                              "w-0 border-[1.5px] border-dashed bg-transparent":
-                                indicator === "dashed",
-                              "my-0.5": nestLabel && indicator === "dashed",
-                            },
+                            indicator === "dot" && "size-2.5",
+                            indicator === "line" && "w-1",
+                            indicator === "dashed" &&
+                              "w-0 border-[1.5px] border-dashed bg-transparent",
+                            nestLabel && indicator === "dashed" && "my-0.5",
                           )}
                           style={
                             {

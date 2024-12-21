@@ -147,7 +147,7 @@ export function CodeBlockCombobox() {
     <PopoverTrigger isOpen={open} onOpenChange={setOpen}>
       <Button
         size="xs"
-        variant="ghost"
+        appearance="plain"
         className="h-5 justify-between px-1 text-xs"
         aria-expanded={open}
       >

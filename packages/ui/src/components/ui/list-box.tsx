@@ -1,106 +1,145 @@
 import type {
-  ListBoxItemProps as AriaListBoxItemProps,
-  ListBoxProps as AriaListBoxProps,
+  ListBoxItemProps as ListBoxItemPrimitiveProps,
+  ListBoxProps as ListBoxPrimitiveProps,
 } from "react-aria-components";
-import { forwardRef } from "react";
-import { Check } from "lucide-react";
+import { Check, Menu } from "lucide-react";
 import {
-  Collection as AriaCollection,
-  Header as AriaHeader,
-  ListBox as AriaListBox,
-  ListBoxItem as AriaListBoxItem,
-  ListBoxSection as AriaListBoxSection,
   composeRenderProps,
+  ListBoxItem as ListBoxItemPrimitive,
+  ListBox as ListBoxPrimitive,
 } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
-import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
+import { cn } from "@projects/ui/lib/utils";
 
-const ListBoxSection = AriaListBoxSection;
+import {
+  DropdownSection,
+  DropdownItemDetails as ListBoxItemDetails,
+} from "./dropdown";
 
-const ListBoxCollection = AriaCollection;
+const listBoxVariants = tv({
+  base: "flex max-h-96 w-full min-w-72 flex-col gap-y-1 overflow-y-auto rounded-xl border p-1 shadow-lg outline-none [scrollbar-width:thin] [&::-webkit-scrollbar]:size-0.5",
+});
 
-const ListBox = forwardRef<HTMLDivElement, AriaListBoxProps<object>>(
-  (props, ref) => {
-    const { className, ...rest } = props;
-    return (
-      <AriaListBox
-        ref={ref}
-        className={composeTailwindRenderProps(
-          cn(
-            "group overflow-auto rounded-md border bg-overlay p-1 text-overlay-fg shadow-md outline-none",
-            /* Empty */
-            "empty:p-6 empty:text-center empty:text-sm",
-          ),
-          className,
-        )}
-        {...rest}
-      />
-    );
-  },
+interface ListBoxProps<T> extends ListBoxPrimitiveProps<T> {
+  className?: string;
+}
+
+const ListBox = <T extends object>({
+  children,
+  className,
+  ...props
+}: ListBoxProps<T>) => (
+  <ListBoxPrimitive {...props} className={listBoxVariants({ className })}>
+    {children}
+  </ListBoxPrimitive>
 );
 
-const ListBoxItem = forwardRef<HTMLDivElement, AriaListBoxItemProps<object>>(
-  (props, ref) => {
-    const { className, children, ...rest } = props;
-    return (
-      <AriaListBoxItem
-        ref={ref}
-        textValue={
-          props.textValue ??
-          (typeof children === "string" ? children : undefined)
-        }
-        className={composeTailwindRenderProps(
-          cn(
-            "relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none",
-            /* Disabled */
-            "disabled:pointer-events-none disabled:opacity-50",
-            /* Focused */
-            "focus:bg-accent focus:text-accent-fg",
-            /* Hovered */
-            "hover:bg-accent hover:text-accent-fg",
-            /* Selection */
-            "data-[selection-mode]:pl-8",
-          ),
+const listBoxItemStyles = tv({
+  base: "relative cursor-pointer rounded-[calc(var(--radius)-1px)] p-2 text-base outline-none lg:text-sm",
+  variants: {
+    isFocusVisible: {
+      true: "bg-secondary text-secondary-fg [&:focus-visible_[slot=description]]:text-accent-fg/70 [&:focus-visible_[slot=label]]:text-accent-fg",
+    },
+    isHovered: {
+      true: "bg-accent text-accent-fg [&:hover_[slot=description]]:text-accent-fg/70 [&:hover_[slot=label]]:text-accent-fg [&_.text-muted-fg]:text-accent-fg/80",
+    },
+    isFocused: {
+      true: "bg-accent text-accent-fg [&_.text-muted-fg]:text-accent-fg/80 [&_[data-slot=icon]]:text-accent-fg [&_[data-slot=label]]:text-accent-fg",
+    },
+    isSelected: {
+      true: "bg-accent text-accent-fg [&_.text-muted-fg]:text-accent-fg/80 [&_[data-slot=icon]]:text-accent-fg [&_[data-slot=label]]:text-accent-fg",
+    },
+    isDragging: { true: "cursor-grabbing bg-secondary text-secondary-fg" },
+    isDisabled: {
+      true: "cursor-default text-muted-fg opacity-70",
+    },
+  },
+});
+
+interface ListBoxItemProps<T extends object>
+  extends ListBoxItemPrimitiveProps<T> {
+  className?: string;
+}
+
+const ListBoxItem = <T extends object>({
+  children,
+  className,
+  ...props
+}: ListBoxItemProps<T>) => {
+  const textValue = typeof children === "string" ? children : undefined;
+
+  return (
+    <ListBoxItemPrimitive
+      textValue={textValue}
+      {...props}
+      className={composeRenderProps(className, (className, renderProps) =>
+        listBoxItemStyles({
+          ...renderProps,
           className,
-        )}
-        {...rest}
-      >
-        {composeRenderProps(children, (children, renderProps) => (
-          <>
-            {renderProps.isSelected && (
-              <span className="absolute left-2 flex size-4 items-center justify-center">
-                <Check className="size-4" />
+        }),
+      )}
+    >
+      {(values) => (
+        <div className="flex items-center gap-2">
+          {values.allowsDragging && (
+            <Menu
+              className={cn(
+                "size-4 shrink-0 text-muted-fg transition",
+                values.isFocused && "text-fg",
+                values.isDragging && "text-fg",
+                values.isSelected && "text-accent-fg/70",
+              )}
+            />
+          )}
+          <div className="flex flex-col">
+            {typeof children === "function" ? children(values) : children}
+
+            {values.isSelected && (
+              <span className="absolute right-2 top-3 animate-in lg:top-2.5">
+                <Check />
               </span>
             )}
-            {children}
-          </>
-        ))}
-      </AriaListBoxItem>
-    );
-  },
-);
-ListBoxItem.displayName = "ListBoxItem";
+          </div>
+        </div>
+      )}
+    </ListBoxItemPrimitive>
+  );
+};
 
-function ListBoxHeader(props: React.ComponentProps<typeof AriaHeader>) {
-  const { className, ...rest } = props;
+type ListBoxPickerProps<T> = ListBoxProps<T>;
+
+const ListBoxPicker = <T extends object>({
+  className,
+  ...props
+}: ListBoxPickerProps<T>) => {
   return (
-    <AriaHeader
-      className={cn("py-1.5 pl-8 pr-2 text-sm font-semibold", className)}
-      {...rest}
+    <ListBoxPrimitive
+      className={cn("max-h-72 overflow-auto p-1 outline-none", className)}
+      {...props}
     />
   );
-}
+};
+
+const ListBoxSection = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof DropdownSection>) => {
+  return (
+    <DropdownSection
+      className={cn(className, "gap-y-1 [&_.lbi:last-child]:-mb-1.5")}
+      {...props}
+    />
+  );
+};
 
 export {
   ListBox,
-  ListBoxCollection,
-  ListBoxHeader,
-  ListBoxItem,
   ListBoxSection,
+  ListBoxItemDetails,
+  ListBoxItem,
+  ListBoxPicker,
+  listBoxVariants,
 };
 
-export type {
-  ListBoxItemProps,
-  ListBoxProps,
-  ListBoxSectionProps,
-} from "react-aria-components";
+export type { ListBoxPickerProps };

@@ -41,5 +41,5 @@ export const parseVideoUrl = (url: string): EmbedUrlData | undefined => {
     };
   }
 
-  return;
+  return undefined;
 };

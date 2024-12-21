@@ -1,100 +1,117 @@
 import type {
-  TreeItemProps as AriaTreeItemProps,
-  TreeProps as AriaTreeProps,
-  ButtonProps,
+  TreeItemProps as TreeItemPrimitiveProps,
+  TreeProps,
 } from "react-aria-components";
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import {
-  UNSTABLE_Tree as AriaTree,
-  UNSTABLE_TreeItem as AriaTreeItem,
   UNSTABLE_TreeItemContent as AriaTreeItemContent,
   Button,
+  composeRenderProps,
+  UNSTABLE_TreeItem as TreeItemPrimitive,
+  UNSTABLE_Tree as TreePrimitive,
 } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
-import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
+import { Checkbox } from "@projects/ui/checkbox";
 
-const TreeItemContent = AriaTreeItemContent;
+const treeStyles = tv({
+  base: "flex max-h-96 min-w-72 cursor-default flex-col overflow-auto rounded-lg border bg-bg py-2 outline-none forced-color-adjust-none [scrollbar-width:thin] lg:text-sm [&::-webkit-scrollbar]:size-0.5",
+  variants: {
+    isFocusVisible: {
+      true: "outline-2 outline-offset-[-1px] outline-primary",
+    },
+  },
+});
 
-function Tree<T extends object>(props: Readonly<AriaTreeProps<T>>) {
-  const { className, ...rest } = props;
-  return (
-    <AriaTree
-      className={composeTailwindRenderProps(
-        "flex flex-col gap-1 overflow-auto p-1 outline-none",
-        className,
-      )}
-      {...rest}
-    />
-  );
-}
-
-function TreeItemExpandButton(props: Readonly<ButtonProps>) {
+const Tree = <T extends object>(props: TreeProps<T>) => {
   const { className, children, ...rest } = props;
   return (
-    <Button
-      slot="chevron"
-      className={composeTailwindRenderProps("outline-none", className)}
-      {...rest}
-    >
-      {(renderProps) => (
-        <>
-          <ChevronRightIcon className="size-4 shrink-0 transition-transform duration-200 group-expanded:rotate-90" />
-          {typeof children === "function" ? children(renderProps) : children}
-        </>
-      )}
-    </Button>
-  );
-}
-
-function TreeItemInfoButton(props: Readonly<ButtonProps>) {
-  const { className, children, ...rest } = props;
-  return (
-    <Button
-      aria-label="Info"
-      className={composeTailwindRenderProps(
-        cn(
-          "ml-auto flex items-center justify-center rounded-md ring-offset-bg",
-          /* Disabled */
-          "disabled:pointer-events-none disabled:opacity-50",
-          /* Resets */
-          "focus-visible:outline-none",
-          /* Focus Visible */
-          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        ),
-        className,
+    <TreePrimitive
+      className={composeRenderProps(className, (className, renderProps) =>
+        treeStyles({
+          ...renderProps,
+          className,
+        }),
       )}
       {...rest}
     >
       {children}
-    </Button>
+    </TreePrimitive>
   );
-}
+};
 
-function TreeItem<T extends object>(props: Readonly<AriaTreeItemProps<T>>) {
-  const { className, ...rest } = props;
+const itemStyles = tv({
+  base: [
+    "p-[0.286rem_0.286rem_0.286rem_0.571rem] pl-[calc((var(--tree-item-level)-1)*20px+0.571rem+var(--padding))] outline-none [--padding:20px] [&_[data-expanded]_[slot=chevron]_[data-slot=icon]]:rotate-90",
+    "[&_[slot=chevron]]:outline-none [&_[slot=chevron]_[data-slot=icon]]:text-muted-fg",
+    "data-[has-child-rows]:[--padding:0px]",
+  ],
+  variants: {
+    isExpanded: {
+      true: "[&_[slot=chevron]_[data-slot=icon]]:rotate-90 [&_[slot=chevron]_[data-slot=icon]]:text-fg [&_[slot=chevron]_[data-slot=icon]]:transition [&_[slot=chevron]_[data-slot=icon]]:duration-200",
+    },
+    isFocusVisible: {
+      true: "focus:outline-none focus-visible:ring-1 focus-visible:ring-primary [&_[slot=chevron]_[data-slot=icon]]:text-fg",
+    },
+    isDisabled: {
+      true: "opacity-50 forced-colors:text-[GrayText]",
+    },
+  },
+});
+
+const TreeItem = <T extends object>(props: TreeItemPrimitiveProps<T>) => {
+  const { className, children, ...rest } = props;
   return (
-    <AriaTreeItem
-      className={composeTailwindRenderProps(
-        cn(
-          "group relative flex items-center gap-2 rounded-md p-1 pl-[calc((var(--tree-item-level)_-_1)_*_2.25rem)] font-medium outline-none ring-offset-bg data-[has-child-rows]:pl-[calc((var(--tree-item-level)_-_1)_*_1.5rem)]",
-          /* Disabled */
-          "disabled:pointer-events-none disabled:opacity-50",
-          /* Resets */
-          "focus-visible:outline-none",
-          /* Focus Visible */
-          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        ),
-        className,
+    <TreeItemPrimitive
+      className={composeRenderProps(className, (className, renderProps) =>
+        itemStyles({
+          ...renderProps,
+          className,
+        }),
       )}
       {...rest}
-    />
+    >
+      {children}
+    </TreeItemPrimitive>
   );
-}
+};
+
+const TreeItemContent = (
+  props: React.ComponentProps<typeof AriaTreeItemContent>,
+) => {
+  const { children, ...rest } = props;
+  return (
+    <AriaTreeItemContent {...rest}>
+      {(renderProps) => (
+        <div className="flex items-center">
+          {typeof children === "function" ? children(renderProps) : children}
+        </div>
+      )}
+    </AriaTreeItemContent>
+  );
+};
+
+const TreeItemIndicator = () => {
+  return (
+    <Button className="relative shrink-0" slot="chevron">
+      <ChevronRight className="size-5" />
+    </Button>
+  );
+};
+
+const TreeItemCheckbox = () => {
+  return <Checkbox slot="selection" />;
+};
+
+const TreeItemLabel = (props: React.HtmlHTMLAttributes<HTMLSpanElement>) => {
+  return <span {...props} />;
+};
 
 export {
   Tree,
   TreeItem,
+  TreeItemLabel,
+  TreeItemIndicator,
+  TreeItemCheckbox,
   TreeItemContent,
-  TreeItemExpandButton,
-  TreeItemInfoButton,
 };

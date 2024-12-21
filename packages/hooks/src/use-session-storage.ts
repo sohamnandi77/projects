@@ -19,52 +19,49 @@ interface SessionStorageEventDetail {
  */
 export function useSessionStorage<T>(key: string, initialValue: T) {
   // Core storage operations
-  const storage = {
-    /**
-     * Retrieves the current value from sessionStorage.
-     * Falls back to the initial value if parsing or retrieval fails.
-     */
-    get: useCallback((): T => {
-      try {
-        const item = sessionStorage.getItem(key);
-        if (!item) return initialValue;
+  /**
+   * Retrieves the current value from sessionStorage.
+   * Falls back to the initial value if parsing or retrieval fails.
+   */
+  const get = (): T => {
+    if (typeof window === "undefined") {
+      // SSR fallback
+      return initialValue;
+    }
 
-        // Safely parse the value using superjson
-        const parsed = superjson.parse<StorageValue<T>>(item);
-        return parsed?.value ?? initialValue;
-      } catch (error) {
-        console.error(`Error reading sessionStorage for key "${key}":`, error);
-        return initialValue;
+    try {
+      const item = sessionStorage.getItem(key);
+      if (!item) return initialValue;
+
+      // Safely parse the value using superjson
+      const parsed = superjson.parse<StorageValue<T>>(item);
+      return parsed?.value ?? initialValue;
+    } catch (error) {
+      console.error(`Error reading sessionStorage for key "${key}":`, error);
+      return initialValue;
+    }
+  };
+
+  /**
+   * Sets a new value in sessionStorage and dispatches a custom event to notify subscribers.
+   */
+  const set = (value: T): void => {
+    try {
+      // Serialize the value safely
+      const serialized = superjson.stringify({ value } as StorageValue<T>);
+      if (typeof serialized === "string") {
+        sessionStorage.setItem(key, serialized);
+
+        // Dispatch a custom event to notify other tabs/components
+        window.dispatchEvent(
+          new CustomEvent<SessionStorageEventDetail>("session-storage", {
+            detail: { key },
+          }),
+        );
       }
-    }, [key, initialValue]),
-
-    /**
-     * Sets a new value in sessionStorage and dispatches a custom event to notify subscribers.
-     */
-    set: useCallback(
-      (value: T): void => {
-        try {
-          // Serialize the value safely
-          const serialized = superjson.stringify({ value } as StorageValue<T>);
-          if (typeof serialized === "string") {
-            sessionStorage.setItem(key, serialized);
-
-            // Dispatch a custom event to notify other tabs/components
-            window.dispatchEvent(
-              new CustomEvent<SessionStorageEventDetail>("session-storage", {
-                detail: { key },
-              }),
-            );
-          }
-        } catch (error) {
-          console.error(
-            `Error setting sessionStorage for key "${key}":`,
-            error,
-          );
-        }
-      },
-      [key],
-    ),
+    } catch (error) {
+      console.error(`Error setting sessionStorage for key "${key}":`, error);
+    }
   };
 
   /**
@@ -74,27 +71,23 @@ export function useSessionStorage<T>(key: string, initialValue: T) {
   const subscribe = useCallback(
     (onStoreChange: () => void) => {
       const handleStorageChange = (e: StorageEvent) => {
-        if (e.key === key) onStoreChange();
+        if (e.key === key || e.key === null) onStoreChange();
       };
 
-      const handleCustomEvent = (e: CustomEvent<SessionStorageEventDetail>) => {
-        if (e.detail.key === key) onStoreChange();
+      const handleCustomEvent = (e: Event) => {
+        const customEvent = e as CustomEvent<SessionStorageEventDetail>;
+
+        if (customEvent.detail.key === key) onStoreChange();
       };
 
       // Listen for native `storage` events and custom `session-storage` events
       window.addEventListener("storage", handleStorageChange);
-      window.addEventListener(
-        "session-storage",
-        handleCustomEvent as EventListener,
-      );
+      window.addEventListener("session-storage", handleCustomEvent);
 
       return () => {
         // Clean up event listeners
         window.removeEventListener("storage", handleStorageChange);
-        window.removeEventListener(
-          "session-storage",
-          handleCustomEvent as EventListener,
-        );
+        window.removeEventListener("session-storage", handleCustomEvent);
       };
     },
     [key],
@@ -103,10 +96,10 @@ export function useSessionStorage<T>(key: string, initialValue: T) {
   // Use the external store synchronization hook
   const value = useSyncExternalStore(
     subscribe,
-    storage.get, // Get the current value
+    get, // Get the current value
     () => initialValue, // Fallback for server-side rendering
   );
 
   // Return the current value and the setter function
-  return [value, storage.set] as const;
+  return [value, set] as const;
 }

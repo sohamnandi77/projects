@@ -36,7 +36,6 @@
   "eslint.validate": [
     "javascript",
     "javascriptreact",
-    "astro",
     "typescript",
     "typescriptreact"
   ],
@@ -47,13 +46,13 @@
   ],
 
   // Prettier settings
-  "prettier.ignorePath": ".gitignore",
+  "prettier.ignorePath": ".prettierignore",
 
   // Tailwind CSS settings
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-    ["variants:\\s*{([\\s\\S]*)}", "\\s?[\\w].*:\\s*?[\"']([^\"']*).*?,?\\s?"]
+    ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
   "tailwindCSS.experimental.configFile": "./tooling/tailwind/web.ts",
   "files.associations": {

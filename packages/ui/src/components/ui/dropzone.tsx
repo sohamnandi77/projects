@@ -1,25 +1,28 @@
-import type { DropZoneProps as AriaDropZoneProps } from "react-aria-components";
+import type { DropZoneProps } from "react-aria-components";
 import {
-  DropZone as AriaDropZone,
   composeRenderProps,
+  DropZone as DropPrimitiveZone,
 } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
-import { cn } from "@projects/ui/lib/utils";
+import { focusStyles } from "@projects/ui/lib/style";
 
-const DropZone = ({ className, ...props }: AriaDropZoneProps) => (
-  <AriaDropZone
-    className={composeRenderProps(className, (className) =>
-      cn(
-        "flex h-[150px] w-[300px] flex-col items-center justify-center gap-2 rounded-md border border-dashed text-sm ring-offset-bg",
-        /* Drop Target */
-        "data-[drop-target]:border-solid data-[drop-target]:border-primary data-[drop-target]:bg-accent",
-        /* Focus Visible */
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        className,
-      ),
+const dropZoneStyles = tv({
+  extend: focusStyles,
+  base: "group flex max-h-[200px] max-w-xl flex-col items-center justify-center gap-2 rounded-md border border-dashed p-6 text-sm has-[slot=description]:text-center",
+  variants: {
+    isDropTarget: {
+      true: "border-solid border-primary bg-primary/10 ring-4 ring-primary/20 [&_.text-muted-fg]:text-primary-fg",
+    },
+  },
+});
+
+const DropZone = ({ className, ...props }: DropZoneProps) => (
+  <DropPrimitiveZone
+    className={composeRenderProps(className, (className, renderProps) =>
+      dropZoneStyles({ ...renderProps, className }),
     )}
     {...props}
   />
 );
-
 export { DropZone };

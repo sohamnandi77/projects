@@ -19,51 +19,55 @@ interface LocalStorageEventDetail {
  */
 export function useLocalStorage<T>(key: string, initialValue: T) {
   // Core storage operations
-  const storage = {
-    /**
-     * Retrieves the current value from localStorage.
-     * Falls back to the initial value if parsing or retrieval fails.
-     */
-    get: useCallback((): T => {
+
+  /**
+   * Retrieves the current value from localStorage.
+   * Falls back to the initial value if parsing or retrieval fails.
+   */
+  const get = useCallback((): T => {
+    if (typeof window === "undefined") {
+      // SSR fallback
+      return initialValue;
+    }
+
+    try {
+      const item = localStorage.getItem(key);
+      if (!item) return initialValue;
+
+      // Add type safety for parsing
+      const parsed = superjson.parse<StorageValue<T>>(item);
+      return parsed?.value ?? initialValue;
+    } catch (error) {
+      console.error(`Error reading localStorage for key "${key}":`, error);
+
+      return initialValue;
+    }
+  }, [key, initialValue]);
+
+  /**
+   * Sets a new value in localStorage and dispatches a custom event to notify subscribers.
+   */
+  const set = useCallback(
+    (value: T): void => {
       try {
-        const item = localStorage.getItem(key);
-        if (!item) return initialValue;
+        // Serialize the value safely
+        const serialized = superjson.stringify({ value } as StorageValue<T>);
+        if (typeof serialized === "string") {
+          localStorage.setItem(key, serialized);
 
-        // Add type safety for parsing
-        const parsed = superjson.parse<StorageValue<T>>(item);
-        return parsed?.value ?? initialValue;
-      } catch (error) {
-        console.error(`Error reading localStorage for key "${key}":`, error);
-
-        return initialValue;
-      }
-    }, [key, initialValue]),
-
-    /**
-     * Sets a new value in localStorage and dispatches a custom event to notify subscribers.
-     */
-    set: useCallback(
-      (value: T): void => {
-        try {
-          // Serialize the value safely
-          const serialized = superjson.stringify({ value } as StorageValue<T>);
-          if (typeof serialized === "string") {
-            localStorage.setItem(key, serialized);
-
-            // Dispatch a custom event to notify other tabs/components
-            window.dispatchEvent(
-              new CustomEvent<LocalStorageEventDetail>("local-storage", {
-                detail: { key },
-              }),
-            );
-          }
-        } catch (error) {
-          console.error(`Error setting localStorage for key "${key}":`, error);
+          // Dispatch a custom event to notify other tabs/components
+          window.dispatchEvent(
+            new CustomEvent<LocalStorageEventDetail>("local-storage", {
+              detail: { key },
+            }),
+          );
         }
-      },
-      [key],
-    ),
-  };
+      } catch (error) {
+        console.error(`Error setting localStorage for key "${key}":`, error);
+      }
+    },
+    [key],
+  );
 
   /**
    * Subscribes to changes in localStorage.
@@ -72,27 +76,22 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   const subscribe = useCallback(
     (onStoreChange: () => void) => {
       const handleStorageChange = (e: StorageEvent) => {
-        if (e.key === key) onStoreChange();
+        if (e.key === key || e.key === null) onStoreChange();
       };
 
-      const handleCustomEvent = (e: CustomEvent<LocalStorageEventDetail>) => {
-        if (e.detail.key === key) onStoreChange();
+      const handleCustomEvent = (e: Event) => {
+        const customEvent = e as CustomEvent<LocalStorageEventDetail>;
+        if (customEvent.detail.key === key) onStoreChange();
       };
 
       // Listen for native `storage` events and custom `local-storage` events
       window.addEventListener("storage", handleStorageChange);
-      window.addEventListener(
-        "local-storage",
-        handleCustomEvent as EventListener,
-      );
+      window.addEventListener("local-storage", handleCustomEvent);
 
       return () => {
         // Clean up event listeners
         window.removeEventListener("storage", handleStorageChange);
-        window.removeEventListener(
-          "local-storage",
-          handleCustomEvent as EventListener,
-        );
+        window.removeEventListener("local-storage", handleCustomEvent);
       };
     },
     [key],
@@ -101,10 +100,10 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   // Use the external store synchronization hook
   const value = useSyncExternalStore(
     subscribe,
-    storage.get, // Get the current value
+    get, // Get the current value
     () => initialValue, // Fallback for server-side rendering
   );
 
   // Return the current value and the setter function
-  return [value, storage.set] as const;
+  return [value, set] as const;
 }

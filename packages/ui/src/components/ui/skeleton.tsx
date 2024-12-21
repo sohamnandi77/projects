@@ -1,13 +1,32 @@
-import { cn } from "@projects/ui/lib/utils";
+import React from "react";
+import { tv } from "tailwind-variants";
 
-function Skeleton(props: Readonly<React.HTMLAttributes<HTMLDivElement>>) {
-  const { className } = props;
-  return (
-    <div
-      className={cn("animate-pulse rounded-md bg-muted", className)}
-      {...props}
-    />
-  );
+const skeletonStyles = tv({
+  base: "shrink-0 animate-pulse",
+  variants: {
+    intent: {
+      muted: "bg-fg/20",
+      lighter: "bg-fg/15",
+    },
+    shape: {
+      circle: "rounded-full",
+      square: "rounded-lg",
+    },
+  },
+  defaultVariants: {
+    intent: "muted",
+    shape: "square",
+  },
+});
+
+interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  intent?: "muted" | "lighter";
+  shape?: "circle" | "square";
 }
+const Skeleton = ({ shape, intent, className, ...props }: SkeletonProps) => {
+  return (
+    <div className={skeletonStyles({ shape, intent, className })} {...props} />
+  );
+};
 
 export { Skeleton };

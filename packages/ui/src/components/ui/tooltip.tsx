@@ -1,44 +1,69 @@
-import type { ReactNode } from "react";
-import type {
-  TooltipProps as AriaTooltipProps,
-  TooltipRenderProps as AriaTooltipRenderProps,
+import type { TooltipProps as TooltipPrimitiveProps } from "react-aria-components";
+import type { VariantProps } from "tailwind-variants";
+import React from "react";
+import {
+  composeRenderProps,
+  OverlayArrow,
+  Tooltip as TooltipPrimitive,
+  TooltipTrigger,
 } from "react-aria-components";
-import { Tooltip as AriaTooltip, OverlayArrow } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
-import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
+const tooltipStyles = tv({
+  base: [
+    "group rounded-lg border px-3 py-1.5 text-sm will-change-transform dark:shadow-none [&_strong]:font-medium",
+    "placement-left:slide-in-from-right-1 placement-right:slide-in-from-left-1 placement-top:slide-in-from-bottom-1 placement-bottom:slide-in-from-top-1",
+  ],
+  variants: {
+    intent: {
+      default:
+        "bg-overlay text-overlay-fg [&_.arx]:fill-overlay [&_.arx]:stroke-border",
+      inverse:
+        "border-transparent bg-dark text-light dark:bg-light dark:text-dark [&_.arx]:fill-dark [&_.arx]:stroke-transparent dark:[&_.arx]:fill-light [&_.text-muted-fg]:text-light/70 dark:[&_.text-muted-fg]:text-dark/70",
+    },
+    isEntering: {
+      true: "animate-in fade-in",
+    },
+    isExiting: {
+      true: "animate-in fade-in direction-reverse",
+    },
+  },
+  defaultVariants: {
+    intent: "default",
+  },
+});
 
-type TooltipRenderProps = AriaTooltipRenderProps & {
-  defaultChildren?: ReactNode;
-};
+const Tooltip = (props: React.ComponentProps<typeof TooltipTrigger>) => (
+  <TooltipTrigger {...props}>{props.children}</TooltipTrigger>
+);
 
-interface TooltipContentProps extends Omit<AriaTooltipProps, "children"> {
-  children?: ReactNode;
+interface ContentProps
+  extends Omit<TooltipPrimitiveProps, "children">,
+    VariantProps<typeof tooltipStyles> {
   showArrow?: boolean;
+  children: React.ReactNode;
 }
 
-const TooltipContent = (props: TooltipContentProps) => {
-  const { className, children, showArrow = true, offset = 8, ...rest } = props;
-
+const TooltipContent = ({
+  showArrow = true,
+  intent = "default",
+  children,
+  ...props
+}: ContentProps) => {
   return (
-    <AriaTooltip
-      offset={offset}
-      className={composeTailwindRenderProps(
-        cn(
-          "group z-50 overflow-hidden rounded-md border bg-overlay px-3 py-1.5 text-sm text-overlay-fg shadow-md animate-in fade-in-0",
-          /* Entering */
-          "entering:zoom-in-95",
-          /* Exiting */
-          "exiting:animate-out exiting:fade-out-0 exiting:zoom-out-95",
-          /* Placement */
-          "placement-left:slide-in-from-right-2 placement-right:slide-in-from-left-2 placement-top:slide-in-from-bottom-2 placement-bottom:slide-in-from-top-2",
-        ),
-        className,
+    <TooltipPrimitive
+      {...props}
+      offset={10}
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        tooltipStyles({
+          ...renderProps,
+          intent,
+          className,
+        }),
       )}
-      {...rest}
     >
       {showArrow && (
         <OverlayArrow>
-          jdlks
           <svg
             width={12}
             height={12}
@@ -50,12 +75,8 @@ const TooltipContent = (props: TooltipContentProps) => {
         </OverlayArrow>
       )}
       {children}
-    </AriaTooltip>
+    </TooltipPrimitive>
   );
 };
 
-export { TooltipContent };
-
-export { TooltipTrigger as Tooltip } from "react-aria-components";
-
-export type { TooltipContentProps, TooltipRenderProps };
+export { Tooltip, TooltipContent };
