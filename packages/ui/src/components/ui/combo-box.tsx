@@ -54,8 +54,7 @@ const ComboBox = <T extends object>(props: ComboBoxProps<T>) => {
   return (
     <ComboBoxPrimitive
       className={composeTailwindRenderProps(base(), className)}
-      {...rest}
-    >
+      {...rest}>
       {label && <Label>{label}</Label>}
       <>{children}</>
       {description && <Description>{description}</Description>}
@@ -113,8 +112,7 @@ const ComboBoxClearButton = () => {
       onPress={() => {
         state?.setSelectedKey(null);
         state?.open();
-      }}
-    >
+      }}>
       <X className="size-4 animate-in" />
     </Button>
   );

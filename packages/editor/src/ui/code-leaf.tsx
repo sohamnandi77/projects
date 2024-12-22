@@ -13,8 +13,7 @@ export const CodeLeaf = withRef<typeof PlateLeaf>(
           "whitespace-pre-wrap rounded-md bg-muted px-[0.3em] py-[0.2em] font-mono text-sm",
           className,
         )}
-        {...props}
-      >
+        {...props}>
         <code>{children}</code>
       </PlateLeaf>
     );

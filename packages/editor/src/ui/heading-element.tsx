@@ -28,8 +28,7 @@ export const HeadingElement = withRef<typeof HeadingElementVariants>(
         ref={ref}
         as={variant ?? "h1"}
         variant={variant}
-        {...props}
-      >
+        {...props}>
         {children}
       </HeadingElementVariants>
     );

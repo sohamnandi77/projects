@@ -12,8 +12,7 @@ export const PlateElement = React.forwardRef<HTMLDivElement, PlateElementProps>(
       <PlateElementPrimitive
         ref={ref}
         className={cn("relative", className)}
-        {...props}
-      >
+        {...props}>
         {children}
 
         {/* {className?.includes("slate-selectable") && <BlockSelection />} */}

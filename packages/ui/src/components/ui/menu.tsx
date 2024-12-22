@@ -107,8 +107,7 @@ const MenuContent = <T extends object>(props: MenuContentProps<T>) => {
           popoverClassName,
         ]),
       })}
-      {...rest}
-    >
+      {...rest}>
       <MenuPrimitive className={menu({ className })} {...props} />
     </PopoverContent>
   );
@@ -138,8 +137,7 @@ const MenuItem = ({
       )}
       textValue={textValue}
       data-danger={isDanger ? "true" : undefined}
-      {...props}
-    >
+      {...props}>
       {(values) => (
         <>
           {typeof children === "function" ? children(values) : children}
@@ -176,8 +174,7 @@ const MenuSeparator = ({ className, ...props }: SeparatorProps) => (
 const MenuCheckbox = ({ className, children, ...props }: MenuItemProps) => (
   <AriaMenuItem
     className={composeTailwindRenderProps("relative pr-8", className)}
-    {...props}
-  >
+    {...props}>
     {(values) => (
       <>
         {typeof children === "function" ? children(values) : children}
@@ -194,8 +191,7 @@ const MenuCheckbox = ({ className, children, ...props }: MenuItemProps) => (
 const MenuRadio = ({ className, children, ...props }: MenuItemProps) => (
   <AriaMenuItem
     className={composeTailwindRenderProps("relative", className)}
-    {...props}
-  >
+    {...props}>
     {(values) => (
       <>
         {typeof children === "function" ? children(values) : children}
@@ -203,8 +199,7 @@ const MenuRadio = ({ className, children, ...props }: MenuItemProps) => (
         {values.isSelected && (
           <span
             data-slot="menu-radio"
-            className="absolute right-3 flex items-center justify-center animate-in"
-          >
+            className="absolute right-3 flex items-center justify-center animate-in">
             <Circle />
           </span>
         )}

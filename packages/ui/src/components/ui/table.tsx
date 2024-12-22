@@ -84,8 +84,7 @@ const ColumnResizer = ({ className, ...props }: ColumnResizerProps) => (
         ...renderProps,
         className,
       }),
-    )}
-  >
+    )}>
     <div className="h-full w-px bg-border py-3" />
   </ColumnResizerPrimitive>
 );
@@ -140,8 +139,7 @@ const TableColumn = ({
       className={columnStyles({
         isResizable,
         className,
-      })}
-    >
+      })}>
       {({ allowsSorting, sortDirection, isHovered }) => (
         <div className="flex items-center gap-2 [&_[data-slot=icon]]:shrink-0">
           {props.children as React.ReactNode}
@@ -149,8 +147,7 @@ const TableColumn = ({
             <span
               className={cellIcon({
                 className: isHovered ? "bg-secondary-fg/10" : "",
-              })}
-            >
+              })}>
               <ChevronDown
                 className={sortDirection === "ascending" ? "rotate-180" : ""}
               />
@@ -209,14 +206,12 @@ const TableRow = <T extends object>({
           "href" in props
             ? cn("cursor-pointer hover:bg-secondary/50", className)
             : "",
-      })}
-    >
+      })}>
       {allowsDragging && (
         <Cell className="group cursor-grab pr-0 ring-primary dragging:cursor-grabbing">
           <Button
             className="relative bg-transparent py-1.5 pl-3.5 text-muted-fg pressed:text-fg"
-            slot="drag"
-          >
+            slot="drag">
             <Menu />
           </Button>
         </Cell>

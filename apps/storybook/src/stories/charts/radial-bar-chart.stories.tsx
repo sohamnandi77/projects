@@ -84,13 +84,11 @@ export const Basic: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadialBarChart
                 data={chartData}
                 innerRadius={30}
-                outerRadius={110}
-              >
+                outerRadius={110}>
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent hideLabel nameKey="category" />}
@@ -155,15 +153,13 @@ export const RadialBarLabel: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadialBarChart
                 data={chartData}
                 startAngle={-90}
                 endAngle={380}
                 innerRadius={30}
-                outerRadius={110}
-              >
+                outerRadius={110}>
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent hideLabel nameKey="category" />}
@@ -236,13 +232,11 @@ export const Grid: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadialBarChart
                 data={chartData}
                 innerRadius={30}
-                outerRadius={100}
-              >
+                outerRadius={100}>
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent hideLabel nameKey="category" />}
@@ -288,15 +282,13 @@ export const Text: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadialBarChart
                 data={chartData}
                 startAngle={0}
                 endAngle={250}
                 innerRadius={80}
-                outerRadius={110}
-              >
+                outerRadius={110}>
                 <PolarGrid
                   gridType="circle"
                   radialLines={false}
@@ -314,20 +306,17 @@ export const Text: Story = {
                             x={viewBox.cx}
                             y={viewBox.cy}
                             textAnchor="middle"
-                            dominantBaseline="middle"
-                          >
+                            dominantBaseline="middle">
                             <tspan
                               x={viewBox.cx}
                               y={viewBox.cy}
-                              className="fill-fg text-4xl font-bold"
-                            >
+                              className="fill-fg text-4xl font-bold">
                               {chartData[0]?.sales.toLocaleString()}
                             </tspan>
                             <tspan
                               x={viewBox.cx}
                               y={(viewBox.cy ?? 0) + 24}
-                              className="fill-muted-fg"
-                            >
+                              className="fill-muted-fg">
                               Sales
                             </tspan>
                           </text>
@@ -378,14 +367,12 @@ export const Shape: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadialBarChart
                 data={chartData}
                 endAngle={100}
                 innerRadius={80}
-                outerRadius={140}
-              >
+                outerRadius={140}>
                 <PolarGrid
                   gridType="circle"
                   radialLines={false}
@@ -403,20 +390,17 @@ export const Shape: Story = {
                             x={viewBox.cx}
                             y={viewBox.cy}
                             textAnchor="middle"
-                            dominantBaseline="middle"
-                          >
+                            dominantBaseline="middle">
                             <tspan
                               x={viewBox.cx}
                               y={viewBox.cy}
-                              className="fill-fg text-4xl font-bold"
-                            >
+                              className="fill-fg text-4xl font-bold">
                               {chartData[0]?.sales.toLocaleString()}
                             </tspan>
                             <tspan
                               x={viewBox.cx}
                               y={(viewBox.cy ?? 0) + 24}
-                              className="fill-muted-fg"
-                            >
+                              className="fill-muted-fg">
                               Sales
                             </tspan>
                           </text>
@@ -467,14 +451,12 @@ export const Stacked: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadialBarChart
                 data={chartData}
                 endAngle={180}
                 innerRadius={80}
-                outerRadius={130}
-              >
+                outerRadius={130}>
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent hideLabel />}
@@ -487,20 +469,17 @@ export const Stacked: Story = {
                           <text
                             x={viewBox.cx}
                             y={viewBox.cy}
-                            textAnchor="middle"
-                          >
+                            textAnchor="middle">
                             <tspan
                               x={viewBox.cx}
                               y={(viewBox.cy ?? 0) - 16}
-                              className="fill-fg text-2xl font-bold"
-                            >
+                              className="fill-fg text-2xl font-bold">
                               {totalRevenue.toLocaleString()}
                             </tspan>
                             <tspan
                               x={viewBox.cx}
                               y={(viewBox.cy ?? 0) + 4}
-                              className="fill-muted-fg"
-                            >
+                              className="fill-muted-fg">
                               Total Revenue
                             </tspan>
                           </text>

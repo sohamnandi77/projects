@@ -134,8 +134,7 @@ const SheetContent = ({
           });
         },
       )}
-      {...props}
-    >
+      {...props}>
       <ModalPrimitive
         className={composeRenderProps(
           classNames?.content,
@@ -147,13 +146,11 @@ const SheetContent = ({
               className,
             }),
         )}
-        {...props}
-      >
+        {...props}>
         <Dialog
           role={role}
           aria-label={props["aria-label"] ?? undefined}
-          className="h-full"
-        >
+          className="h-full">
           {(values) => (
             <>
               {props.children as React.ReactNode}

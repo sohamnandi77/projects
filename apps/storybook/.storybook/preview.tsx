@@ -68,8 +68,7 @@ const preview: Preview = {
       return (
         <ThemeProvider
           attribute="class"
-          forcedTheme={context.globals.theme as Theme}
-        >
+          forcedTheme={context.globals.theme as Theme}>
           <ThemeSwitcher theme={context.globals.theme as Theme}>
             <I18nProvider locale={context.globals.locale as string}>
               <Story />

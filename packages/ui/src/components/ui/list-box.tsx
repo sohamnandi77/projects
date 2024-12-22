@@ -78,8 +78,7 @@ const ListBoxItem = <T extends object>({
           ...renderProps,
           className,
         }),
-      )}
-    >
+      )}>
       {(values) => (
         <div className="flex items-center gap-2">
           {values.allowsDragging && (

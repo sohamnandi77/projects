@@ -33,8 +33,7 @@ const Tree = <T extends object>(props: TreeProps<T>) => {
           className,
         }),
       )}
-      {...rest}
-    >
+      {...rest}>
       {children}
     </TreePrimitive>
   );
@@ -69,8 +68,7 @@ const TreeItem = <T extends object>(props: TreeItemPrimitiveProps<T>) => {
           className,
         }),
       )}
-      {...rest}
-    >
+      {...rest}>
       {children}
     </TreeItemPrimitive>
   );

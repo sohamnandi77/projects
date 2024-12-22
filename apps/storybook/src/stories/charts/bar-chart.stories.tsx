@@ -145,8 +145,7 @@ export const Horizontal: Story = {
                 layout="vertical"
                 margin={{
                   left: -20,
-                }}
-              >
+                }}>
                 <XAxis type="number" dataKey="uptime" hide />
                 <YAxis
                   dataKey="dataCenter"
@@ -220,8 +219,7 @@ export const Label: Story = {
               <BarChart
                 accessibilityLayer
                 data={chartData}
-                margin={{ top: 20 }}
-              >
+                margin={{ top: 20 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="category"
@@ -236,8 +234,7 @@ export const Label: Story = {
                 <Bar
                   dataKey="satisfaction"
                   fill="var(--color-satisfaction)"
-                  radius={8}
-                >
+                  radius={8}>
                   <LabelList
                     position="top"
                     offset={12}
@@ -343,8 +340,7 @@ export const InsetLabel: Story = {
             x={background.width - 10}
             y={y + 20}
             textAnchor="end"
-            fill="hsl(var(--fg))"
-          >
+            fill="hsl(var(--fg))">
             {count.toLocaleString()} ({percentage.toFixed(1)}%)
           </text>
         </>
@@ -365,8 +361,7 @@ export const InsetLabel: Story = {
                 data={chartData}
                 layout="vertical"
                 barSize={30}
-                margin={{ left: 0, right: 0 }}
-              >
+                margin={{ left: 0, right: 0 }}>
                 <YAxis dataKey="name" type="category" hide />
                 <XAxis dataKey="count" type="number" hide />
                 <Bar
@@ -446,8 +441,7 @@ export const CustomLabel: Story = {
                 layout="vertical"
                 margin={{
                   right: 16,
-                }}
-              >
+                }}>
                 <CartesianGrid horizontal={false} />
                 <YAxis
                   dataKey="team"
@@ -465,8 +459,7 @@ export const CustomLabel: Story = {
                   dataKey="completed"
                   layout="vertical"
                   fill="var(--color-completed)"
-                  radius={4}
-                >
+                  radius={4}>
                   <LabelList
                     dataKey="team"
                     position="insideLeft"
@@ -586,8 +579,7 @@ export const Mixed: Story = {
                 layout="vertical"
                 margin={{
                   left: 0,
-                }}
-              >
+                }}>
                 <CartesianGrid horizontal={false} />
                 <YAxis
                   dataKey="browser"
@@ -748,8 +740,7 @@ export const Multiple: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="max-h-[250px] w-full"
-            >
+              className="max-h-[250px] w-full">
               <BarChart accessibilityLayer data={chartData}>
                 <CartesianGrid vertical={false} />
                 <XAxis
@@ -1014,8 +1005,7 @@ export const Controlled: Story = {
             <div>
               <Select
                 selectedKey={activeChart}
-                onSelectionChange={setActiveChart}
-              >
+                onSelectionChange={setActiveChart}>
                 <SelectTrigger />
                 <SelectList placement="bottom end" className="sm:min-w-40">
                   {["sales", "revenue"].map((key) => {
@@ -1025,8 +1015,7 @@ export const Controlled: Story = {
                         key={chart}
                         data-active={activeChart === chart}
                         id={key}
-                        textValue={chartConfig[chart].label}
-                      >
+                        textValue={chartConfig[chart].label}>
                         <SelectOptionDetails
                           label={chartConfig[chart].label}
                           description={total[
@@ -1043,16 +1032,14 @@ export const Controlled: Story = {
           <CardContent className="px-2 sm:p-6">
             <ChartContainer
               config={chartConfig}
-              className="aspect-auto h-[250px] w-full"
-            >
+              className="aspect-auto h-[250px] w-full">
               <BarChart
                 accessibilityLayer
                 data={chartData}
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="date"

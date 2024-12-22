@@ -13,8 +13,7 @@ const ProgressBar = ({ label, className, ...props }: ProgressBarProps) => {
   return (
     <ProgressBarPrimitive
       {...props}
-      className={composeTailwindRenderProps("flex flex-col", className)}
-    >
+      className={composeTailwindRenderProps("flex flex-col", className)}>
       {({ percentage, valueText, isIndeterminate }) => (
         <>
           <div className="flex justify-between gap-2">

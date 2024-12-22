@@ -170,8 +170,7 @@ const SliderOutput = ({ className, ...props }: SliderOutputProps) => {
       {...props}
       className={composeRenderProps(className, (className) =>
         valueLabel({ className }),
-      )}
-    >
+      )}>
       {composeRenderProps(
         props.children,
         (children, { state }) =>

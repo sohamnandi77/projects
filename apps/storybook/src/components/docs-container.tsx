@@ -16,8 +16,7 @@ export const DocsContainer: FC<PropsWithChildren<DocsContainerProps>> = ({
   return (
     <BaseContainer
       theme={isDark ? themes.dark : themes.light}
-      context={context}
-    >
+      context={context}>
       {children}
     </BaseContainer>
   );

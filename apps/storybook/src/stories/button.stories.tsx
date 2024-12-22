@@ -193,8 +193,7 @@ export const PendingButton: Story = {
         onClick={handleClick}
         isDisabled={isLoading}
         isPending={isLoading}
-        className="group relative disabled:opacity-100"
-      >
+        className="group relative disabled:opacity-100">
         <span className="group-pending:text-transparent">Click me</span>
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center">
@@ -266,8 +265,7 @@ export const IconButton: Story = {
         onClick={toggle}
         aria-expanded={open}
         data-slot="icon"
-        aria-label={open ? "Close menu" : "Open menu"}
-      >
+        aria-label={open ? "Close menu" : "Open menu"}>
         <Plus
           className="transition-transform duration-500 [transition-timing-function:cubic-bezier(0.68,-0.6,0.32,1.6)] group-aria-expanded:rotate-[135deg]"
           size={16}

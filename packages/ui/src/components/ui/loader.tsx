@@ -38,8 +38,7 @@ const Bars = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
     viewBox="0 0 135 140"
     xmlns="http://www.w3.org/2000/svg"
     fill="currentColor"
-    {...props}
-  >
+    {...props}>
     <rect y="10" width="15" height="120" rx="6">
       <animate
         attributeName="height"
@@ -140,8 +139,7 @@ const Spin = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
     className={cn("size-4", className)}
     data-slot="icon"
     viewBox="0 0 2400 2400"
-    {...props}
-  >
+    {...props}>
     <g strokeWidth="200" strokeLinecap="round" fill="none">
       <line x1="1200" y1="600" x2="1200" y2="100" />
       <line opacity="0.5" x1="1200" y1="2300" x2="1200" y2="1800" />
@@ -206,8 +204,7 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
       <ProgressBar
         aria-label={props["aria-label"] ?? "Loading..."}
         formatOptions={props.formatOptions}
-        isIndeterminate={isIndeterminate}
-      >
+        isIndeterminate={isIndeterminate}>
         <LoaderPrimitive
           role="presentation"
           className={loaderStyles({

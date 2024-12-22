@@ -34,8 +34,7 @@ const LoginPage = () => {
               e.preventDefault();
               e.stopPropagation();
               void form.handleSubmit();
-            }}
-          >
+            }}>
             <div className="grid gap-4">
               <div className="grid gap-2">
                 <form.Field
@@ -49,8 +48,7 @@ const LoginPage = () => {
                       value={field.state.value}
                       onChange={field.handleChange}
                       isInvalid={field.state.meta.errors.length > 0}
-                      isRequired
-                    >
+                      isRequired>
                       <Label htmlFor="email">Email</Label>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
@@ -67,8 +65,7 @@ const LoginPage = () => {
                           {field.state.meta.errors.map((error, i) => (
                             <li
                               key={`${field.name}-message-${i}`}
-                              className="text-sm text-red-500"
-                            >
+                              className="text-sm text-red-500">
                               {error}
                             </li>
                           ))}
@@ -90,14 +87,12 @@ const LoginPage = () => {
                       value={field.state.value}
                       onChange={field.handleChange}
                       isInvalid={field.state.meta.errors.length > 0}
-                      isRequired
-                    >
+                      isRequired>
                       <div className="flex items-center">
                         <Label htmlFor="password">Password</Label>
                         <Link
                           href="/forgot-password"
-                          className="ml-auto inline-block text-sm underline"
-                        >
+                          className="ml-auto inline-block text-sm underline">
                           Forgot your password?
                         </Link>
                       </div>
@@ -115,8 +110,7 @@ const LoginPage = () => {
                           appearance="plain"
                           size="sm"
                           className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                          onClick={togglePassword}
-                        >
+                          onClick={togglePassword}>
                           {showPassword ? (
                             <EyeIcon className="size-4" aria-hidden="true" />
                           ) : (
@@ -132,8 +126,7 @@ const LoginPage = () => {
                           {field.state.meta.errors.map((error, i) => (
                             <li
                               key={`${field.name}-message-${i}`}
-                              className="text-sm text-red-500"
-                            >
+                              className="text-sm text-red-500">
                               {error}
                             </li>
                           ))}
@@ -151,8 +144,7 @@ const LoginPage = () => {
                       name={field.name}
                       isSelected={field.state.value}
                       onChange={field.handleChange}
-                      isRequired
-                    >
+                      isRequired>
                       Remember me
                     </Checkbox>
                   )}

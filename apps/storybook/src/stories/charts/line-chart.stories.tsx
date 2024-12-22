@@ -78,8 +78,7 @@ export const Basic: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -152,8 +151,7 @@ export const Dots: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -258,8 +256,7 @@ export const DotsColor: Story = {
                   top: 24,
                   left: 24,
                   right: 24,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <ChartTooltip
                   cursor={false}
@@ -360,8 +357,7 @@ export const CustomDot: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -449,8 +445,7 @@ export const Label: Story = {
                   top: 20,
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -472,8 +467,7 @@ export const Label: Story = {
                   }}
                   activeDot={{
                     r: 6,
-                  }}
-                >
+                  }}>
                   <LabelList
                     position="top"
                     offset={12}
@@ -491,8 +485,7 @@ export const Label: Story = {
                   }}
                   activeDot={{
                     r: 6,
-                  }}
-                >
+                  }}>
                   <LabelList
                     position="top"
                     offset={12}
@@ -563,8 +556,7 @@ export const CustomLabel: Story = {
                   top: 24,
                   left: 24,
                   right: 24,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <ChartTooltip
                   cursor={false}
@@ -586,8 +578,7 @@ export const CustomLabel: Story = {
                   }}
                   activeDot={{
                     r: 6,
-                  }}
-                >
+                  }}>
                   <LabelList
                     position="top"
                     offset={12}
@@ -649,8 +640,7 @@ export const Linear: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -720,8 +710,7 @@ export const Multiple: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -791,8 +780,7 @@ export const Step: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -874,8 +862,7 @@ export const Controlled: Story = {
                   <Toggle
                     key={chart}
                     isSelected={activeChart === chart}
-                    onPress={() => setActiveChart(chart)}
-                  >
+                    onPress={() => setActiveChart(chart)}>
                     {chartConfig[chart].label}
                   </Toggle>
                 );
@@ -885,16 +872,14 @@ export const Controlled: Story = {
           <CardContent className="px-2 sm:p-6">
             <ChartContainer
               config={chartConfig}
-              className="aspect-auto h-[250px] w-full"
-            >
+              className="aspect-auto h-[250px] w-full">
               <LineChart
                 accessibilityLayer
                 data={chartData}
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="date"

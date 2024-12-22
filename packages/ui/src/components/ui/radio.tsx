@@ -32,8 +32,7 @@ const RadioGroup = ({
       className={composeTailwindRenderProps(
         "group flex flex-col gap-2",
         props.className,
-      )}
-    >
+      )}>
       {label && <Label>{label}</Label>}
       <div className="flex select-none gap-2 group-orientation-horizontal:flex-wrap group-orientation-horizontal:gap-2 group-orientation-vertical:flex-col sm:group-orientation-horizontal:gap-4">
         {children}
@@ -78,8 +77,7 @@ const Radio = ({ description, ...props }: RadioProps) => {
         className={composeTailwindRenderProps(
           "group flex items-center gap-2 text-sm text-fg transition disabled:text-fg/50 forced-colors:disabled:text-[GrayText]",
           props.className,
-        )}
-      >
+        )}>
         {(renderProps) => (
           <div className="flex gap-2">
             <div

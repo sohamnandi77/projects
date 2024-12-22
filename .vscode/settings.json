@@ -17,6 +17,18 @@
   "better-comments.multilineComments": true,
   "explorer.fileNesting.enabled": true,
 
+  // Search settings
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/out/**": true,
+    "*.map": true,
+    "*.log": true
+  },
+
   // Git settings
   "git.autoStash": true,
   "git.autofetch": true,

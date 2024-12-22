@@ -63,8 +63,7 @@ const Select = <T extends object>({
       className={composeTailwindRenderProps(
         "group flex w-full flex-col gap-y-1.5",
         className,
-      )}
-    >
+      )}>
       {label && <Label>{label}</Label>}
       <>{children as React.ReactNode}</>
       {description && <Description>{description}</Description>}
@@ -108,8 +107,7 @@ const SelectTrigger = ({ className, ...props }: TriggerProps) => {
           ...renderProps,
           className,
         }),
-      )}
-    >
+      )}>
       {props.prefix && <span className="-mr-1">{props.prefix}</span>}
       <SelectValue className="flex-1 text-base placeholder-shown:text-muted-fg lg:text-sm [&_[slot=description]]:hidden" />
       <ChevronDown

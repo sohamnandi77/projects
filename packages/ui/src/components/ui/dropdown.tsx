@@ -83,8 +83,7 @@ const DropdownItem = ({ className, ...props }: ListBoxItemProps) => {
       className={composeRenderProps(className, (className, renderProps) =>
         dropdownItemVariants({ ...renderProps, className }),
       )}
-      {...props}
-    >
+      {...props}>
       {composeRenderProps(props.children, (children, { isSelected }) => (
         <>
           <span className="flex flex-1 items-center gap-2 truncate font-normal group-selected:font-medium">
@@ -125,8 +124,7 @@ const DropdownItemDetails = ({
         <Text
           slot={slot ?? "label"}
           className={cn("font-medium lg:text-sm", classNames?.label)}
-          {...restProps}
-        >
+          {...restProps}>
           {label}
         </Text>
       )}
@@ -134,8 +132,7 @@ const DropdownItemDetails = ({
         <Text
           slot={slot ?? "description"}
           className={cn("text-xs text-muted-fg", classNames?.description)}
-          {...restProps}
-        >
+          {...restProps}>
           {description}
         </Text>
       )}

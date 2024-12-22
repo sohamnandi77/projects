@@ -70,8 +70,7 @@ const CalendarHeaderButton = (props: CalendarHeaderButtonProps) => {
         ),
         className,
       )}
-      {...rest}
-    >
+      {...rest}>
       {children ?? <CalendarNavigationIcon slot={slot} direction={direction} />}
     </Button>
   );
@@ -174,8 +173,7 @@ function Calendar<T extends AriaDateValue>({
       className={composeRenderProps(className, (className) =>
         cn("w-fit", className),
       )}
-      {...props}
-    >
+      {...props}>
       <CalendarHeader />
       <CalendarGrid>
         <CalendarGridHeader>
@@ -197,8 +195,7 @@ function RangeCalendar<T extends AriaDateValue>(
     <RangeCalendarRoot
       className={composeTailwindRenderProps(cn("w-fit"), className)}
       {...rest}
-      visibleDuration={{ months: 3 }}
-    >
+      visibleDuration={{ months: 3 }}>
       <CalendarHeader />
       <div style={{ display: "flex", gap: 30, overflow: "auto" }}>
         <CalendarGrid>

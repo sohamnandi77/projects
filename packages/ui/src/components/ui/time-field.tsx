@@ -40,8 +40,7 @@ const TimeField = <T extends TimeValue>(props: TimeFieldProps<T>) => {
       className={composeTailwindRenderProps(
         "group flex flex-col gap-y-1.5",
         className,
-      )}
-    >
+      )}>
       {label && <Label>{label}</Label>}
       <FieldGroup>
         {prefix ? <span data-slot="prefix">{prefix}</span> : null}

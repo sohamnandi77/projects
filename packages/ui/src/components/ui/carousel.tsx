@@ -159,8 +159,7 @@ const Carousel = (props: CarouselProps) => {
         onKeyDownCapture={handleKeyDown}
         className={cn("relative", className)}
         aria-label="carousel"
-        {...rest}
-      >
+        {...rest}>
         {children}
       </section>
     </CarouselContext>
@@ -177,8 +176,7 @@ const CarouselContent = <T extends object>(props: SectionProps<T>) => {
       aria-label="Slides"
       orientation={orientation}
       ref={carouselRef}
-      className="overflow-hidden"
-    >
+      className="overflow-hidden">
       <ListBoxSection
         className={cn(
           "flex",
@@ -260,8 +258,7 @@ const CarouselButton = (props: CarouselButtonProps) => {
       )}
       isDisabled={!canScroll}
       onPress={scroll}
-      {...rest}
-    >
+      {...rest}>
       <Icon className="size-4" />
     </Button>
   );

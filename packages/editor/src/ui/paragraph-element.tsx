@@ -9,8 +9,7 @@ export const ParagraphElement = withRef<typeof PlateElement>(
       <PlateElement
         ref={ref}
         className={cn("m-0 px-0 py-1", className)}
-        {...props}
-      >
+        {...props}>
         {children}
       </PlateElement>
     );

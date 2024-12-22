@@ -76,8 +76,7 @@ export const Controlled: Story = {
         <ToggleGroup
           selectionMode="multiple"
           selectedKeys={selected}
-          onSelectionChange={setSelected}
-        >
+          onSelectionChange={setSelected}>
           <Toggle id="bold">Bold</Toggle>
           <Toggle id="italic">Italic</Toggle>
           <Toggle id="underline">Underline</Toggle>

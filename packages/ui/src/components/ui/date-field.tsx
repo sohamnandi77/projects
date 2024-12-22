@@ -39,8 +39,7 @@ const DateField = <T extends DateValue>(props: DateFieldProps<T>) => {
       className={composeTailwindRenderProps(
         "group flex flex-col gap-y-1.5",
         className,
-      )}
-    >
+      )}>
       {label && <Label>{label}</Label>}
       <FieldGroup>
         {prefix ? <span data-slot="prefix">{prefix}</span> : null}
@@ -81,8 +80,7 @@ const DateInput = ({
         "bg-transparent p-2 text-base text-fg placeholder:text-muted-fg lg:text-sm",
         className,
       )}
-      {...props}
-    >
+      {...props}>
       {(segment) => <DateSegment segment={segment} className={segmentStyles} />}
     </DateInputPrimitive>
   );

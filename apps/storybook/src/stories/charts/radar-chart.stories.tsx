@@ -69,8 +69,7 @@ export const Basic: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadarChart data={chartData}>
                 <ChartTooltip
                   cursor={false}
@@ -147,8 +146,7 @@ export const CustomLabel: Story = {
                   right: 10,
                   bottom: 10,
                   left: 10,
-                }}
-              >
+                }}>
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent indicator="line" />}
@@ -166,8 +164,7 @@ export const CustomLabel: Story = {
                         textAnchor={textAnchor}
                         fontSize={13}
                         fontWeight={500}
-                        {...rest}
-                      >
+                        {...rest}>
                         <tspan className="fill-fg text-xs">
                           {data?.revenue}
                         </tspan>
@@ -179,8 +176,7 @@ export const CustomLabel: Story = {
                           x={x}
                           dy={"1rem"}
                           fontSize={12}
-                          className="fill-muted-fg"
-                        >
+                          className="fill-muted-fg">
                           {data?.month}
                         </tspan>
                       </text>
@@ -365,8 +361,7 @@ export const GridCircleFilled: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadarChart data={chartData}>
                 <ChartTooltip
                   cursor={false}
@@ -682,8 +677,7 @@ export const RadarLegend: Story = {
                 margin={{
                   top: -40,
                   bottom: -10,
-                }}
-              >
+                }}>
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent indicator="line" />}
@@ -751,8 +745,7 @@ export const LinesOnly: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadarChart data={chartData}>
                 <ChartTooltip
                   cursor={false}
@@ -825,8 +818,7 @@ export const Multiple: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadarChart data={chartData}>
                 <ChartTooltip
                   cursor={false}
@@ -891,8 +883,7 @@ export const RadiusAxis: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadarChart data={chartData}>
                 <ChartTooltip
                   cursor={false}
@@ -966,15 +957,13 @@ export const Icons: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <RadarChart
                 data={chartData}
                 margin={{
                   top: -40,
                   bottom: -10,
-                }}
-              >
+                }}>
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent indicator="line" />}

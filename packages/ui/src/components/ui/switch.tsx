@@ -47,8 +47,7 @@ const Switch = ({ children, intent, className, ...props }: SwitchProps) => {
             typeof className === "function" ? className(values) : className,
         })
       }
-      style={{ WebkitTapHighlightColor: "transparent" }}
-    >
+      style={{ WebkitTapHighlightColor: "transparent" }}>
       {(values) => (
         <>
           <span className={trackStyles({ intent })}>

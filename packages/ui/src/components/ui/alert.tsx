@@ -107,8 +107,7 @@ const AlertTitle = (props: AlertTitleProps) => {
     <Heading
       data-slot="title"
       className={cn("mb-1 font-medium leading-none tracking-tight", className)}
-      {...rest}
-    >
+      {...rest}>
       {children}
     </Heading>
   );

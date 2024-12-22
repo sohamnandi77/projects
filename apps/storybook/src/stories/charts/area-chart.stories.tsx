@@ -67,8 +67,7 @@ export const Primary: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -135,16 +134,14 @@ export const Gradiant: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="max-h-[250px] w-full"
-            >
+              className="max-h-[250px] w-full">
               <AreaChart
                 accessibilityLayer
                 data={chartData}
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -245,16 +242,14 @@ export const Stacked: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="max-h-[250px] w-full"
-            >
+              className="max-h-[250px] w-full">
               <AreaChart
                 accessibilityLayer
                 data={chartData}
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -332,8 +327,7 @@ export const Linear: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -400,8 +394,7 @@ export const Step: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -475,8 +468,7 @@ export const Icon: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"
@@ -557,8 +549,7 @@ export const Legend: Story = {
                 margin={{
                   left: 12,
                   right: 12,
-                }}
-              >
+                }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="month"

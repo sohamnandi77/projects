@@ -122,8 +122,7 @@ const ModalContent = ({
           });
         },
       )}
-      {...props}
-    >
+      {...props}>
       <ModalPrimitive
         className={composeRenderProps(
           classNames?.content,
@@ -134,8 +133,7 @@ const ModalContent = ({
               className,
             }),
         )}
-        {...props}
-      >
+        {...props}>
         {(values) => (
           <Dialog role={role}>
             {typeof children === "function" ? children(values) : children}

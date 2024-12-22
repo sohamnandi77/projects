@@ -38,8 +38,7 @@ const Link = ({ className, ...props }: LinkProps) => {
       {...props}
       className={composeRenderProps(className, (className, ...renderProps) =>
         linkStyles({ ...renderProps, intent: props.intent, className }),
-      )}
-    >
+      )}>
       {(values) => (
         <>
           {typeof props.children === "function"

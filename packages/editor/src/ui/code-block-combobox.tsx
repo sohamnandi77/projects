@@ -146,8 +146,7 @@ export function CodeBlockComboBox() {
         size="xs"
         appearance="plain"
         className="h-5 justify-between px-1 text-xs"
-        aria-expanded={open}
-      >
+        aria-expanded={open}>
         {state.value
           ? languages.find((language) => language.value === state.value)?.label
           : "Plain Text"}
@@ -171,8 +170,7 @@ export function CodeBlockComboBox() {
                 onSelect={(value: string) => {
                   commandItemProps.onSelect(value);
                   setOpen(false);
-                }}
-              >
+                }}>
                 <Check
                   className={cn(
                     state.value === language.value

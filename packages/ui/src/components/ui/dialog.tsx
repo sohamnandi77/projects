@@ -94,8 +94,7 @@ const DialogHeader = ({ className, ...props }: DialogHeaderProps) => {
     <div
       data-slot="dialog-header"
       ref={headerRef}
-      className={header({ className })}
-    >
+      className={header({ className })}>
       {props.title && <DialogTitle>{props.title}</DialogTitle>}
       {props.description && (
         <DialogDescription>{props.description}</DialogDescription>
@@ -230,8 +229,7 @@ const DialogCloseIndicator = (props: CloseButtonIndicatorProps) => {
       aria-label="Close"
       onPress={close}
       className={closeIndicator({ className })}
-      {...rest}
-    >
+      {...rest}>
       <X className="size-4" />
     </ButtonPrimitive>
   ) : null;

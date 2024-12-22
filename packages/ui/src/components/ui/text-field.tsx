@@ -65,8 +65,7 @@ const TextField = ({
       className={composeTailwindRenderProps(
         "group flex flex-col gap-y-1.5",
         className,
-      )}
-    >
+      )}>
       {label && <Label>{label}</Label>}
       <FieldGroup data-loading={isPending ? "true" : undefined}>
         {prefix ? (
@@ -81,8 +80,7 @@ const TextField = ({
             type="button"
             aria-label="Toggle password visibility"
             onPress={handleTogglePasswordVisibility}
-            className="relative mr-2.5 rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-primary [&>[data-slot=icon]]:text-muted-fg"
-          >
+            className="relative mr-2.5 rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-primary [&>[data-slot=icon]]:text-muted-fg">
             <>{isPasswordVisible ? <EyeClosed /> : <Eye />}</>
           </ButtonPrimitive>
         ) : isPending ? (

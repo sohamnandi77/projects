@@ -154,8 +154,7 @@ const CommandMenu = ({
           isBlurred,
           className: classNames?.overlay,
         })}
-        {...props}
-      >
+        {...props}>
         <Modal className={modal({ className: classNames?.content })}>
           <Dialog className="outline-none" aria-label="Command Palette">
             {({ close }) => (
@@ -163,16 +162,14 @@ const CommandMenu = ({
                 <CommandPrimitive
                   value={value}
                   onValueChange={onValueChange}
-                  className={command()}
-                >
+                  className={command()}>
                   {children}
                 </CommandPrimitive>
                 {!hideCloseButton && (
                   <Button
                     autoFocus={!isDesktop}
                     onPress={close}
-                    className={closeButton()}
-                  >
+                    className={closeButton()}>
                     <span className="hidden lg:block">Esc</span>
                     <span className="-mr-2 block lg:hidden">
                       <X />

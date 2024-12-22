@@ -10,6 +10,12 @@ const config = {
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss",
   ],
+  printWidth: 80,
+  singleQuote: false,
+  bracketSpacing: true,
+  bracketSameLine: true,
+  arrowParens: "always",
+  trailingComma: "all",
   tailwindConfig: fileURLToPath(
     new URL("../../tooling/tailwind/web.ts", import.meta.url),
   ),

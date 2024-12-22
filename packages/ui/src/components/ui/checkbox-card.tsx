@@ -104,8 +104,7 @@ const CheckboxCardItem = (props: CheckboxCardItemProps) => {
           ...renderProps,
           className,
         }),
-      )}
-    >
+      )}>
       {(values) => (
         <div className="flex w-full items-center justify-between gap-2">
           <div className="flex flex-col pr-8">

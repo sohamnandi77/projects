@@ -22,8 +22,7 @@ const GridList = <T extends object>({
 }: GridListProps<T>) => (
   <GridListPrimitive
     className={composeTailwindRenderProps(gridListStyles(), className)}
-    {...props}
-  >
+    {...props}>
     {children}
   </GridListPrimitive>
 );
@@ -56,15 +55,13 @@ const GridListItem = ({ className, ...props }: GridListItemProps) => {
       {...props}
       className={composeRenderProps(className, (className, renderProps) =>
         itemStyles({ ...renderProps, className }),
-      )}
-    >
+      )}>
       {({ selectionMode, selectionBehavior, allowsDragging }) => (
         <>
           {allowsDragging && (
             <Button
               slot="drag"
-              className="cursor-grab dragging:cursor-grabbing [&>[data-slot=icon]]:text-muted-fg"
-            >
+              className="cursor-grab dragging:cursor-grabbing [&>[data-slot=icon]]:text-muted-fg">
               <Menu />
             </Button>
           )}

@@ -127,8 +127,7 @@ const DrawerContentPrimitive = ({
       ])}
       style={{
         backgroundColor: bg,
-      }}
-    >
+      }}>
       <ModalPrimitive
         className={cn(
           "flex max-h-full w-full flex-col overflow-hidden rounded-t-2xl bg-overlay text-left align-middle text-overlay-fg shadow-lg sm:rounded-lg",
@@ -148,8 +147,7 @@ const DrawerContentPrimitive = ({
         drag="y"
         dragConstraints={{ top: 0, bottom: h }}
         onDragEnd={onDragEnd}
-        {...props}
-      >
+        {...props}>
         <div className="overflow-hidden">
           {withNotch && (
             <div className="sticky top-0 mx-auto mt-2.5 h-1.5 w-10 shrink-0 touch-pan-y rounded-full bg-fg/20" />
@@ -167,8 +165,7 @@ const DrawerContentPrimitive = ({
                 return () => resizeObserver.disconnect();
               }
               return;
-            }}
-          >
+            }}>
             <>{children}</>
           </div>
         </div>
@@ -196,8 +193,7 @@ const DrawerPrimitive = (props: DrawerPrimitiveProps) => {
       style={{
         borderRadius: bodyBorderRadius,
         transformOrigin: "center 0",
-      }}
-    >
+      }}>
       <AnimatePresence>
         {isOpen && <>{props.children as React.ReactNode}</>}
       </AnimatePresence>
@@ -267,8 +263,7 @@ const DrawerContent = ({
           role={props.role ?? "dialog"}
           aria-label={props["aria-label"] ?? undefined}
           aria-labelledby={props["aria-labelledby"] ?? undefined}
-          className="mx-auto sm:max-w-lg"
-        >
+          className="mx-auto sm:max-w-lg">
           {(values) => (
             <>{typeof children === "function" ? children(values) : children}</>
           )}

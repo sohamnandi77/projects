@@ -46,8 +46,7 @@ const SearchField = ({
     <SearchFieldPrimitive
       aria-label={placeholder ?? props["aria-label"] ?? "Search..."}
       {...props}
-      className={composeTailwindRenderProps(base(), className)}
-    >
+      className={composeTailwindRenderProps(base(), className)}>
       {label && <Label>{label}</Label>}
       <FieldGroup>
         <Search aria-hidden className={searchIcon()} />

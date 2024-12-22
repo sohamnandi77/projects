@@ -41,8 +41,7 @@ const DisclosureGroup = ({
             ? "[&_[data-slot=accordion-item]]:border-none"
             : "[&_[data-slot=accordion-item]]:border-b",
         ])
-      }
-    >
+      }>
       {(values) => (
         <div data-slot="accordion-item-content" className={className}>
           <DisclosureGroupContext value={{ hideIndicator, hideBorder }}>
@@ -80,8 +79,7 @@ const Disclosure = ({ className, ...props }: DisclosureProps) => {
       {...props}
       className={composeRenderProps(className, (className, renderProps) =>
         disclosureStyles({ ...renderProps, className }),
-      )}
-    >
+      )}>
       {props.children}
     </DisclosurePrimitive>
   );
@@ -120,8 +118,7 @@ const DisclosureTrigger = ({ className, ...props }: ButtonProps) => {
           hideBorder,
           className,
         }),
-      )}
-    >
+      )}>
       {(values) => (
         <>
           {typeof props.children === "function"
@@ -144,8 +141,7 @@ const DisclosurePanel = ({ className, ...props }: DisclosurePanelProps) => {
   return (
     <AriaDisclosurePanel
       {...props}
-      className={composeTailwindRenderProps("sm:text-sm", className)}
-    >
+      className={composeTailwindRenderProps("sm:text-sm", className)}>
       {props.children}
     </AriaDisclosurePanel>
   );

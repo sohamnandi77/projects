@@ -151,17 +151,14 @@ const PopoverContent = (props: PopoverProps) => {
         isSubmenuTrigger ? "bg-overlay/10" : "",
       )}
       {...rest}
-      isDismissable
-    >
+      isDismissable>
       <Modal
         className={composeRenderProps(className, (className, renderProps) =>
           drawerStyles({ ...renderProps, isMenu, className }),
-        )}
-      >
+        )}>
         <Dialog
           aria-label={isMenu ? "Menu" : props["aria-label"]}
-          className="touch-none focus:outline-none"
-        >
+          className="touch-none focus:outline-none">
           {children}
         </Dialog>
       </Modal>
@@ -175,16 +172,14 @@ const PopoverContent = (props: PopoverProps) => {
           ...renderProps,
           className,
         }),
-      )}
-    >
+      )}>
       {showArrow && (
         <OverlayArrow className="group">
           <svg
             width={12}
             height={12}
             viewBox="0 0 12 12"
-            className="block fill-overlay stroke-border group-placement-left:-rotate-90 group-placement-right:rotate-90 group-placement-bottom:rotate-180 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
-          >
+            className="block fill-overlay stroke-border group-placement-left:-rotate-90 group-placement-right:rotate-90 group-placement-bottom:rotate-180 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]">
             <path d="M0 0 L6 6 L12 0" />
           </svg>
         </OverlayArrow>
@@ -208,8 +203,7 @@ const PopoverPicker = ({ children, className, ...props }: PopoverProps) => {
               className,
             ),
           }),
-      )}
-    >
+      )}>
       {children}
     </PopoverPrimitive>
   );

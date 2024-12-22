@@ -133,8 +133,7 @@ const Provider = forwardRef<
             className,
           )}
           ref={ref}
-          {...props}
-        >
+          {...props}>
           {children}
         </div>
       </SidebarContext>
@@ -181,8 +180,7 @@ const Sidebar = ({
           "flex h-full w-[--sidebar-width] flex-col bg-tertiary text-fg",
           className,
         )}
-        {...props}
-      >
+        {...props}>
         {children}
       </div>
     );
@@ -199,8 +197,7 @@ const Sidebar = ({
             content: "bg-tertiary text-fg [&>button]:hidden",
           }}
           isStack={intent === "floating"}
-          side={side}
-        >
+          side={side}>
           <SheetBody className="p-0 sm:p-0">{children}</SheetBody>
         </SheetContent>
       </Sheet>
@@ -212,8 +209,7 @@ const Sidebar = ({
       data-state={state}
       data-collapsible={state === "collapsed" ? collapsible : ""}
       data-intent={intent}
-      data-side={side}
-    >
+      data-side={side}>
       <div
         className={cn(
           "relative h-svh w-[--sidebar-width] bg-transparent transition-[width] duration-200 ease-linear",
@@ -235,8 +231,7 @@ const Sidebar = ({
             : "group-data-[collapsible=dock]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
           className,
         )}
-        {...props}
-      >
+        {...props}>
         <div
           data-slot="sidebar"
           className={cn(
@@ -244,8 +239,7 @@ const Sidebar = ({
             intent === "inset" || state === "collapsed"
               ? "[&_[data-slot=sidebar-footer]]:border-transparent [&_[data-slot=sidebar-header]]:border-transparent"
               : "[&_[data-slot=sidebar-footer]]:border-t [&_[data-slot=sidebar-header]]:border-b",
-          )}
-        >
+          )}>
           {children}
         </div>
       </div>
@@ -304,8 +298,7 @@ const Item = ({
     <Tooltip closeDelay={0} delay={0}>
       <Link
         {...props}
-        className="col-span-full grid size-9 place-content-center rounded-lg text-muted-fg hover:bg-muted hover:text-secondary-fg focus:outline-none"
-      >
+        className="col-span-full grid size-9 place-content-center rounded-lg text-muted-fg hover:bg-muted hover:text-secondary-fg focus:outline-none">
         {Icon && <Icon data-slot="icon" />}
         <span className="sr-only">{children as string}</span>
       </Link>
@@ -325,8 +318,7 @@ const Item = ({
           className,
         }),
       )}
-      {...props}
-    >
+      {...props}>
       {(values) => (
         <>
           {Icon && <Icon data-slot="icon" />}
@@ -399,8 +391,7 @@ const Trigger = ({
         onPress?.(event);
         toggleSidebar();
       }}
-      {...props}
-    >
+      {...props}>
       <PanelRight className="hidden md:inline" />
       <Menu className="inline md:hidden" />
       <span className="sr-only">Toggle Sidebar</span>
@@ -502,8 +493,7 @@ const Section = ({
         className,
       )}
       defaultExpanded={isExpanded}
-      {...props}
-    >
+      {...props}>
       {({ isExpanded }) => (
         <>
           {typeof title === "string" && (
@@ -523,8 +513,7 @@ const Section = ({
                       isExpanded && !Icon && "[&>.idctr]:rotate-180",
                       isExpanded && Icon && "[&>.idctr]:rotate-90",
                     )
-                  }
-                >
+                  }>
                   <span className="flex items-center [&>[data-slot=icon]]:mr-2 [&>[data-slot=icon]]:text-muted-fg">
                     {Icon && <Icon data-slot="icon" />}
                     {title}
@@ -545,8 +534,7 @@ const Section = ({
                 state === "collapsed"
                   ? "group-data-[collapsible=dock]:place-content-center"
                   : "grid-cols-[auto_1fr] [&_[data-slot=sidebar-item]:first-child]:mt-0.5",
-              )}
-            >
+              )}>
               {props.children}
             </div>
           </DisclosurePanel>

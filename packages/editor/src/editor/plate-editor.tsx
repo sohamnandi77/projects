@@ -16,8 +16,7 @@ export const PlateEditor = () => {
       editor={editor}
       onChange={({ value }) => {
         setValue(value);
-      }}
-    >
+      }}>
       <EditorContainer>
         <Editor variant="demo" placeholder="Let out your creativity..." />
       </EditorContainer>

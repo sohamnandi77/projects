@@ -58,8 +58,7 @@ export const Orientation: Story = {
             {({ id }) => (
               <CarouselItem
                 key={id}
-                className="basis-1/2 snap-center md:basis-1/3"
-              >
+                className="basis-1/2 snap-center md:basis-1/3">
                 <Card className="p-1">
                   <CardContent className="flex items-center justify-center p-6">
                     <span className="text-4xl font-semibold">{id}</span>
@@ -87,8 +86,7 @@ export const Options: Story = {
             align: "start",
             loop: true,
           }}
-          className="w-full max-w-2xl"
-        >
+          className="w-full max-w-2xl">
           <CarouselContent items={items}>
             {({ id }) => (
               <CarouselItem id={id} className="basis-1/2 lg:basis-1/3">
@@ -120,8 +118,7 @@ export const AutoPlay: Story = {
           onMouseLeave={plugin.current.reset}
           plugins={[plugin.current]}
           opts={{ loop: true, align: "center" }}
-          className="w-full max-w-xs"
-        >
+          className="w-full max-w-xs">
           <CarouselContent items={items}>
             {({ id }) => (
               <CarouselItem id={id}>

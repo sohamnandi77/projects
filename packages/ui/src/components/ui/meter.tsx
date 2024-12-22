@@ -17,15 +17,13 @@ const Meter = ({ label, ...props }: MeterProps) => {
       className={composeTailwindRenderProps(
         "flex flex-col gap-1",
         props.className,
-      )}
-    >
+      )}>
       {({ percentage, valueText }) => (
         <>
           <div className="flex w-full justify-between gap-2">
             <Label>{label}</Label>
             <span
-              className={`text-sm tabular-nums ${percentage >= 80 ? "text-danger" : "text-muted-fg"}`}
-            >
+              className={`text-sm tabular-nums ${percentage >= 80 ? "text-danger" : "text-muted-fg"}`}>
               {percentage >= 80 && (
                 <TriangleAlert
                   aria-label="Alert"

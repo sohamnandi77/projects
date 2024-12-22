@@ -56,8 +56,7 @@ const NumberField = ({
   return (
     <NumberFieldPrimitive
       {...props}
-      className={composeTailwindRenderProps(base(), className)}
-    >
+      className={composeTailwindRenderProps(base(), className)}>
       {label && <Label>{label}</Label>}
       <FieldGroup className="overflow-hidden">
         {(renderProps) => (
@@ -70,8 +69,7 @@ const NumberField = ({
               className={fieldBorderStyles({
                 ...renderProps,
                 className: "grid h-10 place-content-center border-s",
-              })}
-            >
+              })}>
               {isMobile ? (
                 <StepperButton slot="increment" />
               ) : (

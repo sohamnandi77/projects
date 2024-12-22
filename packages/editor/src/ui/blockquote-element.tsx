@@ -11,8 +11,7 @@ export const BlockquoteElement = withRef<typeof PlateElement>(
         ref={ref}
         as="blockquote"
         className={cn("my-1 border-l-2 pl-3 italic", className)}
-        {...props}
-      >
+        {...props}>
         {children}
       </PlateElement>
     );

@@ -68,8 +68,7 @@ const RegisterPage = () => {
               e.preventDefault();
               e.stopPropagation();
               void form.handleSubmit();
-            }}
-          >
+            }}>
             <div className="grid gap-4">
               <div className="grid gap-2">
                 <form.Field
@@ -83,8 +82,7 @@ const RegisterPage = () => {
                       value={field.state.value}
                       onChange={field.handleChange}
                       isInvalid={field.state.meta.errors.length > 0}
-                      isRequired
-                    >
+                      isRequired>
                       <Label htmlFor="name">Name</Label>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
@@ -101,8 +99,7 @@ const RegisterPage = () => {
                           {field.state.meta.errors.map((error, i) => (
                             <li
                               key={`${field.name}-message-${i}`}
-                              className="text-sm text-red-500"
-                            >
+                              className="text-sm text-red-500">
                               {error}
                             </li>
                           ))}
@@ -124,8 +121,7 @@ const RegisterPage = () => {
                       value={field.state.value}
                       onChange={field.handleChange}
                       isInvalid={field.state.meta.errors.length > 0}
-                      isRequired
-                    >
+                      isRequired>
                       <Label htmlFor="email">Email</Label>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
@@ -142,8 +138,7 @@ const RegisterPage = () => {
                           {field.state.meta.errors.map((error, i) => (
                             <li
                               key={`${field.name}-message-${i}`}
-                              className="text-sm text-red-500"
-                            >
+                              className="text-sm text-red-500">
                               {error}
                             </li>
                           ))}
@@ -165,8 +160,7 @@ const RegisterPage = () => {
                       value={field.state.value}
                       onChange={field.handleChange}
                       isInvalid={field.state.meta.errors.length > 0}
-                      isRequired
-                    >
+                      isRequired>
                       <Label htmlFor="password">Password</Label>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
@@ -182,8 +176,7 @@ const RegisterPage = () => {
                           appearance="plain"
                           size="sm"
                           className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                          onClick={togglePassword}
-                        >
+                          onClick={togglePassword}>
                           {showPassword ? (
                             <EyeIcon className="size-4" aria-hidden="true" />
                           ) : (
@@ -199,8 +192,7 @@ const RegisterPage = () => {
                           {field.state.meta.errors.map((error, i) => (
                             <li
                               key={`${field.name}-message-${i}`}
-                              className="text-sm text-red-500"
-                            >
+                              className="text-sm text-red-500">
                               {error}
                             </li>
                           ))}
@@ -222,8 +214,7 @@ const RegisterPage = () => {
                       value={field.state.value}
                       onChange={field.handleChange}
                       isInvalid={field.state.meta.errors.length > 0}
-                      isRequired
-                    >
+                      isRequired>
                       <Label htmlFor="password">Confirm Password</Label>
                       <div className="relative">
                         <TextFieldInput className="peer ps-9" required />
@@ -239,8 +230,7 @@ const RegisterPage = () => {
                           appearance="plain"
                           size="sm"
                           className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                          onClick={toggleConfirmPassword}
-                        >
+                          onClick={toggleConfirmPassword}>
                           {showConfirmPassword ? (
                             <EyeIcon className="size-4" aria-hidden="true" />
                           ) : (
@@ -258,8 +248,7 @@ const RegisterPage = () => {
                           {field.state.meta.errors.map((error, i) => (
                             <li
                               key={`${field.name}-message-${i}`}
-                              className="text-sm text-red-500"
-                            >
+                              className="text-sm text-red-500">
                               {error}
                             </li>
                           ))}

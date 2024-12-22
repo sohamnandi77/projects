@@ -66,8 +66,7 @@ const BreadcrumbSeparator = (props: React.ComponentProps<"span">) => {
     <span
       aria-hidden="true"
       className={cn("[&>svg]:size-3.5", className)}
-      {...rest}
-    >
+      {...rest}>
       {children ?? <ChevronRight />}
     </span>
   );
@@ -83,8 +82,7 @@ const BreadcrumbEllipsis = (props: BreadcrumbEllipsisProps) => {
     <span
       aria-hidden="true"
       className={cn("flex size-9 items-center justify-center", className)}
-      {...rest}
-    >
+      {...rest}>
       <MoreHorizontal className="size-4" />
       <VisuallyHidden>{visuallyHiddenText}</VisuallyHidden>
     </span>

@@ -16,8 +16,7 @@ const ProgressCircle = ({ className, ...props }: ProgressCircleProps) => {
           className={cn("size-4 shrink-0", className)}
           viewBox="0 0 24 24"
           fill="none"
-          data-slot="icon"
-        >
+          data-slot="icon">
           <circle
             cx={c}
             cy={c}

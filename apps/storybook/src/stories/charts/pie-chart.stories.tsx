@@ -87,8 +87,7 @@ export const Basic: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <PieChart>
                 <ChartTooltip
                   cursor={false}
@@ -152,8 +151,7 @@ export const Donut: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <PieChart>
                 <ChartTooltip
                   cursor={false}
@@ -222,8 +220,7 @@ export const DonutActive: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <PieChart>
                 <ChartTooltip
                   cursor={false}
@@ -268,20 +265,17 @@ const CustomContent = (props: CustomContentProps) => {
         x={viewBox.cx}
         y={viewBox.cy}
         textAnchor="middle"
-        dominantBaseline="middle"
-      >
+        dominantBaseline="middle">
         <tspan
           x={viewBox.cx}
           y={viewBox.cy}
-          className="fill-fg text-2xl font-bold"
-        >
+          className="fill-fg text-2xl font-bold">
           {totalSales.toLocaleString()}
         </tspan>
         <tspan
           x={viewBox.cx}
           y={(viewBox.cy ?? 0) + 24}
-          className="fill-muted-fg"
-        >
+          className="fill-muted-fg">
           Sales
         </tspan>
       </text>
@@ -358,8 +352,7 @@ export const DonutWithText: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <PieChart>
                 <ChartTooltip
                   cursor={false}
@@ -370,8 +363,7 @@ export const DonutWithText: Story = {
                   dataKey="sales"
                   nameKey="category"
                   innerRadius={60}
-                  strokeWidth={5}
-                >
+                  strokeWidth={5}>
                   <Label content={<CustomContent totalSales={totalSales} />} />
                 </Pie>
               </PieChart>
@@ -442,8 +434,7 @@ export const CustomLabel: Story = {
           y={y}
           textAnchor={textAnchor}
           dominantBaseline={dominantBaseline}
-          fill="hsl(var(--fg))"
-        >
+          fill="hsl(var(--fg))">
           {payload.amount}
         </text>
       );
@@ -459,8 +450,7 @@ export const CustomLabel: Story = {
           <CardContent>
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
+              className="mx-auto aspect-square max-h-[250px]">
               <PieChart>
                 <ChartTooltip
                   content={<ChartTooltipContent nameKey="amount" hideLabel />}
@@ -515,20 +505,17 @@ const CustomControlledPieLabel = (props: CustomControlledPieLabelProps) => {
         x={viewBox.cx}
         y={viewBox.cy}
         textAnchor="middle"
-        dominantBaseline="middle"
-      >
+        dominantBaseline="middle">
         <tspan
           x={viewBox.cx}
           y={viewBox.cy}
-          className="fill-fg text-2xl font-semibold"
-        >
+          className="fill-fg text-2xl font-semibold">
           {chartData[activeIndex]?.sales.toLocaleString()}
         </tspan>
         <tspan
           x={viewBox.cx}
           y={(viewBox.cy ?? 0) + 24}
-          className="fill-muted-fg"
-        >
+          className="fill-muted-fg">
           Visitors
         </tspan>
       </text>
@@ -614,8 +601,7 @@ export const Controlled: Story = {
             </div>
             <Select
               selectedKey={activeMonth}
-              onSelectionChange={setActiveMonth}
-            >
+              onSelectionChange={setActiveMonth}>
               <SelectTrigger
                 className="ml-auto h-8 w-[130px] rounded-lg px-2"
                 aria-label="Select a value"
@@ -639,8 +625,7 @@ export const Controlled: Story = {
             <ChartContainer
               id={id}
               config={chartConfig}
-              className="mx-auto aspect-square w-full max-w-[315px]"
-            >
+              className="mx-auto aspect-square w-full max-w-[315px]">
               <PieChart>
                 <ChartTooltip
                   cursor={false}
@@ -653,8 +638,7 @@ export const Controlled: Story = {
                   innerRadius={60}
                   strokeWidth={5}
                   activeIndex={activeIndex}
-                  activeShape={<CustomActiveShape />}
-                >
+                  activeShape={<CustomActiveShape />}>
                   <Label
                     content={
                       <CustomControlledPieLabel
@@ -722,8 +706,7 @@ export const PieLabel: Story = {
           <CardContent className="flex-1 pb-0">
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-fg"
-            >
+              className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-fg">
               <PieChart>
                 <ChartTooltip content={<ChartTooltipContent hideLabel />} />
                 <Pie
@@ -794,8 +777,7 @@ export const PieLabelList: Story = {
           <CardContent className="flex-1 pb-0">
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-fg"
-            >
+              className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-fg">
               <PieChart>
                 <ChartTooltip
                   content={
@@ -871,8 +853,7 @@ export const PieLegend: Story = {
           <CardContent className="flex-1 pb-0">
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-fg"
-            >
+              className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-fg">
               <PieChart>
                 <Pie data={chartData} dataKey="visitors" />
                 <ChartLegend
@@ -941,8 +922,7 @@ export const NoneSeparator: Story = {
           <CardContent className="flex-1 pb-0">
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-fg"
-            >
+              className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-fg">
               <PieChart>
                 <ChartTooltip
                   cursor={false}
@@ -1020,8 +1000,7 @@ export const Stacked: Story = {
           <CardContent className="flex-1 pb-0">
             <ChartContainer
               config={chartConfig}
-              className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-fg"
-            >
+              className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-fg">
               <PieChart>
                 <ChartTooltip
                   content={
