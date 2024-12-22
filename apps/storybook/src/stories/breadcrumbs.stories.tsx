@@ -25,7 +25,7 @@ const meta = {
     BreadcrumbSeparator:
       BreadcrumbSeparator as unknown as React.ComponentType<unknown>,
   },
-  tags: ["autodocs"],
+  tags: ["autodocs", "navigation"],
   argTypes: {
     isDisabled: {
       control: "boolean",

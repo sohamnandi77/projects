@@ -16,7 +16,7 @@ const meta = {
     AlertDescription:
       AlertDescription as unknown as React.ComponentType<unknown>,
   },
-  tags: ["autodocs"],
+  tags: ["autodocs", "statuses"],
 } satisfies Meta<typeof Alert>;
 
 export default meta;
@@ -29,10 +29,12 @@ export const PrimaryAlert: Story = {
   render: (args) => (
     <div className="md:w-96">
       <Alert {...args}>
-        <AlertIcon variant="success" />
+        <AlertIcon />
         <AlertTitle>Heads up!</AlertTitle>
-        <AlertDescription>
-          This is a primary alert — check it out!
+        <AlertDescription className="space-x-1">
+          <span>
+            This is a {args.variant} alert with indicator — check it out!
+          </span>
         </AlertDescription>
       </Alert>
     </div>
@@ -47,7 +49,7 @@ export const NoIndicator: Story = {
       <Alert {...args}>
         <AlertTitle>Heads up!</AlertTitle>
         <AlertDescription>
-          This is a secondary alert — check it out!
+          This is a {args.variant} alert without indicator — check it out!
         </AlertDescription>
       </Alert>
     </div>

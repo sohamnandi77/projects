@@ -1,1 +1,32 @@
-export { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+export {
+  Area,
+  AreaChart,
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  PolarAngleAxis,
+  PolarGrid,
+  Radar,
+  RadarChart,
+  RadialBar,
+  RadialBarChart,
+  Scatter,
+  ScatterChart,
+  XAxis,
+  YAxis,
+  ZAxis,
+  Rectangle,
+  Legend,
+  Cell,
+  Dot,
+  Sector,
+  Label,
+  PolarRadiusAxis,
+} from "recharts";
+export type { RectangleProps, BarProps } from "recharts";
+export type { PieSectorDataItem } from "recharts/types/polar/Pie";

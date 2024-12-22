@@ -12,6 +12,40 @@ import { tv } from "tailwind-variants";
 
 import { focusButtonStyles } from "@projects/ui/lib/style";
 
+const ButtonVariantsKey = {
+  variant: "variant",
+  appearance: "appearance",
+  size: "size",
+  shape: "shape",
+} as const;
+
+const ButtonOptionsKey = {
+  [ButtonVariantsKey.variant]: {
+    primary: "primary",
+    secondary: "secondary",
+    success: "success",
+    danger: "danger",
+    info: "info",
+    warning: "warning",
+  },
+  [ButtonVariantsKey.appearance]: {
+    solid: "solid",
+    outline: "outline",
+    plain: "plain",
+  },
+  [ButtonVariantsKey.size]: {
+    xs: "xs",
+    sm: "sm",
+    md: "md",
+    lg: "lg",
+    icon: "icon",
+  },
+  [ButtonVariantsKey.shape]: {
+    square: "square",
+    circle: "circle",
+  },
+} as const;
+
 const getButtonVariants = tv({
   extend: focusButtonStyles,
   base: [
@@ -21,7 +55,7 @@ const getButtonVariants = tv({
   ],
   variants: {
     variant: {
-      default: [
+      primary: [
         "text-primary-fg [--button-bg:theme(colors.primary.DEFAULT)] [--button-border:theme(colors.primary.DEFAULT)] [--button-hover-overlay:theme(colors.white/10%)]",
         "[--button-icon:theme(colors.primary.fg/60%)] active:[--button-icon:theme(colors.primary.fg/80%)] hover:[--button-icon:theme(colors.primary.fg/80%)]",
       ],
@@ -54,7 +88,7 @@ const getButtonVariants = tv({
         "dark:border-white/5 dark:bg-[--button-bg] dark:before:hidden dark:after:-inset-px",
       ],
       outline: [
-        "border-border text-fg [--button-icon:theme(colors.muted.fg)]",
+        "border-[--button-border] text-fg [--button-icon:theme(colors.muted.fg)]",
         "hover:bg-secondary/90 hover:[--button-icon:theme(colors.fg)]",
         "active:bg-secondary/90 active:[--button-icon:theme(colors.fg)]",
       ],
@@ -87,7 +121,7 @@ const getButtonVariants = tv({
     },
   },
   defaultVariants: {
-    variant: "default",
+    variant: "primary",
     appearance: "solid",
     size: "md",
     shape: "square",
@@ -130,6 +164,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   );
 });
 
-export { Button, getButtonVariants };
+export { Button, getButtonVariants, ButtonOptionsKey };
 
 export type { ButtonProps };

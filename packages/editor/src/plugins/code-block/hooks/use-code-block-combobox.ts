@@ -9,7 +9,7 @@ import {
 import { BaseCodeBlockPlugin } from "#editor/plugins/code-block/base-code-block-plugin";
 import { useReadOnly } from "slate-react";
 
-export const useCodeBlockComboboxState = () => {
+export const useCodeBlockComboBoxState = () => {
   const editor = useEditorRef();
   const readOnly = useReadOnly();
   const element = useElement<TCodeBlockElement>();
@@ -30,10 +30,10 @@ export const useCodeBlockComboboxState = () => {
   };
 };
 
-export const useCodeBlockCombobox = ({
+export const useCodeBlockComboBox = ({
   element,
   setValue,
-}: ReturnType<typeof useCodeBlockComboboxState>) => {
+}: ReturnType<typeof useCodeBlockComboBoxState>) => {
   const editor = useEditorRef();
 
   return {

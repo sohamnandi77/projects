@@ -5,7 +5,7 @@ import { AspectRatio } from "@projects/ui/aspect-ratio";
 const meta = {
   title: "Components/AspectRatio",
   component: AspectRatio,
-  tags: ["autodocs"],
+  tags: ["autodocs", "utilities"],
 } satisfies Meta<typeof AspectRatio>;
 
 export default meta;

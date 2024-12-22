@@ -21,7 +21,7 @@ const meta = {
     CardDescription: CardDescription as unknown as React.ComponentType<unknown>,
     CardFooter: CardFooter as unknown as React.ComponentType<unknown>,
   },
-  tags: ["autodocs"],
+  tags: ["autodocs", "surfaces"],
 } satisfies Meta<typeof Card>;
 
 export default meta;

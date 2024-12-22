@@ -44,7 +44,7 @@ const useCarousel = () => {
 
 interface CarouselRootProps {
   CarouselContent?: typeof CarouselContent;
-  CarouselHandler?: typeof CarouselHandler;
+  CarouselHandler?: typeof CarouselButtonHandler;
   CarouselItem?: typeof CarouselItem;
   CarouselButton?: typeof CarouselButton;
 }
@@ -211,7 +211,7 @@ const CarouselItem = (props: ListBoxItemProps) => {
   );
 };
 
-const CarouselHandler = (props: React.HTMLAttributes<HTMLDivElement>) => {
+const CarouselButtonHandler = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const { className, ...rest } = props;
   const { orientation } = useCarousel();
   return (
@@ -225,7 +225,7 @@ const CarouselHandler = (props: React.HTMLAttributes<HTMLDivElement>) => {
     />
   );
 };
-CarouselHandler.displayName = "CarouselHandler";
+CarouselButtonHandler.displayName = "CarouselButtonHandler";
 
 type CarouselButtonProps = ButtonProps & { slot: "previous" | "next" };
 
@@ -270,7 +270,7 @@ const CarouselButton = (props: CarouselButtonProps) => {
 export {
   Carousel,
   CarouselContent,
-  CarouselHandler,
+  CarouselButtonHandler,
   CarouselItem,
   CarouselButton,
 };

@@ -5,9 +5,9 @@ import {
   Menu,
   MenuCheckbox,
   MenuContent,
-  MenuDropdownItemDetails,
   MenuHeader,
   MenuItem,
+  MenuItemDetails,
   MenuKeyboard,
   MenuPrimitive,
   MenuRadio,
@@ -23,8 +23,7 @@ const meta = {
   subcomponents: {
     MenuCheckbox: MenuCheckbox as unknown as React.ComponentType<unknown>,
     MenuContent: MenuContent as unknown as React.ComponentType<unknown>,
-    MenuDropdownItemDetails:
-      MenuDropdownItemDetails as unknown as React.ComponentType<unknown>,
+    MenuItemDetails: MenuItemDetails as unknown as React.ComponentType<unknown>,
     MenuHeader: MenuHeader as unknown as React.ComponentType<unknown>,
     MenuItem: MenuItem as unknown as React.ComponentType<unknown>,
     MenuKeyboard: MenuKeyboard as unknown as React.ComponentType<unknown>,
@@ -35,7 +34,7 @@ const meta = {
     MenuTrigger: MenuTrigger as unknown as React.ComponentType<unknown>,
     SubMenu: SubMenu as unknown as React.ComponentType<unknown>,
   },
-  tags: ["autodocs", "input"],
+  tags: ["autodocs", "collections"],
 } satisfies Meta<typeof Menu>;
 
 export default meta;
@@ -64,7 +63,7 @@ export const SubMenuExample: Story = {
   render: () => (
     <Menu>
       <Button appearance="outline">Open</Button>
-      <MenuContent placement="bottom" className="sm:min-w-48">
+      <MenuContent placement="bottom">
         <MenuItem>Dashboard</MenuItem>
         <MenuItem>Reports</MenuItem>
         <MenuSeparator />
@@ -73,8 +72,23 @@ export const SubMenuExample: Story = {
           <MenuContent>
             <MenuItem>General</MenuItem>
             <MenuItem>Security</MenuItem>
-            <MenuItem>Privacy</MenuItem>
-            <MenuItem>Data Sharing</MenuItem>
+            <MenuSeparator />
+            <SubMenu>
+              <MenuItem>Privacy</MenuItem>
+              <MenuContent>
+                <MenuItem>Data Sharing</MenuItem>
+                <MenuItem>Cookies</MenuItem>
+                <MenuSeparator />
+                <SubMenu>
+                  <MenuItem>Advanced</MenuItem>
+                  <MenuContent>
+                    <MenuItem>Encryption</MenuItem>
+                    <MenuItem>Access Logs</MenuItem>
+                    <MenuItem>API Keys</MenuItem>
+                  </MenuContent>
+                </SubMenu>
+              </MenuContent>
+            </SubMenu>
           </MenuContent>
         </SubMenu>
         <MenuItem>Help</MenuItem>

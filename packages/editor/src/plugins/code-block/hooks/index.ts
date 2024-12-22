@@ -1,6 +1,6 @@
 export {
-  useCodeBlockCombobox,
-  useCodeBlockComboboxState,
+  useCodeBlockComboBox,
+  useCodeBlockComboBoxState,
 } from "./use-code-block-combobox";
 export { useCodeBlockElementState } from "./use-code-block-element";
 export { useCodeSyntaxLeaf } from "./use-code-syntax-leaf";

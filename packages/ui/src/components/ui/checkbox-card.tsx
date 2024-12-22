@@ -11,7 +11,7 @@ import { tv } from "tailwind-variants";
 import { Checkbox } from "@projects/ui/checkbox";
 import { Description, Label } from "@projects/ui/form";
 
-const checkboxCardStyles = tv({
+const checkboxCardVariants = tv({
   base: "grid",
   variants: {
     columns: {
@@ -36,27 +36,28 @@ const checkboxCardStyles = tv({
 
 interface CheckboxCardProps<T extends object>
   extends GridListProps<T>,
-    VariantProps<typeof checkboxCardStyles> {
+    VariantProps<typeof checkboxCardVariants> {
   className?: string;
 }
 
-const CheckboxCard = <T extends object>({
-  columns,
-  gap,
-  className,
-  selectionMode = "multiple",
-  ...props
-}: CheckboxCardProps<T>) => {
+const CheckboxCard = <T extends object>(props: CheckboxCardProps<T>) => {
+  const {
+    columns,
+    gap,
+    className,
+    selectionMode = "multiple",
+    ...rest
+  } = props;
   return (
     <GridList
       layout={columns === 1 ? "stack" : "grid"}
       selectionMode={selectionMode}
-      className={checkboxCardStyles({
+      className={checkboxCardVariants({
         columns,
         gap,
         className,
       })}
-      {...props}
+      {...rest}
     />
   );
 };
@@ -91,16 +92,13 @@ interface CheckboxCardItemProps
   description?: string;
 }
 
-const CheckboxCardItem = ({
-  children,
-  className,
-  ...props
-}: CheckboxCardItemProps) => {
+const CheckboxCardItem = (props: CheckboxCardItemProps) => {
+  const { children, className, ...rest } = props;
   const textValue = typeof children === "string" ? children : undefined;
   return (
     <GridListItem
       textValue={textValue}
-      {...props}
+      {...rest}
       className={composeRenderProps(className, (className, renderProps) =>
         checkboxCardItemStyles({
           ...renderProps,
@@ -128,5 +126,4 @@ const CheckboxCardItem = ({
   );
 };
 
-CheckboxCard.Item = CheckboxCardItem;
-export { CheckboxCard };
+export { CheckboxCard, CheckboxCardItem };

@@ -20,7 +20,7 @@ export function withVariants<
   const ComponentWithClassName = Component as React.FC<{ className: string }>;
 
   return React.forwardRef<
-    React.ElementRef<T>,
+    React.ComponentRef<T>,
     React.ComponentPropsWithoutRef<T> & VariantProps<V>
   >(function ExtendComponent(allProps, ref) {
     const { className, ...props } = allProps;

@@ -83,9 +83,6 @@ const preview: Preview = {
     className: {
       type: "string",
     },
-    name: {
-      type: "string",
-    },
   },
 };
 

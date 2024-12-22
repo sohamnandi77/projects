@@ -1,6 +1,6 @@
 import { withRef } from "#editor/lib/with-ref";
 import { useCodeBlockElementState } from "#editor/plugins/code-block/hooks/use-code-block-element";
-import { CodeBlockCombobox } from "#editor/ui/code-block-combobox";
+import { CodeBlockComboBox } from "#editor/ui/code-block-combobox";
 import { PlateElement } from "#editor/ui/plate-element";
 
 import { cn } from "@projects/ui/lib/utils";
@@ -27,7 +27,7 @@ export const CodeBlockElement = withRef<typeof PlateElement>(
             className="absolute right-2 top-2 z-10 select-none"
             contentEditable={false}
           >
-            <CodeBlockCombobox />
+            <CodeBlockComboBox />
           </div>
         )}
       </PlateElement>

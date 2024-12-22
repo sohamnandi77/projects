@@ -1,17 +1,15 @@
-"use client";
-
 import type {
-  ComboBoxProps as ComboboxPrimitiveProps,
+  ComboBoxProps as ComboBoxPrimitiveProps,
   InputProps,
   PopoverProps as PopoverPrimitiveProps,
   ValidationResult,
 } from "react-aria-components";
-import React from "react";
+import { use } from "react";
 import { composeTailwindRenderProps } from "#ui/lib/utils";
 import { ChevronDown, X } from "lucide-react";
 import {
   ComboBoxContext,
-  ComboBox as ComboboxPrimitive,
+  ComboBox as ComboBoxPrimitive,
   ComboBoxStateContext,
   useSlottedContext,
 } from "react-aria-components";
@@ -42,7 +40,7 @@ const comboboxStyles = tv({
 const { base, chevronButton, chevronIcon, clearButton } = comboboxStyles();
 
 interface ComboBoxProps<T extends object>
-  extends Omit<ComboboxPrimitiveProps<T>, "children"> {
+  extends Omit<ComboBoxPrimitiveProps<T>, "children"> {
   label?: string;
   placeholder?: string;
   description?: string | null;
@@ -50,24 +48,19 @@ interface ComboBoxProps<T extends object>
   children: React.ReactNode;
 }
 
-const ComboBox = <T extends object>({
-  label,
-  description,
-  errorMessage,
-  children,
-  className,
-  ...props
-}: ComboBoxProps<T>) => {
+const ComboBox = <T extends object>(props: ComboBoxProps<T>) => {
+  const { label, description, errorMessage, children, className, ...rest } =
+    props;
   return (
-    <ComboboxPrimitive
-      {...props}
+    <ComboBoxPrimitive
       className={composeTailwindRenderProps(base(), className)}
+      {...rest}
     >
       {label && <Label>{label}</Label>}
       <>{children}</>
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
-    </ComboboxPrimitive>
+    </ComboBoxPrimitive>
   );
 };
 
@@ -79,14 +72,11 @@ interface ListProps<T extends object>
   extends ListBoxPickerProps<T>,
     Omit<PopoverPrimitiveProps, "children" | "className" | "style"> {}
 
-const ComboBoxList = <T extends object>({
-  children,
-  items,
-  ...props
-}: ListProps<T>) => {
+const ComboBoxList = <T extends object>(props: ListProps<T>) => {
+  const { children, items, ...rest } = props;
   return (
     <PopoverPicker trigger="ComboBox" isNonModal placement={props.placement}>
-      <ListBoxPicker items={items} {...props}>
+      <ListBoxPicker items={items} {...rest}>
         {children}
       </ListBoxPicker>
     </PopoverPicker>
@@ -94,6 +84,7 @@ const ComboBoxList = <T extends object>({
 };
 
 const ComboBoxInput = (props: InputProps) => {
+  const { placeholder, ...rest } = props;
   const context = useSlottedContext(ComboBoxContext);
 
   if (!context) {
@@ -102,7 +93,7 @@ const ComboBoxInput = (props: InputProps) => {
 
   return (
     <FieldGroup className="relative pl-0">
-      <Input {...props} placeholder={props.placeholder} />
+      <Input {...rest} placeholder={placeholder} />
       <Button size="icon" appearance="plain" className={chevronButton()}>
         {!context.inputValue && <ChevronDown className={chevronIcon()} />}
       </Button>
@@ -112,7 +103,7 @@ const ComboBoxInput = (props: InputProps) => {
 };
 
 const ComboBoxClearButton = () => {
-  const state = React.useContext(ComboBoxStateContext);
+  const state = use(ComboBoxStateContext);
 
   return (
     <Button

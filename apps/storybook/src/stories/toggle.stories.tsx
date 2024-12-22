@@ -11,7 +11,7 @@ const meta = {
   subcomponents: {
     ToggleGroup: ToggleGroup as unknown as React.ComponentType<unknown>,
   },
-  tags: ["autodocs"],
+  tags: ["autodocs", "button"],
 } satisfies Meta<typeof Toggle>;
 
 export default meta;
@@ -68,8 +68,7 @@ export const Orientation: Story = {
 };
 
 export const Controlled: Story = {
-  render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+  render: function Render() {
     const [selected, setSelected] = useState(new Set<Key>(["bold"]));
 
     return (

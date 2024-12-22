@@ -1,91 +1,66 @@
-import { forwardRef, useContext } from "react";
-import { cn } from "#ui/lib/utils";
-import { OTPInput, OTPInputContext } from "input-otp";
-import { Circle } from "lucide-react";
+import type {
+  InputProps as AriaInputProps,
+  TextAreaProps as AriaTextAreaProps,
+} from "react-aria-components";
+import { forwardRef } from "react";
+import {
+  Input as AriaInput,
+  TextArea as AriaTextArea,
+  TextField as AriaTextField,
+  composeRenderProps,
+} from "react-aria-components";
 
-interface InputOTPType
-  extends React.ForwardRefExoticComponent<
-    React.ComponentPropsWithoutRef<typeof OTPInput> &
-      React.RefAttributes<HTMLInputElement>
-  > {
-  Group: typeof InputOTPGroup;
-  Slot: typeof InputOTPSlot;
-  Separator: typeof InputOTPSeparator;
-}
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
-const InputOTP = forwardRef<
-  React.ComponentRef<typeof OTPInput>,
-  React.ComponentPropsWithoutRef<typeof OTPInput>
->(({ className, containerClassName, ...props }, ref) => (
-  <OTPInput
-    data-1p-ignore
-    ref={ref}
-    containerClassName={cn(
-      "flex items-center gap-2 has-[:disabled]:opacity-50",
-      containerClassName,
-    )}
-    className={cn("disabled:cursor-not-allowed", className)}
-    {...props}
-  />
-)) as InputOTPType;
-InputOTP.displayName = "InputOTP";
+const TextField = AriaTextField;
 
-const InputOTPGroup = forwardRef<
-  React.ComponentRef<"div">,
-  React.ComponentPropsWithoutRef<"div">
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex items-center gap-x-1.5", className)}
-    {...props}
-  />
-));
-InputOTPGroup.displayName = "InputOTPGroup";
+const TextFieldInput = forwardRef<HTMLInputElement, AriaInputProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <AriaInput
+        ref={ref}
+        className={composeTailwindRenderProps(
+          cn(
+            "flex h-10 w-full rounded-md border border-stroke-secondary bg-bg px-3 py-2 text-sm ring-offset-bg file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-fg",
+            /* Disabled */
+            "disabled:cursor-not-allowed disabled:opacity-50",
+            /* Focused */
+            "focus:border-input focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+            /* Resets */
+            "focus-visible:outline-none",
+            /* Invalid / Error */
+            "invalid:border-danger",
+          ),
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
+TextFieldInput.displayName = "TextFieldInput";
 
-const InputOTPSlot = forwardRef<
-  React.ComponentRef<"div">,
-  React.ComponentPropsWithoutRef<"div"> & { index: number }
->(({ index, className, ...props }, ref) => {
-  const inputOTPContext = useContext(OTPInputContext);
-
-  if (!inputOTPContext.slots[index])
-    throw new Error("InputOTPSlot must be with in a Provider");
-
-  const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index];
-
+const TextAreaInput = (props: AriaTextAreaProps) => {
+  const { className, ...rest } = props;
   return (
-    <div
-      ref={ref}
-      className={cn(
-        "relative flex size-10 items-center justify-center rounded-md border text-sm tabular-nums transition-all",
-        isActive ? "z-10 border-ring/70 ring-4 ring-ring/20" : "border-input",
-        className,
+    <AriaTextArea
+      className={composeRenderProps(className, (className) =>
+        cn(
+          "flex min-h-[80px] w-full rounded-md border border-input bg-bg px-3 py-2 text-sm ring-offset-bg placeholder:text-muted-fg",
+          /* Focused */
+          "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+          /* Disabled */
+          "disabled:cursor-not-allowed disabled:opacity-50",
+          /* Resets */
+          "focus-visible:outline-none",
+          /* Invalid / Error */
+          "invalid:border-danger",
+          className,
+        ),
       )}
-      {...props}
-    >
-      {char}
-      {hasFakeCaret && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="h-4 w-px animate-caret-blink bg-fg duration-1000" />
-        </div>
-      )}
-    </div>
+      {...rest}
+    />
   );
-});
-InputOTPSlot.displayName = "InputOTPSlot";
+};
 
-const InputOTPSeparator = forwardRef<
-  React.ElementRef<"div">,
-  React.ComponentPropsWithoutRef<"div">
->(({ ...props }, ref) => (
-  <div ref={ref} role="separator" {...props}>
-    <Circle className="size-2 fill-current" />
-  </div>
-));
-InputOTPSeparator.displayName = "InputOTPSeparator";
-
-InputOTP.Group = InputOTPGroup;
-InputOTP.Slot = InputOTPSlot;
-InputOTP.Separator = InputOTPSeparator;
-
-export { InputOTP };
+export { TextAreaInput, TextField, TextFieldInput };

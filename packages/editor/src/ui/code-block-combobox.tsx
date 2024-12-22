@@ -12,9 +12,7 @@ import "prismjs/components/prism-cpp.js";
 import "prismjs/components/prism-csharp.js";
 import "prismjs/components/prism-css.js";
 import "prismjs/components/prism-dart.js";
-// import 'prismjs/components/prism-django.js';
 import "prismjs/components/prism-docker.js";
-// import 'prismjs/components/prism-ejs.js';
 import "prismjs/components/prism-erlang.js";
 import "prismjs/components/prism-git.js";
 import "prismjs/components/prism-go.js";
@@ -34,7 +32,6 @@ import "prismjs/components/prism-matlab.js";
 import "prismjs/components/prism-mermaid.js";
 import "prismjs/components/prism-objectivec.js";
 import "prismjs/components/prism-perl.js";
-// import 'prismjs/components/prism-php.js';
 import "prismjs/components/prism-powershell.js";
 import "prismjs/components/prism-properties.js";
 import "prismjs/components/prism-protobuf.js";
@@ -54,18 +51,18 @@ import "prismjs/components/prism-yaml.js";
 
 import { Button } from "@projects/ui/button";
 import {
-  Command,
-  CommandEmpty,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@projects/ui/command";
+  CommandMenu,
+  CommandMenuEmpty,
+  CommandMenuInput,
+  CommandMenuItem,
+  CommandMenuList,
+} from "@projects/ui/command-menu";
 import { cn } from "@projects/ui/lib/utils";
 import { Popover, PopoverTrigger } from "@projects/ui/popover";
 
 import {
-  useCodeBlockCombobox,
-  useCodeBlockComboboxState,
+  useCodeBlockComboBox,
+  useCodeBlockComboBoxState,
 } from "../plugins/code-block/hooks";
 
 export { Prism };
@@ -117,7 +114,7 @@ const languages: { label: string; value: string }[] = [
   { label: "R", value: "r" },
   { label: "Ruby", value: "ruby" },
   { label: "Sass (Sass)", value: "sass" },
-  // FIXME: Error with current scala grammar
+  // FIX: Error with current scala grammar
   { label: "Scala", value: "scala" },
   { label: "Scheme", value: "scheme" },
   { label: "Sass (Scss)", value: "scss" },
@@ -127,9 +124,9 @@ const languages: { label: string; value: string }[] = [
   { label: "YAML", value: "yaml" },
 ];
 
-export function CodeBlockCombobox() {
-  const state = useCodeBlockComboboxState();
-  const { commandItemProps } = useCodeBlockCombobox(state);
+export function CodeBlockComboBox() {
+  const state = useCodeBlockComboBoxState();
+  const { commandItemProps } = useCodeBlockComboBox(state);
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -144,7 +141,7 @@ export function CodeBlockCombobox() {
   );
 
   return (
-    <PopoverTrigger isOpen={open} onOpenChange={setOpen}>
+    <Popover isOpen={open} onOpenChange={setOpen}>
       <Button
         size="xs"
         appearance="plain"
@@ -156,22 +153,22 @@ export function CodeBlockCombobox() {
           : "Plain Text"}
         <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
       </Button>
-      <Popover className="w-[200px] p-0">
-        <Command shouldFilter={false}>
-          <CommandInput
+      <PopoverTrigger className="w-[200px] p-0">
+        <CommandMenu>
+          <CommandMenuInput
             value={value}
-            onValueChange={(value) => setValue(value)}
+            onValueChange={(value: string) => setValue(value)}
             placeholder="Search language..."
           />
-          <CommandEmpty>No language found.</CommandEmpty>
+          <CommandMenuEmpty>No language found.</CommandMenuEmpty>
 
-          <CommandList>
+          <CommandMenuList>
             {items.map((language) => (
-              <CommandItem
+              <CommandMenuItem
                 key={language.value}
                 className="cursor-pointer"
                 value={language.value}
-                onSelect={(value) => {
+                onSelect={(value: string) => {
                   commandItemProps.onSelect(value);
                   setOpen(false);
                 }}
@@ -184,11 +181,11 @@ export function CodeBlockCombobox() {
                   )}
                 />
                 {language.label}
-              </CommandItem>
+              </CommandMenuItem>
             ))}
-          </CommandList>
-        </Command>
-      </Popover>
-    </PopoverTrigger>
+          </CommandMenuList>
+        </CommandMenu>
+      </PopoverTrigger>
+    </Popover>
   );
 }

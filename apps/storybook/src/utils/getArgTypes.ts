@@ -1,7 +1,3 @@
-interface Variant {
-  variants: Record<string, Record<string, string>>;
-}
-
 type argTypes = Record<
   string,
   {
@@ -12,11 +8,13 @@ type argTypes = Record<
   }
 >;
 
-export const getArgTypes = (variant: Variant) => {
+export const getArgTypes = (
+  variant: Record<string, Record<string, string>>,
+) => {
   const argTypes: argTypes = {};
-  Object.keys(variant.variants).forEach((key) => {
+  Object.keys(variant).forEach((key) => {
     argTypes[key] = {
-      options: Object.keys(variant.variants[key] ?? {}),
+      options: Object.keys(variant[key] ?? {}),
       control: { type: "select" },
     };
   });

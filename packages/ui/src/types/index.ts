@@ -1,3 +1,5 @@
+import type { LucideProps } from "lucide-react";
+
 /**
  * Type representing React components that accept children as props.
  * @typedef {Object} ReactChildrenProps
@@ -5,3 +7,5 @@
  * @readonly - All properties are readonly to prevent modification after initialization.
  */
 export type ReactChildrenProps = Readonly<{ children?: React.ReactNode }>;
+
+export type IconProps = React.RefAttributes<SVGSVGElement> & LucideProps;

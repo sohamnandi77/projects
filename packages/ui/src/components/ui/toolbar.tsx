@@ -94,3 +94,4 @@ const ToolbarItem = (props: React.ComponentProps<typeof Toggle>) => {
 };
 
 export { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarItem };
+export type { ToolbarProps, GroupProps, SeparatorProps };

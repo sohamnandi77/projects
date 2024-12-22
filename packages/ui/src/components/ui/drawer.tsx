@@ -117,65 +117,63 @@ const DrawerContentPrimitive = ({
   };
 
   return (
-    <>
-      <ModalOverlayPrimitive
-        isDismissable
-        isOpen
-        onOpenChange={closeDrawer}
-        className={cn([
-          "fixed left-0 top-0 isolate z-50 h-[--visual-viewport-height] w-full touch-none will-change-transform",
-          "flex items-end [--visual-viewport-vertical-padding:100px]",
-        ])}
+    <ModalOverlayPrimitive
+      isDismissable
+      isOpen
+      onOpenChange={closeDrawer}
+      className={cn([
+        "fixed left-0 top-0 isolate z-50 h-[--visual-viewport-height] w-full touch-none will-change-transform",
+        "flex items-end [--visual-viewport-vertical-padding:100px]",
+      ])}
+      style={{
+        backgroundColor: bg,
+      }}
+    >
+      <ModalPrimitive
+        className={cn(
+          "flex max-h-full w-full flex-col overflow-hidden rounded-t-2xl bg-overlay text-left align-middle text-overlay-fg shadow-lg sm:rounded-lg",
+          "ring-1 ring-dark/5 dark:ring-light/15",
+        )}
+        initial={{ y: h }}
+        animate={{ y: 0 }}
+        exit={{ y: h }}
+        transition={staticTransition}
         style={{
-          backgroundColor: bg,
+          y,
+          top: "auto",
+          height:
+            contentHeight > 0 ? `${contentHeight + drawerMargin}px` : "auto",
+          maxHeight: `calc(100% - ${drawerMargin}px)`,
         }}
+        drag="y"
+        dragConstraints={{ top: 0, bottom: h }}
+        onDragEnd={onDragEnd}
+        {...props}
       >
-        <ModalPrimitive
-          className={cn(
-            "flex max-h-full w-full flex-col overflow-hidden rounded-t-2xl bg-overlay text-left align-middle text-overlay-fg shadow-lg sm:rounded-lg",
-            "ring-1 ring-dark/5 dark:ring-light/15",
+        <div className="overflow-hidden">
+          {withNotch && (
+            <div className="sticky top-0 mx-auto mt-2.5 h-1.5 w-10 shrink-0 touch-pan-y rounded-full bg-fg/20" />
           )}
-          initial={{ y: h }}
-          animate={{ y: 0 }}
-          exit={{ y: h }}
-          transition={staticTransition}
-          style={{
-            y,
-            top: "auto",
-            height:
-              contentHeight > 0 ? `${contentHeight + drawerMargin}px` : "auto",
-            maxHeight: `calc(100% - ${drawerMargin}px)`,
-          }}
-          drag="y"
-          dragConstraints={{ top: 0, bottom: h }}
-          onDragEnd={onDragEnd}
-          {...props}
-        >
-          <div className="overflow-hidden">
-            {withNotch && (
-              <div className="sticky top-0 mx-auto mt-2.5 h-1.5 w-10 shrink-0 touch-pan-y rounded-full bg-fg/20" />
-            )}
-            <div
-              className="mt-3 overflow-y-auto"
-              ref={(el) => {
-                if (el) {
-                  const resizeObserver = new ResizeObserver((entries) => {
-                    for (const entry of entries) {
-                      setContentHeight(entry.contentRect.height);
-                    }
-                  });
-                  resizeObserver.observe(el);
-                  return () => resizeObserver.disconnect();
-                }
-                return;
-              }}
-            >
-              <>{children}</>
-            </div>
+          <div
+            className="mt-3 overflow-y-auto"
+            ref={(el) => {
+              if (el) {
+                const resizeObserver = new ResizeObserver((entries) => {
+                  for (const entry of entries) {
+                    setContentHeight(entry.contentRect.height);
+                  }
+                });
+                resizeObserver.observe(el);
+                return () => resizeObserver.disconnect();
+              }
+              return;
+            }}
+          >
+            <>{children}</>
           </div>
-        </ModalPrimitive>
-      </ModalOverlayPrimitive>
-    </>
+        </div>
+      </ModalPrimitive>
+    </ModalOverlayPrimitive>
   );
 };
 
@@ -308,13 +306,13 @@ const DrawerFooter = ({
 );
 
 export {
+  DialogClose as DrawerClose,
+  DialogDescription as DrawerDescription,
+  DialogTitle as DrawerTitle,
   Drawer,
   DrawerBody,
-  DialogClose as DrawerClose,
   DrawerContent,
-  DialogDescription as DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DialogTitle as DrawerTitle,
   DrawerTrigger,
 };

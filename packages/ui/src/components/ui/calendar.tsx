@@ -64,7 +64,7 @@ const CalendarHeaderButton = (props: CalendarHeaderButtonProps) => {
       slot={slot}
       className={composeTailwindRenderProps(
         cn(
-          getButtonVariants({ appearance: "outline" }),
+          getButtonVariants({ variant: "secondary" }),
           "size-7 bg-transparent p-0 opacity-50",
           "hover:opacity-100",
         ),

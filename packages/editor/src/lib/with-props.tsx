@@ -17,7 +17,7 @@ export function withProps<
   const ComponentWithClassName = Component as React.FC<{ className: string }>;
 
   return React.forwardRef<
-    React.ElementRef<T>,
+    React.ComponentRef<T>,
     React.ComponentPropsWithoutRef<T>
   >(function ExtendComponent(props, ref) {
     return (

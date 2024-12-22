@@ -100,16 +100,14 @@ const Checkbox = ({ className, ...props }: CheckboxProps) => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <>
-              {props.label ? (
-                <Label>{props.label}</Label>
-              ) : (
-                (props.children as React.ReactNode)
-              )}
-              {props.description && (
-                <Description>{props.description}</Description>
-              )}
-            </>
+            {props.label ? (
+              <Label>{props.label}</Label>
+            ) : (
+              (props.children as React.ReactNode)
+            )}
+            {props.description && (
+              <Description>{props.description}</Description>
+            )}
           </div>
         </div>
       )}

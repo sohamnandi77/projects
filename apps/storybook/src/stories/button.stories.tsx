@@ -3,14 +3,15 @@ import { useCallback, useState } from "react";
 import { fn } from "@storybook/test";
 import { Archive, ArrowLeft, LoaderCircle, Plus, Printer } from "lucide-react";
 
+import type { ButtonProps } from "@projects/ui/button";
 import { useToggle } from "@projects/hooks/use-toggle";
-import { Button } from "@projects/ui/button";
+import { Button, ButtonOptionsKey } from "@projects/ui/button";
 import { Tooltip, TooltipContent } from "@projects/ui/tooltip";
 
 const meta = {
   title: "Components/Button",
   component: Button,
-  tags: ["autodocs"],
+  tags: ["autodocs", "button"],
   argTypes: {
     variant: {
       control: "select",
@@ -32,34 +33,68 @@ const meta = {
     },
   },
   args: { onClick: fn(), children: "Button" },
-  render: (args) => <Button {...args} />,
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {
-    variant: "default",
-  },
+/**
+ * A button lets peeps do stuff with clicks, presses, taps, and keystrokes.
+ */
+export const Basic: Story = {
+  render: (args) => (
+    <div className="space-x-2">
+      {Object.keys(ButtonOptionsKey.variant).map((variant) => (
+        <Button
+          key={variant}
+          {...args}
+          variant={variant as ButtonProps["variant"]}
+        />
+      ))}
+    </div>
+  ),
 };
 
+/**
+ * When a button is disabled, it cannot be interacted with and is visually indicated by a disabled state.
+ */
 export const Disabled: Story = {
   args: {
-    variant: "default",
     isDisabled: true,
   },
+  render: (args) => (
+    <div className="space-x-2">
+      {Object.keys(ButtonOptionsKey.variant).map((variant) => (
+        <Button
+          key={variant}
+          {...args}
+          variant={variant as ButtonProps["variant"]}
+        />
+      ))}
+    </div>
+  ),
 };
 
 export const Rounded: Story = {
   args: {
     shape: "circle",
   },
+  render: (args) => (
+    <div className="space-x-2">
+      {Object.keys(ButtonOptionsKey.variant).map((variant) => (
+        <Button
+          key={variant}
+          {...args}
+          variant={variant as ButtonProps["variant"]}
+        />
+      ))}
+    </div>
+  ),
 };
 
 export const withIcon: Story = {
   args: {
-    variant: "default",
+    variant: "primary",
   },
   render: (args) => (
     <Button {...args}>
@@ -77,7 +112,7 @@ export const withIcon: Story = {
 
 export const OnlyIcon: Story = {
   args: {
-    variant: "default",
+    variant: "secondary",
     appearance: "outline",
     size: "icon",
   },
@@ -112,9 +147,12 @@ export const withBackButton: Story = {
   ),
 };
 
+/**
+ * You can also add loader to the button. This is useful when you want to show a loading state for the button.
+ */
 export const LoadingButton: Story = {
   args: {
-    variant: "default",
+    variant: "primary",
     isDisabled: true,
   },
   render: (args) => (
@@ -131,9 +169,12 @@ export const LoadingButton: Story = {
   ),
 };
 
+/**
+ * A Button can indicate a pending state through the isPending prop. This helps when an action takes time to complete, offering users feedback that the process is ongoing. The pending state communicates the change to assistive technologies and disables interactions, except for focus.
+ */
 export const PendingButton: Story = {
   args: {
-    variant: "default",
+    variant: "primary",
   },
   render: function Render(args) {
     // ! Not a recommend practice try to use newer hooks like `useTransition`, here, we didn't used it as `setTimeout` won’t be marked as Transitions.
@@ -174,6 +215,7 @@ export const PendingButton: Story = {
 export const MessagesButton: Story = {
   args: {
     appearance: "outline",
+    variant: "secondary",
   },
   render: (args) => (
     <Button {...args}>
@@ -188,6 +230,7 @@ export const MessagesButton: Story = {
 export const PrintButton: Story = {
   args: {
     appearance: "outline",
+    variant: "secondary",
   },
   render: (args) => (
     <Button {...args}>
@@ -209,6 +252,7 @@ export const PrintButton: Story = {
 export const IconButton: Story = {
   args: {
     appearance: "outline",
+    variant: "secondary",
   },
   render: function Render(args) {
     const [open, toggle] = useToggle();
@@ -240,6 +284,7 @@ export const WithTooltip: Story = {
   args: {
     appearance: "outline",
     size: "icon",
+    variant: "secondary",
   },
   render: (args) => {
     return (
