@@ -12,7 +12,8 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
-import { Description, FieldError, FieldGroup, Label } from "./form";
+import { Description, FieldError, FieldGroup } from "./form";
+import { Label } from "./label";
 
 interface DateFieldProps<T extends DateValue>
   extends DateFieldPrimitiveProps<T> {

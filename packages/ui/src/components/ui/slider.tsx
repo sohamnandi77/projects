@@ -20,7 +20,9 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
-import { Description, Label } from "@projects/ui/form";
+import { Description } from "@projects/ui/form";
+
+import { Label } from "./label";
 
 const sliderStyles = tv({
   slots: {

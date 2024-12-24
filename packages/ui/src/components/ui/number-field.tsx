@@ -13,7 +13,9 @@ import { tv } from "tailwind-variants";
 
 import { useViewport } from "@projects/hooks/use-viewport";
 
-import { Description, FieldError, FieldGroup, Input, Label } from "./form";
+import { Description, FieldError, FieldGroup } from "./form";
+import { TextFieldInput } from "./input";
+import { Label } from "./label";
 
 const fieldBorderStyles = tv({
   base: "group-focus:border-primary/70 forced-colors:border-[Highlight]",
@@ -64,7 +66,10 @@ const NumberField = ({
             {isMobile ? (
               <StepperButton slot="decrement" className="border-r" />
             ) : null}
-            <Input className="tabular-nums" placeholder={placeholder} />
+            <TextFieldInput
+              className="tabular-nums"
+              placeholder={placeholder}
+            />
             <div
               className={fieldBorderStyles({
                 ...renderProps,

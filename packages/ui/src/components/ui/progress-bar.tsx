@@ -3,7 +3,7 @@ import { composeTailwindRenderProps } from "#ui/lib/utils";
 import { motion } from "framer-motion";
 import { ProgressBar as ProgressBarPrimitive } from "react-aria-components";
 
-import { Label } from "./form";
+import { Label } from "./label";
 
 interface ProgressBarProps extends ProgressBarPrimitiveProps {
   label?: string;

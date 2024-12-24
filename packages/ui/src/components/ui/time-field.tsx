@@ -9,7 +9,8 @@ import { TimeField as TimeFieldPrimitive } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
 import { DateInput } from "./date-field";
-import { Description, FieldError, FieldGroup, Label } from "./form";
+import { Description, FieldError, FieldGroup } from "./form";
+import { Label } from "./label";
 
 export interface TimeFieldProps<T extends TimeValue>
   extends TimeFieldPrimitiveProps<T> {

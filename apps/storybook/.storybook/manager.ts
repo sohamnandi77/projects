@@ -53,7 +53,7 @@ addons.setConfig({
       },
     },
     {
-      tags: "date-time",
+      tags: "date-and-time",
       badge: {
         text: "Date & Time",
         bgColor: "#37474f",
@@ -65,7 +65,7 @@ addons.setConfig({
       },
     },
     {
-      tags: "drag-drop",
+      tags: "drag-and-drop",
       badge: {
         text: "Drag & Drop",
         bgColor: "#212121",

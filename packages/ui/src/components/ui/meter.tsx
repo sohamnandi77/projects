@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { TriangleAlert } from "lucide-react";
 import { Meter as MeterPrimitive } from "react-aria-components";
 
-import { Label } from "./form";
+import { Label } from "./label";
 
 export interface MeterProps extends MeterPrimitiveProps {
   label?: string;

@@ -22,10 +22,12 @@ import {
   DropdownItemDetails,
   DropdownSection,
 } from "@projects/ui/dropdown";
-import { Description, FieldError, Label } from "@projects/ui/form";
+import { Description, FieldError } from "@projects/ui/form";
 import { focusStyles } from "@projects/ui/lib/style";
 import { ListBoxPicker } from "@projects/ui/list-box";
 import { PopoverPicker } from "@projects/ui/popover";
+
+import { Label } from "./label";
 
 const selectTriggerStyles = tv({
   extend: focusStyles,

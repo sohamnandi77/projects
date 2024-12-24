@@ -37,7 +37,7 @@ const meta = {
     CalendarHeaderButton:
       CalendarHeaderButton as unknown as React.ComponentType<unknown>,
   },
-  tags: ["autodocs", "date-time"],
+  tags: ["autodocs", "date-and-time"],
 } satisfies Meta<typeof Calendar>;
 
 export default meta;

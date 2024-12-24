@@ -8,8 +8,9 @@ import { useToggle } from "@projects/hooks/use-toggle";
 import { Google } from "@projects/icons/google";
 import { Button } from "@projects/ui/button";
 import { Checkbox } from "@projects/ui/checkbox";
-import { Form, Label } from "@projects/ui/form";
+import { Form } from "@projects/ui/form";
 import { TextField, TextFieldInput } from "@projects/ui/input";
+import { Label } from "@projects/ui/label";
 
 import useLogin from "~/feature/auth/hooks/useLogin";
 

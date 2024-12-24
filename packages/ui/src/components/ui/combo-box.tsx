@@ -21,7 +21,9 @@ import {
   DropdownItem as ComboBoxItem,
   DropdownSection as ComboBoxSection,
 } from "./dropdown";
-import { Description, FieldError, FieldGroup, Input, Label } from "./form";
+import { Description, FieldError, FieldGroup } from "./form";
+import { TextFieldInput } from "./input";
+import { Label } from "./label";
 import { ListBoxPicker } from "./list-box";
 import { PopoverPicker } from "./popover";
 
@@ -83,7 +85,6 @@ const ComboBoxList = <T extends object>(props: ListProps<T>) => {
 };
 
 const ComboBoxInput = (props: InputProps) => {
-  const { placeholder, ...rest } = props;
   const context = useSlottedContext(ComboBoxContext);
 
   if (!context) {
@@ -92,7 +93,7 @@ const ComboBoxInput = (props: InputProps) => {
 
   return (
     <FieldGroup className="relative pl-0">
-      <Input {...rest} placeholder={placeholder} />
+      <TextFieldInput {...props} />
       <Button size="icon" appearance="plain" className={chevronButton()}>
         {!context.inputValue && <ChevronDown className={chevronIcon()} />}
       </Button>

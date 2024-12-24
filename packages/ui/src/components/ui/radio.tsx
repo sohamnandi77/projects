@@ -10,7 +10,8 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
-import { Description, FieldError, Label } from "./form";
+import { Description, FieldError } from "./form";
+import { Label } from "./label";
 
 interface RadioGroupProps extends Omit<RadioGroupPrimitiveProps, "children"> {
   label?: string;
@@ -71,31 +72,29 @@ interface RadioProps extends RadioPrimitiveProps {
 
 const Radio = ({ description, ...props }: RadioProps) => {
   return (
-    <>
-      <RadioPrimitive
-        {...props}
-        className={composeTailwindRenderProps(
-          "group flex items-center gap-2 text-sm text-fg transition disabled:text-fg/50 forced-colors:disabled:text-[GrayText]",
-          props.className,
-        )}>
-        {(renderProps) => (
-          <div className="flex gap-2">
-            <div
-              className={radioStyles({
-                ...renderProps,
-                className: "description" in props ? "mt-1" : "mt-0.5",
-              })}
-            />
-            <div className="flex flex-col gap-1">
-              {props.children as React.ReactNode}
-              {description && (
-                <Description className="block">{description}</Description>
-              )}
-            </div>
+    <RadioPrimitive
+      {...props}
+      className={composeTailwindRenderProps(
+        "group flex items-center gap-2 text-sm text-fg transition disabled:text-fg/50 forced-colors:disabled:text-[GrayText]",
+        props.className,
+      )}>
+      {(renderProps) => (
+        <div className="flex gap-2">
+          <div
+            className={radioStyles({
+              ...renderProps,
+              className: "description" in props ? "mt-1" : "mt-0.5",
+            })}
+          />
+          <div className="flex flex-col gap-1">
+            {props.children as React.ReactNode}
+            {description && (
+              <Description className="block">{description}</Description>
+            )}
           </div>
-        )}
-      </RadioPrimitive>
-    </>
+        </div>
+      )}
+    </RadioPrimitive>
   );
 };
 

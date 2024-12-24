@@ -10,8 +10,8 @@ import {
   oneTap,
   openAPI,
   organization,
-  passkey,
 } from "better-auth/plugins";
+import { passkey } from "better-auth/plugins/passkey";
 
 import { env } from "~/env";
 import { db } from "~/server/db";
