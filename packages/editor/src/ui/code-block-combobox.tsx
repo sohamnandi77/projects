@@ -114,7 +114,7 @@ const languages: { label: string; value: string }[] = [
   { label: "R", value: "r" },
   { label: "Ruby", value: "ruby" },
   { label: "Sass (Sass)", value: "sass" },
-  // FIX: Error with current scala grammar
+  // FIXME: Error with current scala grammar
   { label: "Scala", value: "scala" },
   { label: "Scheme", value: "scheme" },
   { label: "Sass (Scss)", value: "scss" },

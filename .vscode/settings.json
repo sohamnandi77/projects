@@ -14,7 +14,6 @@
   "editor.quickSuggestions": {
     "strings": true
   },
-  "better-comments.multilineComments": true,
   "explorer.fileNesting.enabled": true,
 
   // Search settings
@@ -72,6 +71,7 @@
   },
 
   // Comment Extensions settings
+  "better-comments.multilineComments": true,
   "better-comments.tags": [
     {
       "tag": "BUG",
@@ -83,7 +83,7 @@
       "italic": false
     },
     {
-      "tag": "FIX",
+      "tag": "FIXME",
       "color": "#FF2D00",
       "strikethrough": false,
       "underline": false,
@@ -203,7 +203,6 @@
   "todo-tree.general.tags": [
     "BUG",
     "ISSUE",
-    "FIX",
     "FIXME",
     "FIXIT",
     "HACK",
@@ -220,7 +219,7 @@
   },
   "todo-tree.general.tagGroups": {
     "BUG": ["ISSUE"],
-    "FIX": ["FIXME", "FIXIT"],
+    "FIXME": ["FIXIT"],
     "TODO": ["TO DO"]
   },
   // check icons list here: https://octicons.github.com/ or https://microsoft.github.io/vscode-codicons/dist/codicon.html
@@ -230,7 +229,7 @@
       "iconColour": "#FF2D00",
       "background": "#FF2D00"
     },
-    "FIX": {
+    "FIXME": {
       "icon": "tools",
       "iconColour": "#FF2D00",
       "background": "#FF2D00"

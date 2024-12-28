@@ -21,5 +21,10 @@ export default [
         React: "writable",
       },
     },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
   },
 ];
