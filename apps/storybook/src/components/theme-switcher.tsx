@@ -11,7 +11,7 @@ interface ThemeSwitcherProps {
 }
 
 export const ThemeSwitcher = (props: ThemeSwitcherProps) => {
-  const { children, theme } = props;
+  const { children, theme = "system" } = props;
   const { setTheme } = useTheme();
 
   useEffect(() => {

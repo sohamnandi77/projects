@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 
+import { useLocalStorage } from "@projects/hooks/use-local-storage";
 import { useTheme } from "@projects/ui/theme";
 
 import type { Theme } from "~/constants";
 import { THEMES } from "~/constants";
 
-export const useIsDarkTheme = (theme: Theme) => {
+export const useIsDarkTheme = () => {
+  const [theme] = useLocalStorage<Theme>("theme", "system");
   const { setTheme } = useTheme();
 
   useEffect(() => {
