@@ -144,7 +144,7 @@ export const CheckboxGroupControlled: Story = {
     const [values, setValues] = useState<string[]>([]);
 
     return (
-      <>
+      <div className="w-[380px]">
         <CheckboxGroup value={values} onChange={setValues}>
           <Label>Options</Label>
           <Checkbox value="sound">Sound</Checkbox>
@@ -161,7 +161,7 @@ export const CheckboxGroupControlled: Story = {
             "No values selected"
           )}
         </Description>
-      </>
+      </div>
     );
   },
 };

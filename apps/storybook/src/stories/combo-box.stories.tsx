@@ -67,7 +67,7 @@ const users = [
 
 export const Basic: Story = {
   render: () => (
-    <ComboBox placeholder="Select a user" label="Users">
+    <ComboBox>
       <ComboBoxInput />
       <ComboBoxList items={users}>
         {(item) => (

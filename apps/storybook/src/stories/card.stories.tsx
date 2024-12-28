@@ -10,6 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@projects/ui/card";
+import { Checkbox } from "@projects/ui/checkbox";
+import { TextField, TextFieldInput } from "@projects/ui/input";
+import { Label } from "@projects/ui/label";
+import { Link } from "@projects/ui/link";
 
 const meta = {
   title: "Components/Card",
@@ -45,7 +49,7 @@ const notifications = [
   },
 ];
 
-export const Primary: Story = {
+export const Basic: Story = {
   render: () => {
     return (
       <Card className="w-[380px]">
@@ -88,6 +92,40 @@ export const Primary: Story = {
             <Check />
             <span>Mark all as read</span>
           </Button>
+        </CardFooter>
+      </Card>
+    );
+  },
+};
+
+export const WithForm: Story = {
+  render: () => {
+    return (
+      <Card className="w-[380px]">
+        <CardHeader>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>
+            Don't loose the level, just keep on going.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <TextField type="text" isRequired>
+            <Label>Email</Label>
+            <TextFieldInput placeholder="Enter your email" />
+          </TextField>
+          <TextField type="password" isRequired>
+            <Label>Password</Label>
+            <TextFieldInput placeholder="Enter your password" />
+          </TextField>
+          <div className="flex items-center justify-between">
+            <Checkbox>Remember me</Checkbox>
+            <Link intent="primary" className="text-sm" href="#">
+              Forgot password?
+            </Link>
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button className="w-full">Login</Button>
         </CardFooter>
       </Card>
     );

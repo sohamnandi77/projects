@@ -1,8 +1,6 @@
 import type {
-  ComboBoxProps as ComboBoxPrimitiveProps,
-  InputProps,
+  ComboBoxProps,
   PopoverProps as PopoverPrimitiveProps,
-  ValidationResult,
 } from "react-aria-components";
 import { use } from "react";
 import { composeTailwindRenderProps } from "#ui/lib/utils";
@@ -15,19 +13,19 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
+import type { InputProps } from "./input";
 import type { ListBox } from "./list-box";
 import { Button } from "./button";
 import {
   DropdownItem as ComboBoxItem,
   DropdownSection as ComboBoxSection,
 } from "./dropdown";
-import { Description, FieldError, FieldGroup } from "./form";
+import { FieldGroup } from "./form";
 import { TextFieldInput } from "./input";
-import { Label } from "./label";
 import { ListBoxPicker } from "./list-box";
 import { PopoverPicker } from "./popover";
 
-const comboboxStyles = tv({
+const comboBoxStyles = tv({
   slots: {
     base: "group flex w-full flex-col gap-y-1.5",
     chevronButton:
@@ -39,29 +37,15 @@ const comboboxStyles = tv({
   },
 });
 
-const { base, chevronButton, chevronIcon, clearButton } = comboboxStyles();
-
-interface ComboBoxProps<T extends object>
-  extends Omit<ComboBoxPrimitiveProps<T>, "children"> {
-  label?: string;
-  placeholder?: string;
-  description?: string | null;
-  errorMessage?: string | ((validation: ValidationResult) => string);
-  children: React.ReactNode;
-}
+const { base, chevronButton, chevronIcon, clearButton } = comboBoxStyles();
 
 const ComboBox = <T extends object>(props: ComboBoxProps<T>) => {
-  const { label, description, errorMessage, children, className, ...rest } =
-    props;
+  const { className, ...rest } = props;
   return (
     <ComboBoxPrimitive
       className={composeTailwindRenderProps(base(), className)}
-      {...rest}>
-      {label && <Label>{label}</Label>}
-      <>{children}</>
-      {description && <Description>{description}</Description>}
-      <FieldError>{errorMessage}</FieldError>
-    </ComboBoxPrimitive>
+      {...rest}
+    />
   );
 };
 
@@ -110,7 +94,7 @@ const ComboBoxClearButton = () => {
       className={clearButton()}
       slot={null}
       aria-label="Clear"
-      onPress={() => {
+      onClick={() => {
         state?.setSelectedKey(null);
         state?.open();
       }}>
@@ -120,3 +104,5 @@ const ComboBoxClearButton = () => {
 };
 
 export { ComboBox, ComboBoxInput, ComboBoxList, ComboBoxItem, ComboBoxSection };
+
+export type { ComboBoxProps, ListBoxPickerProps, ListProps };

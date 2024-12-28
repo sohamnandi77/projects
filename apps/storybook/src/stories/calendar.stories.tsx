@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
-import type { DateValue } from "@projects/ui/calendar";
+import type { DateValue } from "@projects/ui";
 import {
   Calendar,
   CalendarCell,
@@ -13,6 +13,7 @@ import {
   CalendarHeaderCell,
   CalendarHeading,
   CalendarRoot,
+  RangeCalendarCell,
   RangeCalendarRoot,
 } from "@projects/ui/calendar";
 import { cn } from "@projects/ui/lib/utils";
@@ -93,6 +94,9 @@ export const InternationalCalendars: Story = {
 
     return (
       <>
+        <div className="pb-3 text-sm">
+          Try changing the Locale to some other language
+        </div>
         <Calendar aria-label="Date" value={date} onChange={setDate} {...args} />
         <p className="mt-3">Selected date: {date?.toString()}</p>
       </>
@@ -110,7 +114,7 @@ export const RangeCalendarStory: Story = {
             {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
           </CalendarGridHeader>
           <CalendarGridBody>
-            {(date) => <CalendarCell date={date} />}
+            {(date) => <RangeCalendarCell date={date} />}
           </CalendarGridBody>
         </CalendarGrid>
         <CalendarGrid offset={{ months: 1 }}>
@@ -118,7 +122,7 @@ export const RangeCalendarStory: Story = {
             {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
           </CalendarGridHeader>
           <CalendarGridBody>
-            {(date) => <CalendarCell date={date} />}
+            {(date) => <RangeCalendarCell date={date} />}
           </CalendarGridBody>
         </CalendarGrid>
         <CalendarGrid offset={{ months: 2 }}>
@@ -126,7 +130,7 @@ export const RangeCalendarStory: Story = {
             {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
           </CalendarGridHeader>
           <CalendarGridBody>
-            {(date) => <CalendarCell date={date} />}
+            {(date) => <RangeCalendarCell date={date} />}
           </CalendarGridBody>
         </CalendarGrid>
       </div>

@@ -51,12 +51,12 @@ import "prismjs/components/prism-yaml.js";
 
 import { Button } from "@projects/ui/button";
 import {
-  CommandMenu,
-  CommandMenuEmpty,
-  CommandMenuInput,
-  CommandMenuItem,
-  CommandMenuList,
-} from "@projects/ui/command-menu";
+  Command,
+  CommandEmpty,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@projects/ui/command";
 import { cn } from "@projects/ui/lib/utils";
 import { Popover, PopoverTrigger } from "@projects/ui/popover";
 
@@ -153,17 +153,17 @@ export function CodeBlockComboBox() {
         <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
       </Button>
       <PopoverTrigger className="w-[200px] p-0">
-        <CommandMenu>
-          <CommandMenuInput
+        <Command>
+          <CommandInput
             value={value}
             onValueChange={(value: string) => setValue(value)}
             placeholder="Search language..."
           />
-          <CommandMenuEmpty>No language found.</CommandMenuEmpty>
+          <CommandEmpty>No language found.</CommandEmpty>
 
-          <CommandMenuList>
+          <CommandList>
             {items.map((language) => (
-              <CommandMenuItem
+              <CommandItem
                 key={language.value}
                 className="cursor-pointer"
                 value={language.value}
@@ -179,10 +179,10 @@ export function CodeBlockComboBox() {
                   )}
                 />
                 {language.label}
-              </CommandMenuItem>
+              </CommandItem>
             ))}
-          </CommandMenuList>
-        </CommandMenu>
+          </CommandList>
+        </Command>
       </PopoverTrigger>
     </Popover>
   );

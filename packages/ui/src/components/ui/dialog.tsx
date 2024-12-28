@@ -41,34 +41,23 @@ const dialogStyles = tv({
 const { root, header, description, body, footer, closeIndicator } =
   dialogStyles();
 
-const Dialog = ({ role, className, ...props }: DialogProps) => {
+const Dialog = (props: DialogProps) => {
+  const { role, className, ...rest } = props;
   return (
     <DialogPrimitive
       role={role ?? "dialog"}
       className={root({ className })}
-      {...props}
+      {...rest}
     />
   );
 };
 
 const DialogTrigger = (props: ButtonPrimitiveProps) => (
-  <ButtonPrimitive {...props}>
-    {(values) => (
-      <>
-        {typeof props.children === "function"
-          ? props.children(values)
-          : props.children}
-      </>
-    )}
-  </ButtonPrimitive>
+  <ButtonPrimitive {...props} />
 );
 
-type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement> & {
-  title?: string;
-  description?: string;
-};
-
-const DialogHeader = ({ className, ...props }: DialogHeaderProps) => {
+const DialogHeader = (props: React.HTMLAttributes<HTMLDivElement>) => {
+  const { className, children, ...rest } = props;
   const headerRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -94,16 +83,9 @@ const DialogHeader = ({ className, ...props }: DialogHeaderProps) => {
     <div
       data-slot="dialog-header"
       ref={headerRef}
-      className={header({ className })}>
-      {props.title && <DialogTitle>{props.title}</DialogTitle>}
-      {props.description && (
-        <DialogDescription>{props.description}</DialogDescription>
-      )}
-      {!props.title && typeof props.children === "string" ? (
-        <DialogTitle {...props} />
-      ) : (
-        props.children
-      )}
+      className={header({ className })}
+      {...rest}>
+      {children}
     </div>
   );
 };
@@ -246,3 +228,5 @@ export {
   DialogClose,
   DialogCloseIndicator,
 };
+
+export type { DialogProps };

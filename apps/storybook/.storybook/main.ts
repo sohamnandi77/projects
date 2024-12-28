@@ -25,6 +25,7 @@ const config: StorybookConfig = {
     "@storybook/addon-interactions",
     "storybook-addon-tag-badges",
     "@storybook/addon-a11y",
+    "storybook-addon-rtl",
   ],
   framework: {
     name: "@storybook/react-vite",

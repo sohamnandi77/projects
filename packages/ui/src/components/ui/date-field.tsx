@@ -1,55 +1,85 @@
 import type {
-  DateFieldProps as DateFieldPrimitiveProps,
+  DateFieldProps,
   DateInputProps,
+  DateSegmentProps,
   DateValue,
-  ValidationResult,
+  TimeFieldProps,
+  TimeValue,
 } from "react-aria-components";
 import { composeTailwindRenderProps } from "#ui/lib/utils";
 import {
+  composeRenderProps,
   DateField as DateFieldPrimitive,
   DateInput as DateInputPrimitive,
-  DateSegment,
+  DateSegment as DateSegmentPrimitive,
+  TimeField as TimeFieldPrimitive,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
-import { Description, FieldError, FieldGroup } from "./form";
-import { Label } from "./label";
-
-interface DateFieldProps<T extends DateValue>
-  extends DateFieldPrimitiveProps<T> {
-  label?: string;
-  description?: string;
-  errorMessage?: string | ((validation: ValidationResult) => string);
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
-}
+import type { AsChildProps, SlotProps } from "./slot";
+import { Slot } from "./slot";
 
 const DateField = <T extends DateValue>(props: DateFieldProps<T>) => {
-  const {
-    prefix,
-    suffix,
-    label,
-    description,
-    errorMessage,
-    className,
-    ...rest
-  } = props;
+  const { className, ...rest } = props;
   return (
     <DateFieldPrimitive
       {...rest}
       className={composeTailwindRenderProps(
         "group flex flex-col gap-y-1.5",
         className,
-      )}>
-      {label && <Label>{label}</Label>}
-      <FieldGroup>
-        {prefix ? <span data-slot="prefix">{prefix}</span> : null}
-        <DateInput />
-        {suffix ? <span data-slot="suffix">{suffix}</span> : null}
-      </FieldGroup>
-      {description && <Description>{description}</Description>}
-      <FieldError>{errorMessage}</FieldError>
-    </DateFieldPrimitive>
+      )}
+    />
+  );
+};
+
+const TimeField = <T extends TimeValue>(props: TimeFieldProps<T>) => {
+  const { className, ...rest } = props;
+  return (
+    <TimeFieldPrimitive
+      {...rest}
+      className={composeTailwindRenderProps(
+        "group flex flex-col gap-y-1.5",
+        className,
+      )}
+    />
+  );
+};
+
+const DateInputPrefix = (props: SlotProps & AsChildProps) => {
+  const { asChild, ...rest } = props;
+  const Comp = asChild ? Slot : "span";
+  return <Comp data-slot="prefix" {...rest} />;
+};
+
+const DateInputSuffix = (props: SlotProps & AsChildProps) => {
+  const { asChild, ...rest } = props;
+  const Comp = asChild ? Slot : "span";
+  return <Comp data-slot="suffix" {...rest} />;
+};
+
+const DateInput = (props: DateInputProps) => {
+  const { className, ...rest } = props;
+  return (
+    <DateInputPrimitive
+      className={composeTailwindRenderProps(
+        "bg-transparent p-2 text-base text-fg placeholder:text-muted-fg lg:text-sm",
+        className,
+      )}
+      {...rest}
+    />
+  );
+};
+
+const TimeInput = (props: DateInputProps) => {
+  const { className, ...rest } = props;
+  return (
+    <DateInput
+      className={composeTailwindRenderProps(
+        "flex w-fit min-w-28 justify-around whitespace-nowrap sm:text-sm",
+        className,
+      )}
+      {...rest}
+    />
   );
 };
 
@@ -71,20 +101,31 @@ const segmentStyles = tv({
   },
 });
 
-const DateInput = ({
-  className,
-  ...props
-}: Omit<DateInputProps, "children">) => {
+const DateSegment = (props: DateSegmentProps) => {
+  const { className, ...rest } = props;
   return (
-    <DateInputPrimitive
-      className={composeTailwindRenderProps(
-        "bg-transparent p-2 text-base text-fg placeholder:text-muted-fg lg:text-sm",
-        className,
+    <DateSegmentPrimitive
+      className={composeRenderProps(className, (className, renderProps) =>
+        segmentStyles({ ...renderProps, className }),
       )}
-      {...props}>
-      {(segment) => <DateSegment segment={segment} className={segmentStyles} />}
-    </DateInputPrimitive>
+      {...rest}
+    />
   );
 };
 
-export { DateField, DateInput, segmentStyles, type DateFieldProps };
+export {
+  DateField,
+  DateInput,
+  DateInputPrefix,
+  DateInputSuffix,
+  DateSegment,
+  TimeField,
+  TimeInput,
+};
+
+export type {
+  DateFieldProps,
+  DateSegmentProps,
+  DateInputProps,
+  TimeFieldProps,
+};

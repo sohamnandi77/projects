@@ -160,7 +160,7 @@ export {
   DialogFooter as ModalFooter,
   DialogBody as ModalBody,
   DialogClose as ModalClose,
-  ModalContent as ModalContent,
+  ModalContent,
   modalOverlayStyles,
   modalContentStyles,
 };

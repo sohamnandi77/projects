@@ -1,31 +1,65 @@
-import React from "react";
+import React, { isValidElement } from "react";
 import { tv } from "tailwind-variants";
 
+import { Slot } from "./slot";
+
 const skeletonStyles = tv({
-  base: "shrink-0 animate-pulse",
+  base: [
+    // reset
+    "!pointer-events-none !cursor-default !select-none !border-none !bg-none !box-decoration-clone !bg-clip-border !text-transparent !shadow-none *:!invisible before:!invisible after:!invisible",
+    // data-inline-skeleton
+    "data-[inline-skeleton]:!font-['Arial'] data-[inline-skeleton]:leading-[0px]",
+    // empty
+    "empty:block",
+    // base
+    "shrink-0 animate-pulse",
+  ],
   variants: {
-    intent: {
+    variant: {
       muted: "bg-fg/20",
       lighter: "bg-fg/15",
     },
     shape: {
       circle: "rounded-full",
-      square: "rounded-lg",
+      square: "rounded-sm",
     },
   },
   defaultVariants: {
-    intent: "muted",
+    variant: "muted",
     shape: "square",
   },
 });
 
 interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
-  intent?: "muted" | "lighter";
+  variant?: "muted" | "lighter";
   shape?: "circle" | "square";
+  isLoading?: boolean;
 }
-const Skeleton = ({ shape, intent, className, ...props }: SkeletonProps) => {
+
+const Skeleton = (props: SkeletonProps) => {
+  const {
+    shape,
+    variant,
+    className,
+    isLoading = true,
+    children,
+    ...rest
+  } = props;
+  const isValidChildren = isValidElement(children);
+  const Tag = isValidChildren ? Slot : "span";
+
+  if (!isLoading) return children;
+
   return (
-    <div className={skeletonStyles({ shape, intent, className })} {...props} />
+    <Tag
+      aria-hidden
+      tabIndex={-1}
+      data-inline-skeleton={isValidChildren ? undefined : true}
+      className={skeletonStyles({ shape, variant, className })}
+      inert={true}
+      {...rest}>
+      {children}
+    </Tag>
   );
 };
 

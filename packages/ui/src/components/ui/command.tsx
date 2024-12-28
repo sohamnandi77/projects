@@ -83,24 +83,24 @@ const {
   description,
 } = commandStyles();
 
-interface CommandMenuContextProps {
+interface CommandContextProps {
   hideSearchIndicator?: boolean;
   hideCloseButton?: boolean;
   messageOnEmpty?: boolean | string;
   isBlurred?: boolean;
 }
 
-const CommandMenuContext = createContext<CommandMenuContextProps>({});
+const CommandContext = createContext<CommandContextProps>({});
 
-interface CommandMenuRootProps {
-  CommandMenuEmpty?: typeof CommandMenuEmpty;
-  CommandMenuInput?: typeof CommandMenuInput;
-  CommandMenuItem?: typeof CommandMenuItem;
-  CommandMenuKeyboard?: typeof CommandMenuKeyboard;
-  CommandMenuList?: typeof CommandMenuList;
-  CommandMenuSection?: typeof CommandMenuSection;
-  CommandMenuSeparator?: typeof CommandMenuSeparator;
-  CommandMenuDescription?: typeof CommandMenuDescription;
+interface CommandRootProps {
+  CommandEmpty?: typeof CommandEmpty;
+  CommandInput?: typeof CommandInput;
+  CommandItem?: typeof CommandItem;
+  CommandKeyboard?: typeof CommandKeyboard;
+  CommandList?: typeof CommandList;
+  CommandSection?: typeof CommandSection;
+  CommandSeparator?: typeof CommandSeparator;
+  CommandDescription?: typeof CommandDescription;
 }
 
 const modalOverlay = tv({
@@ -114,10 +114,10 @@ const modalOverlay = tv({
     },
   },
 });
-interface CommandMenuProps
+interface CommandProps
   extends ModalOverlayProps,
-    CommandMenuRootProps,
-    CommandMenuContextProps {
+    CommandRootProps,
+    CommandContextProps {
   children: React.ReactNode;
   value?: string;
   messageOnEmpty?: boolean | string;
@@ -128,7 +128,7 @@ interface CommandMenuProps
   };
 }
 
-const CommandMenu = ({
+const Command = ({
   classNames,
   hideSearchIndicator = false,
   hideCloseButton = false,
@@ -138,7 +138,7 @@ const CommandMenu = ({
   children,
   isBlurred = false,
   ...props
-}: CommandMenuProps) => {
+}: CommandProps) => {
   const { isDesktop } = useViewport();
 
   const providerValue = useMemo(
@@ -147,7 +147,7 @@ const CommandMenu = ({
   );
 
   return (
-    <CommandMenuContext value={providerValue}>
+    <CommandContext value={providerValue}>
       <ModalOverlay
         isDismissable
         className={modalOverlay({
@@ -182,19 +182,19 @@ const CommandMenu = ({
           </Dialog>
         </Modal>
       </ModalOverlay>
-    </CommandMenuContext>
+    </CommandContext>
   );
 };
 
-type CommandMenuInputProps = React.ComponentPropsWithoutRef<
+type CommandInputProps = React.ComponentPropsWithoutRef<
   typeof CommandPrimitive.Input
 >;
 
-const CommandMenuInput = forwardRef<
+const CommandInput = forwardRef<
   React.ComponentRef<typeof CommandPrimitive.Input>,
-  CommandMenuInputProps
+  CommandInputProps
 >(({ className, ...props }, ref) => {
-  const { hideSearchIndicator } = useContext(CommandMenuContext);
+  const { hideSearchIndicator } = useContext(CommandContext);
   return (
     <div className="flex items-center border-b px-3">
       {!hideSearchIndicator && (
@@ -212,31 +212,29 @@ const CommandMenuInput = forwardRef<
   );
 });
 
-CommandMenuInput.displayName = CommandPrimitive.Input.displayName;
+CommandInput.displayName = CommandPrimitive.Input.displayName;
 
-type CommandMenuListProps = React.ComponentProps<typeof CommandPrimitive.List>;
+type CommandListProps = React.ComponentProps<typeof CommandPrimitive.List>;
 
-const CommandMenuList = ({ className, ...props }: CommandMenuListProps) => {
-  const { messageOnEmpty } = useContext(CommandMenuContext);
+const CommandList = ({ className, ...props }: CommandListProps) => {
+  const { messageOnEmpty } = useContext(CommandContext);
   return (
     <CommandPrimitive.List className={list({ className })} {...props}>
       {messageOnEmpty !== false && (
-        <CommandMenuEmpty>
+        <CommandEmpty>
           {typeof messageOnEmpty === "string"
             ? messageOnEmpty
             : "No results found."}
-        </CommandMenuEmpty>
+        </CommandEmpty>
       )}
       {props.children}
     </CommandPrimitive.List>
   );
 };
 
-type CommandMenuEmptyProps = React.ComponentProps<
-  typeof CommandPrimitive.Empty
->;
+type CommandEmptyProps = React.ComponentProps<typeof CommandPrimitive.Empty>;
 
-const CommandMenuEmpty = ({ className, ...props }: CommandMenuEmptyProps) => {
+const CommandEmpty = ({ className, ...props }: CommandEmptyProps) => {
   return <CommandPrimitive.Empty className={empty({ className })} {...props} />;
 };
 
@@ -245,7 +243,7 @@ interface CommandSectionProps
   separator?: boolean;
 }
 
-const CommandMenuSection = ({
+const CommandSection = ({
   className,
   separator,
   ...props
@@ -253,12 +251,12 @@ const CommandMenuSection = ({
   return (
     <CommandPrimitive.Group className={section({ className })} {...props}>
       {props.children}
-      {separator && <CommandMenuSeparator className="mt-2" />}
+      {separator && <CommandSeparator className="mt-2" />}
     </CommandPrimitive.Group>
   );
 };
 
-const CommandMenuSeparator = ({ className, ...props }: SeparatorProps) => {
+const CommandSeparator = ({ className, ...props }: SeparatorProps) => {
   return (
     // eslint-disable-next-line tailwindcss/no-custom-classname
     <div className="s3xsprt -mx-4">
@@ -272,11 +270,7 @@ interface CommandItemProps
   isDanger?: boolean;
 }
 
-const CommandMenuItem = ({
-  isDanger,
-  className,
-  ...props
-}: CommandItemProps) => {
+const CommandItem = ({ isDanger, className, ...props }: CommandItemProps) => {
   return (
     <CommandPrimitive.Item
       data-danger={isDanger ? "true" : undefined}
@@ -286,7 +280,7 @@ const CommandMenuItem = ({
   );
 };
 
-interface CommandMenuDescriptionProps extends TextProps {
+interface CommandDescriptionProps extends TextProps {
   intent?: "danger" | "warning" | "primary" | "secondary" | "success";
 }
 
@@ -302,11 +296,11 @@ const commandMenuDescriptionVariants = tv({
   },
 });
 
-const CommandMenuDescription = ({
+const CommandDescription = ({
   intent,
   className,
   ...props
-}: CommandMenuDescriptionProps) => {
+}: CommandDescriptionProps) => {
   return (
     <Text
       {...props}
@@ -318,18 +312,18 @@ const CommandMenuDescription = ({
   );
 };
 
-const CommandMenuKeyboard = (props: KeyboardProps) => (
+const CommandKeyboard = (props: KeyboardProps) => (
   <Keyboard classNames={{ kbd: kbdKeyboard(), base: "-mr-2.5" }} {...props} />
 );
 
 export {
-  CommandMenu,
-  CommandMenuEmpty,
-  CommandMenuInput,
-  CommandMenuItem,
-  CommandMenuKeyboard,
-  CommandMenuList,
-  CommandMenuSection,
-  CommandMenuSeparator,
-  CommandMenuDescription,
+  Command,
+  CommandEmpty,
+  CommandInput,
+  CommandItem,
+  CommandKeyboard,
+  CommandList,
+  CommandSection,
+  CommandSeparator,
+  CommandDescription,
 };

@@ -5,7 +5,7 @@ import { tv } from "tailwind-variants";
 
 const trackStyles = tv({
   base: [
-    "mr-2 h-5 w-8 cursor-pointer rounded-full border-2 border-transparent bg-toggle transition duration-200",
+    "h-5 w-8 cursor-pointer rounded-full border-2 border-transparent bg-toggle transition duration-200",
     "group-focus:ring-4",
     "group-invalid:ring-danger/20 group-focus:ring-4",
     "group-disabled:cursor-default group-disabled:opacity-50",

@@ -164,8 +164,8 @@ addons.setConfig({
       tags: "statuses",
       badge: {
         text: "Statuses",
-        bgColor: "#004d40",
-        fgColor: "#a7ffeb",
+        bgColor: "#3e2723",
+        fgColor: "#ffccbc",
       },
       display: {
         sidebar: ["component"],
@@ -176,8 +176,9 @@ addons.setConfig({
       tags: "utilities",
       badge: {
         text: "Utilities",
-        bgColor: "#3e2723",
-        fgColor: "#ffccbc",
+
+        bgColor: "#283593",
+        fgColor: "#ffeb3b",
       },
       display: {
         sidebar: ["component"],

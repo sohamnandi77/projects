@@ -7,7 +7,7 @@ const separatorStyles = tv({
   variants: {
     orientation: {
       horizontal: "h-px w-full",
-      vertical: "w-px",
+      vertical: "h-full w-px",
     },
   },
   defaultVariants: {
@@ -15,14 +15,12 @@ const separatorStyles = tv({
   },
 });
 
-export function Separator({ className, ...props }: SeparatorProps) {
+export function Separator(props: Readonly<SeparatorProps>) {
+  const { className, orientation = "horizontal", ...rest } = props;
   return (
     <SeparatorPrimitive
-      {...props}
-      className={separatorStyles({
-        orientation: props.orientation,
-        className: className,
-      })}
+      {...rest}
+      className={separatorStyles({ orientation, className })}
     />
   );
 }

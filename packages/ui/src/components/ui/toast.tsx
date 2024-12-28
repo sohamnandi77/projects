@@ -46,7 +46,6 @@ const Toast = ({ ...props }: ToasterProps) => {
           success:
             "bg-primary ring-primary/50 text-primary-fg ring-inset [&>[data-close-button=true]>svg]:text-primary-fg",
           cancelButton: getButtonVariants({
-            className: "",
             size: "xs",
             appearance: "outline",
           }),
