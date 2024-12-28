@@ -1,9 +1,9 @@
 {
   "name": "@projects/editor",
   "version": "1.0.0",
-  "type": "module",
-  "license": "MIT",
   "private": true,
+  "license": "MIT",
+  "type": "module",
   "imports": {
     "#editor*": [
       "./src/*.ts",
@@ -24,6 +24,7 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
+  "prettier": "@projects/prettier-config",
   "dependencies": {
     "@projects/ui": "workspace:*",
     "@udecode/plate-common": "^41.0.2",
@@ -50,6 +51,5 @@
   },
   "peerDependencies": {
     "react": "catalog:react19"
-  },
-  "prettier": "@projects/prettier-config"
+  }
 }

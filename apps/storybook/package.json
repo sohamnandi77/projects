@@ -1,9 +1,9 @@
 {
   "name": "storybook",
   "version": "1.0.0",
-  "type": "module",
-  "license": "MIT",
   "private": true,
+  "license": "MIT",
+  "type": "module",
   "scripts": {
     "build": "storybook build",
     "build:app": "tsc -b && vite build",
@@ -17,6 +17,7 @@
     "preview": "serve storybook-static",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
+  "prettier": "@projects/prettier-config",
   "dependencies": {
     "@projects/hooks": "workspace:*",
     "@projects/ui": "workspace:*",
@@ -50,6 +51,5 @@
     "tailwindcss": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"
-  },
-  "prettier": "@projects/prettier-config"
+  }
 }

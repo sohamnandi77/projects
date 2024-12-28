@@ -8,8 +8,12 @@ import { fileURLToPath } from "url";
 const config = {
   plugins: [
     "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-packagejson",
     "prettier-plugin-tailwindcss",
   ],
+  endOfLine: "lf",
+  tabWidth: 2,
+  useTabs: false,
   printWidth: 80,
   singleQuote: false,
   bracketSpacing: true,

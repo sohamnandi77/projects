@@ -1,9 +1,9 @@
 {
   "name": "blog",
   "version": "0.1.0",
-  "type": "module",
-  "license": "MIT",
   "private": true,
+  "license": "MIT",
+  "type": "module",
   "scripts": {
     "build": "next build",
     "clean": "git clean -xdf .cache .turbo .next dist node_modules",
@@ -20,6 +20,7 @@
     "start": "next start",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
+  "prettier": "@projects/prettier-config",
   "dependencies": {
     "@projects/auth": "workspace:*",
     "@projects/editor": "workspace:*",
@@ -60,6 +61,5 @@
     "jiti": "^2.4.2",
     "tailwindcss": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": "@projects/prettier-config"
+  }
 }

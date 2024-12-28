@@ -1,9 +1,9 @@
 {
   "name": "@projects/tailwind-config",
   "version": "1.0.0",
-  "type": "module",
-  "license": "MIT",
   "private": true,
+  "license": "MIT",
+  "type": "module",
   "exports": {
     "./native": "./native.ts",
     "./web": "./web.ts",
@@ -17,6 +17,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
   },
+  "prettier": "@projects/prettier-config",
   "dependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
@@ -32,6 +33,5 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": "@projects/prettier-config"
+  }
 }
