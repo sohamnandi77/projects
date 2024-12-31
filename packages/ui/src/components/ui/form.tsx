@@ -1,19 +1,25 @@
 import type {
   FieldErrorProps,
   GroupProps,
-  LabelProps,
+  InputProps,
   TextFieldProps as TextFieldPrimitiveProps,
   TextProps,
   ValidationResult,
 } from "react-aria-components";
+import { focusStyles } from "#ui/lib/style";
 import {
+  composeRenderProps,
   FieldError as FieldErrorPrimitive,
   Group,
+  Input as InputPrimitive,
   Text,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
+
+import type { AsChildProps, SlotProps } from "./slot";
+import { Slot } from "./slot";
 
 interface FieldProps {
   label?: string;
@@ -24,32 +30,64 @@ interface FieldProps {
   "aria-labelledby"?: TextFieldPrimitiveProps["aria-labelledby"];
 }
 
-const fieldVariants = tv({
-  slots: {
-    description: "text-pretty text-base/6 text-muted-fg sm:text-sm/6",
-    fieldError: "text-sm/6 text-danger forced-colors:text-[Mark]",
-    // input: [
-    //   "w-full min-w-0 bg-transparent px-2.5 py-2 text-base text-fg placeholder-muted-fg outline-none focus:outline-none lg:text-sm [&::-ms-reveal]:hidden",
-    // ],
+const InputPrefix = (props: SlotProps & AsChildProps) => {
+  const { asChild, className, ...rest } = props;
+  const Comp = asChild ? Slot : "span";
+  return (
+    <Comp
+      data-slot="prefix"
+      className={cn("ml-2.5 text-muted-fg", className)}
+      {...rest}
+    />
+  );
+};
+
+const InputSuffix = (props: SlotProps & AsChildProps) => {
+  const { asChild, className, ...rest } = props;
+  const Comp = asChild ? Slot : "span";
+  return (
+    <Comp
+      data-slot="suffix"
+      className={cn("mr-2.5 text-muted-fg", className)}
+      {...rest}
+    />
+  );
+};
+
+const inputStyles = tv({
+  base: "w-full min-w-0 bg-transparent px-2.5 py-2 text-base text-fg placeholder-muted-fg outline-0 sm:text-sm [&::-ms-reveal]:hidden",
+  variants: {
+    isDisabled: {
+      true: "cursor-not-allowed opacity-50 forced-colors:border-[GrayText]",
+    },
   },
 });
 
-const { description, fieldError } = fieldVariants();
-
-interface DescriptionProps extends TextProps {
-  isWarning?: boolean;
-}
-
-const Description = (props: DescriptionProps) => {
+const Input = (props: InputProps) => {
   const { className, ...rest } = props;
-  const isWarning = props.isWarning ?? false;
+  return (
+    <InputPrimitive
+      {...rest}
+      className={composeRenderProps(className, (className, renderProps) =>
+        inputStyles({
+          ...renderProps,
+          className,
+        }),
+      )}
+    />
+  );
+};
+
+const Description = (props: TextProps) => {
+  const { className, ...rest } = props;
   return (
     <Text
       {...rest}
       slot="description"
-      className={description({
-        className: isWarning ? "text-warning" : className,
-      })}
+      className={cn(
+        "text-pretty text-base/6 text-muted-fg sm:text-sm/6",
+        className,
+      )}
     />
   );
 };
@@ -59,34 +97,50 @@ const FieldError = (props: FieldErrorProps) => {
   return (
     <FieldErrorPrimitive
       {...rest}
-      className={composeTailwindRenderProps(fieldError(), className)}
-    />
-  );
-};
-
-const FieldGroup = (props: GroupProps) => {
-  const { className, ...rest } = props;
-  return (
-    <Group
-      {...rest}
       className={composeTailwindRenderProps(
-        cn([
-          "flex items-center rounded-lg border border-input transition duration-200 ease-out",
-          "focus-within:border-primary/70 focus-within:ring-4 focus-within:ring-primary/20",
-          "focus-within:ring-4 group-invalid:focus-within:border-danger group-invalid:focus-within:ring-danger/20",
-          "[&>[role=progressbar]]:mr-2.5",
-          "[&_[data-slot=icon]]:size-4 [&_[data-slot=icon]]:shrink-0",
-          "[&>[data-slot=suffix]]:mr-2.5 [&>[data-slot=suffix]]:text-muted-fg",
-          "[&>[data-slot=prefix]]:ml-2.5 [&>[data-slot=prefix]]:text-muted-fg",
-          "group-disabled:opacity-50",
-        ]),
+        "text-sm/6 text-danger forced-colors:text-[Mark]",
         className,
       )}
     />
   );
 };
 
-export { Description, FieldError, FieldGroup, fieldVariants };
+const fieldGroupStyles = tv({
+  base: [
+    "group flex h-10 items-center overflow-hidden rounded-lg border border-input transition duration-200 ease-out",
+    "focus-within:ring-4 group-invalid:focus-within:border-danger group-invalid:focus-within:ring-danger/20",
+    "[&>[role=progressbar]]:mr-2.5",
+  ],
+  variants: {
+    isFocusWithin: focusStyles.variants.isFocused,
+    isInvalid: focusStyles.variants.isInvalid,
+    isDisabled: {
+      true: "opacity-50 forced-colors:border-[GrayText]",
+    },
+  },
+});
+
+const FieldGroup = (props: GroupProps) => {
+  const { className, ...rest } = props;
+  return (
+    <Group
+      {...rest}
+      className={composeRenderProps(className, (className, renderProps) =>
+        fieldGroupStyles({
+          ...renderProps,
+          className,
+        }),
+      )}
+    />
+  );
+};
+
+export { Input, Description, FieldError, FieldGroup, InputPrefix, InputSuffix };
 export { Form } from "react-aria-components";
 export type { FormProps } from "react-aria-components";
-export type { FieldProps, FieldErrorProps, LabelProps, DescriptionProps };
+export type {
+  FieldProps,
+  FieldErrorProps,
+  TextProps as DescriptionProps,
+  GroupProps,
+};

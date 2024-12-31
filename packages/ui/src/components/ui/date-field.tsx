@@ -16,8 +16,7 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
-import type { AsChildProps, SlotProps } from "./slot";
-import { Slot } from "./slot";
+import { FieldGroup, InputPrefix, InputSuffix } from "./form";
 
 const DateField = <T extends DateValue>(props: DateFieldProps<T>) => {
   const { className, ...rest } = props;
@@ -43,18 +42,6 @@ const TimeField = <T extends TimeValue>(props: TimeFieldProps<T>) => {
       )}
     />
   );
-};
-
-const DateInputPrefix = (props: SlotProps & AsChildProps) => {
-  const { asChild, ...rest } = props;
-  const Comp = asChild ? Slot : "span";
-  return <Comp data-slot="prefix" {...rest} />;
-};
-
-const DateInputSuffix = (props: SlotProps & AsChildProps) => {
-  const { asChild, ...rest } = props;
-  const Comp = asChild ? Slot : "span";
-  return <Comp data-slot="suffix" {...rest} />;
 };
 
 const DateInput = (props: DateInputProps) => {
@@ -116,8 +103,9 @@ const DateSegment = (props: DateSegmentProps) => {
 export {
   DateField,
   DateInput,
-  DateInputPrefix,
-  DateInputSuffix,
+  FieldGroup as DateFieldGroup,
+  InputPrefix as DateInputPrefix,
+  InputSuffix as DateInputSuffix,
   DateSegment,
   TimeField,
   TimeInput,

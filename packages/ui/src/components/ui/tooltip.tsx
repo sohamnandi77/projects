@@ -1,4 +1,7 @@
-import type { TooltipProps as TooltipPrimitiveProps } from "react-aria-components";
+import type {
+  TooltipProps as TooltipPrimitiveProps,
+  TooltipTriggerComponentProps,
+} from "react-aria-components";
 import type { VariantProps } from "tailwind-variants";
 import React from "react";
 import {
@@ -33,9 +36,10 @@ const tooltipStyles = tv({
   },
 });
 
-const Tooltip = (props: React.ComponentProps<typeof TooltipTrigger>) => (
-  <TooltipTrigger {...props}>{props.children}</TooltipTrigger>
-);
+const Tooltip = (props: TooltipTriggerComponentProps) => {
+  const { children, ...rest } = props;
+  return <TooltipTrigger {...rest}>{children}</TooltipTrigger>;
+};
 
 interface ContentProps
   extends Omit<TooltipPrimitiveProps, "children">,
@@ -44,15 +48,11 @@ interface ContentProps
   children: React.ReactNode;
 }
 
-const TooltipContent = ({
-  showArrow = true,
-  intent = "default",
-  children,
-  ...props
-}: ContentProps) => {
+const TooltipContent = (props: ContentProps) => {
+  const { showArrow = true, intent = "default", children, ...rest } = props;
   return (
     <TooltipPrimitive
-      {...props}
+      {...rest}
       offset={10}
       className={composeRenderProps(props.className, (className, renderProps) =>
         tooltipStyles({

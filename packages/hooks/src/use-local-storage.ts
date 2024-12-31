@@ -34,6 +34,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       const item = localStorage.getItem(key);
       if (!item) return initialValue;
 
+      if (typeof item === "string") return item as T;
       // Add type safety for parsing
       const parsed = superjson.parse<StorageValue<T>>(item);
       return parsed?.value ?? initialValue;

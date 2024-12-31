@@ -15,12 +15,13 @@ import { useDateFormatter, useLocale } from "@projects/ui";
 import { Button } from "@projects/ui/button";
 import {
   DateField,
+  DateFieldGroup,
   DateInput,
   DateInputPrefix,
   DateInputSuffix,
   DateSegment,
 } from "@projects/ui/date-field";
-import { FieldError, FieldGroup, Form } from "@projects/ui/form";
+import { FieldError, Form } from "@projects/ui/form";
 import { Label } from "@projects/ui/label";
 
 const meta = {
@@ -43,11 +44,11 @@ export const Basic: Story = {
     return (
       <DateField>
         <Label>Event date</Label>
-        <FieldGroup>
+        <DateFieldGroup>
           <DateInput>
             {(segment) => <DateSegment segment={segment} />}
           </DateInput>
-        </FieldGroup>
+        </DateFieldGroup>
       </DateField>
     );
   },
@@ -70,11 +71,11 @@ export const DateTimeField: Story = {
           else setValue(today);
         }}>
         <Label>Event date</Label>
-        <FieldGroup>
+        <DateFieldGroup>
           <DateInput>
             {(segment) => <DateSegment segment={segment} />}
           </DateInput>
-        </FieldGroup>
+        </DateFieldGroup>
       </DateField>
     );
   },
@@ -89,11 +90,11 @@ export const ReadOnly: Story = {
         className="mb-2"
         defaultValue={parseDate(now.toString())}>
         <Label>Event date</Label>
-        <FieldGroup>
+        <DateFieldGroup>
           <DateInput>
             {(segment) => <DateSegment segment={segment} />}
           </DateInput>
-        </FieldGroup>
+        </DateFieldGroup>
       </DateField>
     );
   },
@@ -108,11 +109,11 @@ export const Disabled: Story = {
         className="mb-2"
         defaultValue={parseDate(now.toString())}>
         <Label>Event date</Label>
-        <FieldGroup>
+        <DateFieldGroup>
           <DateInput>
             {(segment) => <DateSegment segment={segment} />}
           </DateInput>
-        </FieldGroup>
+        </DateFieldGroup>
       </DateField>
     );
   },
@@ -124,14 +125,14 @@ export const Prefix: Story = {
       <Form onSubmit={(e) => e.preventDefault()}>
         <DateField isRequired className="mb-2">
           <Label>Event date</Label>
-          <FieldGroup>
+          <DateFieldGroup>
             <DateInputPrefix>
               <Calendar1Icon className="size-4" />
             </DateInputPrefix>
             <DateInput>
               {(segment) => <DateSegment segment={segment} />}
             </DateInput>
-          </FieldGroup>
+          </DateFieldGroup>
         </DateField>
         <Button type="submit">Submit</Button>
       </Form>
@@ -145,14 +146,14 @@ export const Suffix: Story = {
       <Form onSubmit={(e) => e.preventDefault()}>
         <DateField isRequired className="mb-2">
           <Label>Event date</Label>
-          <FieldGroup>
+          <DateFieldGroup>
             <DateInput>
               {(segment) => <DateSegment segment={segment} />}
             </DateInput>
             <DateInputSuffix asChild>
               <Calendar1Icon className="size-4" />
             </DateInputSuffix>
-          </FieldGroup>
+          </DateFieldGroup>
         </DateField>
         <Button type="submit">Submit</Button>
       </Form>
@@ -166,11 +167,11 @@ export const Validation: Story = {
       <Form onSubmit={(e) => e.preventDefault()}>
         <DateField isRequired className="mb-2">
           <Label>Event date</Label>
-          <FieldGroup>
+          <DateFieldGroup>
             <DateInput>
               {(segment) => <DateSegment segment={segment} />}
             </DateInput>
-          </FieldGroup>
+          </DateFieldGroup>
           <FieldError />
         </DateField>
         <Button type="submit">Submit</Button>
@@ -189,11 +190,11 @@ export const MinAndMaxValidation: Story = {
           minValue={today(getLocalTimeZone())}
           defaultValue={parseDate("2022-02-03")}>
           <Label>Appointment date</Label>
-          <FieldGroup>
+          <DateFieldGroup>
             <DateInput>
               {(segment) => <DateSegment segment={segment} />}
             </DateInput>
-          </FieldGroup>
+          </DateFieldGroup>
           <FieldError />
         </DateField>
         <Button type="submit">Submit</Button>
@@ -216,11 +217,11 @@ export const CustomValidation: Story = {
             isWeekend(date, locale) ? "We are closed on weekends." : null
           }>
           <Label>Appointment date</Label>
-          <FieldGroup>
+          <DateFieldGroup>
             <DateInput>
               {(segment) => <DateSegment segment={segment} />}
             </DateInput>
-          </FieldGroup>
+          </DateFieldGroup>
           <FieldError />
         </DateField>
         <Button type="submit">Submit</Button>
@@ -241,11 +242,11 @@ export const Controlled: Story = {
       <div className="space-y-3">
         <DateField className="mb-2" value={value} onChange={setValue}>
           <Label>Event date</Label>
-          <FieldGroup>
+          <DateFieldGroup>
             <DateInput>
               {(segment) => <DateSegment segment={segment} />}
             </DateInput>
-          </FieldGroup>
+          </DateFieldGroup>
         </DateField>
         <div className="divide-y [&_p]:py-2">
           <p>
@@ -265,11 +266,11 @@ export const Uncontrolled: Story = {
       <div className="space-y-3">
         <DateField className="mb-2" defaultValue={parseDate(now.toString())}>
           <Label>Event date</Label>
-          <FieldGroup>
+          <DateFieldGroup>
             <DateInput>
               {(segment) => <DateSegment segment={segment} />}
             </DateInput>
-          </FieldGroup>
+          </DateFieldGroup>
         </DateField>
       </div>
     );

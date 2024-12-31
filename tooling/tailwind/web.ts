@@ -3,13 +3,13 @@ import animate from "tailwindcss-animate";
 import twrac from "tailwindcss-react-aria-components";
 
 import base from "./base";
+import { twFieldSizingPlugin } from "./plugins/tailwindcss-field-sizing";
 
 export default {
   darkMode: ["class"],
   content: base.content,
   presets: [base],
-  plugins: [twrac, animate],
-
+  plugins: [twrac, animate, twFieldSizingPlugin],
   theme: {
     container: {
       center: true,
@@ -33,12 +33,12 @@ export default {
             height: "0",
           },
           to: {
-            height: "var(--radix-accordion-content-height)",
+            height: "36",
           },
         },
         "accordion-up": {
           from: {
-            height: "var(--radix-accordion-content-height)",
+            height: "36",
           },
           to: {
             height: "0",

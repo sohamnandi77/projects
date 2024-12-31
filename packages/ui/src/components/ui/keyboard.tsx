@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { Keyboard as KeyboardPrimitive } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
@@ -21,14 +22,16 @@ interface KeyboardProps extends React.HTMLAttributes<HTMLElement> {
   };
 }
 
-const Keyboard = ({ keys, classNames, className, ...props }: KeyboardProps) => {
+const Keyboard = (props: KeyboardProps) => {
+  const { keys, classNames, className, ...rest } = props;
+  const id = useId();
   return (
     <KeyboardPrimitive
       className={base({ className: classNames?.base ?? className })}
-      {...props}>
+      {...rest}>
       {(Array.isArray(keys) ? keys : keys.split("")).map((char, index) => (
         <kbd
-          key={index}
+          key={id}
           className={kbd({
             className: index > 0 && char.length > 1 ? "pl-1" : classNames?.kbd,
           })}>

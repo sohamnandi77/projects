@@ -1,45 +1,26 @@
-import type {
-  RadioGroupProps as RadioGroupPrimitiveProps,
-  RadioProps as RadioPrimitiveProps,
-  ValidationResult,
-} from "react-aria-components";
+import type { RadioGroupProps, RadioProps } from "react-aria-components";
 import { composeTailwindRenderProps } from "#ui/lib/utils";
 import {
+  composeRenderProps,
   RadioGroup as RadioGroupPrimitive,
   Radio as RadioPrimitive,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
-import { Description, FieldError } from "./form";
-import { Label } from "./label";
-
-interface RadioGroupProps extends Omit<RadioGroupPrimitiveProps, "children"> {
-  label?: string;
-  children?: React.ReactNode;
-  description?: string;
-  errorMessage?: string | ((validation: ValidationResult) => string);
-}
-
-const RadioGroup = ({
-  label,
-  description,
-  errorMessage,
-  children,
-  ...props
-}: RadioGroupProps) => {
+const RadioGroup = (props: RadioGroupProps) => {
+  const { children, ...rest } = props;
   return (
     <RadioGroupPrimitive
-      {...props}
+      {...rest}
       className={composeTailwindRenderProps(
         "group flex flex-col gap-2",
         props.className,
       )}>
-      {label && <Label>{label}</Label>}
-      <div className="flex select-none gap-2 group-orientation-horizontal:flex-wrap group-orientation-horizontal:gap-2 group-orientation-vertical:flex-col sm:group-orientation-horizontal:gap-4">
-        {children}
-      </div>
-      {description && <Description>{description}</Description>}
-      <FieldError>{errorMessage}</FieldError>
+      {composeRenderProps(children, (children) => (
+        <div className="flex select-none gap-2 group-orientation-horizontal:flex-wrap group-orientation-horizontal:gap-2 group-orientation-vertical:flex-col sm:group-orientation-horizontal:gap-4">
+          {children}
+        </div>
+      ))}
     </RadioGroupPrimitive>
   );
 };
@@ -61,39 +42,30 @@ const radioStyles = tv({
       true: "border-danger/70 bg-danger/20",
     },
     isDisabled: {
-      true: "opacity-50",
+      true: "cursor-not-allowed opacity-50",
     },
   },
 });
 
-interface RadioProps extends RadioPrimitiveProps {
-  description?: string;
-}
-
-const Radio = ({ description, ...props }: RadioProps) => {
+const Radio = (props: RadioProps) => {
+  const { children, ...rest } = props;
   return (
     <RadioPrimitive
-      {...props}
+      {...rest}
       className={composeTailwindRenderProps(
         "group flex items-center gap-2 text-sm text-fg transition disabled:text-fg/50 forced-colors:disabled:text-[GrayText]",
         props.className,
       )}>
-      {(renderProps) => (
+      {composeRenderProps(children, (children, renderProps) => (
         <div className="flex gap-2">
           <div
             className={radioStyles({
               ...renderProps,
-              className: "description" in props ? "mt-1" : "mt-0.5",
             })}
           />
-          <div className="flex flex-col gap-1">
-            {props.children as React.ReactNode}
-            {description && (
-              <Description className="block">{description}</Description>
-            )}
-          </div>
+          <div className="flex flex-col gap-1">{children}</div>
         </div>
-      )}
+      ))}
     </RadioPrimitive>
   );
 };

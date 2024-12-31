@@ -8,8 +8,8 @@ addons.setConfig({
       tags: "button",
       badge: {
         text: "Button",
-        bgColor: "#004d40",
-        fgColor: "#ffffff",
+        bgColor: "#5300E8",
+        fgColor: "#EFE5FD",
       },
       display: {
         sidebar: ["component"],
@@ -20,8 +20,8 @@ addons.setConfig({
       tags: "charts",
       badge: {
         text: "Charts",
-        bgColor: "#1e3d59",
-        fgColor: "#f4b41a",
+        bgColor: "#B800E5",
+        fgColor: "#F6E3FB",
       },
       display: {
         sidebar: ["component"],
@@ -32,8 +32,8 @@ addons.setConfig({
       tags: "collections",
       badge: {
         text: "Collections",
-        bgColor: "#3a3d40",
-        fgColor: "#ffcc80",
+        bgColor: "#DC036C",
+        fgColor: "#FCE4EE",
       },
       display: {
         sidebar: ["component"],
@@ -44,8 +44,8 @@ addons.setConfig({
       tags: "controls",
       badge: {
         text: "Controls",
-        bgColor: "#263238",
-        fgColor: "#80cbc4",
+        bgColor: "#C62828",
+        fgColor: "#FFEBEE",
       },
       display: {
         sidebar: ["component"],
@@ -56,8 +56,8 @@ addons.setConfig({
       tags: "date-and-time",
       badge: {
         text: "Date & Time",
-        bgColor: "#37474f",
-        fgColor: "#ffab40",
+        bgColor: "#D84315",
+        fgColor: "#FBE9E7",
       },
       display: {
         sidebar: ["component"],
@@ -68,8 +68,8 @@ addons.setConfig({
       tags: "drag-and-drop",
       badge: {
         text: "Drag & Drop",
-        bgColor: "#212121",
-        fgColor: "#fdd835",
+        bgColor: "#F57F17",
+        fgColor: "#FFFDE7",
       },
       display: {
         sidebar: ["component"],
@@ -80,8 +80,8 @@ addons.setConfig({
       tags: "forms",
       badge: {
         text: "Forms",
-        bgColor: "#4e342e",
-        fgColor: "#ffee58",
+        bgColor: "#2E7D32",
+        fgColor: "#E8F5E9",
       },
       display: {
         sidebar: ["component"],
@@ -92,8 +92,8 @@ addons.setConfig({
       tags: "layouts",
       badge: {
         text: "Layouts",
-        bgColor: "#1b5e20",
-        fgColor: "#c8e6c9",
+        bgColor: "#009799",
+        fgColor: "#D7FBFA",
       },
       display: {
         sidebar: ["component"],
@@ -104,8 +104,8 @@ addons.setConfig({
       tags: "media",
       badge: {
         text: "Media",
-        bgColor: "#01579b",
-        fgColor: "#b3e5fc",
+        bgColor: "#283593",
+        fgColor: "#E8EAF6",
       },
       display: {
         sidebar: ["component"],
@@ -116,8 +116,8 @@ addons.setConfig({
       tags: "navigation",
       badge: {
         text: "Navigation",
-        bgColor: "#1a237e",
-        fgColor: "#c5cae9",
+        bgColor: "#6B4F06",
+        fgColor: "#F9F4E2",
       },
       display: {
         sidebar: ["component"],
@@ -128,8 +128,8 @@ addons.setConfig({
       tags: "overlays",
       badge: {
         text: "Overlays",
-        bgColor: "#4a148c",
-        fgColor: "#f8bbd0",
+        bgColor: "#4E342E",
+        fgColor: "#EFEBE9",
       },
       display: {
         sidebar: ["component"],
@@ -140,8 +140,8 @@ addons.setConfig({
       tags: "pickers",
       badge: {
         text: "Pickers",
-        bgColor: "#880e4f",
-        fgColor: "#f48fb1",
+        bgColor: "#1565C0",
+        fgColor: "#E3F2FD",
       },
       display: {
         sidebar: ["component"],
@@ -152,8 +152,8 @@ addons.setConfig({
       tags: "surfaces",
       badge: {
         text: "Surfaces",
-        bgColor: "#33691e",
-        fgColor: "#dce775",
+        bgColor: "#3F3783",
+        fgColor: "#EAEAF4",
       },
       display: {
         sidebar: ["component"],
@@ -164,8 +164,8 @@ addons.setConfig({
       tags: "statuses",
       badge: {
         text: "Statuses",
-        bgColor: "#3e2723",
-        fgColor: "#ffccbc",
+        bgColor: "#32586F",
+        fgColor: "#DFF0FF",
       },
       display: {
         sidebar: ["component"],
@@ -177,8 +177,8 @@ addons.setConfig({
       badge: {
         text: "Utilities",
 
-        bgColor: "#283593",
-        fgColor: "#ffeb3b",
+        bgColor: "#611F27",
+        fgColor: "#FFDFD4",
       },
       display: {
         sidebar: ["component"],

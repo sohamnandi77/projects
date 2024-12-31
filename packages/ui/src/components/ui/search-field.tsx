@@ -1,5 +1,6 @@
-import type { SearchFieldProps } from "react-aria-components";
-import { composeTailwindRenderProps } from "#ui/lib/utils";
+import type { SearchFieldProps as AriaSearchFieldProps } from "react-aria-components";
+import { useMemo } from "react";
+import { createContextFactory } from "#ui/lib/utils";
 import { Search, X } from "lucide-react";
 import { SearchField as SearchFieldPrimitive } from "react-aria-components";
 import { tv } from "tailwind-variants";
@@ -24,23 +25,41 @@ const getSearchFieldVariants = tv({
 
 const { base, searchIcon, clearButton, input } = getSearchFieldVariants();
 
-const SearchField = (props: SearchFieldProps) => {
-  const { className, ...rest } = props;
-
-  return (
-    <SearchFieldPrimitive
-      className={composeTailwindRenderProps(base(), className)}
-      {...rest}
-    />
-  );
-};
-
-interface SearchFieldInputProps extends InputProps {
+interface SearchContextValue {
+  /** Whether the search field is pending */
   isPending?: boolean;
 }
 
-const SearchFieldInput = (props: SearchFieldInputProps) => {
-  const { placeholder = "Search...", isPending, className, ...rest } = props;
+const [SearchContext, useSearchContext] = createContextFactory<
+  SearchContextValue | undefined
+>();
+
+interface SearchFieldProps extends AriaSearchFieldProps {
+  isPending?: boolean;
+}
+
+const SearchField = (props: SearchFieldProps) => {
+  const { className, isPending, ...rest } = props;
+
+  const value = useMemo(() => ({ isPending }), [isPending]);
+
+  return (
+    <SearchContext value={value}>
+      <SearchFieldPrimitive className={base(className)} {...rest} />
+    </SearchContext>
+  );
+};
+
+const SearchFieldInput = (props: InputProps) => {
+  const { placeholder = "Search...", className, ...rest } = props;
+  const context = useSearchContext();
+
+  if (!context) {
+    throw new Error("SearchFieldInput must be within SearchField");
+  }
+
+  const { isPending } = context;
+
   return (
     <FieldGroup>
       <Search aria-hidden className={searchIcon()} />
@@ -53,7 +72,7 @@ const SearchFieldInput = (props: SearchFieldInputProps) => {
         <Loader variant="spin" className="mr-2.5" />
       ) : (
         <Button size="icon" appearance="plain" className={clearButton()}>
-          <X aria-hidden />
+          <X aria-hidden className="size-4" />
         </Button>
       )}
     </FieldGroup>
@@ -61,4 +80,4 @@ const SearchFieldInput = (props: SearchFieldInputProps) => {
 };
 
 export { SearchField, SearchFieldInput };
-export type { SearchFieldProps, SearchFieldInputProps };
+export type { SearchFieldProps };

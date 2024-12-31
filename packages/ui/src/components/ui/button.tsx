@@ -88,7 +88,7 @@ const getButtonVariants = tv({
         "dark:border-white/5 dark:bg-[--button-bg] dark:before:hidden dark:after:-inset-px",
       ],
       outline: [
-        "border-[--button-border] text-fg [--button-icon:theme(colors.muted.fg)]",
+        "border-muted text-fg [--button-icon:theme(colors.muted.fg)]",
         "hover:bg-secondary/90 hover:[--button-icon:theme(colors.fg)]",
         "active:bg-secondary/90 active:[--button-icon:theme(colors.fg)]",
       ],

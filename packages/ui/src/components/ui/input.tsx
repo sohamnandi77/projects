@@ -3,14 +3,18 @@ import type {
   TextAreaProps,
   TextFieldProps,
 } from "react-aria-components";
+import { focusStyles } from "#ui/lib/style";
 import {
-  Input as AriaInput,
   TextArea as AriaTextArea,
   TextField as AriaTextField,
   composeRenderProps,
 } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
 import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
+
+import type { GroupProps } from "./form";
+import { FieldGroup, Input, InputPrefix, InputSuffix } from "./form";
 
 const TextField = (props: TextFieldProps) => {
   const { className, ...rest } = props;
@@ -25,52 +29,55 @@ const TextField = (props: TextFieldProps) => {
   );
 };
 
-const TextFieldInput = (props: InputProps) => {
+const TextFieldGroup = (props: GroupProps) => {
   const { className, ...rest } = props;
   return (
-    <AriaInput
+    <FieldGroup
+      {...rest}
       className={composeTailwindRenderProps(
         cn(
-          "flex h-10 w-full rounded-md border border-stroke-secondary bg-bg px-3 py-2 text-sm ring-offset-bg file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-fg",
-          /* Disabled */
-          "disabled:cursor-not-allowed disabled:opacity-50",
-          /* Focused */
-          "focus:border-input focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-          /* Resets */
-          "focus-visible:outline-none",
-          /* Invalid / Error */
-          "invalid:border-danger",
+          /* Button */
+          "[&_button]:size-7 [&_button]:shrink-0 [&_button]:p-0",
+          /* Prefix */
+          "[&>[data-slot=prefix]>button]:data-focus-visible:outline-1 [&>[data-slot=prefix]>button]:data-focus-visible:outline-offset-1 [&>[data-slot=prefix]>button]:mr-[calc(var(--spacing)*-1.15)] [&>[data-slot=prefix]>button]:rounded-md",
+          /* Suffix */
+          "[&>[data-slot=suffix]>button]:mr-[calc(var(--spacing)*-1.15)] [&>[data-slot=suffix]>button]:rounded-md [&>[data-slot=suffix]>button]:focus-visible:outline-1 [&>[data-slot=suffix]>button]:focus-visible:outline-offset-1",
         ),
         className,
       )}
-      {...rest}
     />
   );
 };
+
+const textAreaInputStyles = tv({
+  extend: focusStyles,
+  base: "outline-hidden data-disabled:opacity-50 min-h-16 w-full min-w-0 rounded-lg border border-input px-2.5 py-2 text-base shadow-sm transition duration-200 field-sizing-content sm:text-sm",
+  variants: {
+    isDisabled: {
+      true: "cursor-not-allowed opacity-50 forced-colors:border-[GrayText]",
+    },
+  },
+});
 
 const TextAreaInput = (props: TextAreaProps) => {
   const { className, ...rest } = props;
   return (
     <AriaTextArea
-      className={composeRenderProps(className, (className) =>
-        cn(
-          "flex min-h-[80px] w-full rounded-lg border border-input bg-bg px-3 py-2 text-sm ring-offset-bg placeholder:text-muted-fg",
-          /* Resets */
-          "focus-visible:outline-none",
-          /* Focused */
-          "duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-          /* Disabled */
-          "disabled:cursor-not-allowed disabled:opacity-50",
-          /* Invalid / Error */
-          "invalid:border-danger",
-          className,
-        ),
+      className={composeRenderProps(className, (className, renderProps) =>
+        textAreaInputStyles({ ...renderProps, className }),
       )}
       {...rest}
     />
   );
 };
 
-export { TextField, TextFieldInput, TextAreaInput };
+export {
+  Input as TextFieldInput,
+  InputPrefix as TextFieldInputPrefix,
+  InputSuffix as TextFieldInputSuffix,
+  TextAreaInput,
+  TextField,
+  TextFieldGroup,
+};
 
 export type { TextFieldProps, InputProps, TextAreaProps };

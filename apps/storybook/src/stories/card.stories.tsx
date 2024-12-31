@@ -119,7 +119,7 @@ export const WithForm: Story = {
           </TextField>
           <div className="flex items-center justify-between">
             <Checkbox>Remember me</Checkbox>
-            <Link intent="primary" className="text-sm" href="#">
+            <Link variant="primary" className="text-sm" href="#">
               Forgot password?
             </Link>
           </div>

@@ -11,8 +11,8 @@ import type {
   DescriptionProps,
   FieldErrorProps,
   FormProps,
-  LabelProps,
 } from "#ui/components/ui/form";
+import type { LabelProps } from "#ui/components/ui/label";
 import type { FC, ReactNode } from "react";
 import type { Except } from "type-fest";
 import {

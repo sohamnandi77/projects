@@ -12,6 +12,7 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
+import type { ToggleProps } from "./toggle";
 import { Separator } from "./separator";
 import { Toggle } from "./toggle";
 
@@ -34,7 +35,7 @@ const ToolbarSeparator = ({ className, ...props }: SeparatorProps) => {
     <Separator
       orientation={effectiveOrientation}
       className={cn(
-        effectiveOrientation === "vertical" ? "mx-1.5" : "my-1.5 w-9",
+        effectiveOrientation === "vertical" ? "mx-1.5 h-9" : "my-1.5 w-9",
         className,
       )}
       {...props}
@@ -85,7 +86,7 @@ const ToolbarGroup = ({ isDisabled, ...props }: GroupProps) => {
   );
 };
 
-const ToolbarItem = (props: React.ComponentProps<typeof Toggle>) => {
+const ToolbarItem = (props: ToggleProps) => {
   const { isDisabled, ...rest } = props;
   const context = useContext(ToolbarGroupContext);
   const effectiveIsDisabled = isDisabled ?? context.isDisabled;

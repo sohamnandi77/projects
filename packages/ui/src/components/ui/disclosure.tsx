@@ -1,150 +1,137 @@
 import type {
   ButtonProps,
-  DisclosureGroupProps as DisclosureGroupPrimitiveProps,
+  DisclosureGroupProps,
   DisclosurePanelProps,
   DisclosureProps,
 } from "react-aria-components";
-import { createContext, useContext } from "react";
+import { use } from "react";
 import { cn, composeTailwindRenderProps } from "#ui/lib/utils";
-import { ChevronLeft } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import {
+  Disclosure as AriaDisclosure,
+  DisclosureGroup as AriaDisclosureGroup,
   DisclosurePanel as AriaDisclosurePanel,
   Button,
   composeRenderProps,
-  DisclosureGroup as DisclosureGroupPrimitive,
-  Disclosure as DisclosurePrimitive,
+  DisclosureGroupStateContext,
+  Heading,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
-interface DisclosureGroupProps extends DisclosureGroupPrimitiveProps {
-  hideBorder?: boolean;
-  hideIndicator?: boolean;
-  className?: string;
-}
-
-const DisclosureGroupContext = createContext<DisclosureGroupProps>({});
-
-const DisclosureGroup = ({
-  children,
-  hideIndicator,
-  hideBorder,
-  className,
-  ...props
-}: DisclosureGroupProps) => {
-  return (
-    <DisclosureGroupPrimitive
-      {...props}
-      className={({ isDisabled }) =>
-        cn([
-          isDisabled ? "cursor-not-allowed opacity-75" : "cursor-pointer",
-          hideBorder
-            ? "[&_[data-slot=accordion-item]]:border-none"
-            : "[&_[data-slot=accordion-item]]:border-b",
-        ])
-      }>
-      {(values) => (
-        <div data-slot="accordion-item-content" className={className}>
-          <DisclosureGroupContext value={{ hideIndicator, hideBorder }}>
-            {typeof children === "function" ? children(values) : children}
-          </DisclosureGroupContext>
-        </div>
-      )}
-    </DisclosureGroupPrimitive>
-  );
-};
-
-const disclosureStyles = tv({
-  base: "group relative flex w-full flex-col",
+const disclosureGroupStyles = tv({
+  base: ["peer cursor-pointer"],
   variants: {
     isDisabled: {
       true: "cursor-not-allowed opacity-75",
     },
-    isExpanded: {
-      true: "pb-3",
-    },
   },
-  compoundVariants: [
-    {
-      hideBorder: true,
-      isExpanded: true,
-      className: "pb-2",
-    },
-  ],
 });
 
-const Disclosure = ({ className, ...props }: DisclosureProps) => {
+function DisclosureGroup(props: Readonly<DisclosureGroupProps>) {
+  const { className, ...rest } = props;
   return (
-    <DisclosurePrimitive
-      data-slot="accordion-item"
-      {...props}
+    <AriaDisclosureGroup
       className={composeRenderProps(className, (className, renderProps) =>
-        disclosureStyles({ ...renderProps, className }),
-      )}>
-      {props.children}
-    </DisclosurePrimitive>
+        disclosureGroupStyles({ ...renderProps, className }),
+      )}
+      {...rest}
+    />
   );
-};
+}
 
-const accordionTriggerStyles = tv({
+const disclosureStyles = tv({
+  base: ["group peer w-full min-w-64 border-border"],
+  variants: {
+    isDisabled: {
+      true: "cursor-not-allowed opacity-70",
+    },
+    isInGroup: {
+      true: "border-0 border-b last:border-b-0",
+    },
+  },
+});
+
+function Disclosure(props: Readonly<DisclosureProps>) {
+  const { className, ...rest } = props;
+  const isInGroup = use(DisclosureGroupStateContext) !== null;
+  return (
+    <AriaDisclosure
+      {...rest}
+      className={composeRenderProps(className, (className, renderProps) =>
+        disclosureStyles({ ...renderProps, isInGroup, className }),
+      )}
+    />
+  );
+}
+
+const disclosureTriggerStyles = tv({
   base: [
-    "group flex flex-1 items-center gap-x-2 rounded-lg font-medium text-muted-fg aria-expanded:text-fg sm:text-sm",
+    "group flex w-full flex-1 items-center justify-between rounded-md py-4 font-medium outline-none ring-offset-bg transition-all",
   ],
   variants: {
-    hideBorder: {
-      true: "py-2",
-      false: "py-3",
+    isHover: { true: "underline" },
+    isDisabled: {
+      true: "cursor-not-allowed opacity-50",
     },
     isFocused: {
-      true: "text-fg outline-none",
+      true: "text-fg outline-0",
     },
     isOpen: {
       true: "text-fg",
     },
-    isDisabled: {
-      true: "cursor-default opacity-50",
+    isFocusVisible: {
+      true: "text-fg outline-0 ring-2 ring-ring ring-offset-2",
     },
   },
 });
 
-const DisclosureTrigger = ({ className, ...props }: ButtonProps) => {
-  const { hideIndicator, hideBorder } = useContext(DisclosureGroupContext);
+function DisclosureTrigger(props: Readonly<ButtonProps>) {
+  const { children, className, ...rest } = props;
   return (
-    <Button
-      {...props}
-      slot="trigger"
-      className={composeRenderProps(className, (className, renderProps) =>
-        accordionTriggerStyles({
-          ...renderProps,
-          hideBorder,
-          className,
-        }),
-      )}>
-      {(values) => (
-        <>
-          {typeof props.children === "function"
-            ? props.children(values)
-            : props.children}
-          {!hideIndicator && (
-            <ChevronLeft
+    <Heading className="flex">
+      <Button
+        slot="trigger"
+        className={composeRenderProps(className, (className, renderProps) =>
+          disclosureTriggerStyles({ ...renderProps, className }),
+        )}
+        {...rest}>
+        {composeRenderProps(children, (children) => (
+          <>
+            {children}
+            <ChevronDown
+              data-slot="chevron"
+              aria-hidden
               className={cn(
-                "ml-auto shrink-0 transition duration-300 group-aria-expanded:-rotate-90",
+                "ml-auto size-4 shrink-0 transition-transform duration-200",
+                "group-expanded:rotate-180",
+                "group-disabled:opacity-50",
               )}
             />
-          )}
-        </>
-      )}
-    </Button>
+          </>
+        ))}
+      </Button>
+    </Heading>
   );
-};
+}
 
-const DisclosurePanel = ({ className, ...props }: DisclosurePanelProps) => {
+function DisclosurePanel(props: Readonly<DisclosurePanelProps>) {
+  const { children, className, ...rest } = props;
   return (
     <AriaDisclosurePanel
-      {...props}
-      className={composeTailwindRenderProps("sm:text-sm", className)}>
-      {props.children}
+      {...rest}
+      className={composeTailwindRenderProps(
+        cn("overflow-hidden text-sm text-muted-fg transition-all"),
+        className,
+      )}>
+      <div className="pb-4 pt-0">{children}</div>
     </AriaDisclosurePanel>
   );
-};
+}
 
-export { DisclosureGroup, DisclosureTrigger, DisclosurePanel, Disclosure };
+export { Disclosure, DisclosureTrigger, DisclosurePanel, DisclosureGroup };
+export type {
+  DisclosureGroupProps,
+  DisclosureProps,
+  DisclosurePanelProps,
+  ButtonProps as DisclosureTriggerProps,
+};

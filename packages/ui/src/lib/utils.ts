@@ -13,11 +13,9 @@ export function composeTailwindRenderProps<T>(
   return composeRenderProps(className, (className) => twMerge(tw, className));
 }
 
-// editable, circular progress, responsive progressbar, responsive modal, QR Code, Rating Group, Steps
+// editable, responsive modal, QR Code, Rating Group, Steps
 // format number, format byte
 // Highlight
-// locale
-// Presence
 
 export function createContextFactory<ContextData>(options?: {
   defaultValue?: ContextData | null;

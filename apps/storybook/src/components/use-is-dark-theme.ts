@@ -7,7 +7,7 @@ import type { Theme } from "~/constants";
 import { THEMES } from "~/constants";
 
 export const useIsDarkTheme = () => {
-  const [theme] = useLocalStorage<Theme>("theme", "system");
+  const [theme] = useLocalStorage<Theme>("theme", THEMES.SYSTEM);
   const { setTheme } = useTheme();
 
   useEffect(() => {

@@ -1,4 +1,7 @@
-import type { CheckboxGroupProps, CheckboxProps } from "react-aria-components";
+import type {
+  CheckboxGroupProps as AriaCheckboxGroupProps,
+  CheckboxProps,
+} from "react-aria-components";
 import { cn, composeTailwindRenderProps } from "#ui/lib/utils";
 import { Check, Minus } from "lucide-react";
 import {
@@ -8,13 +11,26 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
+interface CheckboxGroupProps extends AriaCheckboxGroupProps {
+  orientation?: "horizontal" | "vertical";
+}
+
 const CheckboxGroup = (props: CheckboxGroupProps) => {
-  const { className, ...rest } = props;
+  const { className, orientation = "vertical", children, ...rest } = props;
   return (
     <CheckboxGroupPrimitive
       {...rest}
-      className={composeTailwindRenderProps("flex flex-col gap-y-2", className)}
-    />
+      data-orientation={orientation}
+      className={composeTailwindRenderProps(
+        "group flex flex-col gap-y-2",
+        className,
+      )}>
+      {composeRenderProps(children, (children) => (
+        <div className="flex select-none gap-2 group-orientation-horizontal:flex-wrap group-orientation-horizontal:gap-2 group-orientation-vertical:flex-col sm:group-orientation-horizontal:gap-4">
+          {children}
+        </div>
+      ))}
+    </CheckboxGroupPrimitive>
   );
 };
 

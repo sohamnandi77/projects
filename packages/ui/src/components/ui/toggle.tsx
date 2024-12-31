@@ -3,7 +3,7 @@ import type {
   ToggleButtonProps,
 } from "react-aria-components";
 import type { VariantProps } from "tailwind-variants";
-import { createContext, useContext, useMemo } from "react";
+import { createContext, use, useMemo } from "react";
 import {
   composeRenderProps,
   ToggleButton,
@@ -32,12 +32,15 @@ const getToggleGroupVariants = tv({
   },
 });
 
-const ToggleGroup = ({
-  className,
-  orientation = "horizontal",
-  appearance = "plain",
-  ...props
-}: ToggleButtonGroupProps & ToggleGroupContextProps) => {
+const ToggleGroup = (
+  props: ToggleButtonGroupProps & ToggleGroupContextProps,
+) => {
+  const {
+    className,
+    orientation = "horizontal",
+    appearance = "plain",
+    ...rest
+  } = props;
   const value = useMemo(() => ({ appearance }), [appearance]);
   return (
     <ToggleGroupContext value={value}>
@@ -50,7 +53,7 @@ const ToggleGroup = ({
             className,
           }),
         )}
-        {...props}
+        {...rest}
       />
     </ToggleGroupContext>
   );
@@ -86,7 +89,7 @@ const getToggleVariants = tv({
       sm: "h-9 px-3.5",
       md: "h-10 px-4",
       lg: "h-11 px-5",
-      "square-petite": "size-9 shrink-0",
+      icon: "size-9 shrink-0",
     },
     shape: {
       square: "rounded-lg",
@@ -102,11 +105,12 @@ const getToggleVariants = tv({
 
 type ToggleProps = ToggleButtonProps & VariantProps<typeof getToggleVariants>;
 
-const Toggle = ({ className, appearance, ...props }: ToggleProps) => {
-  const { appearance: groupAppearance } = useContext(ToggleGroupContext);
+const Toggle = (props: ToggleProps) => {
+  const { className, appearance, ...rest } = props;
+  const { appearance: groupAppearance } = use(ToggleGroupContext);
   return (
     <ToggleButton
-      {...props}
+      {...rest}
       className={composeRenderProps(className, (className, renderProps) =>
         getToggleVariants({
           ...renderProps,

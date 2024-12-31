@@ -1,3 +1,4 @@
+export type { DropEvent } from "@react-types/shared";
 export { useDateFormatter } from "@react-aria/i18n";
 export {
   I18nProvider,
@@ -5,5 +6,13 @@ export {
   useDragAndDrop,
   useLocale,
   useSlottedContext,
+  isFileDropItem,
+  Collection,
 } from "react-aria-components";
-export type { Key, DateValue, TimeValue } from "react-aria-components";
+export type {
+  Key,
+  DateValue,
+  TimeValue,
+  Selection,
+} from "react-aria-components";
+export { useListData } from "react-stately";

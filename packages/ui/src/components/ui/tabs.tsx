@@ -1,91 +1,133 @@
 import type {
-  TabListProps as AriaTabListProps,
-  TabPanelProps as AriaTabPanelProps,
-  TabProps as AriaTabProps,
-  TabsProps as AriaTabsProps,
+  TabListProps,
+  TabPanelProps,
+  TabProps,
+  TabsProps,
 } from "react-aria-components";
+import { useId } from "react";
+import { cn, composeTailwindRenderProps } from "#ui/lib/utils";
+import { LayoutGroup, motion } from "framer-motion";
 import {
-  Tab as AriaTab,
-  TabList as AriaTabList,
-  TabPanel as AriaTabPanel,
-  Tabs as AriaTabs,
+  composeRenderProps,
+  TabList,
+  TabPanel,
+  Tab as TabPrimitive,
+  Tabs as TabsPrimitive,
 } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
-import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
+const tabsStyles = tv({
+  base: "group/tabs flex gap-4 forced-color-adjust-none",
+  variants: {
+    orientation: {
+      horizontal: "flex-col",
+      vertical: "w-[800px] flex-row",
+    },
+  },
+});
 
-function Tabs(props: Readonly<AriaTabsProps>) {
+const Tabs = (props: TabsProps) => {
   const { className, ...rest } = props;
   return (
-    <AriaTabs
-      className={composeTailwindRenderProps(
-        cn(
-          "group flex flex-col gap-2",
-          /* Orientation */
-          "orientation-vertical:flex-row",
-        ),
-        className,
-      )}
-      {...rest}
-    />
-  );
-}
-
-const TabList = <T extends object>(props: AriaTabListProps<T>) => {
-  const { className, ...rest } = props;
-  return (
-    <AriaTabList
-      className={composeTailwindRenderProps(
-        cn(
-          "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-fg",
-          /* Orientation */
-          "orientation-vertical:h-auto orientation-vertical:flex-col",
-        ),
-        className,
+    <TabsPrimitive
+      className={composeRenderProps(className, (className, renderProps) =>
+        tabsStyles({ ...renderProps, className }),
       )}
       {...rest}
     />
   );
 };
 
-const Tab = (props: AriaTabProps) => {
+const tabListStyles = tv({
+  base: "flex forced-color-adjust-none",
+  variants: {
+    orientation: {
+      horizontal: "flex-row gap-x-5 border-b border-border",
+      vertical: "flex-col items-start gap-y-4 border-l",
+    },
+  },
+});
+
+const TabsList = <T extends object>(props: TabListProps<T>) => {
+  const { className, ...rest } = props;
+  const id = useId();
+  return (
+    <LayoutGroup id={id}>
+      <TabList
+        {...rest}
+        className={composeRenderProps(className, (className, renderProps) =>
+          tabListStyles({ ...renderProps, className }),
+        )}
+      />
+    </LayoutGroup>
+  );
+};
+
+const tabStyles = tv({
+  base: [
+    "relative flex cursor-default items-center whitespace-nowrap rounded-full text-sm font-medium outline-0 transition *:data-[slot=icon]:mr-2 *:data-[slot=icon]:size-4 hover:text-fg",
+    "group-orientation-vertical/tabs:w-full group-orientation-vertical/tabs:py-0 group-orientation-vertical/tabs:pl-4 group-orientation-vertical/tabs:pr-2",
+    "group-orientation-horizontal/tabs:pb-3",
+  ],
+  variants: {
+    isSelected: {
+      true: "text-fg",
+      false: "text-muted-fg",
+    },
+    isFocused: { true: "text-fg", false: "ring-0" },
+    isDisabled: {
+      true: "cursor-not-allowed text-muted-fg/50",
+    },
+  },
+});
+
+const TabsTrigger = (props: TabProps) => {
+  const { children, href, className, ...rest } = props;
+  return (
+    <TabPrimitive
+      {...rest}
+      href={href}
+      className={composeRenderProps(className, (className, renderProps) =>
+        tabStyles({
+          ...renderProps,
+          className: cn(href && "cursor-pointer", className),
+        }),
+      )}>
+      {composeRenderProps(children, (children, { isSelected }) => (
+        <>
+          {children}
+          {isSelected && (
+            <motion.span
+              className={cn(
+                "absolute rounded bg-fg",
+                // horizontal
+                "group-orientation-horizontal/tabs:inset-x-0 group-orientation-horizontal/tabs:-bottom-px group-orientation-horizontal/tabs:h-0.5 group-orientation-horizontal/tabs:w-full",
+                // vertical
+                "group-orientation-vertical/tabs:left-0 group-orientation-vertical/tabs:h-[calc(100%-10%)] group-orientation-vertical/tabs:w-0.5",
+              )}
+              layoutId="current-selected"
+              transition={{ type: "spring", stiffness: 500, damping: 40 }}
+            />
+          )}
+        </>
+      ))}
+    </TabPrimitive>
+  );
+};
+
+const TabsContent = (props: TabPanelProps) => {
   const { className, ...rest } = props;
   return (
-    <AriaTab
+    <TabPanel
+      {...rest}
       className={composeTailwindRenderProps(
-        cn(
-          "inline-flex cursor-pointer justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium outline-none ring-offset-bg transition-all",
-          /* Focus Visible */
-          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          /* Disabled */
-          "disabled:pointer-events-none disabled:opacity-50",
-          /* Selected */
-          "selected:bg-bg selected:text-fg selected:shadow-sm",
-          /* Orientation */
-          "group-orientation-vertical:w-full",
-        ),
+        "flex-1 text-sm text-fg focus-visible:outline-0",
         className,
       )}
-      {...rest}
     />
   );
 };
 
-const TabPanel = (props: AriaTabPanelProps) => {
-  const { className, ...rest } = props;
+export { Tabs, TabsList, TabsContent, TabsTrigger };
 
-  return (
-    <AriaTabPanel
-      className={composeTailwindRenderProps(
-        cn(
-          "mt-2 ring-offset-bg",
-          /* Focus Visible */
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        ),
-        className,
-      )}
-      {...rest}
-    />
-  );
-};
-
-export { Tab, TabList, TabPanel, Tabs };
+export type { TabsProps, TabListProps, TabProps, TabPanelProps };

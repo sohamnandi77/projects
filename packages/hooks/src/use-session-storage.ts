@@ -33,6 +33,7 @@ export function useSessionStorage<T>(key: string, initialValue: T) {
       const item = sessionStorage.getItem(key);
       if (!item) return initialValue;
 
+      if (typeof item === "string") return item as T;
       // Safely parse the value using superjson
       const parsed = superjson.parse<StorageValue<T>>(item);
       return parsed?.value ?? initialValue;
