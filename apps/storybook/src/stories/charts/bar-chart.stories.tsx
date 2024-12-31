@@ -17,6 +17,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@projects/ui/chart";
+import { Description } from "@projects/ui/form";
+import { Label } from "@projects/ui/label";
 import {
   Bar,
   BarChart,
@@ -168,7 +170,7 @@ export const Horizontal: Story = {
   },
 };
 
-export const Label: Story = {
+export const ChartLabel: Story = {
   render: () => {
     // Data for the chart
     const chartData = [
@@ -1010,18 +1012,21 @@ export const Controlled: Story = {
                 <SelectList placement="bottom end" className="sm:min-w-40">
                   {["sales", "revenue"].map((key) => {
                     const chart = key as keyof typeof chartConfig;
+                    const label = chartConfig[chart].label;
+                    const description =
+                      total[key as keyof typeof total].toLocaleString();
                     return (
                       <SelectOption
                         key={chart}
                         data-active={activeChart === chart}
                         id={key}
                         textValue={chartConfig[chart].label}>
-                        <SelectOptionDetails
-                          label={chartConfig[chart].label}
-                          description={total[
-                            key as keyof typeof total
-                          ].toLocaleString()}
-                        />
+                        <SelectOptionDetails>
+                          {label && <Label>{label}</Label>}
+                          {description && (
+                            <Description>{description}</Description>
+                          )}
+                        </SelectOptionDetails>
                       </SelectOption>
                     );
                   })}

@@ -1,8 +1,5 @@
-import type {
-  ListBoxItemProps,
-  SectionProps,
-  TextProps,
-} from "react-aria-components";
+import type { ListBoxItemProps, SectionProps } from "react-aria-components";
+import { cn } from "#ui/lib/utils";
 import { Check } from "lucide-react";
 import {
   Collection,
@@ -10,11 +7,8 @@ import {
   Header,
   ListBoxItem as ListBoxItemPrimitive,
   ListBoxSection,
-  Text,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
-
-import { cn } from "@projects/ui/lib/utils";
 
 const dropdownItemVariants = tv({
   base: [
@@ -63,33 +57,40 @@ interface DropdownSectionProps<T> extends SectionProps<T> {
   title?: string;
 }
 
+type DropdownSectionHeaderProps = React.HTMLAttributes<HTMLElement> &
+  React.RefAttributes<object>;
+
+const DropdownSectionHeader = (props: DropdownSectionHeaderProps) => {
+  const { className, ...rest } = props;
+  return <Header className={header({ className })} {...rest} />;
+};
+
 const DropdownSection = <T extends object>(props: DropdownSectionProps<T>) => {
-  const { className, items, children, title, ...rest } = props;
+  const { className, items, title, children, ...rest } = props;
   return (
     <ListBoxSection className={section({ className })} {...rest}>
-      {"title" in props && <Header className={header()}>{title}</Header>}
+      <DropdownSectionHeader>{title}</DropdownSectionHeader>
       <Collection items={items}>{children}</Collection>
     </ListBoxSection>
   );
 };
 
-const DropdownItem = ({ className, ...props }: ListBoxItemProps) => {
-  const textValue =
-    props.textValue ??
-    (typeof props.children === "string" ? props.children : undefined);
+const DropdownItem = (props: ListBoxItemProps) => {
+  const { className, textValue, children, ...rest } = props;
+  const newTextValue =
+    textValue ?? (typeof children === "string" ? children : undefined);
   return (
     <ListBoxItemPrimitive
-      textValue={textValue}
+      textValue={newTextValue}
       className={composeRenderProps(className, (className, renderProps) =>
         dropdownItemVariants({ ...renderProps, className }),
       )}
-      {...props}>
-      {composeRenderProps(props.children, (children, { isSelected }) => (
+      {...rest}>
+      {composeRenderProps(children, (children, { isSelected }) => (
         <>
           <span className="flex flex-1 items-center gap-2 truncate font-normal group-selected:font-medium">
             {children}
           </span>
-
           {isSelected && (
             <span className="absolute right-2 top-3 lg:top-2.5">
               <Check />
@@ -101,50 +102,18 @@ const DropdownItem = ({ className, ...props }: ListBoxItemProps) => {
   );
 };
 
-interface DropdownItemSlot extends TextProps {
-  label?: TextProps["children"];
-  description?: TextProps["children"];
-  classNames?: {
-    label?: TextProps["className"];
-    description?: TextProps["className"];
-  };
-}
+const DropdownItemDetails = (props: React.ComponentProps<"div">) => {
+  const { className, ...rest } = props;
 
-const DropdownItemDetails = ({
-  label,
-  description,
-  classNames,
-  ...props
-}: DropdownItemSlot) => {
-  const { slot, children, title, ...restProps } = props;
-
-  return (
-    <div className="flex flex-col gap-y-1" {...restProps}>
-      {label && (
-        <Text
-          slot={slot ?? "label"}
-          className={cn("font-medium lg:text-sm", classNames?.label)}
-          {...restProps}>
-          {label}
-        </Text>
-      )}
-      {description && (
-        <Text
-          slot={slot ?? "description"}
-          className={cn("text-xs text-muted-fg", classNames?.description)}
-          {...restProps}>
-          {description}
-        </Text>
-      )}
-      {!title && children}
-    </div>
-  );
+  return <div className={cn("flex flex-col gap-y-1", className)} {...rest} />;
 };
 
 export {
   DropdownItem,
-  dropdownItemVariants,
   DropdownItemDetails,
   DropdownSection,
+  dropdownItemVariants,
   dropdownSectionVariants,
 };
+
+export type { DropdownSectionProps };

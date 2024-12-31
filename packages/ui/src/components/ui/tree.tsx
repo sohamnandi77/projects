@@ -1,7 +1,9 @@
 import type {
+  TreeItemContentProps,
   TreeItemProps as TreeItemPrimitiveProps,
   TreeProps,
 } from "react-aria-components";
+import { composeTailwindRenderProps } from "#ui/lib/utils";
 import { ChevronRight } from "lucide-react";
 import {
   UNSTABLE_TreeItemContent as AriaTreeItemContent,
@@ -12,7 +14,12 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
+import type { CheckboxProps } from "@projects/ui/checkbox";
 import { Checkbox } from "@projects/ui/checkbox";
+
+import type { ButtonProps } from "./button";
+import type { LabelProps } from "./label";
+import { Label } from "./label";
 
 const treeStyles = tv({
   base: "flex max-h-96 min-w-72 cursor-default flex-col overflow-auto rounded-lg border bg-bg py-2 outline-none forced-color-adjust-none [scrollbar-width:thin] lg:text-sm [&::-webkit-scrollbar]:size-0.5",
@@ -74,9 +81,7 @@ const TreeItem = <T extends object>(props: TreeItemPrimitiveProps<T>) => {
   );
 };
 
-const TreeItemContent = (
-  props: React.ComponentProps<typeof AriaTreeItemContent>,
-) => {
+const TreeItemContent = (props: TreeItemContentProps) => {
   const { children, ...rest } = props;
   return (
     <AriaTreeItemContent {...rest}>
@@ -89,20 +94,25 @@ const TreeItemContent = (
   );
 };
 
-const TreeItemIndicator = () => {
+const TreeItemIndicator = (props: ButtonProps) => {
+  const { slot = "chevron", className, ...rest } = props;
   return (
-    <Button className="relative shrink-0" slot="chevron">
-      <ChevronRight className="size-5" />
+    <Button
+      className={composeTailwindRenderProps("relative shrink-0", className)}
+      slot={slot}
+      {...rest}>
+      <ChevronRight data-slot="icon" className="size-4" />
     </Button>
   );
 };
 
-const TreeItemCheckbox = () => {
-  return <Checkbox slot="selection" />;
+const TreeItemCheckbox = (props: CheckboxProps) => {
+  const { slot = "selection", ...rest } = props;
+  return <Checkbox slot={slot} {...rest} />;
 };
 
-const TreeItemLabel = (props: React.HtmlHTMLAttributes<HTMLSpanElement>) => {
-  return <span {...props} />;
+const TreeItemLabel = (props: LabelProps) => {
+  return <Label {...props} />;
 };
 
 export {

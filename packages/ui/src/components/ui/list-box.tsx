@@ -1,7 +1,4 @@
-import type {
-  ListBoxItemProps as ListBoxItemPrimitiveProps,
-  ListBoxProps as ListBoxPrimitiveProps,
-} from "react-aria-components";
+import type { ListBoxItemProps, ListBoxProps } from "react-aria-components";
 import { Check, Menu } from "lucide-react";
 import {
   composeRenderProps,
@@ -10,30 +7,30 @@ import {
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
-import { cn } from "@projects/ui/lib/utils";
+import { cn, composeTailwindRenderProps } from "@projects/ui/lib/utils";
 
+import type { DropdownSectionProps } from "./dropdown";
 import {
   DropdownSection,
   DropdownItemDetails as ListBoxItemDetails,
 } from "./dropdown";
 
 const listBoxVariants = tv({
-  base: "flex max-h-96 w-full min-w-72 flex-col gap-y-1 overflow-y-auto rounded-xl border p-1 shadow-lg outline-none [scrollbar-width:thin] [&::-webkit-scrollbar]:size-0.5",
+  base: "flex max-h-96 w-full min-w-72 flex-col gap-y-1 overflow-y-auto rounded-xl border p-1 shadow-lg outline-none [scrollbar-width:thin] [&::-webkit-scrollbar]:size-0.5 [&>[data-drop-target]]:border [&>[data-drop-target]]:border-primary",
 });
 
-interface ListBoxProps<T> extends ListBoxPrimitiveProps<T> {
-  className?: string;
-}
-
-const ListBox = <T extends object>({
-  children,
-  className,
-  ...props
-}: ListBoxProps<T>) => (
-  <ListBoxPrimitive {...props} className={listBoxVariants({ className })}>
-    {children}
-  </ListBoxPrimitive>
-);
+const ListBox = <T extends object>(props: ListBoxProps<T>) => {
+  const { children, className, ...rest } = props;
+  return (
+    <ListBoxPrimitive
+      {...rest}
+      className={composeRenderProps(className, (className) =>
+        listBoxVariants({ className }),
+      )}>
+      {children}
+    </ListBoxPrimitive>
+  );
+};
 
 const listBoxItemStyles = tv({
   base: "relative cursor-pointer rounded-[calc(var(--radius)-1px)] p-2 text-base outline-none lg:text-sm",
@@ -52,27 +49,19 @@ const listBoxItemStyles = tv({
     },
     isDragging: { true: "cursor-grabbing bg-secondary text-secondary-fg" },
     isDisabled: {
-      true: "cursor-default text-muted-fg opacity-70",
+      true: "cursor-not-allowed text-muted-fg opacity-70",
     },
   },
 });
 
-interface ListBoxItemProps<T extends object>
-  extends ListBoxItemPrimitiveProps<T> {
-  className?: string;
-}
-
-const ListBoxItem = <T extends object>({
-  children,
-  className,
-  ...props
-}: ListBoxItemProps<T>) => {
+const ListBoxItem = <T extends object>(props: ListBoxItemProps<T>) => {
+  const { children, className, ...rest } = props;
   const textValue = typeof children === "string" ? children : undefined;
 
   return (
     <ListBoxItemPrimitive
+      {...rest}
       textValue={textValue}
-      {...props}
       className={composeRenderProps(className, (className, renderProps) =>
         listBoxItemStyles({
           ...renderProps,
@@ -93,7 +82,6 @@ const ListBoxItem = <T extends object>({
           )}
           <div className="flex flex-col">
             {typeof children === "function" ? children(values) : children}
-
             {values.isSelected && (
               <span className="absolute right-2 top-3 animate-in lg:top-2.5">
                 <Check />
@@ -108,36 +96,35 @@ const ListBoxItem = <T extends object>({
 
 type ListBoxPickerProps<T> = ListBoxProps<T>;
 
-const ListBoxPicker = <T extends object>({
-  className,
-  ...props
-}: ListBoxPickerProps<T>) => {
+const ListBoxPicker = <T extends object>(props: ListBoxPickerProps<T>) => {
+  const { className, ...rest } = props;
   return (
     <ListBoxPrimitive
-      className={cn("max-h-72 overflow-auto p-1 outline-none", className)}
-      {...props}
+      {...rest}
+      className={composeTailwindRenderProps(
+        "max-h-72 overflow-auto p-1 outline-none",
+        className,
+      )}
     />
   );
 };
 
-const ListBoxSection = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof DropdownSection>) => {
+const ListBoxSection = <T extends object>(props: DropdownSectionProps<T>) => {
+  const { className, ...rest } = props;
   return (
     <DropdownSection
-      className={cn(className, "gap-y-1 [&_.lbi:last-child]:-mb-1.5")}
-      {...props}
+      {...rest}
+      className={cn("gap-y-1 [&_.lbi:last-child]:-mb-1.5", className)}
     />
   );
 };
 
 export {
   ListBox,
-  ListBoxSection,
-  ListBoxItemDetails,
   ListBoxItem,
+  ListBoxItemDetails,
   ListBoxPicker,
+  ListBoxSection,
   listBoxVariants,
 };
 

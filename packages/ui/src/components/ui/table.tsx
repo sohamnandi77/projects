@@ -1,13 +1,13 @@
 import type {
-  CellProps,
   ColumnProps,
   ColumnResizerProps,
-  RowProps,
   TableBodyProps,
+  CellProps as TableCellProps,
   TableHeaderProps,
   TableProps as TablePrimitiveProps,
+  RowProps as TableRowProps,
 } from "react-aria-components";
-import React from "react";
+import { useMemo } from "react";
 import { ChevronDown, Menu } from "lucide-react";
 import {
   TableBody as AriaTableBody,
@@ -26,12 +26,12 @@ import {
 import { tv } from "tailwind-variants";
 
 import { Checkbox } from "@projects/ui/checkbox";
-import { cn } from "@projects/ui/lib/utils";
+import { cn, createContextFactory } from "@projects/ui/lib/utils";
 
 // eslint-disable-next-line tailwindcss/no-custom-classname
 const table = tv({
   slots: {
-    root: "table w-full caption-bottom border-spacing-0 text-sm outline-none [&_[data-drop-target]]:border [&_[data-drop-target]]:border-primary",
+    root: "table w-full min-w-full caption-bottom border-spacing-0 text-sm outline-none [&_[data-drop-target]]:border [&_[data-drop-target]]:border-primary",
     header: "border-b",
     row: "tr group relative cursor-default border-b text-fg/70 outline-none ring-primary focus-visible:ring-1 selected:bg-accent-subtle selected:hover:bg-accent-subtle/50 dark:selected:hover:bg-accent-subtle/60",
     cellIcon:
@@ -45,55 +45,66 @@ const table = tv({
 
 const { root, header, row, cellIcon, columnResizer } = table();
 
-interface TableProps extends TablePrimitiveProps {
-  className?: string;
+interface TableContextValue {
   allowResize?: boolean;
 }
 
-const TableContext = React.createContext<TableProps>({
-  allowResize: false,
-});
+const [TableContext, useTableContext] = createContextFactory<
+  TableContextValue | undefined
+>();
 
-const useTableContext = () => React.useContext(TableContext);
-
-const Table = ({ children, className, ...props }: TableProps) => (
-  <TableContext.Provider value={props}>
-    <div className="relative w-full overflow-auto">
-      {props.allowResize ? (
-        <ResizableTableContainer className="overflow-auto">
-          <TablePrimitive {...props} className={root({ className })}>
+interface TableProps extends TablePrimitiveProps {
+  allowResize?: boolean;
+}
+const Table = (props: TableProps) => {
+  const { children, allowResize, className, ...rest } = props;
+  const value = useMemo(() => ({ allowResize }), [allowResize]);
+  return (
+    <TableContext value={value}>
+      <div className="relative w-full overflow-auto">
+        {allowResize ? (
+          <ResizableTableContainer className="overflow-auto">
+            <TablePrimitive
+              {...rest}
+              className={composeRenderProps(className, (className) =>
+                root({ className }),
+              )}>
+              {children}
+            </TablePrimitive>
+          </ResizableTableContainer>
+        ) : (
+          <TablePrimitive
+            {...rest}
+            className={composeRenderProps(className, (className) =>
+              root({ className }),
+            )}>
             {children}
           </TablePrimitive>
-        </ResizableTableContainer>
-      ) : (
-        <TablePrimitive {...props} className={root({ className })}>
-          {children}
-        </TablePrimitive>
-      )}
-    </div>
-  </TableContext.Provider>
-);
+        )}
+      </div>
+    </TableContext>
+  );
+};
 
-const ColumnResizer = ({ className, ...props }: ColumnResizerProps) => (
-  <ColumnResizerPrimitive
-    {...props}
-    className={composeRenderProps(className, (className, renderProps) =>
-      columnResizer({
-        ...renderProps,
-        className,
-      }),
-    )}>
-    <div className="h-full w-px bg-border py-3" />
-  </ColumnResizerPrimitive>
-);
+const ColumnResizer = (props: ColumnResizerProps) => {
+  const { className, ...rest } = props;
+  return (
+    <ColumnResizerPrimitive
+      {...rest}
+      className={composeRenderProps(className, (className, renderProps) =>
+        columnResizer({
+          ...renderProps,
+          className,
+        }),
+      )}>
+      <div className="h-full w-px bg-border py-3" />
+    </ColumnResizerPrimitive>
+  );
+};
 
 const TableBody = <T extends object>(props: TableBodyProps<T>) => (
   <AriaTableBody {...props} className={cn("[&_.tr:last-child]:border-0")} />
 );
-
-interface TableCellProps extends CellProps {
-  className?: string;
-}
 
 const cellStyles = tv({
   base: "group p-3 outline-none",
@@ -103,10 +114,19 @@ const cellStyles = tv({
     },
   },
 });
-const TableCell = ({ children, className, ...props }: TableCellProps) => {
-  const { allowResize } = useTableContext();
+const TableCell = (props: TableCellProps) => {
+  const { children, className, ...rest } = props;
+  const context = useTableContext();
+  if (!context) {
+    throw new Error("TableCell must be within Table");
+  }
+  const { allowResize } = context;
   return (
-    <Cell {...props} className={cellStyles({ allowResize, className })}>
+    <Cell
+      {...rest}
+      className={composeRenderProps(className, (className) =>
+        cellStyles({ allowResize, className }),
+      )}>
       {children}
     </Cell>
   );
@@ -122,56 +142,56 @@ const columnStyles = tv({
 });
 
 interface TableColumnProps extends ColumnProps {
-  className?: string;
   isResizable?: boolean;
 }
 
-const TableColumn = ({
-  isResizable = false,
-  className,
-  ...props
-}: TableColumnProps) => {
+const TableColumn = (props: TableColumnProps) => {
+  const { isResizable = false, children, className, ...rest } = props;
   return (
     <Column
-      {...props}
-      className={columnStyles({
-        isResizable,
-        className,
-      })}>
-      {({ allowsSorting, sortDirection, isHovered }) => (
-        <div className="flex items-center gap-2 [&_[data-slot=icon]]:shrink-0">
-          {props.children as React.ReactNode}
-          {allowsSorting && (
-            <span
-              className={cellIcon({
-                className: isHovered ? "bg-secondary-fg/10" : "",
-              })}>
-              <ChevronDown
-                className={sortDirection === "ascending" ? "rotate-180" : ""}
-              />
-            </span>
-          )}
-          {isResizable && <ColumnResizer />}
-        </div>
+      {...rest}
+      className={composeRenderProps(className, (className) =>
+        columnStyles({
+          isResizable,
+          className,
+        }),
+      )}>
+      {composeRenderProps(
+        children,
+        (children, { allowsSorting, sortDirection, isHovered }) => (
+          <div className="flex items-center gap-2 [&_[data-slot=icon]]:shrink-0">
+            {children}
+            {allowsSorting && (
+              <span
+                className={cellIcon({
+                  className: isHovered ? "bg-secondary-fg/10" : "",
+                })}>
+                <ChevronDown
+                  className={cn(
+                    "size-4",
+                    sortDirection === "ascending" ? "rotate-180" : "",
+                  )}
+                />
+              </span>
+            )}
+            {isResizable && <ColumnResizer />}
+          </div>
+        ),
       )}
     </Column>
   );
 };
 
-interface HeaderProps<T extends object> extends TableHeaderProps<T> {
-  className?: string;
-}
-
-const TableHeader = <T extends object>({
-  children,
-  className,
-  columns,
-  ...props
-}: HeaderProps<T>) => {
+const TableHeader = <T extends object>(props: TableHeaderProps<T>) => {
+  const { children, className, columns, ...rest } = props;
   const { selectionBehavior, selectionMode, allowsDragging } =
     useTableOptions();
   return (
-    <AriaTableHeader {...props} className={header({ className })}>
+    <AriaTableHeader
+      {...rest}
+      className={composeRenderProps(className, (className) =>
+        header({ className }),
+      )}>
       {allowsDragging && <Column className="w-0" />}
       {selectionBehavior === "toggle" && (
         <Column className="w-0 pl-4">
@@ -183,28 +203,21 @@ const TableHeader = <T extends object>({
   );
 };
 
-interface TableRowProps<T extends object> extends RowProps<T> {
-  className?: string;
-}
-
-const TableRow = <T extends object>({
-  children,
-  className,
-  columns,
-  id,
-  ...props
-}: TableRowProps<T>) => {
+const TableRow = <T extends object>(props: TableRowProps<T>) => {
+  const { children, href, className, columns, id, ...rest } = props;
   const { selectionBehavior, allowsDragging } = useTableOptions();
   return (
     <Row
       id={id}
-      {...props}
-      className={row({
-        className:
-          "href" in props
+      href={href}
+      {...rest}
+      className={composeRenderProps(className, (className) =>
+        row({
+          className: href
             ? cn("cursor-pointer hover:bg-secondary/50", className)
             : "",
-      })}>
+        }),
+      )}>
       {allowsDragging && (
         <Cell className="group cursor-grab pr-0 ring-primary dragging:cursor-grabbing">
           <Button
@@ -228,4 +241,36 @@ const TableRow = <T extends object>({
   );
 };
 
-export { Table, TableBody, TableCell, TableColumn, TableRow, TableHeader };
+const TableCaption = (props: React.HTMLAttributes<HTMLTableCaptionElement>) => {
+  const { className, ...rest } = props;
+  return (
+    <caption
+      {...rest}
+      className={cn("mt-4 text-sm text-muted-fg", className)}
+    />
+  );
+};
+
+const TableFooter = (props: React.HTMLAttributes<HTMLTableSectionElement>) => {
+  const { className, ...rest } = props;
+  return (
+    <tfoot
+      className={cn(
+        "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
+        className,
+      )}
+      {...rest}
+    />
+  );
+};
+
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  TableFooter,
+};

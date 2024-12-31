@@ -69,7 +69,7 @@ const menuStyles = tv({
     menu: "max-h-[calc(var(--visual-viewport-height)-10rem)] overflow-auto rounded-xl p-1 outline outline-0 [clip-path:inset(0_0_0_0_round_calc(var(--radius)-2px))] sm:max-h-[inherit]",
     popover: "z-50 min-w-40 p-0 shadow-sm outline-none",
     trigger: [
-      "relative inline text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-primary pressed:outline-none",
+      "relative inline focus:outline-none focus-visible:ring-1 focus-visible:ring-primary pressed:outline-none",
     ],
   },
 });
@@ -80,9 +80,10 @@ interface MenuTriggerProps extends ButtonProps {
   className?: string;
 }
 
-const MenuTrigger = ({ className, ...props }: MenuTriggerProps) => (
-  <Button className={trigger({ className })} {...props} />
-);
+const MenuTrigger = (props: MenuTriggerProps) => {
+  const { className, ...rest } = props;
+  return <Button className={trigger({ className })} {...rest} />;
+};
 
 interface MenuContentProps<T>
   extends Omit<PopoverProps, "children" | "style">,

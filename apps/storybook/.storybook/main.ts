@@ -41,6 +41,7 @@ const config: StorybookConfig = {
     // Add performance configurations
     config.build = {
       ...config.build,
+      cssMinify: "lightningcss",
       reportCompressedSize: true,
       chunkSizeWarningLimit: 1000,
     };
