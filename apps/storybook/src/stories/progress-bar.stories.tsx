@@ -13,11 +13,9 @@ const meta = {
   title: "Components/Progress Bar",
   component: ProgressBar,
   subcomponents: {
-    ProgressBarRoot: ProgressBarRoot as unknown as React.ComponentType<unknown>,
-    ProgressBarTrack:
-      ProgressBarTrack as unknown as React.ComponentType<unknown>,
-    ProgressBarIndicator:
-      ProgressBarIndicator as unknown as React.ComponentType<unknown>,
+    ProgressBarRoot,
+    ProgressBarTrack,
+    ProgressBarIndicator,
   },
   tags: ["autodocs", "statuses"],
 } satisfies Meta<typeof ProgressBar>;

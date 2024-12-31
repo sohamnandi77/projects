@@ -10,7 +10,7 @@ import {
 const meta = {
   title: "Components/Combo Box",
   component: ComboBox,
-  subcomponents: {},
+  subcomponents: { ComboBoxInput, ComboBoxItem, ComboBoxList },
   tags: ["autodocs", "collections"],
   args: {
     children: <></>,

@@ -28,10 +28,10 @@ const meta = {
   title: "Components/Date Field",
   component: DateField,
   subcomponents: {
-    DateInput: DateInput as unknown as React.ComponentType<unknown>,
-    DateSegment: DateSegment as unknown as React.ComponentType<unknown>,
-    DateInputPrefix: DateInputPrefix as unknown as React.ComponentType<unknown>,
-    DateInputSuffix: DateInputSuffix as unknown as React.ComponentType<unknown>,
+    DateInput,
+    DateSegment,
+    DateInputPrefix,
+    DateInputSuffix,
   },
   tags: ["autodocs", "date-and-time"],
 } satisfies Meta<typeof DateField>;

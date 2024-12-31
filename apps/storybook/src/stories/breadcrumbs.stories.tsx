@@ -17,13 +17,11 @@ const meta = {
   title: "Components/Breadcrumbs",
   component: Breadcrumbs,
   subcomponents: {
-    BreadcrumbItem: BreadcrumbItem as unknown as React.ComponentType<unknown>,
-    BreadcrumbEllipsis:
-      BreadcrumbEllipsis as unknown as React.ComponentType<unknown>,
-    BreadcrumbLink: BreadcrumbLink as unknown as React.ComponentType<unknown>,
-    BreadcrumbPage: BreadcrumbPage as unknown as React.ComponentType<unknown>,
-    BreadcrumbSeparator:
-      BreadcrumbSeparator as unknown as React.ComponentType<unknown>,
+    BreadcrumbItem,
+    BreadcrumbEllipsis,
+    BreadcrumbLink,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
   },
   tags: ["autodocs", "navigation"],
   argTypes: {

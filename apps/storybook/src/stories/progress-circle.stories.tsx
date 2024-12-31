@@ -14,12 +14,9 @@ const meta = {
   title: "Components/Progress Circle",
   component: ProgressCircle,
   subcomponents: {
-    ProgressCircleRoot:
-      ProgressCircleRoot as unknown as React.ComponentType<unknown>,
-    ProgressCircleTrack:
-      ProgressCircleTrack as unknown as React.ComponentType<unknown>,
-    ProgressCircleIndicator:
-      ProgressCircleIndicator as unknown as React.ComponentType<unknown>,
+    ProgressCircleRoot,
+    ProgressCircleTrack,
+    ProgressCircleIndicator,
   },
   tags: ["autodocs", "statuses"],
 } satisfies Meta<typeof ProgressCircle>;

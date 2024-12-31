@@ -34,6 +34,18 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  core: {
+    disableTelemetry: true,
+  },
+  viteFinal: (config) => {
+    // Add performance configurations
+    config.build = {
+      ...config.build,
+      reportCompressedSize: true,
+      chunkSizeWarningLimit: 1000,
+    };
+    return config;
+  },
   typescript: {
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {

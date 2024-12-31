@@ -11,10 +11,9 @@ const meta = {
   title: "Components/Alert",
   component: Alert,
   subcomponents: {
-    AlertIcon: AlertIcon as unknown as React.ComponentType<unknown>,
-    AlertTitle: AlertTitle as unknown as React.ComponentType<unknown>,
-    AlertDescription:
-      AlertDescription as unknown as React.ComponentType<unknown>,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
   },
   tags: ["autodocs", "statuses"],
 } satisfies Meta<typeof Alert>;

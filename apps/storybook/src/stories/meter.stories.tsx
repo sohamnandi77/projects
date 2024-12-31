@@ -12,9 +12,9 @@ const meta = {
   title: "Components/Meter",
   component: Meter,
   subcomponents: {
-    MeterRoot: MeterRoot as unknown as React.ComponentType<unknown>,
-    MeterTrack: MeterTrack as unknown as React.ComponentType<unknown>,
-    MeterIndicator: MeterIndicator as unknown as React.ComponentType<unknown>,
+    MeterRoot,
+    MeterTrack,
+    MeterIndicator,
   },
   tags: ["autodocs", "statuses"],
 } satisfies Meta<typeof Meter>;

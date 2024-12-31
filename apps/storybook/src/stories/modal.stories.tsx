@@ -20,15 +20,14 @@ const meta = {
   title: "Components/Modal",
   component: Modal,
   subcomponents: {
-    ModalBody: ModalBody as unknown as React.ComponentType<unknown>,
-    ModalClose: ModalClose as unknown as React.ComponentType<unknown>,
-    ModalContent: ModalContent as unknown as React.ComponentType<unknown>,
-    ModalDescription:
-      ModalDescription as unknown as React.ComponentType<unknown>,
-    ModalFooter: ModalFooter as unknown as React.ComponentType<unknown>,
-    ModalHeader: ModalHeader as unknown as React.ComponentType<unknown>,
-    ModalTitle: ModalTitle as unknown as React.ComponentType<unknown>,
-    ModalTrigger: ModalTrigger as unknown as React.ComponentType<unknown>,
+    ModalBody,
+    ModalClose,
+    ModalContent,
+    ModalDescription,
+    ModalFooter,
+    ModalHeader,
+    ModalTitle,
+    ModalTrigger,
   },
   args: {
     children: <></>,

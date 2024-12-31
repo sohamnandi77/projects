@@ -10,7 +10,7 @@ const meta = {
   title: "Components/Radio",
   component: RadioGroup,
   subcomponents: {
-    Radio: Radio,
+    Radio,
   },
   tags: ["autodocs", "forms"],
 } satisfies Meta<typeof RadioGroup>;

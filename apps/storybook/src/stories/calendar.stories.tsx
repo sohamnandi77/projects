@@ -22,21 +22,16 @@ const meta = {
   title: "Components/Calendar",
   component: Calendar,
   subcomponents: {
-    CalendarRoot: CalendarRoot as unknown as React.ComponentType<unknown>,
-    RangeCalendarRoot:
-      RangeCalendarRoot as unknown as React.ComponentType<unknown>,
-    CalendarHeader: CalendarHeader as unknown as React.ComponentType<unknown>,
-    CalendarGrid: CalendarGrid as unknown as React.ComponentType<unknown>,
-    CalendarCell: CalendarCell as unknown as React.ComponentType<unknown>,
-    CalendarGridHeader:
-      CalendarGridHeader as unknown as React.ComponentType<unknown>,
-    CalendarGridBody:
-      CalendarGridBody as unknown as React.ComponentType<unknown>,
-    CalendarHeading: CalendarHeading as unknown as React.ComponentType<unknown>,
-    CalendarHeaderCell:
-      CalendarHeaderCell as unknown as React.ComponentType<unknown>,
-    CalendarHeaderButton:
-      CalendarHeaderButton as unknown as React.ComponentType<unknown>,
+    CalendarRoot,
+    RangeCalendarRoot,
+    CalendarHeader,
+    CalendarGrid,
+    CalendarCell,
+    CalendarGridHeader,
+    CalendarGridBody,
+    CalendarHeading,
+    CalendarHeaderCell,
+    CalendarHeaderButton,
   },
   tags: ["autodocs", "date-and-time"],
 } satisfies Meta<typeof Calendar>;

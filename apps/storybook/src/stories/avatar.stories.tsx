@@ -7,8 +7,8 @@ const meta = {
   title: "Components/Avatar",
   component: Avatar,
   subcomponents: {
-    AvatarImage: AvatarImage as unknown as React.ComponentType<unknown>,
-    AvatarFallback: AvatarFallback as unknown as React.ComponentType<unknown>,
+    AvatarImage,
+    AvatarFallback,
   },
   tags: ["autodocs", "media"],
 } satisfies Meta<typeof Avatar>;
