@@ -27,7 +27,7 @@
   "prettier": "@projects/prettier-config",
   "dependencies": {
     "@projects/ui": "workspace:*",
-    "@udecode/plate-common": "^41.0.2",
+    "@udecode/plate-common": "^41.0.13",
     "class-variance-authority": "^0.7.1",
     "js-video-url-parser": "^0.5.1",
     "prismjs": "^1.29.0",
